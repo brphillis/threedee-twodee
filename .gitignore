@@ -9,6 +9,8 @@ build/
 .td2d/cache/
 .td2d/tmp/
 history/
+# ...but not td2d's own source for the history feature.
+!packages/core/src/history/
 
 # test artefacts (actual and diff images, golden reports)
 .artifacts/
