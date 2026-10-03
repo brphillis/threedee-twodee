@@ -1,0 +1,100 @@
+{
+  "q5": {
+    "fixture": "an arm of two capsules 0.52 m long (sleeve and skin), the same geometry in every mode, on a two-bone rig, bent 0, 30, 60, 90 and 120 degrees at the elbow, 32 x 32 side view at 26 px/m",
+    "metric": "pixels differing from the rigid arm at each angle, opaque area, colours per sprite",
+    "rows": "q5-skinning.png rows: rigid, nearest-bone, two-bone-blend",
+    "rigid": {
+      "pixelsDifferentFromRigid": [0, 0, 0, 0, 0],
+      "area": [100, 100, 99, 97, 94],
+      "coloursPerSprite": [6, 6, 6, 6, 6]
+    },
+    "nearest-bone": {
+      "pixelsDifferentFromRigid": [0, 0, 2, 1, 0],
+      "area": [100, 100, 99, 98, 94],
+      "coloursPerSprite": [6, 6, 6, 6, 6]
+    },
+    "two-bone-blend": {
+      "pixelsDifferentFromRigid": [0, 7, 12, 9, 8],
+      "area": [100, 99, 96, 96, 95],
+      "coloursPerSprite": [6, 6, 6, 6, 6]
+    }
+  },
+  "q7knight": {
+    "fixture": "the knight, idle, walk and attack, south view, box downscale, auto:8",
+    "metric": "mean Oklab error against the unquantised sprites of six frames; pixels that differ between the rest-pose first frames of idle and attack",
+    "rows": "q7-knight-palettes.png rows: asset, clip (idle 0, idle 5, walk 0, walk 2, attack 0, attack 3)",
+    "asset": {
+      "meanError": 0.0323,
+      "restPoseChangedPixels": 0
+    },
+    "clip": {
+      "meanError": 0.0328,
+      "restPoseChangedPixels": 266
+    }
+  },
+  "q4": {
+    "fixture": "the knight, a walk keyed with four poses from the walk-cycle generator (contact, passing, contact, passing), 8 frames at 10 fps, views s and w; \"generated\" is the generator itself, exact at every frame",
+    "metric": "pixels changed from each frame to the next (mean, max, spread = std/mean, frames identical to the next), and mean pixels differing from the generated walk",
+    "rows": "q4-interpolation.png rows (view w): step, linear, generated",
+    "step": {
+      "perDirection": [
+        {
+          "dir": "s",
+          "meanChange": 128.9,
+          "maxChange": 264,
+          "stillFrames": 4,
+          "changeSpread": 1,
+          "offReference": 182.6
+        },
+        {
+          "dir": "w",
+          "meanChange": 113.6,
+          "maxChange": 232,
+          "stillFrames": 4,
+          "changeSpread": 1,
+          "offReference": 161.8
+        }
+      ]
+    },
+    "linear": {
+      "perDirection": [
+        {
+          "dir": "s",
+          "meanChange": 187.9,
+          "maxChange": 200,
+          "stillFrames": 0,
+          "changeSpread": 0.062,
+          "offReference": 40.8
+        },
+        {
+          "dir": "w",
+          "meanChange": 160,
+          "maxChange": 173,
+          "stillFrames": 0,
+          "changeSpread": 0.067,
+          "offReference": 33.4
+        }
+      ]
+    },
+    "generated": {
+      "perDirection": [
+        {
+          "dir": "s",
+          "meanChange": 181.3,
+          "maxChange": 227,
+          "stillFrames": 0,
+          "changeSpread": 0.186,
+          "offReference": 0
+        },
+        {
+          "dir": "w",
+          "meanChange": 156.8,
+          "maxChange": 193,
+          "stillFrames": 0,
+          "changeSpread": 0.168,
+          "offReference": 0
+        }
+      ]
+    }
+  }
+}

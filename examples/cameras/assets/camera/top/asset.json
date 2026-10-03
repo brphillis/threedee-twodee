@@ -1,0 +1,9 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "camera/top",
+  "type": "prop",
+  "description": "Straight down, for maps.",
+  "camera": "top",
+  "model": { "parts": [{ "type": "component", "id": "cottage", "component": "cottage" }] }
+}

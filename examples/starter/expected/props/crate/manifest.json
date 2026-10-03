@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "props/crate",
+  "assetHash": "sha256:15ccd85b6c2cf4883751ce31f6f4a54f0889b4dac40cb357a5d4229894110d66",
+  "generatedAt": "2026-10-02T11:49:09.746Z",
+  "frame": { "width": 32, "height": 32 },
+  "pivot": {
+    "x": 16,
+    "y": 25,
+    "normalized": { "x": 0.5, "y": 0.78125 }
+  },
+  "pixelsPerUnit": 16,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 7 },
+  "directions": [
+    { "name": "s", "yaw": 0, "mirrorOf": null },
+    { "name": "w", "yaw": 90, "mirrorOf": null },
+    { "name": "n", "yaw": 180, "mirrorOf": null },
+    { "name": "e", "yaw": 270, "mirrorOf": null }
+  ],
+  "palette": { "mode": "none", "name": null, "colors": [] },
+  "clips": [
+    { "name": "idle", "fps": 10, "frames": 1, "loop": true, "motion": false, "durationMs": 100 }
+  ],
+  "sheets": [
+    {
+      "name": "crate",
+      "image": "crate.png",
+      "data": "crate.json",
+      "width": 32,
+      "height": 128,
+      "layout": "grid"
+    }
+  ],
+  "cells": [
+    {
+      "key": "idle/s/000",
+      "clip": "idle",
+      "direction": "s",
+      "index": 0,
+      "sheet": "crate",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/w/000",
+      "clip": "idle",
+      "direction": "w",
+      "index": 0,
+      "sheet": "crate",
+      "x": 0,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/n/000",
+      "clip": "idle",
+      "direction": "n",
+      "index": 0,
+      "sheet": "crate",
+      "x": 0,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/e/000",
+      "clip": "idle",
+      "direction": "e",
+      "index": 0,
+      "sheet": "crate",
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    }
+  ],
+  "files": {
+    "sheets": ["crate.png"],
+    "aseprite-json": ["crate.json"],
+    "manifest": ["manifest.json"]
+  },
+  "stages": {
+    "model": "sha256:35741ec6697c3692655bcdbe6896533e27cbaa0da6a82aa109446d63154b2986",
+    "rig": "sha256:285e259bb372843dcc14aca3e1ee51e88bae58fd72233368b3e44013b0e78686",
+    "plan": "sha256:4c488b62878dce72b6ce2a962c0c532bc2c063bbc37bfa3d742ea1a354561c10",
+    "render": "sha256:8d24c7574efb684a77dd8086971e565c1081d7dffc7896f57139949d208fa8af",
+    "pixel": "sha256:6f95939ad1b0ac73c7d165c2a9f900f25f33e654214e40ea345b2068e5690421",
+    "sheet": "sha256:f873ce105ec034e204e814f8e0f39d25b3523e436a110969d385a98d9538776b"
+  },
+  "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
+}

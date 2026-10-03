@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "top-down-45",
+  "description": "Steeper top-down view.",
+  "projection": "orthographic",
+  "pitch": 45,
+  "yawOffset": 0,
+  "groundMargin": "auto"
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "composition/mirrored",
+  "type": "prop",
+  "description": "Eight directions where the east side is mirrored from the west, so only five are rendered.",
+  "directions": "d8",
+  "mirror": ["e:w", "ne:nw", "se:sw"],
+  "model": { "parts": [{ "type": "component", "id": "cottage", "component": "cottage" }] }
+}

@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "lighting/flat",
+  "assetHash": "sha256:dc1ad21a0fd3c1a20a9e162cbf7f89b6e1d989b2883b7a48a03bd238e4a48641",
+  "generatedAt": "2026-10-02T11:49:03.533Z",
+  "frame": { "width": 48, "height": 48 },
+  "pivot": {
+    "x": 24,
+    "y": 40,
+    "normalized": { "x": 0.5, "y": 0.833333 }
+  },
+  "pixelsPerUnit": 20,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 8 },
+  "directions": [
+    { "name": "s", "yaw": 0, "mirrorOf": null },
+    { "name": "w", "yaw": 90, "mirrorOf": null },
+    { "name": "n", "yaw": 180, "mirrorOf": null },
+    { "name": "e", "yaw": 270, "mirrorOf": null }
+  ],
+  "palette": { "mode": "none", "name": null, "colors": [] },
+  "clips": [
+    { "name": "idle", "fps": 10, "frames": 1, "loop": true, "motion": false, "durationMs": 100 }
+  ],
+  "sheets": [
+    {
+      "name": "flat",
+      "image": "flat.png",
+      "data": "flat.json",
+      "width": 48,
+      "height": 192,
+      "layout": "grid"
+    }
+  ],
+  "cells": [
+    {
+      "key": "idle/s/000",
+      "clip": "idle",
+      "direction": "s",
+      "index": 0,
+      "sheet": "flat",
+      "x": 0,
+      "y": 0,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/w/000",
+      "clip": "idle",
+      "direction": "w",
+      "index": 0,
+      "sheet": "flat",
+      "x": 0,
+      "y": 48,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/n/000",
+      "clip": "idle",
+      "direction": "n",
+      "index": 0,
+      "sheet": "flat",
+      "x": 0,
+      "y": 96,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/e/000",
+      "clip": "idle",
+      "direction": "e",
+      "index": 0,
+      "sheet": "flat",
+      "x": 0,
+      "y": 144,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    }
+  ],
+  "files": { "sheets": ["flat.png"], "aseprite-json": ["flat.json"], "manifest": ["manifest.json"] },
+  "stages": {
+    "model": "sha256:192d8bb09b4c63c7a755a9b92733cdc35d5e4de1d6087cae6c01314cfae8c5b5",
+    "rig": "sha256:92c7184c2728a03f0739a919e91d365d1821423fb72ef2204646b5e0aed6d60d",
+    "plan": "sha256:9b75d101eff98933202401a7a8bf2a6ca15ee9572c13958f304bb354d95bd593",
+    "render": "sha256:8e6fcb7374ecce697a002bd850913fab233eb9ca24a4f6c7677a4e2aaf8b6903",
+    "pixel": "sha256:f52c7fcabcc3fcc9222c5d2a440764f5178525311ee3ac0458d247402f1e89b2",
+    "sheet": "sha256:6cc2ffe917e6676a82bfbe3e33741eb0f9ed856d9f7cc9986c4783e47fa4dd87"
+  },
+  "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
+}

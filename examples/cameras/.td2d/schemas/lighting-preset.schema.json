@@ -1,0 +1,278 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:td2d:schema:lighting-preset:1",
+  "title": "td2d lighting-preset",
+  "type": "object",
+  "properties": {
+    "space": {
+      "type": "string",
+      "enum": [
+        "camera",
+        "world"
+      ],
+      "description": "camera: lights turn with the camera so every direction shades alike. world: lights stay fixed."
+    },
+    "lights": {
+      "minItems": 1,
+      "maxItems": 8,
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "directional"
+              },
+              "azimuth": {
+                "type": "number",
+                "minimum": -360,
+                "maximum": 360,
+                "description": "Degrees around the vertical axis. 0 points from the viewer."
+              },
+              "elevation": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90,
+                "description": "Degrees above the horizon."
+              },
+              "intensity": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 20
+              },
+              "color": {
+                "type": "string",
+                "pattern": "^#[0-9a-fA-F]{6}$",
+                "description": "sRGB colour as #rrggbb.",
+                "examples": [
+                  "#a0693a"
+                ]
+              },
+              "castShadow": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "type",
+              "azimuth",
+              "elevation",
+              "intensity"
+            ],
+            "additionalProperties": false,
+            "description": "Directional light."
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "ambient"
+              },
+              "intensity": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 20
+              },
+              "color": {
+                "type": "string",
+                "pattern": "^#[0-9a-fA-F]{6}$",
+                "description": "sRGB colour as #rrggbb.",
+                "examples": [
+                  "#a0693a"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "intensity"
+            ],
+            "additionalProperties": false,
+            "description": "Uniform ambient light."
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "hemisphere"
+              },
+              "intensity": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 20
+              },
+              "skyColor": {
+                "type": "string",
+                "pattern": "^#[0-9a-fA-F]{6}$",
+                "description": "sRGB colour as #rrggbb.",
+                "examples": [
+                  "#a0693a"
+                ]
+              },
+              "groundColor": {
+                "type": "string",
+                "pattern": "^#[0-9a-fA-F]{6}$",
+                "description": "sRGB colour as #rrggbb.",
+                "examples": [
+                  "#a0693a"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "intensity",
+              "skyColor",
+              "groundColor"
+            ],
+            "additionalProperties": false,
+            "description": "Sky and ground gradient light."
+          }
+        ]
+      },
+      "description": "One to eight lights: directional, ambient or hemisphere."
+    },
+    "shadows": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "mapSize": {
+          "anyOf": [
+            {
+              "type": "number",
+              "const": 256
+            },
+            {
+              "type": "number",
+              "const": 512
+            },
+            {
+              "type": "number",
+              "const": 1024
+            },
+            {
+              "type": "number",
+              "const": 2048
+            },
+            {
+              "type": "number",
+              "const": 4096
+            }
+          ]
+        },
+        "bias": {
+          "type": "number",
+          "minimum": -0.1,
+          "maximum": 0.1
+        },
+        "normalBias": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "enabled",
+        "mapSize",
+        "bias",
+        "normalBias"
+      ],
+      "additionalProperties": false,
+      "description": "Hard shadow settings. Shadows are always unfiltered for reproducibility."
+    },
+    "groundShadow": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "color": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "description": "Colour of the shadow. Sprite alpha is binary, so the shadow is drawn solid in this colour.",
+          "examples": [
+            "#a0693a"
+          ]
+        }
+      },
+      "required": [
+        "enabled",
+        "color"
+      ],
+      "additionalProperties": false,
+      "description": "Draw the shadow the model casts on the ground (y = 0) into the sprite.",
+      "examples": [
+        {
+          "enabled": true,
+          "color": "#1a1c2c"
+        }
+      ]
+    },
+    "$schema": {
+      "type": "string",
+      "description": "Optional JSON Schema reference for editors. Ignored by td2d."
+    },
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^1\\.\\d+\\.\\d+$",
+      "description": "Document schema version. Any 1.x.y version is accepted.",
+      "examples": [
+        "1.0.0"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^[a-z0-9][a-z0-9-]*$",
+      "description": "Lowercase kebab-case name.",
+      "examples": [
+        "steel",
+        "endesga-32"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 2000,
+      "description": "Free-text note. Use this instead of comments."
+    }
+  },
+  "required": [
+    "space",
+    "lights",
+    "shadows",
+    "schemaVersion",
+    "name"
+  ],
+  "additionalProperties": false,
+  "description": "A named lighting preset.",
+  "examples": [
+    {
+      "schemaVersion": "1.0.0",
+      "name": "dusk",
+      "space": "camera",
+      "lights": [
+        {
+          "type": "directional",
+          "azimuth": -40,
+          "elevation": 25,
+          "intensity": 2,
+          "color": "#ffb070"
+        },
+        {
+          "type": "ambient",
+          "intensity": 0.6,
+          "color": "#6070a0"
+        }
+      ],
+      "shadows": {
+        "enabled": false,
+        "mapSize": 1024,
+        "bias": 0,
+        "normalBias": 0
+      }
+    }
+  ]
+}

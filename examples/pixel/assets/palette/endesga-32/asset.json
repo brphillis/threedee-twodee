@@ -1,0 +1,22 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "palette/endesga-32",
+  "type": "prop",
+  "description": "Snapped to the built-in Endesga 32 palette in Oklab space.",
+  "pixel": {
+    "palette": "fixed:endesga-32"
+  },
+  "model": {
+    "parts": [
+      {
+        "type": "component",
+        "id": "mushroom",
+        "component": "mushroom"
+      }
+    ]
+  },
+  "acceptance": {
+    "maxColors": 32
+  }
+}

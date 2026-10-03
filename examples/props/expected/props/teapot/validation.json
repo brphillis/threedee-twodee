@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "props/teapot",
+  "generatedAt": "2026-10-02T11:49:09.189Z",
+  "status": "pass",
+  "checks": [
+    { "id": "sprite-size", "status": "pass", "message": "Every sprite is 32 x 32." },
+    {
+      "id": "binary-alpha",
+      "status": "pass",
+      "message": "Every pixel is fully opaque or fully transparent."
+    },
+    { "id": "not-blank", "status": "pass", "message": "No sprite is blank." },
+    { "id": "inside-frame", "status": "pass", "message": "No sprite touches the frame edge." },
+    { "id": "grounded", "status": "pass", "message": "Every sprite reaches the ground line." },
+    { "id": "isolated-pixels", "status": "pass", "message": "No sprite has stray single pixels." },
+    { "id": "sheet-size", "status": "pass", "message": "The sheet is 32 x 128." },
+    {
+      "id": "cells-in-bounds",
+      "status": "pass",
+      "message": "Every cell, with its extruded border, lies inside its sheet."
+    },
+    {
+      "id": "frame-count",
+      "status": "pass",
+      "message": "All 4 planned frames are on the sheets, each once."
+    }
+  ]
+}

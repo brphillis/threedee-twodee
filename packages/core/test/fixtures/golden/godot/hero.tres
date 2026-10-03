@@ -1,0 +1,90 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://hero.png" id="1_hero"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle_s_000"]
+atlas = ExtResource("1_hero")
+region = Rect2(0, 0, 6, 8)
+margin = Rect2(4, 8, 10, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle_w_000"]
+atlas = ExtResource("1_hero")
+region = Rect2(7, 0, 6, 8)
+margin = Rect2(3, 5, 10, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_walk_s_000"]
+atlas = ExtResource("1_hero")
+region = Rect2(0, 9, 6, 8)
+margin = Rect2(6, 4, 10, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_walk_s_001"]
+atlas = ExtResource("1_hero")
+region = Rect2(7, 9, 6, 8)
+margin = Rect2(2, 5, 10, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_walk_s_002"]
+atlas = ExtResource("1_hero")
+region = Rect2(14, 0, 6, 8)
+margin = Rect2(3, 6, 10, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_walk_w_000"]
+atlas = ExtResource("1_hero")
+region = Rect2(14, 9, 6, 8)
+margin = Rect2(5, 8, 10, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_walk_w_001"]
+atlas = ExtResource("1_hero")
+region = Rect2(0, 18, 6, 8)
+margin = Rect2(6, 9, 10, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_walk_w_002"]
+atlas = ExtResource("1_hero")
+region = Rect2(7, 18, 6, 8)
+margin = Rect2(2, 10, 10, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle_s_000")
+}],
+"loop": true,
+"name": &"idle_s",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle_w_000")
+}],
+"loop": true,
+"name": &"idle_w",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_walk_s_000")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_walk_s_001")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_walk_s_002")
+}],
+"loop": true,
+"name": &"walk_s",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_walk_w_000")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_walk_w_001")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_walk_w_002")
+}],
+"loop": true,
+"name": &"walk_w",
+"speed": 12.0
+}]

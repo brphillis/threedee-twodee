@@ -1,0 +1,39 @@
+name: Nightly
+
+# The full suite and the Phase 8 benchmark every night, so slow regressions show up as a trend:
+# each run's bench.json is kept as an artefact, and the run fails when a target is missed.
+
+on:
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  nightly:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: sudo apt-get install -y --no-install-recommends zsh fish
+      - run: pnpm install --frozen-lockfile
+      - name: Install headless browser
+        run: pnpm --filter @td2d/core exec playwright install --with-deps --only-shell chromium
+      - run: pnpm build
+      - run: pnpm exec vitest run
+      - run: pnpm run licences
+      - run: pnpm bench
+      - run: node scripts/bench-check.ts
+      - name: Keep the benchmark result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bench-${{ github.run_number }}
+          path: build/bench.json
+          retention-days: 90

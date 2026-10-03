@@ -1,0 +1,215 @@
+{
+  "$schema": "../.td2d/schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "name": "knight",
+  "description": "The knight's body on the humanoid rig: armour, tabard, helm, a sword in the right hand and a shield on the left arm. Left limbs are mirrored to the right.",
+  "materials": {
+    "steel": {
+      "color": "#8b9bb4",
+      "shading": "toon"
+    },
+    "trim": {
+      "color": "#feae34",
+      "shading": "toon",
+      "bands": 2
+    },
+    "tabard": {
+      "color": "#3b5dc9",
+      "shading": "toon"
+    },
+    "skin": {
+      "color": "#e8b796",
+      "shading": "toon",
+      "bands": 2
+    },
+    "leather": {
+      "color": "#5d275d",
+      "shading": "toon",
+      "bands": 2
+    },
+    "blade": {
+      "color": "#c0cbdc",
+      "shading": "toon",
+      "bands": 2
+    },
+    "wood": {
+      "color": "#733e39",
+      "shading": "toon",
+      "bands": 2
+    }
+  },
+  "parts": [
+    {
+      "type": "box",
+      "id": "belt",
+      "bone": "hips",
+      "material": "leather",
+      "size": [0.34, 0.08, 0.22],
+      "position": [0, 0.96, 0]
+    },
+    {
+      "type": "box",
+      "id": "skirt",
+      "bone": "hips",
+      "material": "tabard",
+      "size": [0.36, 0.2, 0.24],
+      "position": [0, 0.84, 0]
+    },
+    {
+      "type": "box",
+      "id": "belly",
+      "bone": "spine",
+      "material": "tabard",
+      "size": [0.34, 0.2, 0.22],
+      "position": [0, 1.1, 0]
+    },
+    {
+      "type": "box",
+      "id": "chest-plate",
+      "bone": "chest",
+      "material": "steel",
+      "size": [0.4, 0.3, 0.26],
+      "position": [0, 1.34, 0]
+    },
+    {
+      "type": "box",
+      "id": "crest",
+      "bone": "chest",
+      "material": "trim",
+      "size": [0.08, 0.12, 0.02],
+      "position": [0, 1.33, 0.135]
+    },
+    {
+      "type": "sphere",
+      "id": "pauldron",
+      "bone": "leftUpperArm",
+      "material": "steel",
+      "radius": 0.09,
+      "position": [0.22, 1.44, 0],
+      "mirror": "x"
+    },
+    {
+      "type": "capsule",
+      "id": "upper-arm",
+      "bone": "leftUpperArm",
+      "material": "steel",
+      "radius": 0.055,
+      "length": 0.16,
+      "position": [0.22, 1.3, 0],
+      "mirror": "x"
+    },
+    {
+      "type": "capsule",
+      "id": "forearm",
+      "bone": "leftLowerArm",
+      "material": "leather",
+      "radius": 0.05,
+      "length": 0.16,
+      "position": [0.22, 1.04, 0],
+      "mirror": "x"
+    },
+    {
+      "type": "sphere",
+      "id": "head",
+      "bone": "head",
+      "material": "skin",
+      "radius": 0.12,
+      "position": [0, 1.66, 0.01]
+    },
+    {
+      "type": "cylinder",
+      "id": "helm",
+      "bone": "head",
+      "material": "steel",
+      "radius": 0.135,
+      "height": 0.16,
+      "position": [0, 1.73, 0],
+      "segments": 12
+    },
+    {
+      "type": "box",
+      "id": "plume",
+      "bone": "head",
+      "material": "trim",
+      "size": [0.04, 0.08, 0.22],
+      "position": [0, 1.85, -0.02]
+    },
+    {
+      "type": "capsule",
+      "id": "thigh",
+      "bone": "leftUpperLeg",
+      "material": "tabard",
+      "radius": 0.07,
+      "length": 0.28,
+      "position": [0.1, 0.69, 0],
+      "mirror": "x"
+    },
+    {
+      "type": "capsule",
+      "id": "shin",
+      "bone": "leftLowerLeg",
+      "material": "steel",
+      "radius": 0.06,
+      "length": 0.28,
+      "position": [0.1, 0.28, 0],
+      "mirror": "x"
+    },
+    {
+      "type": "box",
+      "id": "boot",
+      "bone": "leftFoot",
+      "material": "leather",
+      "size": [0.11, 0.08, 0.22],
+      "position": [0.1, 0.04, 0.04],
+      "mirror": "x"
+    },
+    {
+      "type": "group",
+      "id": "sword",
+      "bone": "rightLowerArm",
+      "description": "Held in the right fist, tipped 40 degrees down from forward about the grip.",
+      "position": [-0.22, 0.88, 0.04],
+      "pivot": [-0.22, 0.88, 0.04],
+      "rotation": [40, 0, 0],
+      "parts": [
+        {
+          "type": "box",
+          "id": "grip",
+          "material": "wood",
+          "size": [0.035, 0.035, 0.14],
+          "position": [-0.22, 0.88, 0.04]
+        },
+        {
+          "type": "box",
+          "id": "guard",
+          "material": "trim",
+          "size": [0.16, 0.035, 0.035],
+          "position": [-0.22, 0.88, 0.12]
+        },
+        {
+          "type": "box",
+          "id": "blade",
+          "material": "blade",
+          "size": [0.08, 0.05, 0.5],
+          "position": [-0.22, 0.88, 0.385]
+        }
+      ]
+    },
+    {
+      "type": "box",
+      "id": "shield",
+      "bone": "leftLowerArm",
+      "material": "wood",
+      "size": [0.04, 0.34, 0.28],
+      "position": [0.3, 1.02, 0.04]
+    },
+    {
+      "type": "box",
+      "id": "shield-rim",
+      "bone": "leftLowerArm",
+      "material": "trim",
+      "size": [0.05, 0.08, 0.3],
+      "position": [0.3, 1.02, 0.04]
+    }
+  ]
+}

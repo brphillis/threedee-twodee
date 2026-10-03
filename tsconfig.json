@@ -1,0 +1,44 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "packages/schema"
+    },
+    {
+      "path": "packages/schema/tsconfig.test.json"
+    },
+    {
+      "path": "packages/render-harness/tsconfig.build.json"
+    },
+    {
+      "path": "packages/render-harness"
+    },
+    {
+      "path": "packages/core"
+    },
+    {
+      "path": "packages/core/tsconfig.test.json"
+    },
+    {
+      "path": "packages/cli"
+    },
+    {
+      "path": "packages/cli/tsconfig.test.json"
+    },
+    {
+      "path": "apps/viewer"
+    },
+    {
+      "path": "apps/viewer/tsconfig.client.json"
+    },
+    {
+      "path": "apps/viewer/tsconfig.test.json"
+    },
+    {
+      "path": "apps/viewer/tsconfig.test-browser.json"
+    },
+    {
+      "path": "tsconfig.scripts.json"
+    }
+  ]
+}

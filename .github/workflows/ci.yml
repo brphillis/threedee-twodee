@@ -1,0 +1,124 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  linux:
+    name: Linux (full suite)
+    # Pinned: ubuntu-latest moves to 26.04 during October and November 2026.
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Install headless browser
+        run: pnpm --filter @td2d/core exec playwright install --with-deps --only-shell chromium
+      - name: Install zsh and fish for the shell completion tests
+        run: sudo apt-get install -y --no-install-recommends zsh fish
+      - run: pnpm lint
+      - run: pnpm build
+      - name: Generated files are up to date
+        run: |
+          pnpm generate
+          git diff --exit-code -- schemas docs/reference docs/guide/examples.md
+      - run: pnpm docs:check
+      - run: pnpm run licences
+      - run: pnpm exec vitest run
+      - name: Upload render artefacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: render-artifacts-linux
+          path: packages/core/.artifacts
+          if-no-files-found: ignore
+
+  macos:
+    name: macOS (build and end-to-end)
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Install headless browser
+        run: pnpm --filter @td2d/core exec playwright install --only-shell chromium
+      - run: pnpm build
+      - run: pnpm exec vitest run --project render --project e2e
+
+  package:
+    name: Pack and install (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-15, windows-2025]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - name: Install headless browser
+        run: pnpm --filter @td2d/core exec playwright install ${{ runner.os == 'Linux' && '--with-deps' || '' }} --only-shell chromium
+      # Packs every package and runs td2d from the tarballs installed locally, with npm install -g and through npx.
+      - run: pnpm pack:smoke
+
+  headless-gl:
+    name: headless-gl parity (Linux, xvfb)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: sudo apt-get install -y --no-install-recommends xvfb libgl1-mesa-dri libegl1 build-essential python3
+      - run: pnpm install --frozen-lockfile
+      - name: Install headless browser
+        run: pnpm --filter @td2d/core exec playwright install --with-deps --only-shell chromium
+      - run: pnpm build
+      - run: xvfb-run -a pnpm exec vitest run --project render packages/core/test/render/headless-gl.test.ts
+
+  bench:
+    name: Benchmark (non-gating)
+    runs-on: ubuntu-24.04
+    # Trend data only: a slow runner must not fail the build.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Install headless browser
+        run: pnpm --filter @td2d/core exec playwright install --with-deps --only-shell chromium
+      - run: pnpm build
+      - run: pnpm bench
+      - name: Upload benchmark results
+        uses: actions/upload-artifact@v4
+        with:
+          name: bench-linux
+          path: build/bench.json

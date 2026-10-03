@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "isometric",
+  "description": "True isometric projection. Pitch is atan(1/sqrt(2)).",
+  "projection": "orthographic",
+  "pitch": 35.264,
+  "yawOffset": 45,
+  "groundMargin": "auto"
+}

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0.0",
+  "type": "prop",
+  "description": "A one-metre box. Replace the parts to build your prop.",
+  "frame": {
+    "width": 32,
+    "height": 32
+  },
+  "directions": "d4",
+  "materials": {
+    "base": {
+      "color": "#a0693a",
+      "shading": "toon"
+    }
+  },
+  "model": {
+    "parts": [
+      {
+        "type": "box",
+        "id": "body",
+        "material": "base",
+        "size": [1, 1, 1],
+        "position": [0, 0.5, 0]
+      }
+    ]
+  },
+  "animation": {
+    "fps": 10,
+    "clips": {
+      "idle": {
+        "duration": 0.1
+      }
+    }
+  },
+  "acceptance": {
+    "minAlphaCoverage": 0.1
+  }
+}

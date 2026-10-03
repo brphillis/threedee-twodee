@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "outline/outside-4",
+  "type": "prop",
+  "description": "The same ring drawn with 4-connectivity, which leaves the corners open.",
+  "pixel": {
+    "outline": {
+      "color": "#1a1c2c",
+      "side": "outside",
+      "width": 1,
+      "connectivity": 4
+    }
+  },
+  "model": {
+    "parts": [
+      {
+        "type": "component",
+        "id": "mushroom",
+        "component": "mushroom"
+      }
+    ]
+  }
+}

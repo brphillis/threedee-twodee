@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "flat",
+  "description": "Full-strength ambient light only: every face shows its material colour exactly. For silhouettes, icons and emissive assets.",
+  "space": "camera",
+  "lights": [{ "type": "ambient", "intensity": 3.1416, "color": "#ffffff" }],
+  "shadows": { "enabled": false, "mapSize": 1024, "bias": 0, "normalBias": 0 }
+}

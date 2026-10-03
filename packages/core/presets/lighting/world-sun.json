@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "world-sun",
+  "description": "Sun fixed in world space with a sky and ground fill, for tiles that must match a map-wide light. The lit side changes with direction.",
+  "space": "world",
+  "lights": [
+    {
+      "type": "directional",
+      "azimuth": -45,
+      "elevation": 55,
+      "intensity": 1.7279,
+      "color": "#fff4e0",
+      "castShadow": true
+    },
+    { "type": "hemisphere", "intensity": 1.4137, "skyColor": "#c8dcff", "groundColor": "#504030" }
+  ],
+  "shadows": { "enabled": true, "mapSize": 2048, "bias": -0.0005, "normalBias": 0.02 }
+}

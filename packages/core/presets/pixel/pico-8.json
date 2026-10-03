@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "pico-8",
+  "description": "Snap to the PICO-8 palette with a light ordered dither and a black outline from the palette.",
+  "palette": "fixed:pico-8",
+  "dither": "bayer-4",
+  "ditherStrength": 0.35,
+  "outline": { "color": "#000000", "side": "outside", "width": 1, "snapToPalette": true }
+}

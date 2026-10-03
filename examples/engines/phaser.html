@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>td2d in Phaser</title>
+    <style>
+      body { margin: 0; background: #1a1c2c; color: #f4f4f4; font: 14px system-ui, sans-serif; }
+      p { margin: 8px; }
+    </style>
+  </head>
+  <body>
+    <p id="status">Loading...</p>
+    <script src="vendor/phaser.min.js"></script>
+    <script>
+      // Default: loads the Aseprite JSON td2d writes beside a sheet (index frame names, one tag
+      // per clip and direction) with load.aseprite and creates the animations from its tags.
+      // ?format=multiatlas: loads <asset>.phaser.json with load.multiatlas and creates the
+      // animations from its "animations" configs.
+      const params = new URLSearchParams(location.search);
+      const clip = params.get('clip') ?? 'walk_s';
+      const scale = Number(params.get('scale') ?? 4);
+      const format = params.get('format') ?? 'aseprite';
+      window.td2d = { ready: false, clip, frames: [], error: null };
+      fetch('sheets/manifest.json')
+        .then((r) => r.json())
+        .then((manifest) => {
+          const sheet = manifest.sheets.find((s) => manifest.cells.some((c) => c.sheet === s.name && `${c.clip}_${c.direction}` === clip)) ?? manifest.sheets[0];
+          new Phaser.Game({
+            type: Phaser.AUTO,
+            width: 320,
+            height: 320,
+            backgroundColor: '#333c57',
+            pixelArt: true,
+            scene: {
+              preload() {
+                if (format === 'multiatlas') {
+                  const file = manifest.files['phaser-atlas'][0];
+                  this.load.multiatlas('sprite', `sheets/${file}`, 'sheets/');
+                  this.load.json('anims', `sheets/${file}`);
+                } else {
+                  this.load.aseprite('sprite', `sheets/${sheet.image}`, `sheets/${sheet.data}`);
+                }
+              },
+              create() {
+                if (format === 'multiatlas') {
+                  for (const a of this.cache.json.get('anims').animations) {
+                    this.anims.create({ key: a.key, frameRate: a.frameRate, repeat: a.repeat, frames: a.frames.map((frame) => ({ key: 'sprite', frame })) });
+                  }
+                } else {
+                  this.anims.createFromAseprite('sprite');
+                }
+                const sprite = this.add.sprite(160, 240, 'sprite');
+                sprite.setOrigin(manifest.pivot.normalized.x, manifest.pivot.normalized.y).setScale(scale);
+                sprite.on('animationupdate', (_anim, frame) => {
+                  window.td2d.frames.push(String(frame.textureFrame));
+                  const f = frame.frame;
+                  window.td2d.pivot = { custom: f.customPivot, x: f.pivotX, y: f.pivotY };
+                });
+                sprite.play({ key: clip, repeat: -1 });
+                window.td2d.ready = true;
+                document.getElementById('status').textContent = `${manifest.assetId}: ${clip} (${sheet.image})`;
+              },
+            },
+          });
+        })
+        .catch((error) => {
+          window.td2d.error = String(error);
+          document.getElementById('status').textContent = String(error);
+        });
+    </script>
+  </body>
+</html>

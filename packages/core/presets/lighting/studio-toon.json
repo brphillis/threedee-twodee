@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "studio-toon",
+  "description": "Key light from the upper left front with hard shadows, plus ambient fill. Lights turn with the camera so every direction shades alike. A dimetric box shows three distinct bands: top, left face, right face.",
+  "space": "camera",
+  "lights": [
+    {
+      "type": "directional",
+      "azimuth": -35,
+      "elevation": 55,
+      "intensity": 1.7279,
+      "color": "#ffffff",
+      "castShadow": true
+    },
+    { "type": "ambient", "intensity": 1.4137, "color": "#ffffff" }
+  ],
+  "shadows": { "enabled": true, "mapSize": 1024, "bias": -0.0005, "normalBias": 0.02 },
+  "groundShadow": { "enabled": false, "color": "#1a1c2c" }
+}

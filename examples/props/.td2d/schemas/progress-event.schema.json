@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:td2d:schema:progress-event:1",
+  "title": "td2d progress-event",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "t": {
+          "type": "string"
+        },
+        "event": {
+          "type": "string",
+          "const": "stage:start"
+        },
+        "stage": {
+          "type": "string"
+        },
+        "assetId": {
+          "type": "string"
+        },
+        "total": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "t",
+        "event",
+        "stage"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "t": {
+          "type": "string"
+        },
+        "event": {
+          "type": "string",
+          "const": "item:done"
+        },
+        "stage": {
+          "type": "string"
+        },
+        "assetId": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "n": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "t",
+        "event",
+        "stage",
+        "key",
+        "n",
+        "total"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "t": {
+          "type": "string"
+        },
+        "event": {
+          "type": "string",
+          "const": "stage:done"
+        },
+        "stage": {
+          "type": "string"
+        },
+        "assetId": {
+          "type": "string"
+        },
+        "durationMs": {
+          "type": "number"
+        },
+        "cached": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "t",
+        "event",
+        "stage",
+        "durationMs",
+        "cached"
+      ],
+      "additionalProperties": false
+    }
+  ],
+  "description": "One NDJSON line written to stderr with --json."
+}

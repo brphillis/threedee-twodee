@@ -1,0 +1,10 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "composition/auto-fit",
+  "type": "prop",
+  "description": "pixelsPerUnit auto: the largest whole scale that fits a 24 x 24 frame.",
+  "frame": { "width": 24, "height": 24 },
+  "pixelsPerUnit": "auto",
+  "model": { "parts": [{ "type": "component", "id": "cottage", "component": "cottage" }] }
+}

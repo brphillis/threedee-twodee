@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "lighting/studio-rim",
+  "assetHash": "sha256:5a80d8a76c017a358fd0c2ecc4f10fe7e2484168320825f011a0ec2b39dcb653",
+  "generatedAt": "2026-10-02T11:49:03.817Z",
+  "frame": { "width": 48, "height": 48 },
+  "pivot": {
+    "x": 24,
+    "y": 40,
+    "normalized": { "x": 0.5, "y": 0.833333 }
+  },
+  "pixelsPerUnit": 20,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 8 },
+  "directions": [
+    { "name": "s", "yaw": 0, "mirrorOf": null },
+    { "name": "w", "yaw": 90, "mirrorOf": null },
+    { "name": "n", "yaw": 180, "mirrorOf": null },
+    { "name": "e", "yaw": 270, "mirrorOf": null }
+  ],
+  "palette": { "mode": "none", "name": null, "colors": [] },
+  "clips": [
+    { "name": "idle", "fps": 10, "frames": 1, "loop": true, "motion": false, "durationMs": 100 }
+  ],
+  "sheets": [
+    {
+      "name": "studio-rim",
+      "image": "studio-rim.png",
+      "data": "studio-rim.json",
+      "width": 48,
+      "height": 192,
+      "layout": "grid"
+    }
+  ],
+  "cells": [
+    {
+      "key": "idle/s/000",
+      "clip": "idle",
+      "direction": "s",
+      "index": 0,
+      "sheet": "studio-rim",
+      "x": 0,
+      "y": 0,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/w/000",
+      "clip": "idle",
+      "direction": "w",
+      "index": 0,
+      "sheet": "studio-rim",
+      "x": 0,
+      "y": 48,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/n/000",
+      "clip": "idle",
+      "direction": "n",
+      "index": 0,
+      "sheet": "studio-rim",
+      "x": 0,
+      "y": 96,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/e/000",
+      "clip": "idle",
+      "direction": "e",
+      "index": 0,
+      "sheet": "studio-rim",
+      "x": 0,
+      "y": 144,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    }
+  ],
+  "files": {
+    "sheets": ["studio-rim.png"],
+    "aseprite-json": ["studio-rim.json"],
+    "manifest": ["manifest.json"]
+  },
+  "stages": {
+    "model": "sha256:192d8bb09b4c63c7a755a9b92733cdc35d5e4de1d6087cae6c01314cfae8c5b5",
+    "rig": "sha256:e4ed1f0c804183c876fc4f38fa9ed10c3c6eefbc9f621f0ae320e791c52ab3ec",
+    "plan": "sha256:7d98641c77268e5783e8fef85d26184e1f8fe67a41d1f8e3ee3dec59dc0b2c4e",
+    "render": "sha256:4223a7f08e50e792c856da4ef0ffa4624e6c2c6085e39cd7fab6ec41620d6be3",
+    "pixel": "sha256:e76773de19ab810d68d47974894e6ab52e81538c58025c67b8ef0c21cfb7adf3",
+    "sheet": "sha256:9d3d342593efef54057775ec2d2ee13935b0e2fd3381edb3ad8eaef80619a17c"
+  },
+  "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
+}

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "dimetric",
+  "description": "2:1 pixel isometric. At 45 degrees of yaw a world edge projects with slope sin(pitch), so a 30 degree pitch makes edges step two pixels across for one up.",
+  "projection": "orthographic",
+  "pitch": 30,
+  "yawOffset": 45,
+  "groundMargin": "auto"
+}

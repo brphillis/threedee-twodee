@@ -1,0 +1,58 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "props/lamp",
+  "type": "prop",
+  "description": "A street lamp: one arm and lantern, mirrored to the other side.",
+  "frame": { "width": 32, "height": 48 },
+  "directions": "d4",
+  "materials": { "flame": { "color": "#fee761", "shading": "flat" } },
+  "model": {
+    "parts": [
+      {
+        "type": "cylinder",
+        "id": "base",
+        "material": "iron",
+        "radius": 0.22,
+        "height": 0.08,
+        "position": [0, 0.04, 0],
+        "segments": 8
+      },
+      {
+        "type": "cylinder",
+        "id": "pole",
+        "material": "iron",
+        "radius": 0.045,
+        "height": 1.6,
+        "position": [0, 0.8, 0],
+        "segments": 8
+      },
+      {
+        "type": "group",
+        "id": "arm",
+        "mirror": "x",
+        "parts": [
+          { "type": "box", "id": "bar", "material": "iron", "size": [0.36, 0.04, 0.04], "position": [0.18, 1.5, 0] },
+          {
+            "type": "cone",
+            "id": "hood",
+            "material": "iron",
+            "radius": 0.11,
+            "height": 0.08,
+            "segments": 6,
+            "position": [0.36, 1.44, 0]
+          },
+          {
+            "type": "cylinder",
+            "id": "lantern",
+            "material": "flame",
+            "radius": 0.06,
+            "height": 0.14,
+            "segments": 6,
+            "position": [0.36, 1.33, 0]
+          }
+        ]
+      }
+    ]
+  }
+}

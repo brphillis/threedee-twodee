@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 420" width="420" height="420" font-family="system-ui, sans-serif" font-size="13">
+  <title>Direction yaw, seen from above</title>
+  <rect width="420" height="420" fill="#ffffff"/>
+  <circle cx="210" cy="210" r="140" fill="none" stroke="#e2e2e0" stroke-width="2"/>
+  <rect x="185" y="185" width="50" height="50" fill="#ead4aa" stroke="#733e39"/>
+  <polygon points="210,250 200,235 220,235" fill="#733e39"/>
+  <text x="180" y="270" fill="#733e39">front (+Z)</text>
+  <g fill="#1d1d1f" font-weight="600">
+    <text x="203" y="372">s</text><text x="198" y="388" font-weight="400" fill="#6b6b70">0°</text>
+    <text x="48" y="215">w</text><text x="38" y="232" font-weight="400" fill="#6b6b70">90°</text>
+    <text x="203" y="58">n</text><text x="194" y="42" font-weight="400" fill="#6b6b70">180°</text>
+    <text x="362" y="215">e</text><text x="356" y="232" font-weight="400" fill="#6b6b70">270°</text>
+    <text x="96" y="330">sw</text><text x="96" y="104">nw</text><text x="306" y="104">ne</text><text x="306" y="330">se</text>
+  </g>
+  <rect x="190" y="396" width="40" height="18" rx="4" fill="#be4a2f"/>
+  <text x="240" y="410" fill="#be4a2f">camera (yaw offset 0)</text>
+  <text x="16" y="20" fill="#6b6b70">A direction is where the model faces, clockwise from facing the camera.</text>
+</svg>

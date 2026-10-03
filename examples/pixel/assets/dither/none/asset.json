@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "dither/none",
+  "type": "prop",
+  "description": "PICO-8 palette without dithering: gradients become flat bands.",
+  "pixel": {
+    "palette": "fixed:pico-8",
+    "dither": "none"
+  },
+  "model": {
+    "parts": [
+      {
+        "type": "component",
+        "id": "mushroom",
+        "component": "mushroom"
+      }
+    ]
+  },
+  "acceptance": {
+    "maxColors": 16
+  }
+}

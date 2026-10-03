@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": false,
+    "declaration": false,
+    "declarationMap": false,
+    "noEmit": true,
+    "rewriteRelativeImportExtensions": false,
+    "lib": ["es2024", "dom", "dom.iterable"],
+    "types": [],
+    "jsx": "react-jsx",
+    "rootDir": "."
+  },
+  "include": ["src/client"],
+  "references": [{ "path": "../../packages/schema" }, { "path": "." }]
+}

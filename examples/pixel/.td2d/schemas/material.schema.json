@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:td2d:schema:material:1",
+  "title": "td2d material",
+  "type": "object",
+  "properties": {
+    "description": {
+      "type": "string",
+      "maxLength": 2000,
+      "description": "Free-text note. Use this instead of comments."
+    },
+    "color": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "description": "sRGB colour as #rrggbb.",
+          "examples": [
+            "#a0693a"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "palette": {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9-]*$",
+              "description": "Palette name.",
+              "examples": [
+                "steel",
+                "endesga-32"
+              ]
+            },
+            "index": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 255,
+              "description": "Zero-based colour index within the palette."
+            }
+          },
+          "required": [
+            "palette",
+            "index"
+          ],
+          "additionalProperties": false,
+          "description": "A colour taken from a named palette by index."
+        }
+      ],
+      "description": "Either a #rrggbb colour or a palette reference."
+    },
+    "shading": {
+      "type": "string",
+      "enum": [
+        "toon",
+        "flat",
+        "lambert"
+      ],
+      "description": "toon: banded lighting. flat: unlit base colour. lambert: smooth diffuse lighting."
+    },
+    "bands": {
+      "description": "Number of light bands for toon shading. Default 3.",
+      "type": "integer",
+      "minimum": 2,
+      "maximum": 8
+    },
+    "emissive": {
+      "description": "Emissive colour added regardless of lighting.",
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}$",
+      "examples": [
+        "#a0693a"
+      ]
+    },
+    "outline": {
+      "description": "Whether the outline pass may outline this material.",
+      "type": "boolean"
+    },
+    "opacity": {
+      "description": "Render opacity. The pixel stage thresholds alpha, so values below 1 produce a warning.",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    }
+  },
+  "required": [
+    "color"
+  ],
+  "additionalProperties": false,
+  "description": "Renderer-agnostic material.",
+  "examples": [
+    {
+      "color": "#a0693a",
+      "shading": "toon",
+      "bands": 3,
+      "outline": true
+    }
+  ]
+}

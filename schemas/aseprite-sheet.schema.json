@@ -1,0 +1,321 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:td2d:schema:aseprite-sheet:1",
+  "title": "td2d aseprite-sheet",
+  "type": "object",
+  "properties": {
+    "frames": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "frame": {
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "y": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "w": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "h": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              }
+            },
+            "required": [
+              "x",
+              "y",
+              "w",
+              "h"
+            ],
+            "additionalProperties": false
+          },
+          "rotated": {
+            "type": "boolean"
+          },
+          "trimmed": {
+            "type": "boolean"
+          },
+          "spriteSourceSize": {
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "y": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "w": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "h": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              }
+            },
+            "required": [
+              "x",
+              "y",
+              "w",
+              "h"
+            ],
+            "additionalProperties": false
+          },
+          "sourceSize": {
+            "type": "object",
+            "properties": {
+              "w": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "h": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              }
+            },
+            "required": [
+              "w",
+              "h"
+            ],
+            "additionalProperties": false
+          },
+          "duration": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "description": "Milliseconds."
+          }
+        },
+        "required": [
+          "frame",
+          "rotated",
+          "trimmed",
+          "spriteSourceSize",
+          "sourceSize",
+          "duration"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Frames by name, in sheet order."
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "app": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string",
+          "const": "RGBA8888"
+        },
+        "size": {
+          "type": "object",
+          "properties": {
+            "w": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "h": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": [
+            "w",
+            "h"
+          ],
+          "additionalProperties": false
+        },
+        "scale": {
+          "type": "string"
+        },
+        "frameTags": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "from": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "to": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "direction": {
+                "type": "string",
+                "enum": [
+                  "forward",
+                  "reverse",
+                  "pingpong",
+                  "pingpong_reverse"
+                ]
+              },
+              "color": {
+                "type": "string"
+              },
+              "data": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "from",
+              "to",
+              "direction"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "layers": {
+          "type": "array",
+          "items": {}
+        },
+        "slices": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "color": {
+                "type": "string"
+              },
+              "data": {
+                "type": "string"
+              },
+              "keys": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "frame": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    },
+                    "bounds": {
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "integer",
+                          "minimum": -9007199254740991,
+                          "maximum": 9007199254740991
+                        },
+                        "y": {
+                          "type": "integer",
+                          "minimum": -9007199254740991,
+                          "maximum": 9007199254740991
+                        },
+                        "w": {
+                          "type": "integer",
+                          "minimum": -9007199254740991,
+                          "maximum": 9007199254740991
+                        },
+                        "h": {
+                          "type": "integer",
+                          "minimum": -9007199254740991,
+                          "maximum": 9007199254740991
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y",
+                        "w",
+                        "h"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "pivot": {
+                      "type": "object",
+                      "properties": {
+                        "x": {
+                          "type": "number"
+                        },
+                        "y": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "x",
+                        "y"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "frame",
+                    "bounds"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "name",
+              "color",
+              "keys"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "app",
+        "version",
+        "image",
+        "format",
+        "size",
+        "scale",
+        "frameTags",
+        "layers",
+        "slices"
+      ],
+      "additionalProperties": false,
+      "description": "The sheet image and size, one frame tag per clip and direction, and a pivot slice."
+    }
+  },
+  "required": [
+    "frames",
+    "meta"
+  ],
+  "additionalProperties": false,
+  "description": "Aseprite JSON Hash sprite sheet data."
+}

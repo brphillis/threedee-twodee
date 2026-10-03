@@ -1,0 +1,35 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "props/teapot",
+  "type": "prop",
+  "description": "A GLB made elsewhere, imported with a unit scale and a material map, standing on a primitive plate.",
+  "directions": "d4",
+  "materials": {
+    "glaze": { "color": "#2ce8f5", "shading": "toon" },
+    "plate": { "color": "#ead4aa", "shading": "toon", "bands": 2 }
+  },
+  "model": {
+    "parts": [
+      {
+        "type": "import",
+        "id": "teapot",
+        "src": "import/teapot.glb",
+        "material": "glaze",
+        "materialMap": { "porcelain": "glaze" },
+        "units": 0.03,
+        "align": "base",
+        "position": [0, 0.04, 0]
+      },
+      {
+        "type": "cylinder",
+        "id": "plate",
+        "material": "plate",
+        "radius": 0.55,
+        "height": 0.04,
+        "position": [0, 0.02, 0],
+        "segments": 20
+      }
+    ]
+  }
+}

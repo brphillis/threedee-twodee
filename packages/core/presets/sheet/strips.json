@@ -1,0 +1,7 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "strips",
+  "description": "A separate horizontal strip for each clip and direction.",
+  "layout": "strips",
+  "flow": "rows"
+}

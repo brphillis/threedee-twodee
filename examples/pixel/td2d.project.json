@@ -1,0 +1,33 @@
+{
+  "$schema": "./.td2d/schemas/project.schema.json",
+  "schemaVersion": "1.0.0",
+  "name": "pixel",
+  "description": "One mushroom through every pixel setting: downscale filters, palettes, posterize, dither strengths, outline styles and cleanup.",
+  "defaults": {
+    "frame": {
+      "width": 40,
+      "height": 40
+    },
+    "pixelsPerUnit": 28,
+    "directions": "d4",
+    "materials": {
+      "cap": {
+        "color": "#b13e53",
+        "shading": "lambert"
+      },
+      "spot": {
+        "color": "#f4f4f4",
+        "shading": "toon",
+        "bands": 2
+      },
+      "stem": {
+        "color": "#e4d2aa",
+        "shading": "lambert"
+      },
+      "moss": {
+        "color": "#38b764",
+        "shading": "toon"
+      }
+    }
+  }
+}

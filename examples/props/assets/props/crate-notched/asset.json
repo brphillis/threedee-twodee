@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "props/crate-notched",
+  "type": "prop",
+  "description": "A crate with a hand-hole bored through and one corner cut away, made with CSG.",
+  "directions": "d4",
+  "materials": { "heartwood": { "color": "#3e2731", "shading": "toon" } },
+  "model": {
+    "parts": [
+      {
+        "type": "csg",
+        "id": "body",
+        "op": "subtract",
+        "position": [0, 0.5, 0],
+        "parts": [
+          { "type": "box", "id": "block", "material": "oak", "size": [1, 1, 1] },
+          {
+            "type": "cylinder",
+            "id": "hand-hole",
+            "material": "heartwood",
+            "radius": 0.12,
+            "height": 1.2,
+            "rotation": [0, 0, 90],
+            "position": [0, 0.2, 0],
+            "segments": 12
+          },
+          {
+            "type": "box",
+            "id": "corner-cut",
+            "material": "heartwood",
+            "size": [0.4, 0.4, 0.4],
+            "position": [0.5, 0.5, 0.5]
+          }
+        ]
+      },
+      { "type": "box", "id": "band", "material": "iron", "size": [1.04, 0.1, 1.04], "position": [0, 0.25, 0] }
+    ]
+  }
+}

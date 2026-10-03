@@ -1,0 +1,463 @@
+{
+  "q3": {
+    "fixture": "walker, walk (8 frames) and slide (16 frames over 2 px) clips, 8 views, 32 x 48, 16 px/m",
+    "metric": "walk: variance of edge pixel count across frames (lower is steadier) and mean alpha changes between frames. slide (16 frames, 1/8 px steps aligned with the subsample grid or 0.13 px steps that are not): variance of opaque area (ideal 0) and RMS error of centroid steps against the projected step (ideal 0); fraction of pixels opaque in consecutive frames that change colour; distinct colours per sprite",
+    "rows": "q3-supersample.png rows: supersample 1, 2, 4, 8 with box, then 4 and 8 with mode (side view, yaw 90)",
+    "x1": {
+      "edgeVariance": 22.008,
+      "alphaFlicker": 29.32,
+      "perDirection": [
+        {
+          "dir": "y0",
+          "edgeVariance": 2,
+          "flicker": 9
+        },
+        {
+          "dir": "y45",
+          "edgeVariance": 35.5,
+          "flicker": 29.29
+        },
+        {
+          "dir": "y90",
+          "edgeVariance": 12,
+          "flicker": 45.57
+        },
+        {
+          "dir": "y135",
+          "edgeVariance": 38.438,
+          "flicker": 33.43
+        },
+        {
+          "dir": "y180",
+          "edgeVariance": 0.75,
+          "flicker": 9.57
+        },
+        {
+          "dir": "y225",
+          "edgeVariance": 38.438,
+          "flicker": 29.71
+        },
+        {
+          "dir": "y270",
+          "edgeVariance": 12,
+          "flicker": 45.14
+        },
+        {
+          "dir": "y315",
+          "edgeVariance": 36.938,
+          "flicker": 32.86
+        }
+      ],
+      "renderMsPerFrame": 1.2,
+      "slide": {
+        "aligned": {
+          "areaVariance": 10.402,
+          "centroidStepRmsError": 0.118,
+          "colourChangeRate": 0.032,
+          "coloursPerSprite": 9.9
+        },
+        "unaligned": {
+          "areaVariance": 9.352,
+          "centroidStepRmsError": 0.118,
+          "colourChangeRate": 0.034,
+          "coloursPerSprite": 9.9
+        }
+      }
+    },
+    "x2": {
+      "edgeVariance": 17.73,
+      "alphaFlicker": 28.39,
+      "perDirection": [
+        {
+          "dir": "y0",
+          "edgeVariance": 0.75,
+          "flicker": 7.43
+        },
+        {
+          "dir": "y45",
+          "edgeVariance": 30,
+          "flicker": 31.43
+        },
+        {
+          "dir": "y90",
+          "edgeVariance": 9,
+          "flicker": 41.57
+        },
+        {
+          "dir": "y135",
+          "edgeVariance": 28.359,
+          "flicker": 32.71
+        },
+        {
+          "dir": "y180",
+          "edgeVariance": 0.75,
+          "flicker": 8.14
+        },
+        {
+          "dir": "y225",
+          "edgeVariance": 31.25,
+          "flicker": 30.71
+        },
+        {
+          "dir": "y270",
+          "edgeVariance": 12,
+          "flicker": 42.14
+        },
+        {
+          "dir": "y315",
+          "edgeVariance": 29.734,
+          "flicker": 33
+        }
+      ],
+      "renderMsPerFrame": 1.6,
+      "slide": {
+        "aligned": {
+          "areaVariance": 10.243,
+          "centroidStepRmsError": 0.101,
+          "colourChangeRate": 0.097,
+          "coloursPerSprite": 34.1
+        },
+        "unaligned": {
+          "areaVariance": 11.498,
+          "centroidStepRmsError": 0.126,
+          "colourChangeRate": 0.096,
+          "coloursPerSprite": 34
+        }
+      }
+    },
+    "x4": {
+      "edgeVariance": 21.984,
+      "alphaFlicker": 28.29,
+      "perDirection": [
+        {
+          "dir": "y0",
+          "edgeVariance": 1.234,
+          "flicker": 8
+        },
+        {
+          "dir": "y45",
+          "edgeVariance": 38.734,
+          "flicker": 28.86
+        },
+        {
+          "dir": "y90",
+          "edgeVariance": 10.984,
+          "flicker": 43.14
+        },
+        {
+          "dir": "y135",
+          "edgeVariance": 35.484,
+          "flicker": 32
+        },
+        {
+          "dir": "y180",
+          "edgeVariance": 1.234,
+          "flicker": 9.29
+        },
+        {
+          "dir": "y225",
+          "edgeVariance": 38.984,
+          "flicker": 30
+        },
+        {
+          "dir": "y270",
+          "edgeVariance": 10.984,
+          "flicker": 42.71
+        },
+        {
+          "dir": "y315",
+          "edgeVariance": 38.234,
+          "flicker": 32.29
+        }
+      ],
+      "renderMsPerFrame": 2.9,
+      "slide": {
+        "aligned": {
+          "areaVariance": 13.608,
+          "centroidStepRmsError": 0.111,
+          "colourChangeRate": 0.218,
+          "coloursPerSprite": 56.6
+        },
+        "unaligned": {
+          "areaVariance": 12.466,
+          "centroidStepRmsError": 0.121,
+          "colourChangeRate": 0.22,
+          "coloursPerSprite": 56.3
+        }
+      }
+    },
+    "x8": {
+      "edgeVariance": 22.547,
+      "alphaFlicker": 28.34,
+      "perDirection": [
+        {
+          "dir": "y0",
+          "edgeVariance": 1.359,
+          "flicker": 7.86
+        },
+        {
+          "dir": "y45",
+          "edgeVariance": 38.734,
+          "flicker": 28.14
+        },
+        {
+          "dir": "y90",
+          "edgeVariance": 9.734,
+          "flicker": 43.71
+        },
+        {
+          "dir": "y135",
+          "edgeVariance": 38.984,
+          "flicker": 32.43
+        },
+        {
+          "dir": "y180",
+          "edgeVariance": 1.359,
+          "flicker": 9.14
+        },
+        {
+          "dir": "y225",
+          "edgeVariance": 38.984,
+          "flicker": 28.86
+        },
+        {
+          "dir": "y270",
+          "edgeVariance": 9.734,
+          "flicker": 43.71
+        },
+        {
+          "dir": "y315",
+          "edgeVariance": 41.484,
+          "flicker": 32.86
+        }
+      ],
+      "renderMsPerFrame": 9.5,
+      "slide": {
+        "aligned": {
+          "areaVariance": 12.28,
+          "centroidStepRmsError": 0.118,
+          "colourChangeRate": 0.323,
+          "coloursPerSprite": 65.6
+        },
+        "unaligned": {
+          "areaVariance": 11.728,
+          "centroidStepRmsError": 0.122,
+          "colourChangeRate": 0.327,
+          "coloursPerSprite": 65.7
+        }
+      }
+    },
+    "x4-mode": {
+      "edgeVariance": 21.984,
+      "alphaFlicker": 28.29,
+      "perDirection": [
+        {
+          "dir": "y0",
+          "edgeVariance": 1.234,
+          "flicker": 8
+        },
+        {
+          "dir": "y45",
+          "edgeVariance": 38.734,
+          "flicker": 28.86
+        },
+        {
+          "dir": "y90",
+          "edgeVariance": 10.984,
+          "flicker": 43.14
+        },
+        {
+          "dir": "y135",
+          "edgeVariance": 35.484,
+          "flicker": 32
+        },
+        {
+          "dir": "y180",
+          "edgeVariance": 1.234,
+          "flicker": 9.29
+        },
+        {
+          "dir": "y225",
+          "edgeVariance": 38.984,
+          "flicker": 30
+        },
+        {
+          "dir": "y270",
+          "edgeVariance": 10.984,
+          "flicker": 42.71
+        },
+        {
+          "dir": "y315",
+          "edgeVariance": 38.234,
+          "flicker": 32.29
+        }
+      ],
+      "renderMsPerFrame": 2.9,
+      "slide": {
+        "aligned": {
+          "areaVariance": 13.608,
+          "centroidStepRmsError": 0.111,
+          "colourChangeRate": 0.027,
+          "coloursPerSprite": 10
+        },
+        "unaligned": {
+          "areaVariance": 12.466,
+          "centroidStepRmsError": 0.121,
+          "colourChangeRate": 0.028,
+          "coloursPerSprite": 10.1
+        }
+      }
+    },
+    "x8-mode": {
+      "edgeVariance": 22.547,
+      "alphaFlicker": 28.34,
+      "perDirection": [
+        {
+          "dir": "y0",
+          "edgeVariance": 1.359,
+          "flicker": 7.86
+        },
+        {
+          "dir": "y45",
+          "edgeVariance": 38.734,
+          "flicker": 28.14
+        },
+        {
+          "dir": "y90",
+          "edgeVariance": 9.734,
+          "flicker": 43.71
+        },
+        {
+          "dir": "y135",
+          "edgeVariance": 38.984,
+          "flicker": 32.43
+        },
+        {
+          "dir": "y180",
+          "edgeVariance": 1.359,
+          "flicker": 9.14
+        },
+        {
+          "dir": "y225",
+          "edgeVariance": 38.984,
+          "flicker": 28.86
+        },
+        {
+          "dir": "y270",
+          "edgeVariance": 9.734,
+          "flicker": 43.71
+        },
+        {
+          "dir": "y315",
+          "edgeVariance": 41.484,
+          "flicker": 32.86
+        }
+      ],
+      "renderMsPerFrame": 9.1,
+      "slide": {
+        "aligned": {
+          "areaVariance": 12.28,
+          "centroidStepRmsError": 0.118,
+          "colourChangeRate": 0.024,
+          "coloursPerSprite": 10
+        },
+        "unaligned": {
+          "areaVariance": 11.728,
+          "centroidStepRmsError": 0.122,
+          "colourChangeRate": 0.025,
+          "coloursPerSprite": 10
+        }
+      }
+    }
+  },
+  "q6": {
+    "fixture": "sword, 5 cm x 2 cm blade, 8 views, 32 x 48 at 32 px/m (blade 1.6 px wide face on, 0.6 px edge on)",
+    "rows": "q6-threshold.png rows: threshold 64, 100, 128, 160, 192",
+    "t64": {
+      "brokenViews": 0,
+      "meanComponents": 1,
+      "missingBladeRows": 0,
+      "opaquePixels": 86
+    },
+    "t100": {
+      "brokenViews": 0,
+      "meanComponents": 1,
+      "missingBladeRows": 0.231,
+      "opaquePixels": 70.5
+    },
+    "t128": {
+      "brokenViews": 0,
+      "meanComponents": 1,
+      "missingBladeRows": 0.231,
+      "opaquePixels": 68.8
+    },
+    "t160": {
+      "brokenViews": 0,
+      "meanComponents": 1,
+      "missingBladeRows": 0.241,
+      "opaquePixels": 66
+    },
+    "t192": {
+      "brokenViews": 0,
+      "meanComponents": 0.75,
+      "missingBladeRows": 0.981,
+      "opaquePixels": 11
+    }
+  },
+  "q7": {
+    "fixture": "walker, walk and turn clips, south view, 8 frames each, box downscale (about 50 colours per sprite before the palette)",
+    "metric": "mean Oklab error against unquantised sprites; pixels that change colour between the identical first frames of the two clips",
+    "rows": "q7-palette-scope.png rows: auto:6 asset, auto:6 clip, auto:12 asset, auto:12 clip (walk 0, 2, 4, 6 then turn 0, 2, 4, 6)",
+    "auto6-asset": {
+      "errorWalk": 0.029,
+      "errorTurn": 0.031,
+      "boundaryChangedPixels": 0,
+      "distinctColours": 6
+    },
+    "auto6-clip": {
+      "errorWalk": 0.0251,
+      "errorTurn": 0.0322,
+      "boundaryChangedPixels": 205,
+      "distinctColours": 12
+    },
+    "auto12-asset": {
+      "errorWalk": 0.0116,
+      "errorTurn": 0.0135,
+      "boundaryChangedPixels": 0,
+      "distinctColours": 12
+    },
+    "auto12-clip": {
+      "errorWalk": 0.0092,
+      "errorTurn": 0.0125,
+      "boundaryChangedPixels": 192,
+      "distinctColours": 23
+    }
+  },
+  "q8": {
+    "fixture": "walker walk, west view, 8 frames of 32 x 48 snapped to PICO-8 with bayer-4 dither, as one 256 x 48 strip",
+    "sourceColours": 7,
+    "inHouse": {
+      "bytes": 585,
+      "ms": 0.32,
+      "pixelsChanged": 0,
+      "bleedColoursKept": 1,
+      "deterministic": true
+    },
+    "inHouseWithoutBleed": {
+      "bytes": 499
+    },
+    "sharpPalette": {
+      "bytes": 469,
+      "ms": 0.61,
+      "pixelsChanged": 0,
+      "bleedColoursKept": 0,
+      "coloursOutsidePalette": 0,
+      "deterministic": true
+    },
+    "sharpRgba": {
+      "bytes": 766,
+      "ms": 0.59
+    },
+    "licence": "sharp 0.35.5 bundles libvips 8.18.7 with libimagequant 2.4.1 from lovell/libimagequant under BSD 2-Clause (sharp-libvips README); libvips itself is LGPL-3.0-or-later, dynamically linked."
+  }
+}

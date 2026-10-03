@@ -1,0 +1,16 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "downscale/mode",
+  "type": "prop",
+  "description": "The default: each pixel takes the most common colour of its 4 x 4 block, so only rendered colours appear.",
+  "model": {
+    "parts": [
+      {
+        "type": "component",
+        "id": "mushroom",
+        "component": "mushroom"
+      }
+    ]
+  }
+}

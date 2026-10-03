@@ -1,0 +1,169 @@
+{
+  "host": "darwin-arm64",
+  "docker": "OrbStack 29.4.0",
+  "image": "mcr.microsoft.com/playwright:v1.63.0-noble",
+  "results": [
+    {
+      "arch": "arm64",
+      "scenario": "container-dir native",
+      "mode": "native",
+      "writer": "container",
+      "noticed": true,
+      "latencyMs": 102,
+      "assets": ["props/crate"]
+    },
+    {
+      "arch": "arm64",
+      "scenario": "container-dir poll",
+      "mode": "poll",
+      "writer": "container",
+      "noticed": true,
+      "latencyMs": 126,
+      "assets": ["props/crate"]
+    },
+    {
+      "arch": "arm64",
+      "scenario": "bind-mount native, container writes",
+      "mode": "native",
+      "writer": "container",
+      "noticed": true,
+      "latencyMs": 101,
+      "assets": ["props/crate"]
+    },
+    {
+      "arch": "arm64",
+      "scenario": "bind-mount poll, container writes",
+      "mode": "poll",
+      "writer": "container",
+      "noticed": true,
+      "latencyMs": 119,
+      "assets": ["props/crate"]
+    },
+    {
+      "arch": "arm64",
+      "scenario": "container-dir native, new asset directory",
+      "mode": "native",
+      "writer": "container-new",
+      "noticed": true,
+      "latencyMs": 102,
+      "assets": ["props/barrel"]
+    },
+    {
+      "arch": "arm64",
+      "scenario": "container-dir poll, new asset directory",
+      "mode": "poll",
+      "writer": "container-new",
+      "noticed": true,
+      "latencyMs": 116,
+      "assets": ["props/barrel"]
+    },
+    {
+      "arch": "arm64",
+      "scenario": "container-dir native, file in a directory made after the watch",
+      "mode": "native",
+      "writer": "container-late",
+      "noticed": true,
+      "latencyMs": 103,
+      "assets": ["props/crate"]
+    },
+    {
+      "arch": "arm64",
+      "scenario": "bind-mount native, host writes",
+      "mode": "native",
+      "writer": "host",
+      "noticed": true,
+      "latencyMs": 116,
+      "assets": ["props/crate"]
+    },
+    {
+      "arch": "arm64",
+      "scenario": "bind-mount poll, host writes",
+      "mode": "poll",
+      "writer": "host",
+      "noticed": true,
+      "latencyMs": 317,
+      "assets": ["props/crate"]
+    },
+    {
+      "arch": "amd64",
+      "scenario": "container-dir native",
+      "mode": "native",
+      "writer": "container",
+      "noticed": true,
+      "latencyMs": 114,
+      "assets": ["props/crate"]
+    },
+    {
+      "arch": "amd64",
+      "scenario": "container-dir poll",
+      "mode": "poll",
+      "writer": "container",
+      "noticed": true,
+      "latencyMs": 139,
+      "assets": ["props/crate"]
+    },
+    {
+      "arch": "amd64",
+      "scenario": "bind-mount native, container writes",
+      "mode": "native",
+      "writer": "container",
+      "noticed": true,
+      "latencyMs": 111,
+      "assets": ["props/crate"]
+    },
+    {
+      "arch": "amd64",
+      "scenario": "bind-mount poll, container writes",
+      "mode": "poll",
+      "writer": "container",
+      "noticed": true,
+      "latencyMs": 117,
+      "assets": ["props/crate"]
+    },
+    {
+      "arch": "amd64",
+      "scenario": "container-dir native, new asset directory",
+      "mode": "native",
+      "writer": "container-new",
+      "noticed": true,
+      "latencyMs": 106,
+      "assets": ["props/barrel"]
+    },
+    {
+      "arch": "amd64",
+      "scenario": "container-dir poll, new asset directory",
+      "mode": "poll",
+      "writer": "container-new",
+      "noticed": true,
+      "latencyMs": 118,
+      "assets": ["props/barrel"]
+    },
+    {
+      "arch": "amd64",
+      "scenario": "container-dir native, file in a directory made after the watch",
+      "mode": "native",
+      "writer": "container-late",
+      "noticed": true,
+      "latencyMs": 101,
+      "assets": ["props/crate"]
+    },
+    {
+      "arch": "amd64",
+      "scenario": "bind-mount native, host writes",
+      "mode": "native",
+      "writer": "host",
+      "noticed": true,
+      "latencyMs": 123,
+      "assets": ["props/crate"]
+    },
+    {
+      "arch": "amd64",
+      "scenario": "bind-mount poll, host writes",
+      "mode": "poll",
+      "writer": "host",
+      "noticed": true,
+      "latencyMs": 330,
+      "assets": ["props/crate"]
+    }
+  ]
+}

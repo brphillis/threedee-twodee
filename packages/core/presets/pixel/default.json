@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "default",
+  "description": "Mode downscale (most common colour per block), binary alpha at 128, edge bleed, rendered colours kept.",
+  "downscale": "mode",
+  "alphaThreshold": 128,
+  "bleed": true,
+  "posterize": "none",
+  "palette": "none",
+  "paletteScope": "asset",
+  "dither": "none",
+  "ditherStrength": 0.5,
+  "outline": "none",
+  "cleanup": { "orphans": "off", "minNeighbours": 1 }
+}

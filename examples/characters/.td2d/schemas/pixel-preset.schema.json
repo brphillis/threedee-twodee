@@ -1,0 +1,235 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:td2d:schema:pixel-preset:1",
+  "title": "td2d pixel-preset",
+  "type": "object",
+  "properties": {
+    "downscale": {
+      "type": "string",
+      "enum": [
+        "box",
+        "mode"
+      ],
+      "description": "Downscale filter from the supersampled render. Both use the share of the block that is covered for alpha. box averages the colours, which smooths shading but makes in-between colours; mode takes the most common colour, which keeps only rendered colours."
+    },
+    "alphaThreshold": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 255,
+      "description": "Pixels with alpha at or above this value become opaque; all others become transparent."
+    },
+    "bleed": {
+      "type": "boolean",
+      "description": "Give transparent pixels the nearest opaque colour so engines that filter textures do not show dark halos."
+    },
+    "posterize": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "none"
+        },
+        {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 32
+        }
+      ],
+      "description": "Quantise each colour channel to this many levels before palette mapping."
+    },
+    "palette": {
+      "type": "string",
+      "pattern": "^(none|fixed:[a-z0-9][a-z0-9-]*|auto:([2-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-6]))$",
+      "description": "none, fixed:<palette-name> or auto:<colour count>.",
+      "examples": [
+        "none",
+        "fixed:endesga-32",
+        "auto:16"
+      ]
+    },
+    "paletteScope": {
+      "type": "string",
+      "enum": [
+        "asset",
+        "clip"
+      ],
+      "description": "For auto palettes: one palette for the whole asset (stable), or one per clip."
+    },
+    "dither": {
+      "type": "string",
+      "enum": [
+        "none",
+        "bayer-2",
+        "bayer-4",
+        "bayer-8"
+      ],
+      "description": "Ordered dither used while mapping to a palette. Position-based, so it does not crawl between frames."
+    },
+    "ditherStrength": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "How far dithering may push a colour, from 0 to 1."
+    },
+    "outline": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "none"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "color": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$",
+              "description": "sRGB colour as #rrggbb.",
+              "examples": [
+                "#a0693a"
+              ]
+            },
+            "side": {
+              "type": "string",
+              "enum": [
+                "outside",
+                "inside"
+              ],
+              "description": "outside grows the silhouette by the outline; inside recolours its edge pixels."
+            },
+            "width": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4
+            },
+            "connectivity": {
+              "description": "8 (default) outlines diagonal corners too; 4 leaves them open for a softer look.",
+              "anyOf": [
+                {
+                  "type": "number",
+                  "const": 4
+                },
+                {
+                  "type": "number",
+                  "const": 8
+                }
+              ]
+            },
+            "snapToPalette": {
+              "description": "Replace the outline colour with the nearest palette colour. Default false.",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "color",
+            "side",
+            "width"
+          ],
+          "additionalProperties": false,
+          "description": "One-colour outline drawn from the alpha mask.",
+          "examples": [
+            {
+              "color": "#1a1c2c",
+              "side": "outside",
+              "width": 1
+            }
+          ]
+        }
+      ],
+      "description": "none, or a one-colour outline drawn from the alpha mask."
+    },
+    "cleanup": {
+      "description": "What to do with stray single pixels.",
+      "type": "object",
+      "properties": {
+        "orphans": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "off",
+                "remove",
+                "recolour"
+              ]
+            },
+            {
+              "type": "boolean"
+            }
+          ],
+          "description": "off: keep everything. remove: delete opaque pixels with fewer than minNeighbours opaque neighbours. recolour: give single pixels whose colour matches none of their neighbours the most common neighbouring colour. true means remove."
+        },
+        "minNeighbours": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4,
+          "description": "For remove: fewest opaque 4-neighbours a pixel needs to stay. Default 1."
+        }
+      },
+      "additionalProperties": false
+    },
+    "passes": {
+      "description": "Run these passes in this order instead of the default. It must start with downscale and include alphaThreshold.",
+      "minItems": 2,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "downscale",
+          "alphaThreshold",
+          "posterize",
+          "palette",
+          "outline",
+          "cleanup",
+          "bleed"
+        ]
+      }
+    },
+    "$schema": {
+      "type": "string",
+      "description": "Optional JSON Schema reference for editors. Ignored by td2d."
+    },
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^1\\.\\d+\\.\\d+$",
+      "description": "Document schema version. Any 1.x.y version is accepted.",
+      "examples": [
+        "1.0.0"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^[a-z0-9][a-z0-9-]*$",
+      "description": "Lowercase kebab-case name.",
+      "examples": [
+        "steel",
+        "endesga-32"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 2000,
+      "description": "Free-text note. Use this instead of comments."
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "name"
+  ],
+  "additionalProperties": false,
+  "description": "A named set of pixel settings. Unset fields keep their defaults.",
+  "examples": [
+    {
+      "schemaVersion": "1.0.0",
+      "name": "crisp-12",
+      "palette": "auto:12",
+      "outline": {
+        "color": "#1a1c2c",
+        "side": "outside",
+        "width": 1,
+        "snapToPalette": true
+      },
+      "cleanup": {
+        "orphans": "remove"
+      }
+    }
+  ]
+}

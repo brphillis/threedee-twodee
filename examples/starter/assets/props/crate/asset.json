@@ -1,0 +1,21 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "props/crate",
+  "type": "prop",
+  "description": "Wooden supply crate with an iron band.",
+  "frame": { "width": 32, "height": 32 },
+  "directions": "d4",
+  "materials": {
+    "wood": { "color": "#a0693a", "shading": "toon", "bands": 3 },
+    "iron": { "color": "#5b6770", "shading": "toon", "bands": 2 }
+  },
+  "model": {
+    "parts": [
+      { "type": "box", "id": "body", "material": "wood", "size": [1, 1, 1], "position": [0, 0.5, 0] },
+      { "type": "box", "id": "band", "material": "iron", "size": [1.04, 0.12, 1.04], "position": [0, 0.5, 0] }
+    ]
+  },
+  "animation": { "fps": 10, "clips": { "idle": { "duration": 0.1 } } },
+  "acceptance": { "minAlphaCoverage": 0.15 }
+}

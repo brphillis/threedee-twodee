@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "top",
+  "description": "Straight down, for tiles and maps.",
+  "projection": "orthographic",
+  "pitch": 90,
+  "yawOffset": 0,
+  "groundMargin": "auto"
+}

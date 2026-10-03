@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "camera/three-quarter",
+  "assetHash": "sha256:c645c7a00a559cf7613c2a516513a1c0b62d717dfbbd241bd67b92c44ae2b292",
+  "generatedAt": "2026-10-02T11:49:03.084Z",
+  "frame": { "width": 48, "height": 48 },
+  "pivot": {
+    "x": 24,
+    "y": 42,
+    "normalized": { "x": 0.5, "y": 0.875 }
+  },
+  "pixelsPerUnit": 20,
+  "camera": { "preset": "three-quarter", "pitch": 30, "yawOffset": 0, "groundMargin": 6 },
+  "directions": [
+    { "name": "s", "yaw": 0, "mirrorOf": null },
+    { "name": "w", "yaw": 90, "mirrorOf": null },
+    { "name": "n", "yaw": 180, "mirrorOf": null },
+    { "name": "e", "yaw": 270, "mirrorOf": null }
+  ],
+  "palette": { "mode": "none", "name": null, "colors": [] },
+  "clips": [
+    { "name": "idle", "fps": 10, "frames": 1, "loop": true, "motion": false, "durationMs": 100 }
+  ],
+  "sheets": [
+    {
+      "name": "three-quarter",
+      "image": "three-quarter.png",
+      "data": "three-quarter.json",
+      "width": 48,
+      "height": 192,
+      "layout": "grid"
+    }
+  ],
+  "cells": [
+    {
+      "key": "idle/s/000",
+      "clip": "idle",
+      "direction": "s",
+      "index": 0,
+      "sheet": "three-quarter",
+      "x": 0,
+      "y": 0,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/w/000",
+      "clip": "idle",
+      "direction": "w",
+      "index": 0,
+      "sheet": "three-quarter",
+      "x": 0,
+      "y": 48,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/n/000",
+      "clip": "idle",
+      "direction": "n",
+      "index": 0,
+      "sheet": "three-quarter",
+      "x": 0,
+      "y": 96,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/e/000",
+      "clip": "idle",
+      "direction": "e",
+      "index": 0,
+      "sheet": "three-quarter",
+      "x": 0,
+      "y": 144,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    }
+  ],
+  "files": {
+    "sheets": ["three-quarter.png"],
+    "aseprite-json": ["three-quarter.json"],
+    "manifest": ["manifest.json"]
+  },
+  "stages": {
+    "model": "sha256:192d8bb09b4c63c7a755a9b92733cdc35d5e4de1d6087cae6c01314cfae8c5b5",
+    "rig": "sha256:d70eb9401d14f3674fb123b0499e42173e15eb6a5db6a4eef0e7e8a70efe7868",
+    "plan": "sha256:cc1502788636681c45f63dc337e5ef0f71a6821c9f7a96904a7b7f47fd82bf67",
+    "render": "sha256:fb1fc3cb85f4e367d766e9b085bf55b721b1737f6cab575124262456a39fbf6b",
+    "pixel": "sha256:26057c14e71d6eb541f1aab48aadbaabdde01e7d429fa1f50574c9d5095edac9",
+    "sheet": "sha256:14e8f8c419cb36e2c7a36c5f9ca7db0c776eda64c844bbbb22145ea77aea2ba4"
+  },
+  "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
+}

@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "dither/none",
+  "assetHash": "sha256:0881aedfae04ae7cfca701bb49374d7e48f210a2cc36c6222edc044a0d38a34c",
+  "generatedAt": "2026-10-02T11:49:07.717Z",
+  "frame": { "width": 40, "height": 40 },
+  "pivot": {
+    "x": 20,
+    "y": 32,
+    "normalized": { "x": 0.5, "y": 0.8 }
+  },
+  "pixelsPerUnit": 28,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 8 },
+  "directions": [
+    { "name": "s", "yaw": 0, "mirrorOf": null },
+    { "name": "w", "yaw": 90, "mirrorOf": null },
+    { "name": "n", "yaw": 180, "mirrorOf": null },
+    { "name": "e", "yaw": 270, "mirrorOf": null }
+  ],
+  "palette": {
+    "mode": "fixed:pico-8",
+    "name": "pico-8",
+    "colors": [
+      "#000000",
+      "#1d2b53",
+      "#7e2553",
+      "#008751",
+      "#ab5236",
+      "#5f574f",
+      "#c2c3c7",
+      "#fff1e8",
+      "#ff004d",
+      "#ffa300",
+      "#ffec27",
+      "#00e436",
+      "#29adff",
+      "#83769c",
+      "#ff77a8",
+      "#ffccaa"
+    ]
+  },
+  "clips": [
+    { "name": "idle", "fps": 10, "frames": 1, "loop": true, "motion": false, "durationMs": 100 }
+  ],
+  "sheets": [
+    {
+      "name": "none",
+      "image": "none.png",
+      "data": "none.json",
+      "width": 40,
+      "height": 160,
+      "layout": "grid"
+    }
+  ],
+  "cells": [
+    {
+      "key": "idle/s/000",
+      "clip": "idle",
+      "direction": "s",
+      "index": 0,
+      "sheet": "none",
+      "x": 0,
+      "y": 0,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/w/000",
+      "clip": "idle",
+      "direction": "w",
+      "index": 0,
+      "sheet": "none",
+      "x": 0,
+      "y": 40,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/n/000",
+      "clip": "idle",
+      "direction": "n",
+      "index": 0,
+      "sheet": "none",
+      "x": 0,
+      "y": 80,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/e/000",
+      "clip": "idle",
+      "direction": "e",
+      "index": 0,
+      "sheet": "none",
+      "x": 0,
+      "y": 120,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    }
+  ],
+  "files": { "sheets": ["none.png"], "aseprite-json": ["none.json"], "manifest": ["manifest.json"] },
+  "stages": {
+    "model": "sha256:0cc760358d4fa215f3ab736ee1b58519db977c282d0b9bcc8fe4107e675f4766",
+    "rig": "sha256:e626281ad1cffb94df5917c9bbf833ba5b31f5bcd3d66205b395cf0453e3d32b",
+    "plan": "sha256:b1aa2e5df864e20bc32713f0490459fe8f0c705d3f6f19d320a6fc3e73d026fd",
+    "render": "sha256:e85213e45c31713773ac1646618f94cfe1f070cfcb90935c0d517f0390a48c00",
+    "pixel": "sha256:20ff27b87bab5b2a5acd12e148ebcb2455e61dfdd6e334f3636e8ad87aa015e9",
+    "sheet": "sha256:1a154f542a93db20a5bebce2fbdf40d2117e513e80fd3a6b964cb15103d0b685"
+  },
+  "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
+}

@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "packed",
+  "description": "Sprites trimmed to their opaque pixels and packed tightly, one pixel of padding and extrusion, power-of-two sheets.",
+  "layout": "packed",
+  "trim": true,
+  "padding": 1,
+  "extrude": 1,
+  "powerOfTwo": true
+}

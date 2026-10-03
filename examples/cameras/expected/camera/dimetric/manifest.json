@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "camera/dimetric",
+  "assetHash": "sha256:785758f9a70b5869cf9bc934cbe366c5196f3c8729faf975a59fbd651e0f2a40",
+  "generatedAt": "2026-10-02T11:49:02.887Z",
+  "frame": { "width": 48, "height": 48 },
+  "pivot": {
+    "x": 24,
+    "y": 40,
+    "normalized": { "x": 0.5, "y": 0.833333 }
+  },
+  "pixelsPerUnit": 20,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 8 },
+  "directions": [
+    { "name": "s", "yaw": 0, "mirrorOf": null },
+    { "name": "w", "yaw": 90, "mirrorOf": null },
+    { "name": "n", "yaw": 180, "mirrorOf": null },
+    { "name": "e", "yaw": 270, "mirrorOf": null }
+  ],
+  "palette": { "mode": "none", "name": null, "colors": [] },
+  "clips": [
+    { "name": "idle", "fps": 10, "frames": 1, "loop": true, "motion": false, "durationMs": 100 }
+  ],
+  "sheets": [
+    {
+      "name": "dimetric",
+      "image": "dimetric.png",
+      "data": "dimetric.json",
+      "width": 48,
+      "height": 192,
+      "layout": "grid"
+    }
+  ],
+  "cells": [
+    {
+      "key": "idle/s/000",
+      "clip": "idle",
+      "direction": "s",
+      "index": 0,
+      "sheet": "dimetric",
+      "x": 0,
+      "y": 0,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/w/000",
+      "clip": "idle",
+      "direction": "w",
+      "index": 0,
+      "sheet": "dimetric",
+      "x": 0,
+      "y": 48,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/n/000",
+      "clip": "idle",
+      "direction": "n",
+      "index": 0,
+      "sheet": "dimetric",
+      "x": 0,
+      "y": 96,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/e/000",
+      "clip": "idle",
+      "direction": "e",
+      "index": 0,
+      "sheet": "dimetric",
+      "x": 0,
+      "y": 144,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    }
+  ],
+  "files": {
+    "sheets": ["dimetric.png"],
+    "aseprite-json": ["dimetric.json"],
+    "manifest": ["manifest.json"]
+  },
+  "stages": {
+    "model": "sha256:192d8bb09b4c63c7a755a9b92733cdc35d5e4de1d6087cae6c01314cfae8c5b5",
+    "rig": "sha256:6cd5974b5ae3f7281a1b7c24f16dfb0748c6d87a765ef8d1d7da283a40374a21",
+    "plan": "sha256:c3a2e063e2ffa1f734a8f21df41773fce0d9eacc2e7b2222a2eacb1bcae32a27",
+    "render": "sha256:776a7bff453f7a97b9866666bc4bf4e4331a9ef2cea529b9ec6acb4a92bda247",
+    "pixel": "sha256:17a85e95aa9832b86921c1dfde582b5efc91339ce77e5c6383b0ba6ca1af798b",
+    "sheet": "sha256:e7dda211968503350aae294b33b6c9e17b403a1e9d114708c34b26db75bb348b"
+  },
+  "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
+}

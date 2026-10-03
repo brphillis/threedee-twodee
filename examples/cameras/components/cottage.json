@@ -1,0 +1,20 @@
+{
+  "$schema": "../.td2d/schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "name": "cottage",
+  "description": "A one-room cottage, about 1 m wide and 1.15 m tall, with the door on the front (+Z) and a chimney on the right.",
+  "parts": [
+    { "type": "box", "id": "walls", "material": "wall", "size": [1, 0.7, 0.8], "position": [0, 0.35, 0] },
+    {
+      "type": "extrude",
+      "id": "roof",
+      "material": "roof",
+      "shape": [[-0.6, 0], [0.6, 0], [0, 0.45]],
+      "depth": 0.95,
+      "position": [0, 0.7, 0]
+    },
+    { "type": "box", "id": "door", "material": "door", "size": [0.22, 0.4, 0.04], "position": [-0.2, 0.2, 0.41] },
+    { "type": "box", "id": "window", "material": "glass", "size": [0.2, 0.18, 0.04], "position": [0.22, 0.42, 0.41] },
+    { "type": "box", "id": "chimney", "material": "brick", "size": [0.14, 0.4, 0.14], "position": [0.32, 0.95, -0.15] }
+  ]
+}

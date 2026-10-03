@@ -1,0 +1,50 @@
+{
+  "name": "@td2d/viewer",
+  "version": "0.0.0",
+  "description": "Local web viewer for td2d builds. Reads build/ only; never generates.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brphillis/threedee-twodee.git",
+    "directory": "apps/viewer"
+  },
+  "homepage": "https://github.com/brphillis/threedee-twodee#readme",
+  "bugs": {
+    "url": "https://github.com/brphillis/threedee-twodee/issues"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "td2d-source": "./src/server/index.ts",
+      "types": "./dist/server/index.d.ts",
+      "default": "./dist/server/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "bundle": "vite build"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "@hono/node-server": "2.1.3",
+    "chokidar": "5.0.0",
+    "hono": "4.13.12"
+  },
+  "devDependencies": {
+    "@td2d/render-harness": "workspace:*",
+    "@td2d/schema": "workspace:*",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@types/three": "0.186.0",
+    "@vitejs/plugin-react": "6.1.1",
+    "pixelmatch": "7.2.0",
+    "react": "19.3.0",
+    "react-compare-slider": "4.0.0",
+    "react-dom": "19.3.0",
+    "three": "0.186.1"
+  }
+}

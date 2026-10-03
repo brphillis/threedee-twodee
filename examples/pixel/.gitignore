@@ -1,0 +1,5 @@
+# td2d generated output. Commit history/ if you want generations under version control.
+build/
+history/
+.td2d/cache/
+.td2d/tmp/

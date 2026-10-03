@@ -1,0 +1,19 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "downscale/box",
+  "type": "prop",
+  "description": "Box filter: each pixel averages its 4 x 4 block, which smooths shading but makes in-between colours.",
+  "pixel": {
+    "downscale": "box"
+  },
+  "model": {
+    "parts": [
+      {
+        "type": "component",
+        "id": "mushroom",
+        "component": "mushroom"
+      }
+    ]
+  }
+}

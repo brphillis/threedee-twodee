@@ -1,0 +1,6 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "none",
+  "description": "No bones. Use it to turn off a rig set by project defaults.",
+  "bones": []
+}

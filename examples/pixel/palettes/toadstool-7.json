@@ -1,0 +1,7 @@
+{
+  "$schema": "../.td2d/schemas/palette.schema.json",
+  "schemaVersion": "1.0.0",
+  "name": "toadstool-7",
+  "description": "A hand-picked seven-colour palette for the mushroom: two reds, two creams, white and two greens.",
+  "colors": ["#73172d", "#b13e53", "#a08662", "#e4d2aa", "#f4f4f4", "#1e6f50", "#38b764"]
+}

@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:td2d:schema:validation-report:1",
+  "title": "td2d validation-report",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^1\\.\\d+\\.\\d+$",
+      "description": "Version of this output format, 1.x.y. Readers accept any 1.x."
+    },
+    "generator": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "const": "td2d"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ],
+      "additionalProperties": false,
+      "description": "The program that wrote the file, and its version."
+    },
+    "assetId": {
+      "type": "string",
+      "maxLength": 128,
+      "pattern": "^[a-z0-9][a-z0-9-]*(\\/[a-z0-9][a-z0-9-]*)*$",
+      "description": "Asset id. Equals the directory path under assets/.",
+      "examples": [
+        "props/crate"
+      ]
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+      "description": "When the file was written, in ISO 8601 UTC."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pass",
+        "warn",
+        "fail"
+      ],
+      "description": "fail if any check failed, warn if any warned, else pass."
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pass",
+              "warn",
+              "fail"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "frames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "details": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {}
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "message"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Every check, with the frames it is about."
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "generator",
+    "assetId",
+    "generatedAt",
+    "status",
+    "checks"
+  ],
+  "additionalProperties": false,
+  "description": "Results of output validation for one asset."
+}

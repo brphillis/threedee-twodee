@@ -1,0 +1,45 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "props/totem",
+  "type": "prop",
+  "description": "A capsule body with repeated torus rings and a cone top, coloured per part from a palette.",
+  "frame": { "width": 32, "height": 48 },
+  "directions": "d4",
+  "model": {
+    "parts": [
+      {
+        "type": "capsule",
+        "id": "body",
+        "material": "stone",
+        "radius": 0.24,
+        "length": 0.8,
+        "position": [0, 0.64, 0],
+        "capSegments": 3,
+        "radialSegments": 10
+      },
+      {
+        "type": "torus",
+        "id": "ring",
+        "material": "stone",
+        "color": { "palette": "endesga-32", "index": 9 },
+        "radius": 0.24,
+        "tube": 0.045,
+        "radialSegments": 6,
+        "tubularSegments": 16,
+        "position": [0, 0.4, 0],
+        "repeat": { "count": 3, "offset": [0, 0.3, 0] }
+      },
+      {
+        "type": "cone",
+        "id": "top",
+        "material": "stone",
+        "color": { "palette": "endesga-32", "index": 26 },
+        "radius": 0.2,
+        "height": 0.3,
+        "segments": 8,
+        "position": [0, 1.45, 0]
+      }
+    ]
+  }
+}

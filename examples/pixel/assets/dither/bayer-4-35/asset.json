@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "dither/bayer-4-35",
+  "type": "prop",
+  "description": "PICO-8 palette with a 4 x 4 ordered dither at strength 0.35.",
+  "pixel": {
+    "palette": "fixed:pico-8",
+    "dither": "bayer-4",
+    "ditherStrength": 0.35
+  },
+  "model": {
+    "parts": [
+      {
+        "type": "component",
+        "id": "mushroom",
+        "component": "mushroom"
+      }
+    ]
+  },
+  "acceptance": {
+    "maxColors": 16
+  }
+}

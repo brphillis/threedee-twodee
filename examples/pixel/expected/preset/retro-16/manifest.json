@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "preset/retro-16",
+  "assetHash": "sha256:2d71213aee24ef15981c29538f3506ffe7e5594390c842481f4ded805f6e0a78",
+  "generatedAt": "2026-10-02T11:49:08.169Z",
+  "frame": { "width": 40, "height": 40 },
+  "pivot": {
+    "x": 20,
+    "y": 31,
+    "normalized": { "x": 0.5, "y": 0.775 }
+  },
+  "pixelsPerUnit": 28,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 9 },
+  "directions": [
+    { "name": "s", "yaw": 0, "mirrorOf": null },
+    { "name": "w", "yaw": 90, "mirrorOf": null },
+    { "name": "n", "yaw": 180, "mirrorOf": null },
+    { "name": "e", "yaw": 270, "mirrorOf": null }
+  ],
+  "palette": {
+    "mode": "auto:16",
+    "name": null,
+    "colors": [
+      "#7b2838",
+      "#842c3c",
+      "#8c2f40",
+      "#943244",
+      "#9c3648",
+      "#a5394d",
+      "#a93b4f",
+      "#ae3d51",
+      "#247f44",
+      "#2f9e56",
+      "#a09376",
+      "#38b764",
+      "#ababab",
+      "#c4b492",
+      "#cebe99",
+      "#f4f4f4"
+    ]
+  },
+  "clips": [
+    { "name": "idle", "fps": 10, "frames": 1, "loop": true, "motion": false, "durationMs": 100 }
+  ],
+  "sheets": [
+    {
+      "name": "retro-16",
+      "image": "retro-16.png",
+      "data": "retro-16.json",
+      "width": 40,
+      "height": 160,
+      "layout": "grid"
+    }
+  ],
+  "cells": [
+    {
+      "key": "idle/s/000",
+      "clip": "idle",
+      "direction": "s",
+      "index": 0,
+      "sheet": "retro-16",
+      "x": 0,
+      "y": 0,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/w/000",
+      "clip": "idle",
+      "direction": "w",
+      "index": 0,
+      "sheet": "retro-16",
+      "x": 0,
+      "y": 40,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/n/000",
+      "clip": "idle",
+      "direction": "n",
+      "index": 0,
+      "sheet": "retro-16",
+      "x": 0,
+      "y": 80,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/e/000",
+      "clip": "idle",
+      "direction": "e",
+      "index": 0,
+      "sheet": "retro-16",
+      "x": 0,
+      "y": 120,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    }
+  ],
+  "files": {
+    "sheets": ["retro-16.png"],
+    "aseprite-json": ["retro-16.json"],
+    "manifest": ["manifest.json"]
+  },
+  "stages": {
+    "model": "sha256:0cc760358d4fa215f3ab736ee1b58519db977c282d0b9bcc8fe4107e675f4766",
+    "rig": "sha256:927965db5f06221d6d3b1bc9550bee266164a86cfaca8eace22aa7428222e4be",
+    "plan": "sha256:b15836121c07716aeb7dbfc8f5a76687f8ecb0c6c86f10b09232cbffeddb6309",
+    "render": "sha256:904ee1f465311c2b7e319066fc69e63b24cb5edd284676412328905713624f36",
+    "pixel": "sha256:bfbfb2f078d91c160f91c563bb5939f3e9881a4507528e239deb0eb9e4208470",
+    "sheet": "sha256:862bbdd9ceb3f8da7e12caec791ed03cd1a8c62035fd86a9082e22697909b556"
+  },
+  "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
+}

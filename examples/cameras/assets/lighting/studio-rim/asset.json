@@ -1,0 +1,9 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "lighting/studio-rim",
+  "type": "prop",
+  "description": "studio-toon plus a warm rim light from behind.",
+  "lighting": "studio-rim",
+  "model": { "parts": [{ "type": "component", "id": "cottage", "component": "cottage" }] }
+}

@@ -1,0 +1,9 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "composition/counted",
+  "type": "prop",
+  "description": "Six evenly spaced directions starting at 30 degrees.",
+  "directions": { "count": 6, "start": 30 },
+  "model": { "parts": [{ "type": "component", "id": "cottage", "component": "cottage" }] }
+}

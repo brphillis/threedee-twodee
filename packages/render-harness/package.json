@@ -1,0 +1,42 @@
+{
+  "name": "@td2d/render-harness",
+  "version": "0.0.0",
+  "description": "The three.js scene builder td2d runs inside a headless browser to render frames.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brphillis/threedee-twodee.git",
+    "directory": "packages/render-harness"
+  },
+  "homepage": "https://github.com/brphillis/threedee-twodee#readme",
+  "bugs": {
+    "url": "https://github.com/brphillis/threedee-twodee/issues"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "td2d-source": "./src/index.ts",
+      "types": "./dist/lib/index.d.ts",
+      "default": "./dist/lib/index.js"
+    },
+    "./bundle": "./dist/td2d-harness.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "bundle": "vite build"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "three": "0.186.1"
+  },
+  "devDependencies": {
+    "@td2d/schema": "workspace:*",
+    "@types/three": "0.186.0"
+  }
+}

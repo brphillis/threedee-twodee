@@ -1,0 +1,45 @@
+{
+  "name": "@td2d/cli",
+  "version": "0.0.0",
+  "description": "td2d command-line interface: turn declarative 3D asset definitions into pixel-art sprite sheets.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brphillis/threedee-twodee.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://github.com/brphillis/threedee-twodee#readme",
+  "bugs": {
+    "url": "https://github.com/brphillis/threedee-twodee/issues"
+  },
+  "type": "module",
+  "bin": {
+    "td2d": "./dist/main.js"
+  },
+  "exports": {
+    ".": {
+      "td2d-source": "./src/program.ts",
+      "types": "./dist/program.d.ts",
+      "default": "./dist/program.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "@td2d/core": "workspace:*",
+    "@td2d/schema": "workspace:*",
+    "@td2d/viewer": "workspace:*",
+    "commander": "15.0.0",
+    "pino": "10.3.1"
+  },
+  "devDependencies": {
+    "ajv": "8.20.0",
+    "playwright": "1.63.0",
+    "sharp": "0.35.5"
+  }
+}

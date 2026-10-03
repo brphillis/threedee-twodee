@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "studio-rim",
+  "description": "studio-toon with a warm rim light from behind, which lifts back edges off dark backgrounds.",
+  "space": "camera",
+  "lights": [
+    {
+      "type": "directional",
+      "azimuth": -35,
+      "elevation": 55,
+      "intensity": 1.7279,
+      "color": "#ffffff",
+      "castShadow": true
+    },
+    {
+      "type": "directional",
+      "azimuth": 150,
+      "elevation": 20,
+      "intensity": 1.257,
+      "color": "#fff1e8",
+      "castShadow": false
+    },
+    { "type": "ambient", "intensity": 1.1, "color": "#ffffff" }
+  ],
+  "shadows": { "enabled": true, "mapSize": 1024, "bias": -0.0005, "normalBias": 0.02 }
+}

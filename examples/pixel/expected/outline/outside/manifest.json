@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "outline/outside",
+  "assetHash": "sha256:4a8848c035ecbd196cebf4dd360e9b6dd0e49140a7aee6ca40607aa9e98f9545",
+  "generatedAt": "2026-10-02T11:49:07.864Z",
+  "frame": { "width": 40, "height": 40 },
+  "pivot": {
+    "x": 20,
+    "y": 31,
+    "normalized": { "x": 0.5, "y": 0.775 }
+  },
+  "pixelsPerUnit": 28,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 9 },
+  "directions": [
+    { "name": "s", "yaw": 0, "mirrorOf": null },
+    { "name": "w", "yaw": 90, "mirrorOf": null },
+    { "name": "n", "yaw": 180, "mirrorOf": null },
+    { "name": "e", "yaw": 270, "mirrorOf": null }
+  ],
+  "palette": { "mode": "none", "name": null, "colors": [] },
+  "clips": [
+    { "name": "idle", "fps": 10, "frames": 1, "loop": true, "motion": false, "durationMs": 100 }
+  ],
+  "sheets": [
+    {
+      "name": "outside",
+      "image": "outside.png",
+      "data": "outside.json",
+      "width": 40,
+      "height": 160,
+      "layout": "grid"
+    }
+  ],
+  "cells": [
+    {
+      "key": "idle/s/000",
+      "clip": "idle",
+      "direction": "s",
+      "index": 0,
+      "sheet": "outside",
+      "x": 0,
+      "y": 0,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/w/000",
+      "clip": "idle",
+      "direction": "w",
+      "index": 0,
+      "sheet": "outside",
+      "x": 0,
+      "y": 40,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/n/000",
+      "clip": "idle",
+      "direction": "n",
+      "index": 0,
+      "sheet": "outside",
+      "x": 0,
+      "y": 80,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/e/000",
+      "clip": "idle",
+      "direction": "e",
+      "index": 0,
+      "sheet": "outside",
+      "x": 0,
+      "y": 120,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    }
+  ],
+  "files": {
+    "sheets": ["outside.png"],
+    "aseprite-json": ["outside.json"],
+    "manifest": ["manifest.json"]
+  },
+  "stages": {
+    "model": "sha256:0cc760358d4fa215f3ab736ee1b58519db977c282d0b9bcc8fe4107e675f4766",
+    "rig": "sha256:86cc31d66c220333d20dee6812d38c3f6d6659bb5de0147314d4b2caac5d9290",
+    "plan": "sha256:4f0ef496c128057ffba1b1ca9ff1d167b46296ac5f5cef3df5d61bc62a265aa5",
+    "render": "sha256:37074421111400d6ffb9805af85b6428621143857d1a153274ec2ffa191a8c39",
+    "pixel": "sha256:f5979619e683a6307233d9140d80cc2c48d1e9bd00a95829083b758b6fa9968f",
+    "sheet": "sha256:84f053f96f3c78b5339721597cab337043fc8b1391a94d1f8b2de6b3e5932f7b"
+  },
+  "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
+}

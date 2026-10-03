@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "retro-16",
+  "description": "A 16-colour palette built from the asset itself, a dark one-pixel outline in the nearest palette colour, and stray-pixel cleanup.",
+  "palette": "auto:16",
+  "outline": { "color": "#1a1c2c", "side": "outside", "width": 1, "snapToPalette": true },
+  "cleanup": { "orphans": "remove", "minNeighbours": 1 }
+}

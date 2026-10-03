@@ -1,0 +1,22 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "palette/auto-4",
+  "type": "prop",
+  "description": "Four colours built from the asset itself.",
+  "pixel": {
+    "palette": "auto:4"
+  },
+  "model": {
+    "parts": [
+      {
+        "type": "component",
+        "id": "mushroom",
+        "component": "mushroom"
+      }
+    ]
+  },
+  "acceptance": {
+    "maxColors": 16
+  }
+}

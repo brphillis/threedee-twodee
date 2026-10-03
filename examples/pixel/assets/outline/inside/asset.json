@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "outline/inside",
+  "type": "prop",
+  "description": "The silhouette's own edge pixels recoloured, so the sprite does not grow.",
+  "pixel": {
+    "outline": {
+      "color": "#1a1c2c",
+      "side": "inside",
+      "width": 1
+    }
+  },
+  "model": {
+    "parts": [
+      {
+        "type": "component",
+        "id": "mushroom",
+        "component": "mushroom"
+      }
+    ]
+  }
+}

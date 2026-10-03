@@ -1,0 +1,19 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "posterize/4",
+  "type": "prop",
+  "description": "Each colour channel cut to 4 levels before anything else.",
+  "pixel": {
+    "posterize": 4
+  },
+  "model": {
+    "parts": [
+      {
+        "type": "component",
+        "id": "mushroom",
+        "component": "mushroom"
+      }
+    ]
+  }
+}

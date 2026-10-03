@@ -1,0 +1,35 @@
+{
+  "$schema": "../.td2d/schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "name": "fence-post",
+  "description": "A square post with a pointed cap. Its base sits on the component origin.",
+  "params": {
+    "height": {
+      "type": "number",
+      "default": 1,
+      "min": 0.3,
+      "max": 3,
+      "description": "Post height in metres, not counting the cap."
+    },
+    "width": { "type": "number", "default": 0.12, "min": 0.04, "max": 0.5 }
+  },
+  "parts": [
+    {
+      "type": "box",
+      "id": "post",
+      "material": "oak",
+      "size": ["${width}", "${height}", "${width}"],
+      "position": [0, "${height / 2}", 0]
+    },
+    {
+      "type": "cone",
+      "id": "cap",
+      "material": "oak",
+      "radius": "${width * 0.75}",
+      "height": "${width}",
+      "segments": 4,
+      "rotation": [0, 45, 0],
+      "position": [0, "${height + width / 2}", 0]
+    }
+  ]
+}

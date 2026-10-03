@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": false,
+    "declaration": false,
+    "declarationMap": false,
+    "noEmit": true,
+    "rewriteRelativeImportExtensions": false,
+    "lib": ["es2024", "dom"],
+    "types": ["node"],
+    "rootDir": "."
+  },
+  "include": ["src", "test", "test-browser", "vite.config.ts"],
+  "references": [{ "path": "../schema" }]
+}

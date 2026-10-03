@@ -1,0 +1,9 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "camera/three-quarter",
+  "type": "prop",
+  "description": "Classic top-down RPG view, no yaw offset.",
+  "camera": "three-quarter",
+  "model": { "parts": [{ "type": "component", "id": "cottage", "component": "cottage" }] }
+}

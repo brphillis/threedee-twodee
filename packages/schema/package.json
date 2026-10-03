@@ -1,0 +1,38 @@
+{
+  "name": "@td2d/schema",
+  "version": "0.0.0",
+  "description": "Schemas, types and error codes shared by every td2d package.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brphillis/threedee-twodee.git",
+    "directory": "packages/schema"
+  },
+  "homepage": "https://github.com/brphillis/threedee-twodee#readme",
+  "bugs": {
+    "url": "https://github.com/brphillis/threedee-twodee/issues"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "td2d-source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./camera": {
+      "td2d-source": "./src/camera.ts",
+      "types": "./dist/camera.d.ts",
+      "default": "./dist/camera.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "zod": "4.6.5"
+  }
+}

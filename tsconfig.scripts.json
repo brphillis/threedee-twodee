@@ -1,0 +1,23 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "composite": false,
+    "declaration": false,
+    "declarationMap": false,
+    "noEmit": true,
+    "rewriteRelativeImportExtensions": false,
+    "rootDir": "."
+  },
+  "include": ["scripts", "examples/*/scripts", "examples/engines", "packages/cli/scripts", "test"],
+  "references": [
+    {
+      "path": "packages/schema"
+    },
+    {
+      "path": "packages/core"
+    },
+    {
+      "path": "packages/cli"
+    }
+  ]
+}

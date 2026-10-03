@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "dither/bayer-2-50",
+  "assetHash": "sha256:4e5663530dd9a8eaf8a6f7bb5ccb7ec06c9a2e0684cb3aeeda3108677d3b6530",
+  "generatedAt": "2026-10-02T11:49:07.595Z",
+  "frame": { "width": 40, "height": 40 },
+  "pivot": {
+    "x": 20,
+    "y": 32,
+    "normalized": { "x": 0.5, "y": 0.8 }
+  },
+  "pixelsPerUnit": 28,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 8 },
+  "directions": [
+    { "name": "s", "yaw": 0, "mirrorOf": null },
+    { "name": "w", "yaw": 90, "mirrorOf": null },
+    { "name": "n", "yaw": 180, "mirrorOf": null },
+    { "name": "e", "yaw": 270, "mirrorOf": null }
+  ],
+  "palette": {
+    "mode": "fixed:pico-8",
+    "name": "pico-8",
+    "colors": [
+      "#000000",
+      "#1d2b53",
+      "#7e2553",
+      "#008751",
+      "#ab5236",
+      "#5f574f",
+      "#c2c3c7",
+      "#fff1e8",
+      "#ff004d",
+      "#ffa300",
+      "#ffec27",
+      "#00e436",
+      "#29adff",
+      "#83769c",
+      "#ff77a8",
+      "#ffccaa"
+    ]
+  },
+  "clips": [
+    { "name": "idle", "fps": 10, "frames": 1, "loop": true, "motion": false, "durationMs": 100 }
+  ],
+  "sheets": [
+    {
+      "name": "bayer-2-50",
+      "image": "bayer-2-50.png",
+      "data": "bayer-2-50.json",
+      "width": 40,
+      "height": 160,
+      "layout": "grid"
+    }
+  ],
+  "cells": [
+    {
+      "key": "idle/s/000",
+      "clip": "idle",
+      "direction": "s",
+      "index": 0,
+      "sheet": "bayer-2-50",
+      "x": 0,
+      "y": 0,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/w/000",
+      "clip": "idle",
+      "direction": "w",
+      "index": 0,
+      "sheet": "bayer-2-50",
+      "x": 0,
+      "y": 40,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/n/000",
+      "clip": "idle",
+      "direction": "n",
+      "index": 0,
+      "sheet": "bayer-2-50",
+      "x": 0,
+      "y": 80,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/e/000",
+      "clip": "idle",
+      "direction": "e",
+      "index": 0,
+      "sheet": "bayer-2-50",
+      "x": 0,
+      "y": 120,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    }
+  ],
+  "files": {
+    "sheets": ["bayer-2-50.png"],
+    "aseprite-json": ["bayer-2-50.json"],
+    "manifest": ["manifest.json"]
+  },
+  "stages": {
+    "model": "sha256:0cc760358d4fa215f3ab736ee1b58519db977c282d0b9bcc8fe4107e675f4766",
+    "rig": "sha256:976d249c20b2e97e15c9adb760b1c56f22d236ea0ff37f958133264c29824495",
+    "plan": "sha256:898058214117df57c77737f67ae0a66d23a30995e130af7398cd4809070d2a8e",
+    "render": "sha256:41870706f5b39e6d6189003314f7e675d94d23bb9330c0f9dd15ee5554a4d729",
+    "pixel": "sha256:03d773a07c61fe635224f88c19eeb937ab1d68b113092765681805e43e411637",
+    "sheet": "sha256:a5bd17334f24aa5d7631aeae661ee2cd83bf76a52858f8da9411cb1f2d4a7407"
+  },
+  "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
+}

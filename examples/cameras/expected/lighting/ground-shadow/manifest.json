@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "lighting/ground-shadow",
+  "assetHash": "sha256:36b494afe23351201fcdb29013c7212cd41d494b8ef4dad8d9879757e95a243b",
+  "generatedAt": "2026-10-02T11:49:03.663Z",
+  "frame": { "width": 56, "height": 48 },
+  "pivot": {
+    "x": 28,
+    "y": 40,
+    "normalized": { "x": 0.5, "y": 0.833333 }
+  },
+  "pixelsPerUnit": 20,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 8 },
+  "directions": [
+    { "name": "s", "yaw": 0, "mirrorOf": null },
+    { "name": "w", "yaw": 90, "mirrorOf": null },
+    { "name": "n", "yaw": 180, "mirrorOf": null },
+    { "name": "e", "yaw": 270, "mirrorOf": null }
+  ],
+  "palette": { "mode": "none", "name": null, "colors": [] },
+  "clips": [
+    { "name": "idle", "fps": 10, "frames": 1, "loop": true, "motion": false, "durationMs": 100 }
+  ],
+  "sheets": [
+    {
+      "name": "ground-shadow",
+      "image": "ground-shadow.png",
+      "data": "ground-shadow.json",
+      "width": 56,
+      "height": 192,
+      "layout": "grid"
+    }
+  ],
+  "cells": [
+    {
+      "key": "idle/s/000",
+      "clip": "idle",
+      "direction": "s",
+      "index": 0,
+      "sheet": "ground-shadow",
+      "x": 0,
+      "y": 0,
+      "w": 56,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/w/000",
+      "clip": "idle",
+      "direction": "w",
+      "index": 0,
+      "sheet": "ground-shadow",
+      "x": 0,
+      "y": 48,
+      "w": 56,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/n/000",
+      "clip": "idle",
+      "direction": "n",
+      "index": 0,
+      "sheet": "ground-shadow",
+      "x": 0,
+      "y": 96,
+      "w": 56,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/e/000",
+      "clip": "idle",
+      "direction": "e",
+      "index": 0,
+      "sheet": "ground-shadow",
+      "x": 0,
+      "y": 144,
+      "w": 56,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    }
+  ],
+  "files": {
+    "sheets": ["ground-shadow.png"],
+    "aseprite-json": ["ground-shadow.json"],
+    "manifest": ["manifest.json"]
+  },
+  "stages": {
+    "model": "sha256:192d8bb09b4c63c7a755a9b92733cdc35d5e4de1d6087cae6c01314cfae8c5b5",
+    "rig": "sha256:c3a038dd4a6ac76c8749953004ef26ebe027b996df66abc0ecfb78eeb0660a47",
+    "plan": "sha256:00db74fdb8885c9048d030f25314f7e556fb5f8931a58e4bad8e0c2a319702a9",
+    "render": "sha256:38f147a594534fc0fbfa2e184f79c7f55ab931e408e9a948d5f421ad9b924894",
+    "pixel": "sha256:850dbdbc9e4a300559a00c742495c10361aeeb0c0bded93aadf0cb8903625748",
+    "sheet": "sha256:846e0b1e4cdac51e65502cee0a501ba1dba8c0e43972d145dcd2863abc2430a2"
+  },
+  "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
+}

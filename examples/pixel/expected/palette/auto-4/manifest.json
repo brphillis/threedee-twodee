@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "palette/auto-4",
+  "assetHash": "sha256:a43edec7fd1c41542c43f2567b33d9be8e9ca7ce8bff38a74f136cc4d489ed70",
+  "generatedAt": "2026-10-02T11:49:07.991Z",
+  "frame": { "width": 40, "height": 40 },
+  "pivot": {
+    "x": 20,
+    "y": 32,
+    "normalized": { "x": 0.5, "y": 0.8 }
+  },
+  "pixelsPerUnit": 28,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 8 },
+  "directions": [
+    { "name": "s", "yaw": 0, "mirrorOf": null },
+    { "name": "w", "yaw": 90, "mirrorOf": null },
+    { "name": "n", "yaw": 180, "mirrorOf": null },
+    { "name": "e", "yaw": 270, "mirrorOf": null }
+  ],
+  "palette": {
+    "mode": "auto:4",
+    "name": null,
+    "colors": ["#a0374a", "#31a359", "#ab9f85", "#f4f4f4"]
+  },
+  "clips": [
+    { "name": "idle", "fps": 10, "frames": 1, "loop": true, "motion": false, "durationMs": 100 }
+  ],
+  "sheets": [
+    {
+      "name": "auto-4",
+      "image": "auto-4.png",
+      "data": "auto-4.json",
+      "width": 40,
+      "height": 160,
+      "layout": "grid"
+    }
+  ],
+  "cells": [
+    {
+      "key": "idle/s/000",
+      "clip": "idle",
+      "direction": "s",
+      "index": 0,
+      "sheet": "auto-4",
+      "x": 0,
+      "y": 0,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/w/000",
+      "clip": "idle",
+      "direction": "w",
+      "index": 0,
+      "sheet": "auto-4",
+      "x": 0,
+      "y": 40,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/n/000",
+      "clip": "idle",
+      "direction": "n",
+      "index": 0,
+      "sheet": "auto-4",
+      "x": 0,
+      "y": 80,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/e/000",
+      "clip": "idle",
+      "direction": "e",
+      "index": 0,
+      "sheet": "auto-4",
+      "x": 0,
+      "y": 120,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    }
+  ],
+  "files": {
+    "sheets": ["auto-4.png"],
+    "aseprite-json": ["auto-4.json"],
+    "manifest": ["manifest.json"]
+  },
+  "stages": {
+    "model": "sha256:0cc760358d4fa215f3ab736ee1b58519db977c282d0b9bcc8fe4107e675f4766",
+    "rig": "sha256:f12aa0cb8c5756885cfa7fb55abd7ac2ec2cbe2dcd917b40b1d4ea16244d835d",
+    "plan": "sha256:0c14ce04e8bdf8769813a3d6ad1e105c72cb1d1ee7ad7075a6da6a0d7d82005f",
+    "render": "sha256:d9026cfefd3516b84c947b77f43a80a10e5070e1ab2a89b10b78b3b072365c16",
+    "pixel": "sha256:405af7e056af3d30fb1840b49f1b9ec644479f3c0800e89dc4e742bd5470b58b",
+    "sheet": "sha256:89fd5384245658d99d69e013bc07372ac59985fdb86ad784dbddb37d6519d76c"
+  },
+  "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
+}

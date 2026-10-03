@@ -1,0 +1,144 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "palette/endesga-32",
+  "assetHash": "sha256:d00bfdfcda9034ca9b92a5b5b891fce29c871d05ef1c07025e8f160157b96881",
+  "generatedAt": "2026-10-02T11:49:08.051Z",
+  "frame": { "width": 40, "height": 40 },
+  "pivot": {
+    "x": 20,
+    "y": 32,
+    "normalized": { "x": 0.5, "y": 0.8 }
+  },
+  "pixelsPerUnit": 28,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 8 },
+  "directions": [
+    { "name": "s", "yaw": 0, "mirrorOf": null },
+    { "name": "w", "yaw": 90, "mirrorOf": null },
+    { "name": "n", "yaw": 180, "mirrorOf": null },
+    { "name": "e", "yaw": 270, "mirrorOf": null }
+  ],
+  "palette": {
+    "mode": "fixed:endesga-32",
+    "name": "endesga-32",
+    "colors": [
+      "#be4a2f",
+      "#d77643",
+      "#ead4aa",
+      "#e4a672",
+      "#b86f50",
+      "#733e39",
+      "#3e2731",
+      "#a22633",
+      "#e43b44",
+      "#f77622",
+      "#feae34",
+      "#fee761",
+      "#63c74d",
+      "#3e8948",
+      "#265c42",
+      "#193c3e",
+      "#124e89",
+      "#0099db",
+      "#2ce8f5",
+      "#ffffff",
+      "#c0cbdc",
+      "#8b9bb4",
+      "#5a6988",
+      "#3a4466",
+      "#262b44",
+      "#181425",
+      "#ff0044",
+      "#68386c",
+      "#b55088",
+      "#f6757a",
+      "#e8b796",
+      "#c28569"
+    ]
+  },
+  "clips": [
+    { "name": "idle", "fps": 10, "frames": 1, "loop": true, "motion": false, "durationMs": 100 }
+  ],
+  "sheets": [
+    {
+      "name": "endesga-32",
+      "image": "endesga-32.png",
+      "data": "endesga-32.json",
+      "width": 40,
+      "height": 160,
+      "layout": "grid"
+    }
+  ],
+  "cells": [
+    {
+      "key": "idle/s/000",
+      "clip": "idle",
+      "direction": "s",
+      "index": 0,
+      "sheet": "endesga-32",
+      "x": 0,
+      "y": 0,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/w/000",
+      "clip": "idle",
+      "direction": "w",
+      "index": 0,
+      "sheet": "endesga-32",
+      "x": 0,
+      "y": 40,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/n/000",
+      "clip": "idle",
+      "direction": "n",
+      "index": 0,
+      "sheet": "endesga-32",
+      "x": 0,
+      "y": 80,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/e/000",
+      "clip": "idle",
+      "direction": "e",
+      "index": 0,
+      "sheet": "endesga-32",
+      "x": 0,
+      "y": 120,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    }
+  ],
+  "files": {
+    "sheets": ["endesga-32.png"],
+    "aseprite-json": ["endesga-32.json"],
+    "manifest": ["manifest.json"]
+  },
+  "stages": {
+    "model": "sha256:0cc760358d4fa215f3ab736ee1b58519db977c282d0b9bcc8fe4107e675f4766",
+    "rig": "sha256:98e5617ea49887f95baba20f271b36b29064187d1249feb8ac074415612124c1",
+    "plan": "sha256:16f4d5e3d9f8d3b096005cacdd175fc75f2456d2088ad47d649d9b6bca649c78",
+    "render": "sha256:92448f4a80e6545e7d7247c5965f5a820b045098114f46533e7e3a533cb9e222",
+    "pixel": "sha256:be1354801522e334f05936673f451758ec0e0efe453bc599dcb33182bd6916a7",
+    "sheet": "sha256:21115485ce4c503f2b5ae9e4a9f0f2e6cd0b7f1d929b98746cb3783ff6038313"
+  },
+  "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
+}

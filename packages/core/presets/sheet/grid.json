@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "grid",
+  "description": "One row per clip and direction, one column per frame, no padding.",
+  "layout": "grid",
+  "order": "clip-direction",
+  "flow": "rows",
+  "split": "none",
+  "trim": false,
+  "padding": 0,
+  "extrude": 0,
+  "powerOfTwo": false,
+  "maxSize": 4096
+}

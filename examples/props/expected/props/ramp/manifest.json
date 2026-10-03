@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "props/ramp",
+  "assetHash": "sha256:5180085ce6b8d9e791758f196290fff773cf4214a1b34e9a5635c1f4e1599483",
+  "generatedAt": "2026-10-02T11:49:09.075Z",
+  "frame": { "width": 40, "height": 40 },
+  "pivot": {
+    "x": 20,
+    "y": 31,
+    "normalized": { "x": 0.5, "y": 0.775 }
+  },
+  "pixelsPerUnit": 16,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 9 },
+  "directions": [
+    { "name": "s", "yaw": 0, "mirrorOf": null },
+    { "name": "w", "yaw": 90, "mirrorOf": null },
+    { "name": "n", "yaw": 180, "mirrorOf": null },
+    { "name": "e", "yaw": 270, "mirrorOf": null }
+  ],
+  "palette": { "mode": "none", "name": null, "colors": [] },
+  "clips": [
+    { "name": "idle", "fps": 10, "frames": 1, "loop": true, "motion": false, "durationMs": 100 }
+  ],
+  "sheets": [
+    {
+      "name": "ramp",
+      "image": "ramp.png",
+      "data": "ramp.json",
+      "width": 40,
+      "height": 160,
+      "layout": "grid"
+    }
+  ],
+  "cells": [
+    {
+      "key": "idle/s/000",
+      "clip": "idle",
+      "direction": "s",
+      "index": 0,
+      "sheet": "ramp",
+      "x": 0,
+      "y": 0,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/w/000",
+      "clip": "idle",
+      "direction": "w",
+      "index": 0,
+      "sheet": "ramp",
+      "x": 0,
+      "y": 40,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/n/000",
+      "clip": "idle",
+      "direction": "n",
+      "index": 0,
+      "sheet": "ramp",
+      "x": 0,
+      "y": 80,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/e/000",
+      "clip": "idle",
+      "direction": "e",
+      "index": 0,
+      "sheet": "ramp",
+      "x": 0,
+      "y": 120,
+      "w": 40,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    }
+  ],
+  "files": { "sheets": ["ramp.png"], "aseprite-json": ["ramp.json"], "manifest": ["manifest.json"] },
+  "stages": {
+    "model": "sha256:3961ac3f95f0ab7058ee334cde7c4d492207981e79bea77ad779036db3ec7ab1",
+    "rig": "sha256:4e24a86af0ff130050d46385c29ec1b4b690ebee813d6aab29653a87651a362e",
+    "plan": "sha256:c083b6c5fa209a4f73bbcc81ca7a0d9dfa80e1451edcc77b266a8da5ec86797a",
+    "render": "sha256:1dad5aefc675b1f88fa68c0516f4db7cd189011d932a62a99cd0ecc4be5d2713",
+    "pixel": "sha256:4a0e0fc803ec9c98ea36e0f68d43dec415c21b99b8c3cf5afd9cfcdc7638bbc3",
+    "sheet": "sha256:a75d74b72e44732ea0a99d16fdde981a235c117de8a5344d0faa4ee448dcec98"
+  },
+  "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
+}

@@ -1,0 +1,18 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": false,
+    "declaration": false,
+    "declarationMap": false,
+    "noEmit": true,
+    "rewriteRelativeImportExtensions": false,
+    "rootDir": ".",
+    "lib": ["es2024", "dom"]
+  },
+  "include": ["test"],
+  "references": [
+    {
+      "path": "."
+    }
+  ]
+}

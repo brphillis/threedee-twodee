@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>td2d in PixiJS</title>
+    <style>
+      body { margin: 0; background: #1a1c2c; color: #f4f4f4; font: 14px system-ui, sans-serif; }
+      p { margin: 8px; }
+    </style>
+  </head>
+  <body>
+    <p id="status">Loading...</p>
+    <script src="vendor/pixi.min.js"></script>
+    <script>
+      // Loads the PixiJS spritesheet td2d writes (<sheet>.pixi.json, with an animation per clip
+      // and direction and the pivot as each frame's anchor) and plays one clip.
+      const params = new URLSearchParams(location.search);
+      const clip = params.get('clip') ?? 'walk_s';
+      const scale = Number(params.get('scale') ?? 4);
+      window.td2d = { ready: false, clip, frames: [], error: null };
+      (async () => {
+        const manifest = await (await fetch('sheets/manifest.json')).json();
+        const app = new PIXI.Application();
+        await app.init({ width: 320, height: 320, background: '#333c57', antialias: false });
+        document.body.appendChild(app.canvas);
+        const files = manifest.files.pixi ?? [];
+        const sheets = [];
+        for (const file of files) sheets.push(await PIXI.Assets.load(`sheets/${file}`));
+        const sheet = sheets.find((s) => s.animations[clip]);
+        if (!sheet) throw new Error(`No PixiJS animation "${clip}" in ${files.join(', ')}`);
+        const sprite = new PIXI.AnimatedSprite(sheet.animations[clip]);
+        for (const t of sprite.textures) t.source.scaleMode = 'nearest';
+        const fps = manifest.clips.find((c) => clip.startsWith(`${c.name}_`))?.fps ?? 10;
+        sprite.animationSpeed = fps / 60;
+        sprite.scale.set(scale);
+        sprite.position.set(160, 240);
+        sprite.onFrameChange = (frame) => window.td2d.frames.push(String(frame));
+        app.stage.addChild(sprite);
+        sprite.play();
+        window.td2d.ready = true;
+        document.getElementById('status').textContent = `${manifest.assetId}: ${clip}`;
+      })().catch((error) => {
+        window.td2d.error = String(error);
+        document.getElementById('status').textContent = String(error);
+      });
+    </script>
+  </body>
+</html>

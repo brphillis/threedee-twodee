@@ -1,0 +1,6 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "outlined",
+  "description": "Default processing plus a one-pixel dark outline outside the silhouette.",
+  "outline": { "color": "#1a1c2c", "side": "outside", "width": 1 }
+}

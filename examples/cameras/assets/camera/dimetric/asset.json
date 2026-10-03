@@ -1,0 +1,9 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "camera/dimetric",
+  "type": "prop",
+  "description": "The default 2:1 pixel isometric camera.",
+  "camera": "dimetric",
+  "model": { "parts": [{ "type": "component", "id": "cottage", "component": "cottage" }] }
+}

@@ -1,0 +1,137 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "composition/counted",
+  "assetHash": "sha256:90088cfa0a0e03bf86c986f365a1fd43be2bc5ab2dc764c1c93c3c2d4f403454",
+  "generatedAt": "2026-10-02T11:49:03.352Z",
+  "frame": { "width": 48, "height": 48 },
+  "pivot": {
+    "x": 24,
+    "y": 40,
+    "normalized": { "x": 0.5, "y": 0.833333 }
+  },
+  "pixelsPerUnit": 20,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 8 },
+  "directions": [
+    { "name": "a30", "yaw": 30, "mirrorOf": null },
+    { "name": "a90", "yaw": 90, "mirrorOf": null },
+    { "name": "a150", "yaw": 150, "mirrorOf": null },
+    { "name": "a210", "yaw": 210, "mirrorOf": null },
+    { "name": "a270", "yaw": 270, "mirrorOf": null },
+    { "name": "a330", "yaw": 330, "mirrorOf": null }
+  ],
+  "palette": { "mode": "none", "name": null, "colors": [] },
+  "clips": [
+    { "name": "idle", "fps": 10, "frames": 1, "loop": true, "motion": false, "durationMs": 100 }
+  ],
+  "sheets": [
+    {
+      "name": "counted",
+      "image": "counted.png",
+      "data": "counted.json",
+      "width": 48,
+      "height": 288,
+      "layout": "grid"
+    }
+  ],
+  "cells": [
+    {
+      "key": "idle/a30/000",
+      "clip": "idle",
+      "direction": "a30",
+      "index": 0,
+      "sheet": "counted",
+      "x": 0,
+      "y": 0,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/a90/000",
+      "clip": "idle",
+      "direction": "a90",
+      "index": 0,
+      "sheet": "counted",
+      "x": 0,
+      "y": 48,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/a150/000",
+      "clip": "idle",
+      "direction": "a150",
+      "index": 0,
+      "sheet": "counted",
+      "x": 0,
+      "y": 96,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/a210/000",
+      "clip": "idle",
+      "direction": "a210",
+      "index": 0,
+      "sheet": "counted",
+      "x": 0,
+      "y": 144,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/a270/000",
+      "clip": "idle",
+      "direction": "a270",
+      "index": 0,
+      "sheet": "counted",
+      "x": 0,
+      "y": 192,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/a330/000",
+      "clip": "idle",
+      "direction": "a330",
+      "index": 0,
+      "sheet": "counted",
+      "x": 0,
+      "y": 240,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    }
+  ],
+  "files": {
+    "sheets": ["counted.png"],
+    "aseprite-json": ["counted.json"],
+    "manifest": ["manifest.json"]
+  },
+  "stages": {
+    "model": "sha256:192d8bb09b4c63c7a755a9b92733cdc35d5e4de1d6087cae6c01314cfae8c5b5",
+    "rig": "sha256:d9f74cc0b0843455fa2101f7136b14b1ffa90b661d9630f1e161f7944f0ddad8",
+    "plan": "sha256:d07a3324173e0ca787eb8e29e7823c13b74612bb44fe8c342afa21a6580669f2",
+    "render": "sha256:c85614716ff7437d6c8ff46de9069ae0e4bf9e238e487c6a34e7441fdb57a0b9",
+    "pixel": "sha256:f4bcb3ec5ebc4391103f7ceaa76164f36c5ac805a5a501507fdd0f57b74ae7da",
+    "sheet": "sha256:8bd5cedfb8f438d54a90f1efd017e841d9f86c1302a165a981196279316ba9ee"
+  },
+  "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
+}

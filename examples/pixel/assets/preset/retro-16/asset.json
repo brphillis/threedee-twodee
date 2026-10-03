@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "preset/retro-16",
+  "type": "prop",
+  "description": "The built-in retro-16 preset: auto:16 palette, outline and stray-pixel cleanup.",
+  "pixel": "retro-16",
+  "model": {
+    "parts": [
+      {
+        "type": "component",
+        "id": "mushroom",
+        "component": "mushroom"
+      }
+    ]
+  },
+  "acceptance": {
+    "maxColors": 16
+  }
+}

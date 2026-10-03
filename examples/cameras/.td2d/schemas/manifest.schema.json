@@ -1,0 +1,504 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:td2d:schema:manifest:1",
+  "title": "td2d manifest",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^1\\.\\d+\\.\\d+$",
+      "description": "Version of this output format, 1.x.y. Readers accept any 1.x."
+    },
+    "generator": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "const": "td2d"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ],
+      "additionalProperties": false,
+      "description": "The program that wrote the file, and its version."
+    },
+    "assetId": {
+      "type": "string",
+      "maxLength": 128,
+      "pattern": "^[a-z0-9][a-z0-9-]*(\\/[a-z0-9][a-z0-9-]*)*$",
+      "description": "Asset id. Equals the directory path under assets/.",
+      "examples": [
+        "props/crate"
+      ]
+    },
+    "assetHash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "description": "Hash of the resolved asset: equal hashes mean identical settings and inputs."
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+      "description": "When the file was written, in ISO 8601 UTC."
+    },
+    "frame": {
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "height": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "width",
+        "height"
+      ],
+      "additionalProperties": false,
+      "description": "Size of every sprite, in pixels."
+    },
+    "pivot": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "normalized": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "x",
+            "y"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "normalized"
+      ],
+      "additionalProperties": false,
+      "description": "Where the model stands in each frame: x and y in pixels, and normalized from 0 to 1. Set sprite origins or anchors to it."
+    },
+    "pixelsPerUnit": {
+      "type": "number",
+      "description": "Scale the sprites were drawn at: pixels per metre."
+    },
+    "camera": {
+      "type": "object",
+      "properties": {
+        "preset": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9-]*$",
+              "description": "Lowercase kebab-case name.",
+              "examples": [
+                "steel",
+                "endesga-32"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pitch": {
+          "type": "number"
+        },
+        "yawOffset": {
+          "type": "number"
+        },
+        "groundMargin": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991,
+          "description": "Ground margin used, in pixels. Equals frame.height minus pivot.y."
+        }
+      },
+      "required": [
+        "preset",
+        "pitch",
+        "yawOffset",
+        "groundMargin"
+      ],
+      "additionalProperties": false,
+      "description": "The camera the sprites were rendered with."
+    },
+    "directions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "yaw": {
+            "type": "number",
+            "description": "Direction yaw before the camera yaw offset, in degrees."
+          },
+          "mirrorOf": {
+            "description": "Source direction when this direction is produced by mirroring.",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "yaw",
+          "mirrorOf"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Each direction: its name, yaw, and the direction it was mirrored from, if any."
+    },
+    "palette": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string"
+        },
+        "name": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9-]*$",
+              "description": "Lowercase kebab-case name.",
+              "examples": [
+                "steel",
+                "endesga-32"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "colors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^#[0-9a-fA-F]{6}$",
+            "description": "sRGB colour as #rrggbb.",
+            "examples": [
+              "#a0693a"
+            ]
+          },
+          "description": "Every palette colour the sprites may use. Empty when no palette is set."
+        },
+        "byClip": {
+          "description": "With paletteScope clip: each clip's own palette.",
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$",
+              "description": "sRGB colour as #rrggbb.",
+              "examples": [
+                "#a0693a"
+              ]
+            }
+          }
+        }
+      },
+      "required": [
+        "mode",
+        "name",
+        "colors"
+      ],
+      "additionalProperties": false,
+      "description": "The palette mode and every colour the sprites may use."
+    },
+    "clips": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "fps": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "frames": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "loop": {
+            "type": "boolean"
+          },
+          "motion": {
+            "type": "boolean",
+            "description": "The clip moves the model across the frame on purpose."
+          },
+          "durationMs": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "name",
+          "fps",
+          "frames",
+          "loop",
+          "motion",
+          "durationMs"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Each clip: frames, frame rate, duration, and whether it loops or moves on purpose."
+    },
+    "sheets": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string",
+            "description": "Sheet image file, relative to the manifest."
+          },
+          "data": {
+            "description": "Aseprite JSON for this sheet, or null when aseprite-json is not written.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "width": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "height": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "layout": {
+            "type": "string",
+            "enum": [
+              "grid",
+              "strips",
+              "packed"
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "image",
+          "data",
+          "width",
+          "height",
+          "layout"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Each sheet image with its size and layout. Packed sheets may have several pages."
+    },
+    "cells": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Sprite key: clip/direction/nnn."
+          },
+          "clip": {
+            "type": "string"
+          },
+          "direction": {
+            "type": "string"
+          },
+          "index": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "sheet": {
+            "type": "string",
+            "description": "Name of the sheet the cell is on."
+          },
+          "x": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "y": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "w": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "h": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "trimmed": {
+            "type": "boolean"
+          },
+          "offset": {
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "y": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              }
+            },
+            "required": [
+              "x",
+              "y"
+            ],
+            "additionalProperties": false,
+            "description": "Where the top-left of the cell goes inside the frame: 0, 0 unless trimmed."
+          },
+          "mirrored": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "key",
+          "clip",
+          "direction",
+          "index",
+          "sheet",
+          "x",
+          "y",
+          "w",
+          "h",
+          "trimmed",
+          "offset",
+          "mirrored"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Every sprite: its key, the sheet it is on, its rectangle and trim offset. Read positions from here, never by guessing."
+    },
+    "files": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "description": "Files written for each export format, relative to the manifest."
+    },
+    "stages": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^sha256:[0-9a-f]{64}$"
+      },
+      "description": "Hash of each stage up to the sheet: equal hashes mean equal outputs."
+    },
+    "validation": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "pass",
+            "warn",
+            "fail"
+          ]
+        },
+        "warnings": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "errors": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "report": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "warnings",
+        "errors",
+        "report"
+      ],
+      "additionalProperties": false,
+      "description": "Validation status and counts; the checks are in the report file it names."
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "generator",
+    "assetId",
+    "assetHash",
+    "generatedAt",
+    "frame",
+    "pivot",
+    "pixelsPerUnit",
+    "camera",
+    "directions",
+    "palette",
+    "clips",
+    "sheets",
+    "cells",
+    "files",
+    "stages",
+    "validation"
+  ],
+  "additionalProperties": false,
+  "description": "Tool-native description of a generated asset, written beside its sprite sheets."
+}

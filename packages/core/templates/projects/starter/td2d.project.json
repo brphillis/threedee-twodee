@@ -1,0 +1,11 @@
+{
+  "$schema": "./.td2d/schemas/project.schema.json",
+  "schemaVersion": "1.0.0",
+  "name": "starter",
+  "description": "A td2d project. Asset definitions live in assets/<id>/asset.json.",
+  "defaults": {
+    "pixelsPerUnit": 16,
+    "camera": "dimetric",
+    "lighting": "studio-toon"
+  }
+}

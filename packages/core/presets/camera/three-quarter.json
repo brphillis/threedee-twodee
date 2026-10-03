@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "three-quarter",
+  "description": "Classic top-down RPG view.",
+  "projection": "orthographic",
+  "pitch": 30,
+  "yawOffset": 0,
+  "groundMargin": "auto"
+}

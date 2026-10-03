@@ -1,0 +1,9 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "lighting/studio-toon",
+  "type": "prop",
+  "description": "Key light from the upper left front and ambient fill, turning with the camera.",
+  "lighting": "studio-toon",
+  "model": { "parts": [{ "type": "component", "id": "cottage", "component": "cottage" }] }
+}

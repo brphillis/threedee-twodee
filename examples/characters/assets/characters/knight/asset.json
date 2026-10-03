@@ -1,0 +1,92 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "characters/knight",
+  "type": "character",
+  "description": "A knight with a sword in the right hand and a shield on the left arm. Every part rides one bone; the left limbs are mirrored to the right.",
+  "pixelsPerUnit": "auto",
+  "model": {
+    "parts": [
+      {
+        "type": "component",
+        "id": "knight",
+        "component": "knight"
+      }
+    ]
+  },
+  "animation": {
+    "fps": 10,
+    "clips": {
+      "idle": {
+        "description": "A slow breath.",
+        "duration": 1,
+        "generator": {
+          "type": "idle-breathe",
+          "amount": 3,
+          "rise": 0.015
+        }
+      },
+      "walk": {
+        "description": "Generated walk cycle.",
+        "duration": 0.8,
+        "generator": {
+          "type": "walk-cycle",
+          "stride": 25,
+          "bob": 0.065,
+          "armSwing": 15
+        }
+      },
+      "attack": {
+        "description": "Draw the sword back over the shoulder, cut down and forward, recover.",
+        "duration": 0.5,
+        "loop": false,
+        "motion": true,
+        "keys": [
+          {
+            "t": 0,
+            "pose": {},
+            "easing": "ease-out"
+          },
+          {
+            "t": 0.2,
+            "pose": {
+              "spine": {
+                "rotation": [-6, -20, 0]
+              },
+              "rightUpperArm": {
+                "rotation": [-115, 0, -10]
+              },
+              "rightLowerArm": {
+                "rotation": [-90, 0, 0]
+              }
+            },
+            "easing": "ease-in-cubic"
+          },
+          {
+            "t": 0.3,
+            "pose": {
+              "spine": {
+                "rotation": [10, 12, 0]
+              },
+              "rightUpperArm": {
+                "rotation": [-25, 0, 0]
+              },
+              "rightLowerArm": {
+                "rotation": [-5, 0, 0]
+              }
+            },
+            "easing": "ease-in-out"
+          },
+          {
+            "t": 0.5,
+            "pose": {}
+          }
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "maxJitter": 2,
+    "requiredClips": ["idle", "walk", "attack"]
+  }
+}

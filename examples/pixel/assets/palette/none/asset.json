@@ -1,0 +1,19 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "palette/none",
+  "type": "prop",
+  "description": "No palette: the rendered colours, here dozens of lambert gradient steps.",
+  "pixel": {
+    "palette": "none"
+  },
+  "model": {
+    "parts": [
+      {
+        "type": "component",
+        "id": "mushroom",
+        "component": "mushroom"
+      }
+    ]
+  }
+}

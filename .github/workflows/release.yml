@@ -1,0 +1,67 @@
+name: Release
+
+# Versions and publishing with changesets. On main, the action opens a "Version packages" pull
+# request from the pending changesets; merging it publishes every package to npm. A manual run
+# publishes a snapshot prerelease under the "next" tag. Publishing uses npm trusted publishing
+# (OIDC): no token is stored, and each package carries a provenance statement from this workflow.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      prerelease:
+        description: Publish a snapshot prerelease (0.0.0-next-<timestamp>) under the "next" dist-tag
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+      # Trusted publishing needs npm 11.5 or newer.
+      - run: npm install -g npm@11
+      - run: pnpm install --frozen-lockfile
+      - name: Install headless browser
+        run: pnpm --filter @td2d/core exec playwright install --with-deps --only-shell chromium
+      # Fails before anything is published when a package would be rejected, for example
+      # without a repository.url naming this repository (npm provenance needs it).
+      - run: pnpm run release:check
+      - run: pnpm build
+      - run: pnpm exec vitest run
+      - run: pnpm pack:smoke
+
+      - name: Version pull request or publish
+        if: github.event_name == 'push'
+        uses: changesets/action@v1
+        with:
+          version: pnpm changeset version
+          publish: pnpm changeset publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_CONFIG_PROVENANCE: 'true'
+
+      - name: Snapshot prerelease
+        if: github.event_name == 'workflow_dispatch' && inputs.prerelease
+        run: |
+          pnpm changeset version --snapshot next
+          pnpm build
+          pnpm changeset publish --tag next --no-git-tag
+        env:
+          NPM_CONFIG_PROVENANCE: 'true'

@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "outline/outside",
+  "type": "prop",
+  "description": "A dark one-pixel ring around the silhouette, diagonals included.",
+  "pixel": {
+    "outline": {
+      "color": "#1a1c2c",
+      "side": "outside",
+      "width": 1
+    }
+  },
+  "model": {
+    "parts": [
+      {
+        "type": "component",
+        "id": "mushroom",
+        "component": "mushroom"
+      }
+    ]
+  }
+}

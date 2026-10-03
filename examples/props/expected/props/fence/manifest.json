@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "props/fence",
+  "assetHash": "sha256:6ccea9bc014d99e7f477849c8c18611ba5bdba6e0b0a9d3aaeb60989bf35ed1a",
+  "generatedAt": "2026-10-02T11:49:08.931Z",
+  "frame": { "width": 64, "height": 40 },
+  "pivot": {
+    "x": 32,
+    "y": 33,
+    "normalized": { "x": 0.5, "y": 0.825 }
+  },
+  "pixelsPerUnit": 16,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 7 },
+  "directions": [
+    { "name": "s", "yaw": 0, "mirrorOf": null },
+    { "name": "w", "yaw": 90, "mirrorOf": null },
+    { "name": "n", "yaw": 180, "mirrorOf": null },
+    { "name": "e", "yaw": 270, "mirrorOf": null }
+  ],
+  "palette": { "mode": "none", "name": null, "colors": [] },
+  "clips": [
+    { "name": "idle", "fps": 10, "frames": 1, "loop": true, "motion": false, "durationMs": 100 }
+  ],
+  "sheets": [
+    {
+      "name": "fence",
+      "image": "fence.png",
+      "data": "fence.json",
+      "width": 64,
+      "height": 160,
+      "layout": "grid"
+    }
+  ],
+  "cells": [
+    {
+      "key": "idle/s/000",
+      "clip": "idle",
+      "direction": "s",
+      "index": 0,
+      "sheet": "fence",
+      "x": 0,
+      "y": 0,
+      "w": 64,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/w/000",
+      "clip": "idle",
+      "direction": "w",
+      "index": 0,
+      "sheet": "fence",
+      "x": 0,
+      "y": 40,
+      "w": 64,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/n/000",
+      "clip": "idle",
+      "direction": "n",
+      "index": 0,
+      "sheet": "fence",
+      "x": 0,
+      "y": 80,
+      "w": 64,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/e/000",
+      "clip": "idle",
+      "direction": "e",
+      "index": 0,
+      "sheet": "fence",
+      "x": 0,
+      "y": 120,
+      "w": 64,
+      "h": 40,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    }
+  ],
+  "files": {
+    "sheets": ["fence.png"],
+    "aseprite-json": ["fence.json"],
+    "manifest": ["manifest.json"]
+  },
+  "stages": {
+    "model": "sha256:ba19ba725ccd99f1a853be6d118e96247cfac0e50613f6c0284bb24404039bb5",
+    "rig": "sha256:1b46e6e9748d2511cf3ac8b26345b126db83ba60baf309c37c3014d80e95c5ed",
+    "plan": "sha256:ccb8fbf175045bbb7e42770bf4fcc1336409f98841c3c2e0dd0a5b16fd41b9f1",
+    "render": "sha256:45ff1dc635bc19b02f712e6381b76073b49df0a1e08acf3932023a2125bc8b2c",
+    "pixel": "sha256:1cbd560aef4faa4ec68bfb4adb95d629c9ba500c6e7ff6ba8b5784f35bd4fd0f",
+    "sheet": "sha256:8fb5238de572d64b886829ad237ea2c781677bba4b1c9c89ee6172a6d44cb5b7"
+  },
+  "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
+}

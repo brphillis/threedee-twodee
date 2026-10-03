@@ -1,0 +1,28 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "outline/snapped",
+  "type": "prop",
+  "description": "PICO-8 palette with the outline colour snapped to its nearest palette colour.",
+  "pixel": {
+    "palette": "fixed:pico-8",
+    "outline": {
+      "color": "#202020",
+      "side": "outside",
+      "width": 1,
+      "snapToPalette": true
+    }
+  },
+  "model": {
+    "parts": [
+      {
+        "type": "component",
+        "id": "mushroom",
+        "component": "mushroom"
+      }
+    ]
+  },
+  "acceptance": {
+    "maxColors": 16
+  }
+}

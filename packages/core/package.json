@@ -1,0 +1,64 @@
+{
+  "name": "@td2d/core",
+  "version": "0.0.0",
+  "description": "The td2d generation engine: project loading, model building, rendering, pixel processing, export and validation.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brphillis/threedee-twodee.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/brphillis/threedee-twodee#readme",
+  "bugs": {
+    "url": "https://github.com/brphillis/threedee-twodee/issues"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "td2d-source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./sdk": {
+      "td2d-source": "./src/sdk/index.ts",
+      "types": "./dist/sdk/index.d.ts",
+      "default": "./dist/sdk/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "presets",
+    "palettes",
+    "templates"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "@gltf-transform/core": "4.5.1",
+    "@gltf-transform/extensions": "4.5.1",
+    "@td2d/render-harness": "workspace:*",
+    "@td2d/schema": "workspace:*",
+    "gltf-validator": "2.0.0-dev.3.10",
+    "manifold-3d": "3.5.4",
+    "maxrects-packer": "2.7.3",
+    "piscina": "5.3.2",
+    "pixelmatch": "7.2.0",
+    "playwright": "1.63.0",
+    "sharp": "0.35.5",
+    "three": "0.186.1",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@types/three": "0.186.0"
+  },
+  "peerDependencies": {
+    "gl": "9.0.0-rc.10"
+  },
+  "peerDependenciesMeta": {
+    "gl": {
+      "optional": true
+    }
+  }
+}

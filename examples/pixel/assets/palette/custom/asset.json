@@ -1,0 +1,22 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "palette/custom",
+  "type": "prop",
+  "description": "The project palette palettes/toadstool-7.json, seven hand-picked colours.",
+  "pixel": {
+    "palette": "fixed:toadstool-7"
+  },
+  "model": {
+    "parts": [
+      {
+        "type": "component",
+        "id": "mushroom",
+        "component": "mushroom"
+      }
+    ]
+  },
+  "acceptance": {
+    "maxColors": 16
+  }
+}

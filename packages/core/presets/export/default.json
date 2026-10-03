@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "default",
+  "description": "Aseprite JSON and the td2d manifest.",
+  "formats": ["aseprite-json", "manifest"],
+  "png": {
+    "indexed": "auto",
+    "compressionLevel": 9
+  },
+  "aseprite": {
+    "variant": "hash",
+    "frameNames": "index"
+  },
+  "godot": {
+    "directory": "res://"
+  },
+  "gif": {
+    "scale": 2,
+    "background": "transparent"
+  }
+}

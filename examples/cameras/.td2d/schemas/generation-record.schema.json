@@ -1,0 +1,336 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:td2d:schema:generation-record:1",
+  "title": "td2d generation-record",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^1\\.\\d+\\.\\d+$",
+      "description": "Version of this output format, 1.x.y. Readers accept any 1.x."
+    },
+    "generator": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "const": "td2d"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ],
+      "additionalProperties": false,
+      "description": "The program that wrote the file, and its version."
+    },
+    "assetId": {
+      "type": "string",
+      "maxLength": 128,
+      "pattern": "^[a-z0-9][a-z0-9-]*(\\/[a-z0-9][a-z0-9-]*)*$",
+      "description": "Asset id. Equals the directory path under assets/.",
+      "examples": [
+        "props/crate"
+      ]
+    },
+    "assetHash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "description": "Hash of the resolved asset: equal hashes mean identical settings and inputs."
+    },
+    "startedAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+      "description": "When the generation started, in ISO 8601 UTC."
+    },
+    "finishedAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+      "description": "When it finished, in ISO 8601 UTC."
+    },
+    "durationMs": {
+      "type": "number",
+      "description": "Wall time in milliseconds."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ok",
+        "warn",
+        "failed"
+      ],
+      "description": "ok, warn (finished with warnings) or failed."
+    },
+    "backend": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
+            },
+            "renderer": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "version",
+            "renderer"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "The render backend and the exact renderer it used, or null when nothing rendered."
+    },
+    "stages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "hash": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "cached": {
+            "type": "boolean"
+          },
+          "durationMs": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "name",
+          "hash",
+          "cached",
+          "durationMs"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Every stage in order: its hash, whether it came from the cache, and its time."
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "path",
+          "sha256",
+          "bytes"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Every file written, with its SHA-256 and size."
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "W_OPACITY_THRESHOLDED",
+              "W_UNUSED_MATERIAL",
+              "W_PRESET_SHADOWS_BUILTIN",
+              "W_NO_ASSETS",
+              "W_HARDWARE_RENDERER",
+              "W_BLANK_FRAME",
+              "W_FRAME_CLIPPED",
+              "W_VALIDATOR_UNAVAILABLE",
+              "W_OUTPUT_CHECK",
+              "W_MODEL_OUT_OF_FRAME",
+              "W_MODEL_BELOW_GROUND",
+              "W_TRIANGLE_BUDGET",
+              "W_DEGENERATE_TRIANGLES",
+              "W_OPEN_MESH",
+              "W_COMPOSITION_GROUND",
+              "W_COMPOSITION_EDGE",
+              "W_INDEXED_UNAVAILABLE",
+              "W_CLIP_FRAME_PERIOD",
+              "W_CLIP_BONE_LIMIT",
+              "W_CLIP_FOOT_CONTACT",
+              "W_BACKEND_RESTARTED",
+              "W_CACHE_PRUNED",
+              "W_MEMORY_HIGH",
+              "W_PALETTE_PER_CLIP"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "assetId": {
+            "type": "string"
+          },
+          "hint": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "additionalProperties": false,
+        "description": "A non-fatal problem."
+      },
+      "description": "Warnings raised while generating."
+    },
+    "error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "E_INTERNAL",
+            "E_USAGE",
+            "E_PROJECT_NOT_FOUND",
+            "E_PROJECT_EXISTS",
+            "E_INIT_CONFLICT",
+            "E_ASSET_NOT_FOUND",
+            "E_ASSET_EXISTS",
+            "E_NOT_GENERATED",
+            "E_SCHEMA_NOT_FOUND",
+            "E_TEMPLATE_NOT_FOUND",
+            "E_JSON_PARSE",
+            "E_PROJECT_INVALID",
+            "E_ASSET_INVALID",
+            "E_PRESET_NOT_FOUND",
+            "E_PRESET_INVALID",
+            "E_PALETTE_NOT_FOUND",
+            "E_PALETTE_INVALID",
+            "E_PATH_OUTSIDE_PROJECT",
+            "E_OUTPUT_DIR_NOT_EMPTY",
+            "E_MODEL_INVALID",
+            "E_PART_NOT_MANIFOLD",
+            "E_COMPONENT_NOT_FOUND",
+            "E_COMPONENT_INVALID",
+            "E_COMPONENT_CYCLE",
+            "E_IMPORT_FAILED",
+            "E_MODEL_TOO_COMPLEX",
+            "E_SCRIPT_FAILED",
+            "E_SCRIPT_PERMISSION",
+            "E_GENERATION_FAILED",
+            "E_PARTIAL_PLAN",
+            "E_BACKEND_CRASHED",
+            "E_BATCH_FAILED",
+            "E_ASSET_TIMEOUT",
+            "E_RENDER_FAILED",
+            "E_VALIDATION_FAILED",
+            "E_BATCH_PARTIAL",
+            "E_ENVIRONMENT",
+            "E_NODE_VERSION",
+            "E_BROWSER_MISSING",
+            "E_BACKEND_UNAVAILABLE",
+            "E_NATIVE_MODULE",
+            "E_CANCELLED"
+          ]
+        },
+        "message": {
+          "type": "string"
+        },
+        "file": {
+          "type": "string"
+        },
+        "issues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "file": {
+                "description": "File the issue is in, relative to the project root.",
+                "type": "string"
+              },
+              "path": {
+                "type": "string",
+                "description": "Dotted path inside the document, such as \"model.parts[2].size\". Empty for the whole document."
+              },
+              "message": {
+                "type": "string"
+              },
+              "code": {
+                "description": "Issue kind, such as invalid_type or unknown_material.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "path",
+              "message"
+            ],
+            "additionalProperties": false,
+            "description": "One problem found in an input document."
+          }
+        },
+        "hint": {
+          "type": "string"
+        },
+        "docs": {
+          "description": "Documentation path for this error.",
+          "type": "string"
+        },
+        "details": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "additionalProperties": false,
+      "description": "A structured error."
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "generator",
+    "assetId",
+    "assetHash",
+    "startedAt",
+    "finishedAt",
+    "durationMs",
+    "status",
+    "backend",
+    "stages",
+    "outputs",
+    "warnings"
+  ],
+  "additionalProperties": false,
+  "description": "Everything needed to understand and reproduce one generation."
+}

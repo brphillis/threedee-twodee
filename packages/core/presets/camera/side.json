@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "side",
+  "description": "Side-scroller view. Use with the d1-side direction set.",
+  "projection": "orthographic",
+  "pitch": 0,
+  "yawOffset": 0,
+  "groundMargin": "auto"
+}

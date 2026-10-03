@@ -1,0 +1,82 @@
+{
+  "frames": {
+    "0": {
+      "frame": { "x": 0, "y": 0, "w": 48, "h": 48 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+      "sourceSize": { "w": 48, "h": 48 },
+      "duration": 100
+    },
+    "1": {
+      "frame": { "x": 0, "y": 48, "w": 48, "h": 48 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+      "sourceSize": { "w": 48, "h": 48 },
+      "duration": 100
+    },
+    "2": {
+      "frame": { "x": 0, "y": 96, "w": 48, "h": 48 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+      "sourceSize": { "w": 48, "h": 48 },
+      "duration": 100
+    },
+    "3": {
+      "frame": { "x": 0, "y": 144, "w": 48, "h": 48 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+      "sourceSize": { "w": 48, "h": 48 },
+      "duration": 100
+    },
+    "4": {
+      "frame": { "x": 0, "y": 192, "w": 48, "h": 48 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+      "sourceSize": { "w": 48, "h": 48 },
+      "duration": 100
+    },
+    "5": {
+      "frame": { "x": 0, "y": 240, "w": 48, "h": 48 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+      "sourceSize": { "w": 48, "h": 48 },
+      "duration": 100
+    }
+  },
+  "meta": {
+    "app": "td2d",
+    "version": "0.0.0",
+    "image": "counted.png",
+    "format": "RGBA8888",
+    "size": { "w": 48, "h": 288 },
+    "scale": "1",
+    "frameTags": [
+      { "name": "idle_a30", "from": 0, "to": 0, "direction": "forward", "color": "#000000ff" },
+      { "name": "idle_a90", "from": 1, "to": 1, "direction": "forward", "color": "#000000ff" },
+      { "name": "idle_a150", "from": 2, "to": 2, "direction": "forward", "color": "#000000ff" },
+      { "name": "idle_a210", "from": 3, "to": 3, "direction": "forward", "color": "#000000ff" },
+      { "name": "idle_a270", "from": 4, "to": 4, "direction": "forward", "color": "#000000ff" },
+      { "name": "idle_a330", "from": 5, "to": 5, "direction": "forward", "color": "#000000ff" }
+    ],
+    "layers": [],
+    "slices": [
+      {
+        "name": "pivot",
+        "color": "#0000ffff",
+        "keys": [
+          {
+            "frame": 0,
+            "bounds": { "x": 0, "y": 0, "w": 48, "h": 48 },
+            "pivot": { "x": 24, "y": 40 }
+          }
+        ]
+      }
+    ]
+  }
+}

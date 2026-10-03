@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "dither/bayer-2-50",
+  "type": "prop",
+  "description": "PICO-8 palette with a 2 x 2 ordered dither at strength 0.5.",
+  "pixel": {
+    "palette": "fixed:pico-8",
+    "dither": "bayer-2",
+    "ditherStrength": 0.5
+  },
+  "model": {
+    "parts": [
+      {
+        "type": "component",
+        "id": "mushroom",
+        "component": "mushroom"
+      }
+    ]
+  },
+  "acceptance": {
+    "maxColors": 16
+  }
+}

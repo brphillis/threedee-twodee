@@ -1,0 +1,9 @@
+packages:
+  - packages/*
+  - apps/*
+minimumReleaseAgeExclude:
+  - '@types/node@24.19.1'
+  - vite@8.3.2
+  - pixi.js@8.22.0
+allowBuilds:
+  gl: true

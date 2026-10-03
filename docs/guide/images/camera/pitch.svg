@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 260" width="520" height="260" font-family="system-ui, sans-serif" font-size="13">
+  <title>Camera pitch and ground margin, seen from the side</title>
+  <rect width="520" height="260" fill="#ffffff"/>
+  <line x1="20" y1="200" x2="500" y2="200" stroke="#6b6b70" stroke-width="1.5"/>
+  <text x="24" y="218" fill="#6b6b70">ground, y = 0</text>
+  <rect x="150" y="120" width="80" height="80" fill="#ead4aa" stroke="#733e39"/>
+  <circle cx="190" cy="200" r="4" fill="#3b6fd8"/>
+  <text x="160" y="240" fill="#3b6fd8">pivot (model origin)</text>
+  <line x1="190" y1="200" x2="450" y2="50" stroke="#be4a2f" stroke-width="2" stroke-dasharray="6 4"/>
+  <rect x="440" y="36" width="34" height="22" rx="4" fill="#be4a2f"/>
+  <text x="404" y="30" fill="#be4a2f">camera</text>
+  <path d="M 290 200 A 100 100 0 0 0 277 151" fill="none" stroke="#1d1d1f" stroke-width="1.5"/>
+  <text x="298" y="180" fill="#1d1d1f">pitch</text>
+  <text x="250" y="110" fill="#6b6b70">30° dimetric, 35.264° isometric,</text>
+  <text x="250" y="126" fill="#6b6b70">0° side view, 90° straight down</text>
+</svg>

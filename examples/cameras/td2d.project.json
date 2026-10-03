@@ -1,0 +1,18 @@
+{
+  "$schema": "./.td2d/schemas/project.schema.json",
+  "schemaVersion": "1.0.0",
+  "name": "cameras",
+  "description": "One cottage under every camera preset, every lighting preset, and the composition options: fitted scale, mirrored and counted directions.",
+  "defaults": {
+    "frame": { "width": 48, "height": 48 },
+    "pixelsPerUnit": 20,
+    "directions": "d4",
+    "materials": {
+      "wall": { "color": "#ead4aa", "shading": "toon" },
+      "roof": { "color": "#be4a2f", "shading": "toon" },
+      "door": { "color": "#733e39", "shading": "toon", "bands": 2 },
+      "glass": { "color": "#2ce8f5", "shading": "flat" },
+      "brick": { "color": "#5a6988", "shading": "toon", "bands": 2 }
+    }
+  }
+}

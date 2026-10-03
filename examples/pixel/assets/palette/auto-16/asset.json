@@ -1,0 +1,22 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "palette/auto-16",
+  "type": "prop",
+  "description": "A 16-colour palette built from all the asset's frames, shared by every frame.",
+  "pixel": {
+    "palette": "auto:16"
+  },
+  "model": {
+    "parts": [
+      {
+        "type": "component",
+        "id": "mushroom",
+        "component": "mushroom"
+      }
+    ]
+  },
+  "acceptance": {
+    "maxColors": 16
+  }
+}

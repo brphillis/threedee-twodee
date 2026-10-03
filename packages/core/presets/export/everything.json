@@ -1,0 +1,6 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "everything",
+  "description": "Every supported format: Aseprite JSON, the manifest, frame PNGs, PixiJS, Phaser and Godot data, and GIF previews.",
+  "formats": ["aseprite-json", "manifest", "frames", "pixi", "phaser-atlas", "godot-spriteframes", "gif-preview"]
+}

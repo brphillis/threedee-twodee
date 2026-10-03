@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "props/teapot",
+  "assetHash": "sha256:09d1cba971a791afea4455c5d0be5551fdeeae64e85a9f743eadf147e578f69b",
+  "generatedAt": "2026-10-02T11:49:09.190Z",
+  "frame": { "width": 32, "height": 32 },
+  "pivot": {
+    "x": 16,
+    "y": 26,
+    "normalized": { "x": 0.5, "y": 0.8125 }
+  },
+  "pixelsPerUnit": 16,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 6 },
+  "directions": [
+    { "name": "s", "yaw": 0, "mirrorOf": null },
+    { "name": "w", "yaw": 90, "mirrorOf": null },
+    { "name": "n", "yaw": 180, "mirrorOf": null },
+    { "name": "e", "yaw": 270, "mirrorOf": null }
+  ],
+  "palette": { "mode": "none", "name": null, "colors": [] },
+  "clips": [
+    { "name": "idle", "fps": 10, "frames": 1, "loop": true, "motion": false, "durationMs": 100 }
+  ],
+  "sheets": [
+    {
+      "name": "teapot",
+      "image": "teapot.png",
+      "data": "teapot.json",
+      "width": 32,
+      "height": 128,
+      "layout": "grid"
+    }
+  ],
+  "cells": [
+    {
+      "key": "idle/s/000",
+      "clip": "idle",
+      "direction": "s",
+      "index": 0,
+      "sheet": "teapot",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/w/000",
+      "clip": "idle",
+      "direction": "w",
+      "index": 0,
+      "sheet": "teapot",
+      "x": 0,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/n/000",
+      "clip": "idle",
+      "direction": "n",
+      "index": 0,
+      "sheet": "teapot",
+      "x": 0,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/e/000",
+      "clip": "idle",
+      "direction": "e",
+      "index": 0,
+      "sheet": "teapot",
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    }
+  ],
+  "files": {
+    "sheets": ["teapot.png"],
+    "aseprite-json": ["teapot.json"],
+    "manifest": ["manifest.json"]
+  },
+  "stages": {
+    "model": "sha256:88f94b3e6d186a28186443d06cf3b4d0ebb7a05ef95703ea76192a8d6571c30d",
+    "rig": "sha256:ae1aa9fc991351cd6d30ee9ead08ded7af0a092a26cb64852b425d552bab89bc",
+    "plan": "sha256:7841f4d212e3ef54da7dcae160c21f80654e523062fbb000256a19c1e616b451",
+    "render": "sha256:ce51e37d323a642492b54e77b315b03c79d3cc8ec14dbf1d67d875321c2e795f",
+    "pixel": "sha256:e1049bc63b736fc4f9913a86eee33be5b8d828512f400ac89caa6c36d88594f7",
+    "sheet": "sha256:4d262983028deb07c53ce5f6c19b0121d3620eec70399575093693690387ad02"
+  },
+  "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
+}

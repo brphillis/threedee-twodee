@@ -1,0 +1,244 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:td2d:schema:phaser-atlas:1",
+  "title": "td2d phaser-atlas",
+  "type": "object",
+  "properties": {
+    "textures": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "type": "string"
+          },
+          "format": {
+            "type": "string",
+            "const": "RGBA8888"
+          },
+          "size": {
+            "type": "object",
+            "properties": {
+              "w": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "h": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              }
+            },
+            "required": [
+              "w",
+              "h"
+            ],
+            "additionalProperties": false
+          },
+          "scale": {
+            "type": "number"
+          },
+          "frames": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "filename": {
+                  "type": "string"
+                },
+                "rotated": {
+                  "type": "boolean"
+                },
+                "trimmed": {
+                  "type": "boolean"
+                },
+                "sourceSize": {
+                  "type": "object",
+                  "properties": {
+                    "w": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    },
+                    "h": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    }
+                  },
+                  "required": [
+                    "w",
+                    "h"
+                  ],
+                  "additionalProperties": false
+                },
+                "spriteSourceSize": {
+                  "type": "object",
+                  "properties": {
+                    "x": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    },
+                    "y": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    },
+                    "w": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    },
+                    "h": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    }
+                  },
+                  "required": [
+                    "x",
+                    "y",
+                    "w",
+                    "h"
+                  ],
+                  "additionalProperties": false
+                },
+                "frame": {
+                  "type": "object",
+                  "properties": {
+                    "x": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    },
+                    "y": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    },
+                    "w": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    },
+                    "h": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    }
+                  },
+                  "required": [
+                    "x",
+                    "y",
+                    "w",
+                    "h"
+                  ],
+                  "additionalProperties": false
+                },
+                "anchor": {
+                  "type": "object",
+                  "properties": {
+                    "x": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "y": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    }
+                  },
+                  "required": [
+                    "x",
+                    "y"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "filename",
+                "rotated",
+                "trimmed",
+                "sourceSize",
+                "spriteSourceSize",
+                "frame",
+                "anchor"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "image",
+          "format",
+          "size",
+          "scale",
+          "frames"
+        ],
+        "additionalProperties": false
+      },
+      "description": "One texture per sheet image, with its frames."
+    },
+    "animations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "frameRate": {
+            "type": "number"
+          },
+          "repeat": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "frames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "key",
+          "frameRate",
+          "repeat",
+          "frames"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Animation configs for this.anims.create, one per clip and direction."
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "app": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "app",
+        "version"
+      ],
+      "additionalProperties": false,
+      "description": "The program that wrote the atlas."
+    }
+  },
+  "required": [
+    "textures",
+    "animations",
+    "meta"
+  ],
+  "additionalProperties": false,
+  "description": "Phaser multi-atlas data with animation configs."
+}

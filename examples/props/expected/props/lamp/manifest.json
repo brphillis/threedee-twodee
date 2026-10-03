@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "props/lamp",
+  "assetHash": "sha256:d703ea95c6e1e53f3a9ba926e5dc6cead3d6c0a14e564fab9c72bbc5b03fa98d",
+  "generatedAt": "2026-10-02T11:49:09.020Z",
+  "frame": { "width": 32, "height": 48 },
+  "pivot": {
+    "x": 16,
+    "y": 45,
+    "normalized": { "x": 0.5, "y": 0.9375 }
+  },
+  "pixelsPerUnit": 16,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 3 },
+  "directions": [
+    { "name": "s", "yaw": 0, "mirrorOf": null },
+    { "name": "w", "yaw": 90, "mirrorOf": null },
+    { "name": "n", "yaw": 180, "mirrorOf": null },
+    { "name": "e", "yaw": 270, "mirrorOf": null }
+  ],
+  "palette": { "mode": "none", "name": null, "colors": [] },
+  "clips": [
+    { "name": "idle", "fps": 10, "frames": 1, "loop": true, "motion": false, "durationMs": 100 }
+  ],
+  "sheets": [
+    {
+      "name": "lamp",
+      "image": "lamp.png",
+      "data": "lamp.json",
+      "width": 32,
+      "height": 192,
+      "layout": "grid"
+    }
+  ],
+  "cells": [
+    {
+      "key": "idle/s/000",
+      "clip": "idle",
+      "direction": "s",
+      "index": 0,
+      "sheet": "lamp",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/w/000",
+      "clip": "idle",
+      "direction": "w",
+      "index": 0,
+      "sheet": "lamp",
+      "x": 0,
+      "y": 48,
+      "w": 32,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/n/000",
+      "clip": "idle",
+      "direction": "n",
+      "index": 0,
+      "sheet": "lamp",
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/e/000",
+      "clip": "idle",
+      "direction": "e",
+      "index": 0,
+      "sheet": "lamp",
+      "x": 0,
+      "y": 144,
+      "w": 32,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    }
+  ],
+  "files": { "sheets": ["lamp.png"], "aseprite-json": ["lamp.json"], "manifest": ["manifest.json"] },
+  "stages": {
+    "model": "sha256:1d9de4cad12f8134ccc11fa49ece109087e9570637d79d42621fdeb023e2c5a4",
+    "rig": "sha256:9cf8bf52320bdeed66b7492a12f02c5585dc46a6df7edb7ab849f735dacc19a5",
+    "plan": "sha256:59b681c5cf8a4a89c0d3af3dc2add36ef3a82148cb14f9d064cdbe58029cc975",
+    "render": "sha256:143b2f67ad63e0a0f0233538a6f07d689519df27bfeb99be950a4422a9971b09",
+    "pixel": "sha256:3073ec0fd3480eb48a20827482cd0e0b74e349a1c5e8ca97d37c7f27da6b6d71",
+    "sheet": "sha256:7a1a9297c03408adc6f880e229c5543a883bb5577b5a92c4edc914db6ce63ac2"
+  },
+  "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
+}

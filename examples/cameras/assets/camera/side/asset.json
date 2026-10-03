@@ -1,0 +1,9 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "camera/side",
+  "type": "prop",
+  "description": "Side-scroller view.",
+  "camera": "side",
+  "model": { "parts": [{ "type": "component", "id": "cottage", "component": "cottage" }] }
+}

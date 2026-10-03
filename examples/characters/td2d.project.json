@@ -1,0 +1,9 @@
+{
+  "$schema": "./.td2d/schemas/project.schema.json",
+  "schemaVersion": "1.0.0",
+  "name": "characters",
+  "description": "An animated knight on the humanoid rig: an idle breath, a generated walk and a keyed sword attack in eight directions.",
+  "typeDefaults": {
+    "character": { "frame": { "width": 32, "height": 48 }, "rig": "humanoid-basic", "directions": "d8" }
+  }
+}

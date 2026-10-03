@@ -1,0 +1,143 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "quadruped-basic",
+  "description": "Fourteen bones for a four-legged animal about 0.7 m tall, body along Z facing +Z: hips, spine, chest, neck, head, tail and two bones per leg.",
+  "bones": [
+    {
+      "name": "hips",
+      "parent": null,
+      "position": [0, 0.55, -0.3],
+      "description": "Root, over the back legs. The body runs along Z and faces +Z."
+    },
+    {
+      "name": "spine",
+      "parent": "hips",
+      "position": [0, 0.02, 0.3],
+      "limits": {
+        "x": [-30, 30],
+        "y": [-30, 30],
+        "z": [-20, 20]
+      }
+    },
+    {
+      "name": "chest",
+      "parent": "spine",
+      "position": [0, 0, 0.3],
+      "limits": {
+        "x": [-30, 30],
+        "y": [-30, 30],
+        "z": [-20, 20]
+      }
+    },
+    {
+      "name": "neck",
+      "parent": "chest",
+      "position": [0, 0.08, 0.1],
+      "limits": {
+        "x": [-60, 45],
+        "y": [-60, 60],
+        "z": [-30, 30]
+      }
+    },
+    {
+      "name": "head",
+      "parent": "neck",
+      "position": [0, 0.15, 0.1],
+      "limits": {
+        "x": [-45, 45],
+        "y": [-60, 60],
+        "z": [-30, 30]
+      }
+    },
+    {
+      "name": "tail",
+      "parent": "hips",
+      "position": [0, 0.05, -0.1],
+      "limits": {
+        "x": [-90, 60],
+        "y": [-60, 60],
+        "z": [-30, 30]
+      }
+    },
+    {
+      "name": "front-left-upper",
+      "parent": "chest",
+      "position": [0.12, -0.05, 0],
+      "limits": {
+        "x": [-90, 90],
+        "y": [-20, 20],
+        "z": [-30, 30]
+      }
+    },
+    {
+      "name": "front-left-lower",
+      "parent": "front-left-upper",
+      "position": [0, -0.25, 0],
+      "limits": {
+        "x": [-120, 120],
+        "y": [-10, 10],
+        "z": [-10, 10]
+      }
+    },
+    {
+      "name": "front-right-upper",
+      "parent": "chest",
+      "position": [-0.12, -0.05, 0],
+      "limits": {
+        "x": [-90, 90],
+        "y": [-20, 20],
+        "z": [-30, 30]
+      }
+    },
+    {
+      "name": "front-right-lower",
+      "parent": "front-right-upper",
+      "position": [0, -0.25, 0],
+      "limits": {
+        "x": [-120, 120],
+        "y": [-10, 10],
+        "z": [-10, 10]
+      }
+    },
+    {
+      "name": "back-left-upper",
+      "parent": "hips",
+      "position": [0.12, -0.05, 0],
+      "limits": {
+        "x": [-90, 90],
+        "y": [-20, 20],
+        "z": [-30, 30]
+      }
+    },
+    {
+      "name": "back-left-lower",
+      "parent": "back-left-upper",
+      "position": [0, -0.25, 0],
+      "limits": {
+        "x": [-120, 120],
+        "y": [-10, 10],
+        "z": [-10, 10]
+      }
+    },
+    {
+      "name": "back-right-upper",
+      "parent": "hips",
+      "position": [-0.12, -0.05, 0],
+      "limits": {
+        "x": [-90, 90],
+        "y": [-20, 20],
+        "z": [-30, 30]
+      }
+    },
+    {
+      "name": "back-right-lower",
+      "parent": "back-right-upper",
+      "position": [0, -0.25, 0],
+      "limits": {
+        "x": [-120, 120],
+        "y": [-10, 10],
+        "z": [-10, 10]
+      }
+    }
+  ]
+}

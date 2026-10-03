@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist/lib",
+    "tsBuildInfoFile": "dist/lib/.tsbuildinfo",
+    "lib": ["es2024", "dom"],
+    "types": []
+  },
+  "include": ["src"],
+  "exclude": ["src/browser-entry.ts"],
+  "references": [{ "path": "../schema" }]
+}

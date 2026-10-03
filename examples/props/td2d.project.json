@@ -1,0 +1,16 @@
+{
+  "$schema": "./.td2d/schemas/project.schema.json",
+  "schemaVersion": "1.0.0",
+  "name": "props",
+  "description": "One prop per model feature: lathe, extrude, CSG, components with repeat, import, mirror, wedge and part colours.",
+  "defaults": {
+    "pixelsPerUnit": 16,
+    "camera": "dimetric",
+    "lighting": "studio-toon",
+    "materials": {
+      "oak": { "color": "#8a5a3b", "shading": "toon" },
+      "iron": { "color": "#3a4466", "shading": "toon", "bands": 2 },
+      "stone": { "color": "#8b9bb4", "shading": "toon" }
+    }
+  }
+}

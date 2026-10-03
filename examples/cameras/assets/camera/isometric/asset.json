@@ -1,0 +1,9 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "camera/isometric",
+  "type": "prop",
+  "description": "True isometric: 35.264 degree pitch, 30 degree lines.",
+  "camera": "isometric",
+  "model": { "parts": [{ "type": "component", "id": "cottage", "component": "cottage" }] }
+}

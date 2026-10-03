@@ -1,0 +1,202 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:td2d:schema:cli-envelope:1",
+  "title": "td2d cli-envelope",
+  "type": "object",
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "description": "true on success; false when error is present."
+    },
+    "command": {
+      "type": "string",
+      "description": "Command path such as \"validate\" or \"asset show\"."
+    },
+    "version": {
+      "type": "string",
+      "description": "td2d version."
+    },
+    "durationMs": {
+      "type": "number",
+      "description": "How long the command took, in milliseconds."
+    },
+    "data": {
+      "description": "Command-specific result. Present on success and, where useful, on failure."
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "W_OPACITY_THRESHOLDED",
+              "W_UNUSED_MATERIAL",
+              "W_PRESET_SHADOWS_BUILTIN",
+              "W_NO_ASSETS",
+              "W_HARDWARE_RENDERER",
+              "W_BLANK_FRAME",
+              "W_FRAME_CLIPPED",
+              "W_VALIDATOR_UNAVAILABLE",
+              "W_OUTPUT_CHECK",
+              "W_MODEL_OUT_OF_FRAME",
+              "W_MODEL_BELOW_GROUND",
+              "W_TRIANGLE_BUDGET",
+              "W_DEGENERATE_TRIANGLES",
+              "W_OPEN_MESH",
+              "W_COMPOSITION_GROUND",
+              "W_COMPOSITION_EDGE",
+              "W_INDEXED_UNAVAILABLE",
+              "W_CLIP_FRAME_PERIOD",
+              "W_CLIP_BONE_LIMIT",
+              "W_CLIP_FOOT_CONTACT",
+              "W_BACKEND_RESTARTED",
+              "W_CACHE_PRUNED",
+              "W_MEMORY_HIGH",
+              "W_PALETTE_PER_CLIP"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "assetId": {
+            "type": "string"
+          },
+          "hint": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "additionalProperties": false,
+        "description": "A non-fatal problem."
+      },
+      "description": "Warnings, also on success. Each has a code, a message and often a hint."
+    },
+    "error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "E_INTERNAL",
+            "E_USAGE",
+            "E_PROJECT_NOT_FOUND",
+            "E_PROJECT_EXISTS",
+            "E_INIT_CONFLICT",
+            "E_ASSET_NOT_FOUND",
+            "E_ASSET_EXISTS",
+            "E_NOT_GENERATED",
+            "E_SCHEMA_NOT_FOUND",
+            "E_TEMPLATE_NOT_FOUND",
+            "E_JSON_PARSE",
+            "E_PROJECT_INVALID",
+            "E_ASSET_INVALID",
+            "E_PRESET_NOT_FOUND",
+            "E_PRESET_INVALID",
+            "E_PALETTE_NOT_FOUND",
+            "E_PALETTE_INVALID",
+            "E_PATH_OUTSIDE_PROJECT",
+            "E_OUTPUT_DIR_NOT_EMPTY",
+            "E_MODEL_INVALID",
+            "E_PART_NOT_MANIFOLD",
+            "E_COMPONENT_NOT_FOUND",
+            "E_COMPONENT_INVALID",
+            "E_COMPONENT_CYCLE",
+            "E_IMPORT_FAILED",
+            "E_MODEL_TOO_COMPLEX",
+            "E_SCRIPT_FAILED",
+            "E_SCRIPT_PERMISSION",
+            "E_GENERATION_FAILED",
+            "E_PARTIAL_PLAN",
+            "E_BACKEND_CRASHED",
+            "E_BATCH_FAILED",
+            "E_ASSET_TIMEOUT",
+            "E_RENDER_FAILED",
+            "E_VALIDATION_FAILED",
+            "E_BATCH_PARTIAL",
+            "E_ENVIRONMENT",
+            "E_NODE_VERSION",
+            "E_BROWSER_MISSING",
+            "E_BACKEND_UNAVAILABLE",
+            "E_NATIVE_MODULE",
+            "E_CANCELLED"
+          ]
+        },
+        "message": {
+          "type": "string"
+        },
+        "file": {
+          "type": "string"
+        },
+        "issues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "file": {
+                "description": "File the issue is in, relative to the project root.",
+                "type": "string"
+              },
+              "path": {
+                "type": "string",
+                "description": "Dotted path inside the document, such as \"model.parts[2].size\". Empty for the whole document."
+              },
+              "message": {
+                "type": "string"
+              },
+              "code": {
+                "description": "Issue kind, such as invalid_type or unknown_material.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "path",
+              "message"
+            ],
+            "additionalProperties": false,
+            "description": "One problem found in an input document."
+          }
+        },
+        "hint": {
+          "type": "string"
+        },
+        "docs": {
+          "description": "Documentation path for this error.",
+          "type": "string"
+        },
+        "details": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "additionalProperties": false,
+      "description": "A structured error."
+    }
+  },
+  "required": [
+    "ok",
+    "command",
+    "version",
+    "durationMs",
+    "warnings"
+  ],
+  "additionalProperties": false,
+  "description": "The single JSON document every command prints to stdout with --json."
+}

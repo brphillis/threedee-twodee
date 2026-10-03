@@ -1,0 +1,9 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "lighting/world-sun",
+  "type": "prop",
+  "description": "A sun fixed in the world: the lit side changes with direction.",
+  "lighting": "world-sun",
+  "model": { "parts": [{ "type": "component", "id": "cottage", "component": "cottage" }] }
+}

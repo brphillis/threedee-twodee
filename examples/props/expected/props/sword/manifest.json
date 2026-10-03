@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "props/sword",
+  "assetHash": "sha256:0bfe78bfae1f81472c66e724f3a08f445db38f7283acfd70f70f4fc1f95c237c",
+  "generatedAt": "2026-10-02T11:49:09.131Z",
+  "frame": { "width": 32, "height": 48 },
+  "pivot": {
+    "x": 16,
+    "y": 46,
+    "normalized": { "x": 0.5, "y": 0.958333 }
+  },
+  "pixelsPerUnit": 24,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 2 },
+  "directions": [
+    { "name": "s", "yaw": 0, "mirrorOf": null },
+    { "name": "w", "yaw": 90, "mirrorOf": null },
+    { "name": "n", "yaw": 180, "mirrorOf": null },
+    { "name": "e", "yaw": 270, "mirrorOf": null }
+  ],
+  "palette": { "mode": "none", "name": null, "colors": [] },
+  "clips": [
+    { "name": "idle", "fps": 10, "frames": 1, "loop": true, "motion": false, "durationMs": 100 }
+  ],
+  "sheets": [
+    {
+      "name": "sword",
+      "image": "sword.png",
+      "data": "sword.json",
+      "width": 32,
+      "height": 192,
+      "layout": "grid"
+    }
+  ],
+  "cells": [
+    {
+      "key": "idle/s/000",
+      "clip": "idle",
+      "direction": "s",
+      "index": 0,
+      "sheet": "sword",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/w/000",
+      "clip": "idle",
+      "direction": "w",
+      "index": 0,
+      "sheet": "sword",
+      "x": 0,
+      "y": 48,
+      "w": 32,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/n/000",
+      "clip": "idle",
+      "direction": "n",
+      "index": 0,
+      "sheet": "sword",
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/e/000",
+      "clip": "idle",
+      "direction": "e",
+      "index": 0,
+      "sheet": "sword",
+      "x": 0,
+      "y": 144,
+      "w": 32,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    }
+  ],
+  "files": {
+    "sheets": ["sword.png"],
+    "aseprite-json": ["sword.json"],
+    "manifest": ["manifest.json"]
+  },
+  "stages": {
+    "model": "sha256:054515d31b373f5ea9ba985f72fa5d7e70366ed31b331eb828132b3f08d31e31",
+    "rig": "sha256:5f9a02e7a437b6d250b85e5a8185352c27d80ce3724c7f6e558d89a137094ab0",
+    "plan": "sha256:20b24559e09c35234dd9a3e50d5cbd7929c303de8e43c531d5fb7c362e20cbb9",
+    "render": "sha256:03aea87ce92d4a8b33895ac4f949251eae9d57e1326f207d3f7ed9c101c20a39",
+    "pixel": "sha256:f0e308e81c87d5d018b0fadce3ea030fe2745e7ae6921c3428c62e0e6dee273e",
+    "sheet": "sha256:fb4c9d8bac3ead4e43263cc10d4538325277f899f2107660b5f61906c55db973"
+  },
+  "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
+}

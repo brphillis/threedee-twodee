@@ -1,0 +1,61 @@
+{
+  "machine": {
+    "platform": "darwin-arm64",
+    "cpus": 10,
+    "cpu": "Apple M5",
+    "memoryGB": 32,
+    "node": "v24.3.0"
+  },
+  "assets": 20,
+  "concurrency": 2,
+  "runs": [
+    {
+      "label": "cold",
+      "seconds": 20.2,
+      "samples": 2880,
+      "rendered": 2880,
+      "reused": 0,
+      "samplesPerSecond": 142.5,
+      "stageCacheHitRatio": 0,
+      "itemReuseRatio": 0,
+      "peakTd2dMB": 514,
+      "peakBrowserMB": 93,
+      "status": "ok",
+      "warnings": []
+    },
+    {
+      "label": "warm",
+      "seconds": 2.8,
+      "samples": 2880,
+      "rendered": 0,
+      "reused": 2880,
+      "samplesPerSecond": 0,
+      "stageCacheHitRatio": 1,
+      "itemReuseRatio": 1,
+      "peakTd2dMB": 514,
+      "peakBrowserMB": 0,
+      "status": "ok",
+      "warnings": []
+    },
+    {
+      "label": "clip edit",
+      "seconds": 11.3,
+      "samples": 2880,
+      "rendered": 640,
+      "reused": 2240,
+      "samplesPerSecond": 56.5,
+      "stageCacheHitRatio": 0.111,
+      "itemReuseRatio": 0.778,
+      "peakTd2dMB": 530,
+      "peakBrowserMB": 89,
+      "status": "ok",
+      "warnings": []
+    }
+  ],
+  "largeAsset": {
+    "description": "one asset, 8 directions x 64 frames at 4x supersample, in its own process",
+    "seconds": 4.9,
+    "samples": 512,
+    "peakTd2dMB": 470
+  }
+}

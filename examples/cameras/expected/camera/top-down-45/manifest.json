@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "camera/top-down-45",
+  "assetHash": "sha256:c22fe8b26ddbd573c844b8bab190ea9dfc3e7d56a3edb6cc33167d9dfe88a33c",
+  "generatedAt": "2026-10-02T11:49:03.206Z",
+  "frame": { "width": 48, "height": 48 },
+  "pivot": {
+    "x": 24,
+    "y": 39,
+    "normalized": { "x": 0.5, "y": 0.8125 }
+  },
+  "pixelsPerUnit": 20,
+  "camera": { "preset": "top-down-45", "pitch": 45, "yawOffset": 0, "groundMargin": 9 },
+  "directions": [
+    { "name": "s", "yaw": 0, "mirrorOf": null },
+    { "name": "w", "yaw": 90, "mirrorOf": null },
+    { "name": "n", "yaw": 180, "mirrorOf": null },
+    { "name": "e", "yaw": 270, "mirrorOf": null }
+  ],
+  "palette": { "mode": "none", "name": null, "colors": [] },
+  "clips": [
+    { "name": "idle", "fps": 10, "frames": 1, "loop": true, "motion": false, "durationMs": 100 }
+  ],
+  "sheets": [
+    {
+      "name": "top-down-45",
+      "image": "top-down-45.png",
+      "data": "top-down-45.json",
+      "width": 48,
+      "height": 192,
+      "layout": "grid"
+    }
+  ],
+  "cells": [
+    {
+      "key": "idle/s/000",
+      "clip": "idle",
+      "direction": "s",
+      "index": 0,
+      "sheet": "top-down-45",
+      "x": 0,
+      "y": 0,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/w/000",
+      "clip": "idle",
+      "direction": "w",
+      "index": 0,
+      "sheet": "top-down-45",
+      "x": 0,
+      "y": 48,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/n/000",
+      "clip": "idle",
+      "direction": "n",
+      "index": 0,
+      "sheet": "top-down-45",
+      "x": 0,
+      "y": 96,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/e/000",
+      "clip": "idle",
+      "direction": "e",
+      "index": 0,
+      "sheet": "top-down-45",
+      "x": 0,
+      "y": 144,
+      "w": 48,
+      "h": 48,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    }
+  ],
+  "files": {
+    "sheets": ["top-down-45.png"],
+    "aseprite-json": ["top-down-45.json"],
+    "manifest": ["manifest.json"]
+  },
+  "stages": {
+    "model": "sha256:192d8bb09b4c63c7a755a9b92733cdc35d5e4de1d6087cae6c01314cfae8c5b5",
+    "rig": "sha256:cedcb8beb02fe69af0bf59fbe1ba44490e33b47984532d2140490a09d2dff5fa",
+    "plan": "sha256:f8d552bcdf13b00f8362d1e3c6f9d051e08b9803b5d4162703eb5f49635575a9",
+    "render": "sha256:3ee4faa88ece3cd47ad5e1d060d242bb661442a6d1c33ffe8b52a7757032b1e7",
+    "pixel": "sha256:6029fe7556148435ecfa4113974d60195594dc43f277945e23502605c060d95f",
+    "sheet": "sha256:923577632001d5fefee2e5c192e6e8436d6e1f62877a2d05e932ba0707b7a72a"
+  },
+  "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
+}

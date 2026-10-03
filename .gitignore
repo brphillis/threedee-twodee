@@ -1,0 +1,17 @@
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+.DS_Store
+
+# td2d generated output
+build/
+.td2d/cache/
+.td2d/tmp/
+history/
+
+# test artefacts (actual and diff images, golden reports)
+.artifacts/
+
+# viewer browser test fixtures, written by its global setup
+apps/viewer/test-browser/fixtures-out/

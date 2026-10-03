@@ -1,0 +1,55 @@
+{
+  "name": "td2d-workspace",
+  "private": true,
+  "description": "td2d: a CLI-first tool that turns declarative 3D asset definitions into pixel-art sprites and sprite sheets.",
+  "type": "module",
+  "packageManager": "pnpm@12.8.1",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "tsc -b && vite build --config packages/render-harness/vite.config.ts && vite build --config apps/viewer/vite.config.ts",
+    "clean": "tsc -b --clean",
+    "typecheck": "tsc -b",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "generate": "node --conditions=td2d-source packages/schema/scripts/generate.ts && node --conditions=td2d-source packages/cli/scripts/reference.ts && node scripts/gallery.ts",
+    "test": "pnpm build && vitest run",
+    "test:unit": "vitest run --project unit",
+    "test:e2e": "pnpm build && vitest run --project e2e",
+    "td2d": "node --conditions=td2d-source packages/cli/src/main.ts",
+    "changeset": "changeset",
+    "test:render": "vitest run --project render --project harness",
+    "test:update-goldens": "TD2D_UPDATE_GOLDENS=1 vitest run --project render",
+    "docs:images": "node --conditions=td2d-source scripts/docs-images.ts",
+    "experiments": "TD2D_EXPERIMENTS=1 vitest run --project experiments",
+    "bench": "node --conditions=td2d-source scripts/bench.ts",
+    "release:check": "node scripts/release-check.ts",
+    "docs:check": "node scripts/check-links.ts",
+    "pack:smoke": "node scripts/pack-smoke.ts",
+    "licences": "node scripts/licences.ts"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.15",
+    "@changesets/cli": "3.0.3",
+    "@td2d/core": "workspace:*",
+    "@td2d/schema": "workspace:*",
+    "@types/node": "24.19.1",
+    "@types/three": "0.186.0",
+    "@vitejs/plugin-react": "6.1.1",
+    "@vitest/browser-playwright": "5.0.3",
+    "@vitest/coverage-v8": "5.0.3",
+    "ajv": "8.20.0",
+    "phaser": "4.2.1",
+    "pixi.js": "8.22.0",
+    "playwright": "1.63.0",
+    "three": "0.186.1",
+    "tinyexec": "1.3.1",
+    "typescript": "7.0.2",
+    "vite": "8.3.2",
+    "vitest": "5.0.3"
+  },
+  "optionalDependencies": {
+    "gl": "9.0.0-rc.10"
+  }
+}

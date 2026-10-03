@@ -1,0 +1,232 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:td2d:schema:component:1",
+  "title": "td2d component",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Optional JSON Schema reference for editors. Ignored by td2d."
+    },
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^1\\.\\d+\\.\\d+$",
+      "description": "Document schema version. Any 1.x.y version is accepted.",
+      "examples": [
+        "1.0.0"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^[a-z0-9][a-z0-9-]*$",
+      "description": "Lowercase kebab-case name.",
+      "examples": [
+        "steel",
+        "endesga-32"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 2000,
+      "description": "Free-text note. Use this instead of comments."
+    },
+    "params": {
+      "description": "Parameters the component takes, with types, defaults and limits. Use them as ${name} in parts.",
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-zA-Z0-9]*$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "number",
+              "string",
+              "boolean"
+            ]
+          },
+          "default": {
+            "type": [
+              "number",
+              "string",
+              "boolean"
+            ]
+          },
+          "min": {
+            "type": "number"
+          },
+          "max": {
+            "type": "number"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 2000,
+            "description": "Free-text note. Use this instead of comments."
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "materials": {
+      "description": "Default materials. Asset materials with the same name win.",
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "maxLength": 64,
+        "pattern": "^[a-z0-9][a-z0-9-]*$",
+        "description": "Lowercase kebab-case name.",
+        "examples": [
+          "steel",
+          "endesga-32"
+        ]
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "maxLength": 2000,
+            "description": "Free-text note. Use this instead of comments."
+          },
+          "color": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^#[0-9a-fA-F]{6}$",
+                "description": "sRGB colour as #rrggbb.",
+                "examples": [
+                  "#a0693a"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "palette": {
+                    "type": "string",
+                    "maxLength": 64,
+                    "pattern": "^[a-z0-9][a-z0-9-]*$",
+                    "description": "Palette name.",
+                    "examples": [
+                      "steel",
+                      "endesga-32"
+                    ]
+                  },
+                  "index": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 255,
+                    "description": "Zero-based colour index within the palette."
+                  }
+                },
+                "required": [
+                  "palette",
+                  "index"
+                ],
+                "additionalProperties": false,
+                "description": "A colour taken from a named palette by index."
+              }
+            ],
+            "description": "Either a #rrggbb colour or a palette reference."
+          },
+          "shading": {
+            "type": "string",
+            "enum": [
+              "toon",
+              "flat",
+              "lambert"
+            ],
+            "description": "toon: banded lighting. flat: unlit base colour. lambert: smooth diffuse lighting."
+          },
+          "bands": {
+            "description": "Number of light bands for toon shading. Default 3.",
+            "type": "integer",
+            "minimum": 2,
+            "maximum": 8
+          },
+          "emissive": {
+            "description": "Emissive colour added regardless of lighting.",
+            "type": "string",
+            "pattern": "^#[0-9a-fA-F]{6}$",
+            "examples": [
+              "#a0693a"
+            ]
+          },
+          "outline": {
+            "description": "Whether the outline pass may outline this material.",
+            "type": "boolean"
+          },
+          "opacity": {
+            "description": "Render opacity. The pixel stage thresholds alpha, so values below 1 produce a warning.",
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "color"
+        ],
+        "additionalProperties": false,
+        "description": "Renderer-agnostic material.",
+        "examples": [
+          {
+            "color": "#a0693a",
+            "shading": "toon",
+            "bands": 3,
+            "outline": true
+          }
+        ]
+      }
+    },
+    "parts": {
+      "minItems": 1,
+      "maxItems": 1000,
+      "type": "array",
+      "items": {},
+      "description": "Parts, validated after \"${...}\" placeholders are replaced. A placeholder can hold arithmetic: \"${height / 2}\"."
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "name",
+    "parts"
+  ],
+  "additionalProperties": false,
+  "description": "A reusable, parameterised group of parts, stored as components/<name>.json.",
+  "examples": [
+    {
+      "schemaVersion": "1.0.0",
+      "name": "fence-post",
+      "params": {
+        "height": {
+          "type": "number",
+          "default": 1,
+          "min": 0.2
+        }
+      },
+      "parts": [
+        {
+          "type": "box",
+          "id": "post",
+          "material": "wood",
+          "size": [
+            0.12,
+            "${height}",
+            0.12
+          ],
+          "position": [
+            0,
+            "${height / 2}",
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}

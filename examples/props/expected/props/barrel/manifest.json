@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "props/barrel",
+  "assetHash": "sha256:4c2755113212697a407a483d0815ab747545aed8d84222f195af1fc237fd5756",
+  "generatedAt": "2026-10-02T11:49:08.804Z",
+  "frame": { "width": 32, "height": 32 },
+  "pivot": {
+    "x": 16,
+    "y": 28,
+    "normalized": { "x": 0.5, "y": 0.875 }
+  },
+  "pixelsPerUnit": 16,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 4 },
+  "directions": [
+    { "name": "s", "yaw": 0, "mirrorOf": null },
+    { "name": "w", "yaw": 90, "mirrorOf": null },
+    { "name": "n", "yaw": 180, "mirrorOf": null },
+    { "name": "e", "yaw": 270, "mirrorOf": null }
+  ],
+  "palette": { "mode": "none", "name": null, "colors": [] },
+  "clips": [
+    { "name": "idle", "fps": 10, "frames": 1, "loop": true, "motion": false, "durationMs": 100 }
+  ],
+  "sheets": [
+    {
+      "name": "barrel",
+      "image": "barrel.png",
+      "data": "barrel.json",
+      "width": 32,
+      "height": 128,
+      "layout": "grid"
+    }
+  ],
+  "cells": [
+    {
+      "key": "idle/s/000",
+      "clip": "idle",
+      "direction": "s",
+      "index": 0,
+      "sheet": "barrel",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/w/000",
+      "clip": "idle",
+      "direction": "w",
+      "index": 0,
+      "sheet": "barrel",
+      "x": 0,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/n/000",
+      "clip": "idle",
+      "direction": "n",
+      "index": 0,
+      "sheet": "barrel",
+      "x": 0,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/e/000",
+      "clip": "idle",
+      "direction": "e",
+      "index": 0,
+      "sheet": "barrel",
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    }
+  ],
+  "files": {
+    "sheets": ["barrel.png"],
+    "aseprite-json": ["barrel.json"],
+    "manifest": ["manifest.json"]
+  },
+  "stages": {
+    "model": "sha256:e9f1b73759f8586cc0a8bc828912341c3680e579b218df2695de6528c55359d6",
+    "rig": "sha256:afc470a8feb77d5394043925e90e2b5e7339b0680ae3c6ac335a7a7504790f15",
+    "plan": "sha256:3c29f0f8081da245825b266183e780524115adb2fe26b9f7f0eda097efb8479d",
+    "render": "sha256:96d8610ace0da4de6bc88177ea57f6ba2aa387ac5ea3035e515ac784e12b9620",
+    "pixel": "sha256:3892afb0fc563054ca36a7b0b7c88461d3fbc73d3181af6626add357f8c9af33",
+    "sheet": "sha256:762387ab10a71698fe4d30e2e3f27bcc8be68c8ea69de5960255a5e048bfdcc1"
+  },
+  "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
+}
