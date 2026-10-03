@@ -62,10 +62,11 @@ Packages are versioned together with changesets: `@td2d/schema`, `@td2d/core`, `
 
 Publishing uses npm trusted publishing: the workflow's OIDC identity is the credential, so no npm token is stored, and every package carries a provenance statement linking it to the workflow run.
 
-Publishing depends on two settings:
+Releasing depends on three settings:
 
 1. On npmjs.com, each of the five packages gets this repository and `release.yml` as its trusted publisher.
 2. Each package's `package.json` has a `repository` naming this GitHub repository, such as `"repository": { "type": "git", "url": "git+https://github.com/brphillis/threedee-twodee.git", "directory": "packages/cli" }`. npm rejects a provenance publish whose `repository.url` names a different repository, so a fork that publishes must change it.
+3. In the repository's Settings, under Actions, General, Workflow permissions, "Allow GitHub Actions to create and approve pull requests" is on, so the release workflow can open the "Version packages" pull request. GitHub turns it off by default, and the workflow fails at that step until it is on.
 
 `pnpm run release:check` checks the packages before anything is published: one shared version, the `@td2d` scope, MIT with a `LICENSE` file, a `files` list and a README in every package and, inside GitHub Actions, a `repository.url` that names the repository the workflow runs in. It prints the `repository` entry to add when one is missing.
 

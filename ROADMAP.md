@@ -1,6 +1,6 @@
 # threedee-twodee (`td2d`): 3D-to-2D Sprite Generation Tool Roadmap
 
-Status: Phases 0 to 11 implemented and verified locally on macOS and Linux (notes in [docs/roadmaps](docs/roadmaps)). The repository is at [github.com/brphillis/threedee-twodee](https://github.com/brphillis/threedee-twodee). Not yet done, because each needs the repository owner: green CI on GitHub's runners (including Windows), the npm trusted-publisher setup, and publishing (see [phase 11 notes](docs/roadmaps/phase-11.md)). This document is the implementation source of truth.
+Status: Phases 0 to 11 implemented and verified locally on macOS and Linux (notes in [docs/roadmaps](docs/roadmaps)). The repository is at [github.com/brphillis/threedee-twodee](https://github.com/brphillis/threedee-twodee). CI passes on every runner, Windows included. Not yet done, because each needs the repository owner: the repository setting that lets Actions open the release pull request, the npm trusted-publisher setup, and publishing (see [phase 11 notes](docs/roadmaps/phase-11.md)). This document is the implementation source of truth.
 Last updated: 2026-10-02.
 
 This document was written before implementation began. Commands, files, schemas and snippets in it, especially those marked `(proposed)`, show the intended shape; the phase notes in [docs/roadmaps](docs/roadmaps) record what was built and where it differs.
@@ -1643,11 +1643,11 @@ Claude Code determines completion by running `pnpm test` and reading the phase n
 
 The project is complete for a 1.0 release when all of the following hold:
 
-- [ ] Phases 0 to 11 are done per section 20. (Done locally; section 20 also needs green CI on every runner, which needs the repository on GitHub.)
-- [ ] `npx td2d init`, `doctor --fix`, `generate`, `batch`, `preview`, `compare`, `viewer` work from a published package on macOS, Linux and Windows. (They work from the packed tarballs, installed with npm locally and with `npm install -g`, and through `npx` with the tarballs as its packages, on macOS and Linux; not yet published, and Windows not yet run.)
+- [x] Phases 0 to 11 are done per section 20. (CI passes on every configured runner.)
+- [ ] `npx td2d init`, `doctor --fix`, `generate`, `batch`, `preview`, `compare`, `viewer` work from a published package on macOS, Linux and Windows. (They work from the packed tarballs, installed with npm locally and with `npm install -g`, and through `npx` with the tarballs as its packages, on macOS, Linux and Windows; not yet published.)
 - [x] The complete pipeline runs through the CLI without the viewer, and the viewer presents everything in section 10.2 without the CLI running.
 - [x] No MCP server or external 3D application is required.
-- [ ] All examples regenerate on CI and match their committed expected manifests; sprite goldens match within policy. (They do on macOS and in the Linux CI image on arm64 and x86_64; CI itself has not run.)
+- [x] All examples regenerate on CI and match their committed expected manifests; sprite goldens match within policy.
 - [x] Same-machine regeneration is byte-identical; cross-OS drift of raw renders is within 0.5 percent and documented.
 - [x] The agent workflow test passes and a recorded fresh-session operator transcript reaches a validated sheet in under ten commands.
 - [x] All error codes have catalogue entries; all commands have examples; all registries are introspectable through `describe`.

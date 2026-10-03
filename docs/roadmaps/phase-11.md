@@ -118,19 +118,19 @@ The Linux runs found four problems, all fixed:
 
 ## Not done here
 
-- **CI on GitHub's runners.** The repository was pushed to `github.com/brphillis/threedee-twodee` on 2026-10-03, after these notes were written; the workflow results are on GitHub. Everything they run had been run here on macOS and in the Linux image, except the Windows jobs.
-- **Windows.** The pack-and-install smoke test handles Windows (the `td2d.cmd` shim, a shell for npm and `;` in `PATH`), and CI runs it on windows-2025, but no Windows machine was available here.
+- **CI on GitHub's runners.** Done on 2026-10-03, after these notes were first written: on commit `19578a5` of `github.com/brphillis/threedee-twodee`, every CI job passed, including pack-and-install on windows-2025. The first push found two problems a clean checkout exposes: the `history/` ignore pattern had also ignored `packages/core/src/history/`, and the release workflow lacked zsh for the completion test. The release workflow's tests pass; its "Version packages" step waits for the repository setting that lets Actions open pull requests (CI and release guide).
+- **Windows.** No Windows machine was available here; the pack-and-install smoke test passes on GitHub's windows-2025 runner.
 - **Publishing.** No prerelease or 1.0.0 has been published: that needs the owner's npm account and the trusted-publisher setup, and is an outward-facing step for the owner to take.
 
 ## 1.0 readiness review (section 21)
 
 | Criterion | State |
 |---|---|
-| Phases 0 to 11 done per section 20 | Done locally. Section 20 also asks for green CI on every configured runner, which needs the repository on GitHub |
-| `npx td2d init`, `doctor --fix`, `generate`, `batch`, `preview`, `compare`, `viewer` from a published package on macOS, Linux and Windows | From the packed tarballs, installed with npm locally and globally and run through `npx`: passes on macOS and Linux (arm64 and x86_64). Not yet from the registry, and not yet on Windows |
+| Phases 0 to 11 done per section 20 | Done: CI passes on every configured runner (2026-10-03) |
+| `npx td2d init`, `doctor --fix`, `generate`, `batch`, `preview`, `compare`, `viewer` from a published package on macOS, Linux and Windows | From the packed tarballs, installed with npm locally and globally and run through `npx`: passes on macOS, Linux (arm64 and x86_64) and Windows (CI). Not yet from the registry |
 | The pipeline runs without the viewer, and the viewer presents section 10.2 without the CLI running | Done: every e2e pipeline test runs without the viewer; `td2d index` writes a static viewer, tested in the browser from a plain static file server |
 | No MCP server or external 3D application required | Done |
-| All examples regenerate on CI and match their expected manifests; sprite goldens match within policy | Done locally: the example regeneration tests compare every committed expected file on macOS and in the Linux CI image, and the render goldens are byte-identical on macOS and Linux arm64 and x86_64. CI itself has not run |
+| All examples regenerate on CI and match their expected manifests; sprite goldens match within policy | Done: the example regeneration tests compare every committed expected file, on CI and locally, and the render goldens are byte-identical on macOS and Linux arm64 and x86_64 |
 | Same-machine regeneration byte-identical; cross-OS raw render drift within 0.5 percent and documented | Done: identical across separate browser launches, and the raw goldens are byte-identical across macOS and both Linux architectures (rendering guide) |
 | Agent workflow test passes and a fresh-session transcript reaches a validated sheet in under ten commands | Done in Phase 10 (8 commands) |
 | Every error code has a catalogue entry, every command an example, every registry is introspectable | Done: 42 errors and 24 warnings (Phase 11 added `E_SCRIPT_PERMISSION`, `E_ASSET_TIMEOUT` and `W_MEMORY_HIGH`), 31 commands, `td2d describe` |
