@@ -35,7 +35,14 @@ export function listHistory(project: Project, assetId: string): HistoryEntry[] {
       }
       const match = /^(\d{4}-\d{2}-\d{2})T(\d{2})-(\d{2})-(\d{2})-(\d{3})Z-([0-9a-f]+)$/.exec(e.name);
       const createdAt = match ? `${match[1]}T${match[2]}:${match[3]}:${match[4]}.${match[5]}Z` : '';
-      return { id: e.name, assetId, createdAt, hash: match?.[6] ?? '', dir: relativePosix(project.root, full), validation };
+      return {
+        id: e.name,
+        assetId,
+        createdAt,
+        hash: match?.[6] ?? '',
+        dir: relativePosix(project.root, full),
+        validation,
+      };
     })
     .sort((a, b) => (a.id < b.id ? 1 : a.id > b.id ? -1 : 0));
 }
@@ -44,7 +51,13 @@ export function listHistory(project: Project, assetId: string): HistoryEntry[] {
  * Copy the published outputs of a generation into history/<id>/<timestamp>-<hash>/.
  * Nothing is recorded when the newest entry already has the same outputs.
  */
-export function recordHistory(project: Project, assetId: string, buildDir: string, exportHash: string, now = new Date()): HistoryEntry | null {
+export function recordHistory(
+  project: Project,
+  assetId: string,
+  buildDir: string,
+  exportHash: string,
+  now = new Date(),
+): HistoryEntry | null {
   const latest = listHistory(project, assetId)[0];
   if (latest && exportHash.startsWith(latest.hash)) return null;
   const id = entryId(now, exportHash);
@@ -75,7 +88,12 @@ export function historyAssetIds(project: Project): string[] {
 
 export interface HistoryDetails extends HistoryEntry {
   readonly bytes: number;
-  readonly sheets: { readonly name: string; readonly width: number; readonly height: number; readonly layout: string }[];
+  readonly sheets: {
+    readonly name: string;
+    readonly width: number;
+    readonly height: number;
+    readonly layout: string;
+  }[];
   readonly cells: number;
   readonly clips: { readonly name: string; readonly frames: number }[];
   readonly checks: { readonly id: string; readonly status: string; readonly message: string }[];
@@ -108,7 +126,9 @@ export function findHistoryEntry(project: Project, assetId: string, ref: string)
   const byName: Record<string, HistoryEntry | undefined> = { latest: entries[0], previous: entries[1] };
   const named = byName[ref];
   if (named) return named;
-  const matches = entries.filter((e) => e.id === ref || e.id.startsWith(ref) || (ref.length >= 4 && e.hash.startsWith(ref)));
+  const matches = entries.filter(
+    (e) => e.id === ref || e.id.startsWith(ref) || (ref.length >= 4 && e.hash.startsWith(ref)),
+  );
   if (matches.length === 1) return matches[0] as HistoryEntry;
   throw new Td2dError(
     'E_USAGE',
@@ -134,8 +154,13 @@ export function showHistory(project: Project, assetId: string, ref: string): His
     sheets: manifest?.sheets.map((s) => ({ name: s.name, width: s.width, height: s.height, layout: s.layout })) ?? [],
     cells: manifest?.cells.length ?? 0,
     clips: manifest?.clips.map((c) => ({ name: c.name, frames: c.frames })) ?? [],
-    checks: validation?.checks.filter((c) => c.status !== 'pass').map((c) => ({ id: c.id, status: c.status, message: c.message })) ?? [],
-    generation: generation ? { finishedAt: generation.finishedAt, durationMs: generation.durationMs, status: generation.status } : null,
+    checks:
+      validation?.checks
+        .filter((c) => c.status !== 'pass')
+        .map((c) => ({ id: c.id, status: c.status, message: c.message })) ?? [],
+    generation: generation
+      ? { finishedAt: generation.finishedAt, durationMs: generation.durationMs, status: generation.status }
+      : null,
   };
 }
 
@@ -161,7 +186,9 @@ export interface PruneResult {
  */
 export function pruneHistory(project: Project, assetIds: readonly string[], options: PruneOptions): PruneResult {
   if (options.keep === undefined && options.olderThanMs === undefined)
-    throw new Td2dError('E_USAGE', 'Say which entries to remove.', { hint: 'Pass --keep <n>, --older-than <duration>, or both.' });
+    throw new Td2dError('E_USAGE', 'Say which entries to remove.', {
+      hint: 'Pass --keep <n>, --older-than <duration>, or both.',
+    });
   const now = (options.now ?? new Date()).getTime();
   const removed: PruneResult['removed'][number][] = [];
   let kept = 0;
