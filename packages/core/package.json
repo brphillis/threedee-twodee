@@ -1,6 +1,6 @@
 {
   "name": "@td2d/core",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "The td2d generation engine: project loading, model building, rendering, pixel processing, export and validation.",
   "license": "MIT",
   "repository": {

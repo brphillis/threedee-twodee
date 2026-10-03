@@ -1,6 +1,6 @@
 {
   "name": "@td2d/cli",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "td2d command-line interface: turn declarative 3D asset definitions into pixel-art sprite sheets.",
   "license": "MIT",
   "repository": {

@@ -1,6 +1,6 @@
 {
   "name": "@td2d/schema",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Schemas, types and error codes shared by every td2d package.",
   "license": "MIT",
   "repository": {

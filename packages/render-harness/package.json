@@ -1,6 +1,6 @@
 {
   "name": "@td2d/render-harness",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "The three.js scene builder td2d runs inside a headless browser to render frames.",
   "license": "MIT",
   "repository": {
