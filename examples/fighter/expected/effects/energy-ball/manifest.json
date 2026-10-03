@@ -3,7 +3,7 @@
   "generator": { "name": "td2d", "version": "0.0.0" },
   "assetId": "effects/energy-ball",
   "assetHash": "sha256:40f70cce4f883ec8aeeabb30955966d6937f1da17499fa4de016bc22f2d79e60",
-  "generatedAt": "2026-10-03T06:34:59.550Z",
+  "generatedAt": "2026-10-03T08:48:11.160Z",
   "frame": { "width": 64, "height": 64 },
   "pivot": {
     "x": 32,
@@ -182,9 +182,9 @@
     "model": "sha256:6a52d0957873ac3e872a91787e7623795ec7b7ca93c29871e96454de272e0a9b",
     "rig": "sha256:b6c928788bb403181eb75aaaa584df7c28783091c3ccdc9a0fa07e20517b9cf5",
     "plan": "sha256:94569c70511b1b23067dac48f9b679bb5fecbf6337f259dae10eecb9dd844482",
-    "render": "sha256:e173381f45ebfef613b8fa5505bbc52fe1219b49018241a0e5a73c6305fb0367",
-    "pixel": "sha256:eeed4ffc024dd3e1b30df51887063df13168709b054e3d88d6aa4af86b448b9f",
-    "sheet": "sha256:cef8494bfca1a594fc8460d14ca3579d09504a3e543a37a2b78aa84fcf2f68b1"
+    "render": "sha256:0c753816f5a6281d05df8b7cdf8c851e4b0a07b18436c40622c0a5bb7ba457f0",
+    "pixel": "sha256:71e747c0e8d5959377f21ca62a91fc8ee3e3fa508c20b2c18d0220de23182ffd",
+    "sheet": "sha256:35cac5deb19473730d33e82ffed64707fe68285fac08e1b4ab5bed5ba79608ef"
   },
   "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
 }

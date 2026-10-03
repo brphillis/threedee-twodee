@@ -11,8 +11,8 @@
     "parts": [
       {
         "type": "component",
-        "id": "mushroom",
-        "component": "mushroom"
+        "id": "crates",
+        "component": "crates"
       }
     ]
   },

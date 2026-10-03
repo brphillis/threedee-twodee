@@ -1,6 +1,6 @@
 # Pixel art processing
 
-The `pixel` stage turns each supersampled render into a sprite. It runs a fixed list of passes, each over every frame of the asset, so an automatic palette is built once from all frames and every frame shares it. This page explains each pass and its settings, the checks that validate the result, and indexed PNG output. The pictures come from `examples/pixel`, which generates one mushroom per setting.
+The `pixel` stage turns each supersampled render into a sprite. It runs a fixed list of passes, each over every frame of the asset, so an automatic palette is built once from all frames and every frame shares it. This page explains each pass and its settings, the checks that validate the result, and indexed PNG output. The pictures come from `examples/pixel`, which generates one crate scene per setting.
 
 ## The passes
 
@@ -57,7 +57,7 @@ Both filters set a pixel's alpha from how much of its block is covered, then `al
 
 ## Palettes
 
-| `none` | `fixed:endesga-32` | `auto:16` | `auto:4` | `fixed:toadstool-7` | `posterize: 4` |
+| `none` | `fixed:endesga-32` | `auto:16` | `auto:4` | `fixed:crate-8` | `posterize: 4` |
 |---|---|---|---|---|---|
 | ![none](images/pixel/palette-none.png) | ![endesga](images/pixel/palette-endesga-32.png) | ![auto16](images/pixel/palette-auto-16.png) | ![auto4](images/pixel/palette-auto-4.png) | ![custom](images/pixel/palette-custom.png) | ![posterize](images/pixel/posterize-4.png) |
 
@@ -75,7 +75,7 @@ The manifest records the palette under `palette.colors`, and under `palette.byCl
 |---|---|---|---|
 | ![none](images/pixel/dither-none.png) | ![b4 35](images/pixel/dither-bayer-4-35.png) | ![b4 70](images/pixel/dither-bayer-4-70.png) | ![b2 50](images/pixel/dither-bayer-2-50.png) |
 
-Dithering only applies with a palette. It is ordered (Bayer 2 x 2, 4 x 4 or 8 x 8): each pixel's colour is nudged by a threshold that depends only on its position before it is snapped. The pattern is therefore fixed to the frame and does not crawl as the sprite animates. `ditherStrength` from 0 to 1 sets how far colours may be pushed. Flat areas between two palette colours become a checker pattern, as on the moss above.
+Dithering only applies with a palette. It is ordered (Bayer 2 x 2, 4 x 4 or 8 x 8): each pixel's colour is nudged by a threshold that depends only on its position before it is snapped. The pattern is therefore fixed to the frame and does not crawl as the sprite animates. `ditherStrength` from 0 to 1 sets how far colours may be pushed. Flat areas between two palette colours become a checker pattern, as on the crates above.
 
 ## Outlines
 
@@ -97,19 +97,19 @@ Dithering only applies with a palette. It is ordered (Bayer 2 x 2, 4 x 4 or 8 x 
 The outline pass only rings the silhouette, so where an arm crosses the chest or one leg passes in front of the other, the two shapes run together. Pixel artists draw a line there. `render.lines` makes the renderer draw one:
 
 ```json
-{ "render": { "lines": { "width": 1, "color": "shade", "shade": 0.35, "depth": 0.03 } } }
+{ "render": { "lines": { "width": 1, "color": "shade", "shade": 0.35, "depth": 0.015 } } }
 ```
 
 | outline only | `lines`, dark | `lines`, `shade`, with the outline |
 |---|---|---|
-| ![outline only](images/pixel/outline-outside.png) | ![dark lines](images/pixel/lines-dark.png) | ![shaded lines](images/pixel/lines-shade.png) |
+| ![outline only](images/pixel/lines-none.png) | ![dark lines](images/pixel/lines-dark.png) | ![shaded lines](images/pixel/lines-shade.png) |
 
-- **How.** Every part is drawn a second time, back faces only, pushed out along their normals by `width` final pixels. A part's line shows wherever what lies behind it is further away than the part itself: around the silhouette, and inside it where the part stands in front of another. Two parts that merely meet, a wrist going into a fist, get no line between them.
-- **`depth`** (metres, default 0.03) is how far in front of what lies behind it a part must be to get a line there. Raise it to line limbs held close to the body; keep it below the thickness of the parts, or thin parts (a headband, a cape panel, gold trim) are lined all over and turn dark.
+- **How.** After rendering, the renderer looks at the depth of every pixel. A line runs wherever the depth steps, and wherever two materials that take lines meet, so parts that touch with no step between them, a brace lying on planks, are still lined. The line always goes on the nearer side, `width` final pixels into the part in front, so it never paints over that part. Two pieces of the same material that merely join, a wrist going into a fist, get no line between them.
+- **`depth`** (metres, default 0.015) is the smallest step in depth that gets a line. Steps are found from how the depth bends, not how fast it changes, so a flat surface is never lined however steeply it is tilted.
 - **`color`** is one `#rrggbb` for every line, or `shade` (the default): each part's line is its own colour at `shade` brightness, so skin is lined in dark brown and cloth in its own deep tone, as hand-drawn sprites are.
-- Materials with `"outline": false` get no lines, such as eyes and visor slits.
+- Materials with `"outline": false` get no lines and start none: use it for fine detail (grain, stitching, rope strands, eyes) and for dark gaps, or every streak and seam is lined.
 - Lines are drawn into the render and survive the `mode` downscale: a block at least half covered by line becomes a line pixel. With the `box` filter they blend into their neighbours instead.
-- The lines add `width` pixels around the silhouette, which the automatic scale, the ground margin and the out-of-frame check all allow for. With the outline pass as well, the outside edge is two pixels: the line in each part's shade, then the outline.
+- Lines lie inside the silhouette, so they do not change the sprite's size. With the outline pass as well, the outside edge is two pixels: the line in each part's shade, then the outline.
 
 Lines, two or three toon bands per material and `cleanup.orphans: "recolour"` together make a model read as drawn rather than rendered; `examples/fighter` uses all three.
 

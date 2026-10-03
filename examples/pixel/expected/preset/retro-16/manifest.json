@@ -2,16 +2,16 @@
   "schemaVersion": "1.0.0",
   "generator": { "name": "td2d", "version": "0.0.0" },
   "assetId": "preset/retro-16",
-  "assetHash": "sha256:73543a9cb9ef13511e7cc7b108adf3973e48ed282294783c0d4ad8e3a37514d7",
-  "generatedAt": "2026-10-03T06:41:38.857Z",
-  "frame": { "width": 64, "height": 64 },
+  "assetHash": "sha256:c4888a437f2f4452aae9a21df87da51fc8528e09bf0c1b2dd2b55c8c2f23939b",
+  "generatedAt": "2026-10-03T08:38:13.986Z",
+  "frame": { "width": 160, "height": 160 },
   "pivot": {
-    "x": 32,
-    "y": 51,
-    "normalized": { "x": 0.5, "y": 0.796875 }
+    "x": 80,
+    "y": 121,
+    "normalized": { "x": 0.5, "y": 0.75625 }
   },
-  "pixelsPerUnit": 44,
-  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 13 },
+  "pixelsPerUnit": 90,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 39 },
   "directions": [
     { "name": "s", "yaw": 0, "mirrorOf": null },
     { "name": "w", "yaw": 90, "mirrorOf": null },
@@ -22,22 +22,22 @@
     "mode": "auto:16",
     "name": null,
     "colors": [
-      "#7c2838",
-      "#923243",
-      "#9d3649",
-      "#a4394d",
-      "#a93b4f",
-      "#ae3d51",
-      "#247f44",
-      "#8f8163",
-      "#2f9e56",
-      "#a09376",
-      "#38b764",
-      "#acaba8",
-      "#cbb992",
-      "#d7c6a0",
-      "#e3d1a9",
-      "#f4f4f4"
+      "#1b1516",
+      "#3d2415",
+      "#5d3a1e",
+      "#694524",
+      "#664f34",
+      "#734b2b",
+      "#6f5a46",
+      "#8a542b",
+      "#845b36",
+      "#7c6550",
+      "#9e6837",
+      "#a47543",
+      "#9c7b59",
+      "#bd7e42",
+      "#b58b5f",
+      "#c8a67e"
     ]
   },
   "clips": [
@@ -48,8 +48,8 @@
       "name": "retro-16",
       "image": "retro-16.png",
       "data": "retro-16.json",
-      "width": 64,
-      "height": 256,
+      "width": 160,
+      "height": 640,
       "layout": "grid"
     }
   ],
@@ -62,8 +62,8 @@
       "sheet": "retro-16",
       "x": 0,
       "y": 0,
-      "w": 64,
-      "h": 64,
+      "w": 160,
+      "h": 160,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -75,9 +75,9 @@
       "index": 0,
       "sheet": "retro-16",
       "x": 0,
-      "y": 64,
-      "w": 64,
-      "h": 64,
+      "y": 160,
+      "w": 160,
+      "h": 160,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -89,9 +89,9 @@
       "index": 0,
       "sheet": "retro-16",
       "x": 0,
-      "y": 128,
-      "w": 64,
-      "h": 64,
+      "y": 320,
+      "w": 160,
+      "h": 160,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -103,9 +103,9 @@
       "index": 0,
       "sheet": "retro-16",
       "x": 0,
-      "y": 192,
-      "w": 64,
-      "h": 64,
+      "y": 480,
+      "w": 160,
+      "h": 160,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -117,12 +117,12 @@
     "manifest": ["manifest.json"]
   },
   "stages": {
-    "model": "sha256:1ce36eaed64ea87af8050347f9e19242f81b05dd086c176d8f44833736281d3f",
-    "rig": "sha256:e761dd620ea9784ca293d1f9d8f5d1ed5caa5798f17ada37f49f2c8e1c02577d",
-    "plan": "sha256:89ca57ab98ff92edbe7e9f6379f33a473a21d37bbcb5cdccc60de3e08e34feed",
-    "render": "sha256:8d6ded036d4d62e02efd6661e797066ec2a9dcbd2e38acd41a2beb61a9708b1b",
-    "pixel": "sha256:0144ef5322d41ccd26a9312e36febfd788b920c553020f6a83dd6c913c59b6df",
-    "sheet": "sha256:a01a50b4c4be3c162f4955c0c8b4fd17884a3ed2bc2ab08274417f3249f220b8"
+    "model": "sha256:38f1c020a083e22ea6540fb84f758f0f00ec795350daff701bde674e6c47f56d",
+    "rig": "sha256:fdd0ed7b97099bce6eddcd4e21e027f7c2608d8bedab593b3e23fc7bac79c777",
+    "plan": "sha256:a10983561209a99af811edff5c801665793c3dcc3bb5263d4ebb6c4c1ce6a2ab",
+    "render": "sha256:e51bb9d8db5b7e7f840786146b18a454137204a00b52c7b0a9dc633174076c27",
+    "pixel": "sha256:4a15110bd944af6861678decad9d9e6f7e5bdaadb839b231cb49848010df68ff",
+    "sheet": "sha256:18c14907f1cdd63d019df95d6233e2bf1c4003f59faf3dcc3ff25118a8f46619"
   },
   "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
 }

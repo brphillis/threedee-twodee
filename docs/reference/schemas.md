@@ -84,7 +84,7 @@ Material, used inside asset materials maps. Read from `asset.json materials.<nam
 | `shading` |  | toon: banded lighting. flat: unlit base colour. lambert: smooth diffuse lighting. |
 | `bands` |  | Number of light bands for toon shading. Default 3. |
 | `emissive` |  | Emissive colour added regardless of lighting. |
-| `outline` |  | Whether the outline pass may outline this material. |
+| `outline` |  | Whether render.lines may line this material. Default true. Turn it off for fine detail such as grain, stitching or strands, and for dark gaps. |
 | `opacity` |  | Render opacity. The pixel stage thresholds alpha, so values below 1 produce a warning. |
 
 ## component

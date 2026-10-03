@@ -1,0 +1,7 @@
+{
+  "$schema": "../.td2d/schemas/palette.schema.json",
+  "schemaVersion": "1.0.0",
+  "name": "crate-8",
+  "description": "A hand-picked eight-colour palette for the crates: four honey-oak browns from seam to highlight, two burlaps, rope and the dark outline brown.",
+  "colors": ["#3a2214", "#6e4422", "#a06232", "#d08c48", "#e8b070", "#9a7650", "#c49a68", "#c8924e"]
+}

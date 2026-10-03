@@ -1920,7 +1920,7 @@
                   "maximum": 1
                 },
                 "depth": {
-                  "description": "How far in front of what lies behind it a part must be to get a line there, in metres. Keep it below the thickness of the parts: parts that merely meet stay unlined. Default 0.03.",
+                  "description": "The smallest step in depth that gets a line, in metres. Flat surfaces are never lined however steeply they are tilted. Default 0.015.",
                   "type": "number",
                   "minimum": 0,
                   "maximum": 1

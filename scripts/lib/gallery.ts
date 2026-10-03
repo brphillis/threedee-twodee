@@ -8,7 +8,7 @@ const INTRO: Record<string, string> = {
     'Eight props, each built a different way: lathe, CSG, components, mirrored groups, wedges, extrusions, an imported GLB and palette colours.',
   cameras: 'One cottage with every camera and lighting preset, plus automatic scale, counted and mirrored directions.',
   pixel:
-    'One mushroom processed with each pixel setting: downscale, palettes, dithering, posterising, outlines, render lines and presets.',
+    'One crate scene processed with each pixel setting: downscale, palettes, dithering, posterising, outlines, render lines and presets.',
   characters:
     'A rigged knight with idle, walk and attack clips in eight directions, its cape moving in the wind on its own bones, on a grid sheet and on a packed sheet in every export format.',
   fighter:

@@ -2,16 +2,16 @@
   "schemaVersion": "1.0.0",
   "generator": { "name": "td2d", "version": "0.0.0" },
   "assetId": "palette/auto-4",
-  "assetHash": "sha256:5f87cab144bda0680cad8259dd3bf7c2188ca492fb0d4fd7521589d4fa32a17f",
-  "generatedAt": "2026-10-03T06:41:38.640Z",
-  "frame": { "width": 64, "height": 64 },
+  "assetHash": "sha256:4dd6e75edd673fb007a19e2223e05709764c7800814d75e32530e92579b17807",
+  "generatedAt": "2026-10-03T08:38:13.500Z",
+  "frame": { "width": 160, "height": 160 },
   "pivot": {
-    "x": 32,
-    "y": 52,
-    "normalized": { "x": 0.5, "y": 0.8125 }
+    "x": 80,
+    "y": 121,
+    "normalized": { "x": 0.5, "y": 0.75625 }
   },
-  "pixelsPerUnit": 44,
-  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 12 },
+  "pixelsPerUnit": 90,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 39 },
   "directions": [
     { "name": "s", "yaw": 0, "mirrorOf": null },
     { "name": "w", "yaw": 90, "mirrorOf": null },
@@ -21,7 +21,7 @@
   "palette": {
     "mode": "auto:4",
     "name": null,
-    "colors": ["#a4394c", "#31a258", "#aa9d82", "#f4f3f2"]
+    "colors": ["#372115", "#664425", "#8f6036", "#b3804e"]
   },
   "clips": [
     { "name": "idle", "fps": 10, "frames": 1, "loop": true, "motion": false, "durationMs": 100 }
@@ -31,8 +31,8 @@
       "name": "auto-4",
       "image": "auto-4.png",
       "data": "auto-4.json",
-      "width": 64,
-      "height": 256,
+      "width": 160,
+      "height": 640,
       "layout": "grid"
     }
   ],
@@ -45,8 +45,8 @@
       "sheet": "auto-4",
       "x": 0,
       "y": 0,
-      "w": 64,
-      "h": 64,
+      "w": 160,
+      "h": 160,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -58,9 +58,9 @@
       "index": 0,
       "sheet": "auto-4",
       "x": 0,
-      "y": 64,
-      "w": 64,
-      "h": 64,
+      "y": 160,
+      "w": 160,
+      "h": 160,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -72,9 +72,9 @@
       "index": 0,
       "sheet": "auto-4",
       "x": 0,
-      "y": 128,
-      "w": 64,
-      "h": 64,
+      "y": 320,
+      "w": 160,
+      "h": 160,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -86,9 +86,9 @@
       "index": 0,
       "sheet": "auto-4",
       "x": 0,
-      "y": 192,
-      "w": 64,
-      "h": 64,
+      "y": 480,
+      "w": 160,
+      "h": 160,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -100,12 +100,12 @@
     "manifest": ["manifest.json"]
   },
   "stages": {
-    "model": "sha256:1ce36eaed64ea87af8050347f9e19242f81b05dd086c176d8f44833736281d3f",
-    "rig": "sha256:7d4112aef2a3dc1abd987f16f3a611d33b5c3d005c0e174cc58c7c406d596c84",
-    "plan": "sha256:2b23aca388e95ca4fe61b298952944afa18f1147ccb41807dff4e80b84d20e6d",
-    "render": "sha256:8cf90c7768036adcf274797fb0d69db910d8ac9b32ec0eeab8652281be3aa02c",
-    "pixel": "sha256:1cebc038003be1351ddd515de3f1d4f1d86dc23241a309c2987935372d282a97",
-    "sheet": "sha256:8ea88e8faac611ca1a5fa5895622489112e41deaa729ce1bad1b46de178e03db"
+    "model": "sha256:38f1c020a083e22ea6540fb84f758f0f00ec795350daff701bde674e6c47f56d",
+    "rig": "sha256:fc375dc1797a5b75ec46a19b2b5670d8d44ea350cfdc2fd048bafa6cfe6334b7",
+    "plan": "sha256:a94611d5e9ce249cb42669e6b5b39bd53c7072948f13587638e7e16e61636a04",
+    "render": "sha256:58e75d877a71e336580d6a2c7f527dfc84d219e7a2b0db0a86f181da3722b184",
+    "pixel": "sha256:d971026c1acd9863e2e408679610f398346e52a1c13f162f0c1c2c5abe99a266",
+    "sheet": "sha256:8a4b4076665c211bc8a3901777def2000014080e0c6e047f7bd6bbaec8dc038a"
   },
   "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
 }

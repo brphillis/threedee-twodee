@@ -29,7 +29,10 @@ export const MaterialDefinition = z
       .optional()
       .meta({ description: 'Number of light bands for toon shading. Default 3.' }),
     emissive: HexColor.optional().meta({ description: 'Emissive colour added regardless of lighting.' }),
-    outline: z.boolean().optional().meta({ description: 'Whether the outline pass may outline this material.' }),
+    outline: z.boolean().optional().meta({
+      description:
+        'Whether render.lines may line this material. Default true. Turn it off for fine detail such as grain, stitching or strands, and for dark gaps.',
+    }),
     opacity: z
       .number()
       .min(0)

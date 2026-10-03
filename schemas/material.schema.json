@@ -73,7 +73,7 @@
       ]
     },
     "outline": {
-      "description": "Whether the outline pass may outline this material.",
+      "description": "Whether render.lines may line this material. Default true. Turn it off for fine detail such as grain, stitching or strands, and for dark gaps.",
       "type": "boolean"
     },
     "opacity": {

@@ -2,16 +2,16 @@
   "schemaVersion": "1.0.0",
   "generator": { "name": "td2d", "version": "0.0.0" },
   "assetId": "dither/none",
-  "assetHash": "sha256:4fdcc6d7211d10dfe3e37346f6a7d35dc5d49e25b6bfda8c512db10f3d42f504",
-  "generatedAt": "2026-10-03T06:41:38.041Z",
-  "frame": { "width": 64, "height": 64 },
+  "assetHash": "sha256:700c07408d8cddbd115186362f54c5eec9b270aed9cbdf5320a3dc7809133a66",
+  "generatedAt": "2026-10-03T08:38:11.906Z",
+  "frame": { "width": 160, "height": 160 },
   "pivot": {
-    "x": 32,
-    "y": 52,
-    "normalized": { "x": 0.5, "y": 0.8125 }
+    "x": 80,
+    "y": 121,
+    "normalized": { "x": 0.5, "y": 0.75625 }
   },
-  "pixelsPerUnit": 44,
-  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 12 },
+  "pixelsPerUnit": 90,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 39 },
   "directions": [
     { "name": "s", "yaw": 0, "mirrorOf": null },
     { "name": "w", "yaw": 90, "mirrorOf": null },
@@ -48,8 +48,8 @@
       "name": "none",
       "image": "none.png",
       "data": "none.json",
-      "width": 64,
-      "height": 256,
+      "width": 160,
+      "height": 640,
       "layout": "grid"
     }
   ],
@@ -62,8 +62,8 @@
       "sheet": "none",
       "x": 0,
       "y": 0,
-      "w": 64,
-      "h": 64,
+      "w": 160,
+      "h": 160,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -75,9 +75,9 @@
       "index": 0,
       "sheet": "none",
       "x": 0,
-      "y": 64,
-      "w": 64,
-      "h": 64,
+      "y": 160,
+      "w": 160,
+      "h": 160,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -89,9 +89,9 @@
       "index": 0,
       "sheet": "none",
       "x": 0,
-      "y": 128,
-      "w": 64,
-      "h": 64,
+      "y": 320,
+      "w": 160,
+      "h": 160,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -103,9 +103,9 @@
       "index": 0,
       "sheet": "none",
       "x": 0,
-      "y": 192,
-      "w": 64,
-      "h": 64,
+      "y": 480,
+      "w": 160,
+      "h": 160,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -113,12 +113,12 @@
   ],
   "files": { "sheets": ["none.png"], "aseprite-json": ["none.json"], "manifest": ["manifest.json"] },
   "stages": {
-    "model": "sha256:1ce36eaed64ea87af8050347f9e19242f81b05dd086c176d8f44833736281d3f",
-    "rig": "sha256:cb334c8815176c9bd1920447fd6ae272da66303b419f7bb3e78d054d0bb8660d",
-    "plan": "sha256:2947a63248976dd3f3cea392aa3e3dfa8372c1f256866d42b51de664f6076349",
-    "render": "sha256:d635acb02772c9aeb2adddbcacd53864b348bed5c15cacd5f175bcc4e60147aa",
-    "pixel": "sha256:8f5656c4c7c1096397e4168c75080e822998af47825ee573a5894b0cbf937dba",
-    "sheet": "sha256:e6acd8246340fc0fc436684b9ef7c7332aa35424f62c338216aadc306f235d66"
+    "model": "sha256:38f1c020a083e22ea6540fb84f758f0f00ec795350daff701bde674e6c47f56d",
+    "rig": "sha256:027165c0ac3a748bf342a148be4cf03f5f73929ebbf59151a451b92e48e9c046",
+    "plan": "sha256:0d7feb00527a8141a8438973b795650ee2710176bc9f25c6b3e43cfd70e0e888",
+    "render": "sha256:c183ed01778d27ec5a934b7f64c199212a12d5328f80cabca7e19e93b930c38a",
+    "pixel": "sha256:3ab99fcc70bc20a4d1cf4cb710e79c190a564b966bf7be2ad64527251507b552",
+    "sheet": "sha256:d54cc68953d79c69636a5732a017265af311d0dc269a6dfa22804bf0a2a8ea7a"
   },
   "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
 }

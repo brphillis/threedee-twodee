@@ -16,7 +16,7 @@
         ]
       },
       "directions": "d8",
-      "render": { "lines": { "width": 1, "color": "shade", "shade": 0.3, "depth": 0.008 } },
+      "render": { "lines": { "width": 1, "color": "shade", "shade": 0.5, "depth": 0.008 } },
       "lighting": {
         "preset": "studio-toon",
         "lights": [

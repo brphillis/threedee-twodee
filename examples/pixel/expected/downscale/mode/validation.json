@@ -2,10 +2,10 @@
   "schemaVersion": "1.0.0",
   "generator": { "name": "td2d", "version": "0.0.0" },
   "assetId": "downscale/mode",
-  "generatedAt": "2026-10-03T06:41:38.108Z",
+  "generatedAt": "2026-10-03T08:38:12.075Z",
   "status": "pass",
   "checks": [
-    { "id": "sprite-size", "status": "pass", "message": "Every sprite is 64 x 64." },
+    { "id": "sprite-size", "status": "pass", "message": "Every sprite is 160 x 160." },
     {
       "id": "binary-alpha",
       "status": "pass",
@@ -14,8 +14,14 @@
     { "id": "not-blank", "status": "pass", "message": "No sprite is blank." },
     { "id": "inside-frame", "status": "pass", "message": "No sprite touches the frame edge." },
     { "id": "grounded", "status": "pass", "message": "Every sprite reaches the ground line." },
+    {
+      "id": "cleanup",
+      "status": "pass",
+      "message": "Cleanup removed 0 and recoloured 2233 stray pixel(s) across all sprites.",
+      "details": { "removed": 0, "recoloured": 2233 }
+    },
     { "id": "isolated-pixels", "status": "pass", "message": "No sprite has stray single pixels." },
-    { "id": "sheet-size", "status": "pass", "message": "The sheet is 64 x 256." },
+    { "id": "sheet-size", "status": "pass", "message": "The sheet is 160 x 640." },
     {
       "id": "cells-in-bounds",
       "status": "pass",

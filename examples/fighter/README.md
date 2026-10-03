@@ -49,9 +49,10 @@ The animations are the project's `gif-preview` exports: the project sets
   `palettes/dojo.json` holds ramps for skin, the cool-shadowed white gi, ink black, headband red,
   hand wraps and blue energy, with one outline colour.
 - **Model.** The body is the `fighter` component, in fighting-game proportions: a broad chest and
-  shoulders over a narrow waist, thick arms, big fists and feet. The head is drawn a fifth larger
-  than life, a group scaled about the neck joint, with eye whites, pupils, heavy brows and three rings of hair
-  spikes. Smooth hulls of spheres give the chest, jaw, fists and feet; the gi jacket is a hull
+  shoulders over a narrow waist, thick arms, big fists and feet. The head is drawn a third larger
+  than life, a group scaled about the neck joint, with three rings of hair spikes. The face is a
+  simple cartoon one that reads at sprite size: two tall dark eyes with clear skin round them, a
+  nose and a short mouth. Smooth hulls of spheres give the chest, jaw, fists and feet; the gi jacket is a hull
   with a V cut from its front, whose cut faces draw the lapels, and an outer flap crossing it. The
   sleeves are torn into ragged points. The headband and belt tails ride extra bones added to
   `humanoid-basic` in the project's `typeDefaults.character.rig`.
@@ -73,7 +74,8 @@ Each clip is a few poses with easing between them, posed at every frame, at 16 f
 Planted feet are solved with two-bone IK in the side plane, so they stay on the floor however far
 the hips drop or drive forward; a foot that leaves the floor, like the kicking leg, is posed by
 its joint angles. With the camera already turned three quarters, the stance turns the chest only a
-little further towards the viewer, and the head turns back towards the opponent. Every clip layers `sway`
+little further towards the viewer, and the head turns further still, chin a little down, so both
+eyes show while he still faces his opponent. Every clip layers `sway`
 generators over its keys, so the headband and belt tails flutter, harder in the attacks.
 
 `expected/` holds the committed outputs; the test suite regenerates them byte for byte, and checks

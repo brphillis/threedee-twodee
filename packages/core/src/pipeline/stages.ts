@@ -293,13 +293,10 @@ function poseHash(positions: Float64Array): string {
   return sha256Hex(new Uint8Array(rounded.buffer));
 }
 
-/**
- * Pixels added outside the rendered silhouette: the width of an outside outline, plus the
- * lines the renderer draws around every part.
- */
+/** Pixels the pixel stage adds outside the rendered silhouette: the width of an outside outline. */
 function outlinePad(asset: ResolvedAssetT): number {
   const o = asset.pixel.outline;
-  return (o !== 'none' && o.side === 'outside' ? o.width : 0) + Math.ceil(renderLines(asset)?.width ?? 0);
+  return o !== 'none' && o.side === 'outside' ? o.width : 0;
 }
 
 /** The harness's line settings, or null when the asset draws no lines. */
@@ -310,7 +307,7 @@ function renderLines(asset: ResolvedAssetT): RenderLinesSettings | null {
     width: lines.width ?? 1,
     color: lines.color === undefined || lines.color === 'shade' ? null : lines.color,
     shade: lines.shade ?? 0.4,
-    depth: lines.depth ?? 0.03,
+    depth: lines.depth ?? 0.015,
     skip: Object.entries(asset.materials)
       .filter(([, m]) => !m.outline)
       .map(([name]) => name)

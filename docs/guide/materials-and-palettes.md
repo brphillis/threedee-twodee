@@ -20,7 +20,7 @@ Each part names a material. A material says what colour the part is and how ligh
 | `shading` | `toon` (banded, the default), `lambert` (smooth) or `flat` (unlit) |
 | `bands` | Light bands for toon shading, 2 to 8. Default 3 |
 | `emissive` | A colour added regardless of light |
-| `outline` | Whether the outline pass may outline this material. Default true |
+| `outline` | Whether `render.lines` may line this material. Default true. Turn it off for fine detail and dark gaps |
 | `opacity` | Below 1 gives `W_OPACITY_THRESHOLDED`: sprites have binary alpha, so prefer dithering |
 
 The same sphere with toon shading in 3 and 2 bands, lambert, flat, and toon with an emissive colour:
@@ -45,7 +45,7 @@ Put shared materials in the project's `defaults.materials`; an asset's own mater
 | `fixed:<name>` | A built-in palette (`endesga-32`, `pico-8`, `db32`, `resurrect-64`, `aap-64`) or one in `palettes/` |
 | `auto:<n>` | Build an `n`-colour palette (2 to 256) from the asset's own frames |
 
-| `none` | `fixed:endesga-32` | `auto:16` | `auto:4` | `fixed:toadstool-7` |
+| `none` | `fixed:endesga-32` | `auto:16` | `auto:4` | `fixed:crate-8` |
 |---|---|---|---|---|
 | ![](images/pixel/palette-none.png) | ![](images/pixel/palette-endesga-32.png) | ![](images/pixel/palette-auto-16.png) | ![](images/pixel/palette-auto-4.png) | ![](images/pixel/palette-custom.png) |
 
@@ -56,9 +56,9 @@ A project palette is a JSON file in `palettes/`:
 ```json
 {
   "schemaVersion": "1.0.0",
-  "name": "toadstool-7",
-  "description": "A hand-picked seven-colour palette for the mushroom.",
-  "colors": ["#73172d", "#b13e53", "#a08662", "#e4d2aa", "#f4f4f4", "#1e6f50", "#38b764"]
+  "name": "crate-8",
+  "description": "A hand-picked eight-colour palette for the crates.",
+  "colors": ["#3a2214", "#6e4422", "#a06232", "#d08c48", "#e8b070", "#9a7650", "#c49a68", "#c8924e"]
 }
 ```
 

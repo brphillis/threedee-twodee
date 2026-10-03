@@ -65,7 +65,7 @@ td2d generate
 
 ## pixel
 
-One mushroom processed with each pixel setting: downscale, palettes, dithering, posterising, outlines, render lines and presets. [README](../../examples/pixel/README.md)
+One crate scene processed with each pixel setting: downscale, palettes, dithering, posterising, outlines, render lines and presets. [README](../../examples/pixel/README.md)
 
 ```sh
 cd examples/pixel
@@ -77,20 +77,21 @@ td2d generate
 | `dither/bayer-2-50`<br>PICO-8 palette with a 2 x 2 ordered dither at strength 0.5. | ![dither/bayer-2-50](images/examples/pixel/dither-bayer-2-50.png) |
 | `dither/bayer-4-35`<br>PICO-8 palette with a 4 x 4 ordered dither at strength 0.35. | ![dither/bayer-4-35](images/examples/pixel/dither-bayer-4-35.png) |
 | `dither/bayer-4-70`<br>PICO-8 palette with a 4 x 4 ordered dither at strength 0.7. | ![dither/bayer-4-70](images/examples/pixel/dither-bayer-4-70.png) |
-| `dither/none`<br>PICO-8 palette without dithering: gradients become flat bands. | ![dither/none](images/examples/pixel/dither-none.png) |
+| `dither/none`<br>PICO-8 palette without dithering: each tone snaps to its nearest palette colour, so tones between two palette colours jump to one of them. | ![dither/none](images/examples/pixel/dither-none.png) |
 | `downscale/box`<br>Box filter: each pixel averages its 4 x 4 block, which smooths shading but makes in-between colours. | ![downscale/box](images/examples/pixel/downscale-box.png) |
 | `downscale/mode`<br>The default: each pixel takes the most common colour of its 4 x 4 block, so only rendered colours appear. | ![downscale/mode](images/examples/pixel/downscale-mode.png) |
-| `lines/dark`<br>Lines drawn by the renderer in one dark colour: around the silhouette, and inside it where the cap overhangs the stem. | ![lines/dark](images/examples/pixel/lines-dark.png) |
-| `lines/shade`<br>Lines in a darker shade of each part's own colour, with the dark outline outside: the cap is lined in deep red, the stem in brown. | ![lines/shade](images/examples/pixel/lines-shade.png) |
+| `lines/dark`<br>Lines drawn by the renderer in one dark colour: around the silhouette, and inside it round every rail, brace and plank. | ![lines/dark](images/examples/pixel/lines-dark.png) |
+| `lines/none`<br>No render lines, only the dark outline outside: the crates, sack and rope run together where they overlap. | ![lines/none](images/examples/pixel/lines-none.png) |
+| `lines/shade`<br>Lines in a darker shade of each part's own colour, with the dark outline outside: the wood is lined in dark brown, the sack in deep tan. | ![lines/shade](images/examples/pixel/lines-shade.png) |
 | `outline/inside`<br>The silhouette's own edge pixels recoloured, so the sprite does not grow. | ![outline/inside](images/examples/pixel/outline-inside.png) |
 | `outline/outside`<br>A dark one-pixel ring around the silhouette, diagonals included. | ![outline/outside](images/examples/pixel/outline-outside.png) |
 | `outline/outside-4`<br>The same ring drawn with 4-connectivity, which leaves the corners open. | ![outline/outside-4](images/examples/pixel/outline-outside-4.png) |
 | `outline/snapped`<br>PICO-8 palette with the outline colour snapped to its nearest palette colour. | ![outline/snapped](images/examples/pixel/outline-snapped.png) |
 | `palette/auto-16`<br>A 16-colour palette built from all the asset's frames, shared by every frame. | ![palette/auto-16](images/examples/pixel/palette-auto-16.png) |
 | `palette/auto-4`<br>Four colours built from the asset itself. | ![palette/auto-4](images/examples/pixel/palette-auto-4.png) |
-| `palette/custom`<br>The project palette palettes/toadstool-7.json, seven hand-picked colours. | ![palette/custom](images/examples/pixel/palette-custom.png) |
+| `palette/custom`<br>The project palette palettes/crate-8.json, eight hand-picked colours. | ![palette/custom](images/examples/pixel/palette-custom.png) |
 | `palette/endesga-32`<br>Snapped to the built-in Endesga 32 palette in Oklab space. | ![palette/endesga-32](images/examples/pixel/palette-endesga-32.png) |
-| `palette/none`<br>No palette: the rendered colours, here dozens of lambert gradient steps. | ![palette/none](images/examples/pixel/palette-none.png) |
+| `palette/none`<br>No palette: the rendered colours, a few flat toon tones per face. | ![palette/none](images/examples/pixel/palette-none.png) |
 | `posterize/4`<br>Each colour channel cut to 4 levels before anything else. | ![posterize/4](images/examples/pixel/posterize-4.png) |
 | `preset/pico-8`<br>The built-in pico-8 preset. | ![preset/pico-8](images/examples/pixel/preset-pico-8.png) |
 | `preset/retro-16`<br>The built-in retro-16 preset: auto:16 palette, outline and stray-pixel cleanup. | ![preset/retro-16](images/examples/pixel/preset-retro-16.png) |

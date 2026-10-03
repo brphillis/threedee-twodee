@@ -29,7 +29,10 @@ export interface RenderSceneSettings {
   readonly lines?: RenderLinesSettings;
 }
 
-/** Lines the harness draws around each part: back faces pushed out along their normals. */
+/**
+ * Lines the harness draws in screen space: on the nearer side of every step in depth and of
+ * every boundary between two lined materials.
+ */
 export interface RenderLinesSettings {
   /** Width in final sprite pixels. */
   readonly width: number;
@@ -37,7 +40,7 @@ export interface RenderLinesSettings {
   readonly color: string | null;
   /** With color null, the line's brightness as a share of the part's colour. */
   readonly shade: number;
-  /** How far in front of what lies behind it a part must be to get a line there, in metres. */
+  /** The smallest step in depth that is lined, in metres. */
   readonly depth: number;
   /** Materials that draw no lines. */
   readonly skip: readonly string[];

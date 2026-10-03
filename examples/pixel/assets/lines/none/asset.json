@@ -1,0 +1,26 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "lines/none",
+  "type": "prop",
+  "description": "No render lines, only the dark outline outside: the crates, sack and rope run together where they overlap.",
+  "render": {
+    "lines": "none"
+  },
+  "pixel": {
+    "outline": {
+      "color": "#1a1c2c",
+      "side": "outside",
+      "width": 1
+    }
+  },
+  "model": {
+    "parts": [
+      {
+        "type": "component",
+        "id": "crates",
+        "component": "crates"
+      }
+    ]
+  }
+}

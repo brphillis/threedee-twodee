@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "generator": { "name": "td2d", "version": "0.0.0" },
   "assetId": "characters/knight-packed",
-  "generatedAt": "2026-10-03T05:46:24.844Z",
+  "generatedAt": "2026-10-03T08:38:20.851Z",
   "status": "pass",
   "checks": [
     { "id": "sprite-size", "status": "pass", "message": "Every sprite is 96 x 96." },

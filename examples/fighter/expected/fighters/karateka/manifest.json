@@ -2,16 +2,16 @@
   "schemaVersion": "1.0.0",
   "generator": { "name": "td2d", "version": "0.0.0" },
   "assetId": "fighters/karateka",
-  "assetHash": "sha256:9e178d2c978d6475ad9b00248ae9c845a269253d905a0d142935b459d4a3465d",
-  "generatedAt": "2026-10-03T06:35:01.509Z",
+  "assetHash": "sha256:b3b75af4fe81c367fd2d5c8706cb85de694ebe651b0277f37524d6b74dec1f3d",
+  "generatedAt": "2026-10-03T08:48:13.612Z",
   "frame": { "width": 128, "height": 128 },
   "pivot": {
     "x": 64,
-    "y": 123,
-    "normalized": { "x": 0.5, "y": 0.960938 }
+    "y": 124,
+    "normalized": { "x": 0.5, "y": 0.96875 }
   },
   "pixelsPerUnit": 56,
-  "camera": { "preset": "side", "pitch": 10, "yawOffset": 30, "groundMargin": 5 },
+  "camera": { "preset": "side", "pitch": 10, "yawOffset": 30, "groundMargin": 4 },
   "directions": [
     { "name": "e", "yaw": 270, "mirrorOf": null }
   ],
@@ -847,12 +847,12 @@
     "manifest": ["manifest.json"]
   },
   "stages": {
-    "model": "sha256:b413151c3000afd41ec32ec559d751d8a9fb24b786d179405f9cd1f639d38a84",
-    "rig": "sha256:34a605e4b7e7caefb52abbc9e88ca79a84661354e6a76e3c1aa2e4b1d77a969a",
-    "plan": "sha256:c8c6c1bf979aaeabdda176abc6bf1ef742e1572eb7099a5c0fb1502df7bfaf02",
-    "render": "sha256:620856d2c993d38da8810bbc1ec1a8e8d5d59c01b54b5077abfac7600a94e838",
-    "pixel": "sha256:7befa85f1e812ff153e9e420ac85fb822a924306de4f2656c6bead37813aac16",
-    "sheet": "sha256:30f3f4784d5392a21c712b6490981ee0cb483173c07a6196e6e94fa6980ddc88"
+    "model": "sha256:8b7a7b190cc4965b81a7454f7a4300928760dfd59eec7ea98728472acd03fa06",
+    "rig": "sha256:dee5cad4eac173e551ebea82f51642dc173e4bfa4e8edf201a8512a30c2a62c0",
+    "plan": "sha256:f6a634f4cdccbf43942090ed553a631e6336f405e046387e4fac5d1d7f07a1e3",
+    "render": "sha256:bd378efcbbc032c5e8f3f16ec0cf46c79397d52f4603946747a3d830673e232a",
+    "pixel": "sha256:8bff0cba4b8709a120f1057a7d0b844ee9cfc5bd5aef432693e229b31e8cd205",
+    "sheet": "sha256:a33670c50a5612638c275108c15dd8fbe748c67257c896f44222d2e9995d7805"
   },
   "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
 }

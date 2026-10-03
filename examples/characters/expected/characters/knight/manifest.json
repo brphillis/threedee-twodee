@@ -2,16 +2,16 @@
   "schemaVersion": "1.0.0",
   "generator": { "name": "td2d", "version": "0.0.0" },
   "assetId": "characters/knight",
-  "assetHash": "sha256:23e6c3c44136305ac66be7d446d91879ce132128eec2013a372aecb84be4de06",
-  "generatedAt": "2026-10-03T05:46:24.166Z",
+  "assetHash": "sha256:2fad13db1b3984da7730488b94ed7c8613d4c2e97ad26ab3bdfd7b893e648828",
+  "generatedAt": "2026-10-03T08:38:20.208Z",
   "frame": { "width": 96, "height": 96 },
   "pivot": {
     "x": 48,
-    "y": 87,
-    "normalized": { "x": 0.5, "y": 0.90625 }
+    "y": 88,
+    "normalized": { "x": 0.5, "y": 0.916667 }
   },
-  "pixelsPerUnit": 36,
-  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 9 },
+  "pixelsPerUnit": 37,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 8 },
   "directions": [
     { "name": "s", "yaw": 0, "mirrorOf": null },
     { "name": "sw", "yaw": 45, "mirrorOf": null },
@@ -2767,10 +2767,10 @@
   "stages": {
     "model": "sha256:fb70a15f35c24f63a8cca984b03645af412d2dec69baf3e35246c85e1ef10091",
     "rig": "sha256:3f941e61a0be47a402b01e183078a815dbf42dd90028ff58dc7b9c37214c14da",
-    "plan": "sha256:08a45632a79d1e78c2cdab66f5f93729d67b32018917a3c88ea76d19861a1d3d",
-    "render": "sha256:a3633265d5c47450e5403ade24a1709efed12a16e6d9ef52089e6d1e74bae850",
-    "pixel": "sha256:8a975c096bc27829c1c86f44369bc8e9be77426bf0d6b6ab606b2494e541230d",
-    "sheet": "sha256:9ed4f7a31ad3009aaf8e172134156645a58833c3b61d04983f34b4af4d3110c7"
+    "plan": "sha256:b732f7e22143c814f098ddd4c9edd2b023f9f919022943528ed651bc401d0e21",
+    "render": "sha256:afd55ece58b0846e773a41ea635afbf7a4b6c21de32778cb08efbc34fe1c1b7f",
+    "pixel": "sha256:ffd39e05583f2299fc2f9240abd7f68f13eda06d3ab2d65bf35d339d824fc52d",
+    "sheet": "sha256:3ab19dce18cb1825a1c10b00bde07e6c068d9223ca77d2d3fb2b573e26626b8c"
   },
   "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
 }

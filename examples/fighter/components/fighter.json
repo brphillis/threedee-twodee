@@ -2,7 +2,7 @@
   "$schema": "../.td2d/schemas/component.schema.json",
   "schemaVersion": "1.0.0",
   "name": "fighter",
-  "description": "A martial artist on the humanoid rig: spiky hair and a red headband, a white gi with torn sleeves and a crossing flap, open at the chest, a knotted black belt, wrapped hands and bare feet. The head is drawn a fifth larger than life. Left limbs are mirrored to the right; the headband and belt tails ride their own bones.",
+  "description": "A martial artist on the humanoid rig: spiky hair and a red headband, a white gi with torn sleeves and a crossing flap, open at the chest, a knotted black belt, wrapped hands and bare feet. The head is drawn a third larger than life. Left limbs are mirrored to the right; the headband and belt tails ride their own bones.",
   "materials": {
     "skin": {
       "color": "#e0905e",
@@ -42,7 +42,8 @@
     "band": {
       "color": "#d8323e",
       "shading": "toon",
-      "bands": 2
+      "bands": 2,
+      "outline": false
     },
     "wrap": {
       "color": "#efdcb5",
@@ -70,10 +71,10 @@
       "type": "group",
       "id": "head",
       "bone": "head",
-      "description": "The head, a fifth larger than life about the neck joint.",
+      "description": "The head, a third larger than life about the neck joint, as fighting games draw heads.",
       "position": [0, 1.57, 0],
       "pivot": [0, 1.57, 0],
-      "scale": 1.2,
+      "scale": 1.35,
       "parts": [
         {
           "type": "csg",
@@ -140,8 +141,8 @@
           "type": "wedge",
           "id": "nose",
           "material": "skin",
-          "size": [0.032, 0.05, 0.035],
-          "position": [0, 1.645, 0.11]
+          "size": [0.036, 0.055, 0.042],
+          "position": [0, 1.643, 0.112]
         },
         {
           "type": "sphere",
@@ -155,36 +156,22 @@
           "heightSegments": 10
         },
         {
-          "type": "box",
-          "id": "eye-white",
-          "material": "eye-white",
-          "size": [0.034, 0.018, 0.012],
-          "position": [0.038, 1.673, 0.093],
-          "mirror": "x"
-        },
-        {
-          "type": "box",
-          "id": "pupil",
+          "type": "sphere",
+          "id": "eye",
           "material": "eyes",
-          "size": [0.015, 0.018, 0.012],
-          "position": [0.043, 1.673, 0.098],
-          "mirror": "x"
-        },
-        {
-          "type": "box",
-          "id": "brow",
-          "material": "hair",
-          "size": [0.052, 0.02, 0.026],
-          "rotation": [0, 0, 18],
-          "position": [0.04, 1.696, 0.094],
-          "mirror": "x"
+          "radius": 0.012,
+          "scale": [0.9, 1.6, 0.6],
+          "position": [0.034, 1.664, 0.1],
+          "mirror": "x",
+          "widthSegments": 14,
+          "heightSegments": 10
         },
         {
           "type": "box",
           "id": "mouth",
-          "material": "lips",
-          "size": [0.04, 0.009, 0.012],
-          "position": [0, 1.598, 0.096]
+          "material": "eyes",
+          "size": [0.036, 0.013, 0.02],
+          "position": [0, 1.597, 0.106]
         },
         {
           "type": "box",
@@ -382,28 +369,28 @@
           "id": "headband-tail-a-0",
           "material": "band",
           "size": [0.012, 0.012, 0.012],
-          "position": [-0.006, 1.74, -0.13]
+          "position": [-0.006, 1.759, -0.145]
         },
         {
           "type": "box",
           "id": "headband-tail-a-1",
           "material": "band",
           "size": [0.012, 0.012, 0.012],
-          "position": [0.034, 1.74, -0.13]
+          "position": [0.034, 1.759, -0.145]
         },
         {
           "type": "box",
           "id": "headband-tail-a-2",
           "material": "band",
           "size": [0.012, 0.012, 0.012],
-          "position": [0.015, 1.68, -0.28]
+          "position": [0.015, 1.7, -0.295]
         },
         {
           "type": "box",
           "id": "headband-tail-a-3",
           "material": "band",
           "size": [0.012, 0.012, 0.012],
-          "position": [0.055, 1.68, -0.28]
+          "position": [0.055, 1.7, -0.295]
         }
       ]
     },
@@ -418,28 +405,28 @@
           "id": "headband-tail-b-0",
           "material": "band",
           "size": [0.012, 0.012, 0.012],
-          "position": [-0.033, 1.74, -0.13]
+          "position": [-0.033, 1.759, -0.145]
         },
         {
           "type": "box",
           "id": "headband-tail-b-1",
           "material": "band",
           "size": [0.012, 0.012, 0.012],
-          "position": [0.005, 1.74, -0.13]
+          "position": [0.005, 1.759, -0.145]
         },
         {
           "type": "box",
           "id": "headband-tail-b-2",
           "material": "band",
           "size": [0.012, 0.012, 0.012],
-          "position": [-0.049, 1.7, -0.27]
+          "position": [-0.049, 1.72, -0.285]
         },
         {
           "type": "box",
           "id": "headband-tail-b-3",
           "material": "band",
           "size": [0.012, 0.012, 0.012],
-          "position": [-0.011, 1.7, -0.27]
+          "position": [-0.011, 1.72, -0.285]
         }
       ]
     },
@@ -454,28 +441,28 @@
           "id": "headband-tail-a2-0",
           "material": "band",
           "size": [0.012, 0.012, 0.012],
-          "position": [0.017, 1.68, -0.275]
+          "position": [0.017, 1.7, -0.29]
         },
         {
           "type": "box",
           "id": "headband-tail-a2-1",
           "material": "band",
           "size": [0.012, 0.012, 0.012],
-          "position": [0.053, 1.68, -0.275]
+          "position": [0.053, 1.7, -0.29]
         },
         {
           "type": "box",
           "id": "headband-tail-a2-2",
           "material": "band",
           "size": [0.012, 0.012, 0.012],
-          "position": [0.032, 1.62, -0.42]
+          "position": [0.032, 1.64, -0.435]
         },
         {
           "type": "box",
           "id": "headband-tail-a2-3",
           "material": "band",
           "size": [0.012, 0.012, 0.012],
-          "position": [0.068, 1.62, -0.42]
+          "position": [0.068, 1.64, -0.435]
         }
       ]
     },
@@ -490,28 +477,28 @@
           "id": "headband-tail-b2-0",
           "material": "band",
           "size": [0.012, 0.012, 0.012],
-          "position": [-0.047, 1.7, -0.265]
+          "position": [-0.047, 1.72, -0.28]
         },
         {
           "type": "box",
           "id": "headband-tail-b2-1",
           "material": "band",
           "size": [0.012, 0.012, 0.012],
-          "position": [-0.013, 1.7, -0.265]
+          "position": [-0.013, 1.72, -0.28]
         },
         {
           "type": "box",
           "id": "headband-tail-b2-2",
           "material": "band",
           "size": [0.012, 0.012, 0.012],
-          "position": [-0.062, 1.66, -0.4]
+          "position": [-0.062, 1.68, -0.415]
         },
         {
           "type": "box",
           "id": "headband-tail-b2-3",
           "material": "band",
           "size": [0.012, 0.012, 0.012],
-          "position": [-0.028, 1.66, -0.4]
+          "position": [-0.028, 1.68, -0.415]
         }
       ]
     },

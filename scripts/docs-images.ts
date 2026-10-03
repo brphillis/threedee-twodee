@@ -415,6 +415,7 @@ async function pixel(): Promise<void> {
     'outline/outside-4',
     'outline/inside',
     'outline/snapped',
+    'lines/none',
     'lines/dark',
     'lines/shade',
     'preset/retro-16',

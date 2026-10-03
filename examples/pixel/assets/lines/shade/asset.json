@@ -3,15 +3,15 @@
   "schemaVersion": "1.0.0",
   "id": "lines/shade",
   "type": "prop",
-  "description": "Lines in a darker shade of each part's own colour, with the dark outline outside: the cap is lined in deep red, the stem in brown.",
+  "description": "Lines in a darker shade of each part's own colour, with the dark outline outside: the wood is lined in dark brown, the sack in deep tan.",
   "render": { "lines": { "width": 1, "color": "shade", "shade": 0.35 } },
   "pixel": { "outline": { "color": "#1a1c2c", "side": "outside", "width": 1 } },
   "model": {
     "parts": [
       {
         "type": "component",
-        "id": "mushroom",
-        "component": "mushroom"
+        "id": "crates",
+        "component": "crates"
       }
     ]
   }

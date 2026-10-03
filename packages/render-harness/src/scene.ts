@@ -1,9 +1,8 @@
-import type { LightingSettingsT, ModelInfo, RenderLinesSettings, RenderSceneSettings } from '@td2d/schema';
+import type { LightingSettingsT, ModelInfo, RenderSceneSettings } from '@td2d/schema';
 import {
   AmbientLight,
   type AnimationClip,
   AnimationMixer,
-  BackSide,
   BasicShadowMap,
   Box3,
   Color,
@@ -19,16 +18,14 @@ import {
   PlaneGeometry,
   type Quaternion,
   Scene,
-  ShaderMaterial,
   ShadowMaterial,
-  SkinnedMesh,
   SRGBColorSpace,
-  Vector2,
   type Vector3,
   type WebGLRenderer,
 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { type CameraRig, cameraRig, lightDirection } from './camera.ts';
+import { LinePass } from './lines.ts';
 import { materialFromSpec, td2dMaterial } from './materials.ts';
 
 interface RestPose {
@@ -72,11 +69,12 @@ export class HarnessScene {
   private settings: RenderSceneSettings | undefined;
   private radius = 1;
   private ground: Mesh | undefined;
-  private lines: Mesh[] = [];
+  private readonly linePass: LinePass;
 
   constructor(renderer: WebGLRenderer) {
     this.renderer = renderer;
     configureRenderer(renderer);
+    this.linePass = new LinePass(renderer);
     this.scene.background = null;
   }
 
@@ -157,7 +155,6 @@ export class HarnessScene {
   configure(settings: RenderSceneSettings): void {
     this.settings = settings;
     if (settings.materials) this.applyMaterials(settings.materials);
-    this.applyLines(settings.lines, settings);
     this.renderer.setSize(
       settings.frame.width * settings.supersample,
       settings.frame.height * settings.supersample,
@@ -215,55 +212,6 @@ export class HarnessScene {
     }
   }
 
-  /**
-   * A line around every part: its back faces drawn again in the line colour, pushed out along
-   * their normals by a fixed number of render pixels. A part's line shows wherever what lies
-   * behind the part is further away than the part's own back, so it outlines the part against
-   * the background and against other parts behind it, but not where two parts merely meet.
-   */
-  private applyLines(lines: RenderLinesSettings | undefined, settings: RenderSceneSettings): void {
-    for (const line of this.lines) {
-      line.removeFromParent();
-      (line.material as Material).dispose();
-    }
-    this.lines = [];
-    if (!lines || !this.root) return;
-    const skip = new Set(lines.skip);
-    const resolution = new Vector2(
-      settings.frame.width * settings.supersample,
-      settings.frame.height * settings.supersample,
-    );
-    const parts: Mesh[] = [];
-    this.root.traverse((object) => {
-      if (object instanceof Mesh) parts.push(object);
-    });
-    for (const part of parts) {
-      const source = (Array.isArray(part.material) ? part.material[0] : part.material) as Material & {
-        color?: Color;
-      };
-      // A part with its own colour uses the material variant <material>~<part id>.
-      if (skip.has(source.name.split('~')[0] as string)) continue;
-      const material = lineMaterial(lineColour(lines, source.color), lines.width * settings.supersample, resolution);
-      let line: Mesh;
-      if (part instanceof SkinnedMesh) {
-        const skinned = new SkinnedMesh(part.geometry, material);
-        skinned.bind(part.skeleton, part.bindMatrix);
-        skinned.bindMode = part.bindMode;
-        skinned.position.copy(part.position);
-        skinned.quaternion.copy(part.quaternion);
-        skinned.scale.copy(part.scale);
-        skinned.frustumCulled = false;
-        part.parent?.add(skinned);
-        line = skinned;
-      } else {
-        line = new Mesh(part.geometry, material);
-        part.add(line);
-      }
-      line.name = `${part.name}~line`;
-      this.lines.push(line);
-    }
-  }
-
   private restoreRestPose(): void {
     for (const r of this.rest) {
       r.object.position.copy(r.position);
@@ -305,11 +253,6 @@ export class HarnessScene {
     this.camera.updateProjectionMatrix();
     this.camera.updateMatrixWorld(true);
 
-    // Lines reach this far in front of their part's back faces, in clip-space depth.
-    const reach = this.settings?.lines?.depth ?? 0;
-    for (const line of this.lines)
-      (line.material as ShaderMaterial).uniforms.depthBias = { value: (2 * reach) / (frustum.far - frustum.near) };
-
     const distance = Math.hypot(...rig.position);
     const extent = Math.max(this.radius, 0.5) * (this.ground ? 3 : 1.5);
     for (const entry of this.lights) {
@@ -341,59 +284,20 @@ export class HarnessScene {
     this.root?.updateMatrixWorld(true);
     const rig = cameraRig(settings, sample.yaw, this.radius);
     this.aim(rig);
-    this.renderer.render(this.scene, this.camera);
+    if (settings.lines)
+      this.linePass.render(
+        this.scene,
+        this.camera,
+        this.root,
+        settings.lines,
+        rig.renderWidth,
+        rig.renderHeight,
+        settings.supersample,
+      );
+    else this.renderer.render(this.scene, this.camera);
     const gl = this.renderer.getContext();
     const rgba = new Uint8Array(rig.renderWidth * rig.renderHeight * 4);
     gl.readPixels(0, 0, rig.renderWidth, rig.renderHeight, gl.RGBA, gl.UNSIGNED_BYTE, rgba);
     return { width: rig.renderWidth, height: rig.renderHeight, rgba };
   }
-}
-
-/** The line colour for a part: the fixed colour, or a darker shade of the part's own colour. */
-function lineColour(lines: RenderLinesSettings, partColour: Color | undefined): Color {
-  if (lines.color !== null) return new Color(lines.color);
-  const rgb = { r: 1, g: 1, b: 1 };
-  partColour?.getRGB(rgb, SRGBColorSpace);
-  return new Color().setRGB(rgb.r * lines.shade, rgb.g * lines.shade, rgb.b * lines.shade, SRGBColorSpace);
-}
-
-/** Back faces pushed out along their screen-space normals by `width` render pixels, unlit. */
-function lineMaterial(colour: Color, width: number, resolution: Vector2): ShaderMaterial {
-  return new ShaderMaterial({
-    name: 'td2d-line',
-    side: BackSide,
-    uniforms: {
-      lineColour: { value: colour },
-      lineWidth: { value: width },
-      resolution: { value: resolution },
-      depthBias: { value: 0 },
-    },
-    vertexShader: `
-      #include <common>
-      #include <skinning_pars_vertex>
-      uniform float lineWidth;
-      uniform vec2 resolution;
-      uniform float depthBias;
-      void main() {
-        #include <beginnormal_vertex>
-        #include <skinbase_vertex>
-        #include <skinnormal_vertex>
-        #include <begin_vertex>
-        #include <skinning_vertex>
-        #include <project_vertex>
-        vec2 n = (normalMatrix * objectNormal).xy;
-        float len = length(n);
-        if (len > 1e-5) gl_Position.xy += (n / len) * (2.0 * lineWidth / resolution) * gl_Position.w;
-        gl_Position.z -= depthBias * gl_Position.w;
-      }
-    `,
-    fragmentShader: `
-      uniform vec3 lineColour;
-      void main() {
-        // Alpha 254 marks line samples for the pixel stage's downscale (LINE_ALPHA in @td2d/core).
-        gl_FragColor = vec4(lineColour, 254.0 / 255.0);
-        #include <colorspace_fragment>
-      }
-    `,
-  });
 }

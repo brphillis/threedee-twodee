@@ -283,7 +283,7 @@ A project that applies it, with a top-down RPG camera, an outline, a light dithe
 }
 ```
 
-| `none`                                        | `fixed:endesga-32`                                  | `auto:16`                                        | `auto:4`                                        | `fixed:toadstool-7`                             |
+| `none`                                        | `fixed:endesga-32`                                  | `auto:16`                                        | `auto:4`                                        | `fixed:crate-8`                             |
 | --------------------------------------------- | --------------------------------------------------- | ------------------------------------------------ | ----------------------------------------------- | ----------------------------------------------- |
 | ![](docs/guide/images/pixel/palette-none.png) | ![](docs/guide/images/pixel/palette-endesga-32.png) | ![](docs/guide/images/pixel/palette-auto-16.png) | ![](docs/guide/images/pixel/palette-auto-4.png) | ![](docs/guide/images/pixel/palette-custom.png) |
 

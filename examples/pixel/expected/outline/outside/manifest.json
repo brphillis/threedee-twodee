@@ -2,16 +2,16 @@
   "schemaVersion": "1.0.0",
   "generator": { "name": "td2d", "version": "0.0.0" },
   "assetId": "outline/outside",
-  "assetHash": "sha256:f38ef276d6d35e35659051eff4de5a20aa967cad047be8d7a27edc149db04cf4",
-  "generatedAt": "2026-10-03T06:41:38.464Z",
-  "frame": { "width": 64, "height": 64 },
+  "assetHash": "sha256:58b0bf3c3a4d5a24b6251570b9eb4a5b32ace03a01091bf1183fa5b732fb9139",
+  "generatedAt": "2026-10-03T08:38:13.162Z",
+  "frame": { "width": 160, "height": 160 },
   "pivot": {
-    "x": 32,
-    "y": 51,
-    "normalized": { "x": 0.5, "y": 0.796875 }
+    "x": 80,
+    "y": 121,
+    "normalized": { "x": 0.5, "y": 0.75625 }
   },
-  "pixelsPerUnit": 44,
-  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 13 },
+  "pixelsPerUnit": 90,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 39 },
   "directions": [
     { "name": "s", "yaw": 0, "mirrorOf": null },
     { "name": "w", "yaw": 90, "mirrorOf": null },
@@ -27,8 +27,8 @@
       "name": "outside",
       "image": "outside.png",
       "data": "outside.json",
-      "width": 64,
-      "height": 256,
+      "width": 160,
+      "height": 640,
       "layout": "grid"
     }
   ],
@@ -41,8 +41,8 @@
       "sheet": "outside",
       "x": 0,
       "y": 0,
-      "w": 64,
-      "h": 64,
+      "w": 160,
+      "h": 160,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -54,9 +54,9 @@
       "index": 0,
       "sheet": "outside",
       "x": 0,
-      "y": 64,
-      "w": 64,
-      "h": 64,
+      "y": 160,
+      "w": 160,
+      "h": 160,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -68,9 +68,9 @@
       "index": 0,
       "sheet": "outside",
       "x": 0,
-      "y": 128,
-      "w": 64,
-      "h": 64,
+      "y": 320,
+      "w": 160,
+      "h": 160,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -82,9 +82,9 @@
       "index": 0,
       "sheet": "outside",
       "x": 0,
-      "y": 192,
-      "w": 64,
-      "h": 64,
+      "y": 480,
+      "w": 160,
+      "h": 160,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -96,12 +96,12 @@
     "manifest": ["manifest.json"]
   },
   "stages": {
-    "model": "sha256:1ce36eaed64ea87af8050347f9e19242f81b05dd086c176d8f44833736281d3f",
-    "rig": "sha256:cab912f653b09d399655649bea21cb3663ca5c4b98c9d516772204e5cb1922c3",
-    "plan": "sha256:9eaf8fae746abfc252588db8230b26200ec47a14756805f149f87b2f961ef0b0",
-    "render": "sha256:e515670dcf61a04981e86ca6459a6764421cc83c19a12a6d911591d3d3b97ecd",
-    "pixel": "sha256:45b2adca904b6609df3bb0be7b7e244fbdfea6266b3d1a26686b68bae19277d0",
-    "sheet": "sha256:f3cd3ebed638d8c29380df87109f0779a3bd7b706d29b9e421cb20e1c4ccee07"
+    "model": "sha256:38f1c020a083e22ea6540fb84f758f0f00ec795350daff701bde674e6c47f56d",
+    "rig": "sha256:99b585e1bcc76875bef8155bcccd423dd3bb98602f0b6d136530523513ff9abe",
+    "plan": "sha256:e58b262cc50d0387397693273da1cf2c300e3603e479d5edf5fe74d7d13df99f",
+    "render": "sha256:067478a28a0e66655b06a78a4fac77196580db9485684e934e6ddbcefc32e986",
+    "pixel": "sha256:1f6f59dd6ea907042623ea6abd6195b328182613da2d6e5b061b65e42cb61937",
+    "sheet": "sha256:e9d1efccdd949bf437a7157b79936c7edd59b120d4c9610b562618178fac3b71"
   },
   "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
 }

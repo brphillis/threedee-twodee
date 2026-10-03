@@ -2,36 +2,125 @@
   "$schema": "./.td2d/schemas/project.schema.json",
   "schemaVersion": "1.0.0",
   "name": "pixel",
-  "description": "One toadstool scene through every pixel setting: downscale filters, palettes, posterize, dither strengths, outline styles, render lines and cleanup.",
+  "description": "One crate scene through every pixel setting: downscale filters, palettes, posterize, dither strengths, outline styles, render lines and cleanup.",
   "defaults": {
     "frame": {
-      "width": 64,
-      "height": 64
+      "width": 160,
+      "height": 160
     },
-    "pixelsPerUnit": 44,
+    "pixelsPerUnit": 90,
     "directions": "d4",
     "materials": {
-      "cap": {
-        "color": "#b13e53",
-        "shading": "lambert"
-      },
-      "spot": {
-        "color": "#f4f4f4",
+      "wood": {
+        "color": "#b8743a",
         "shading": "toon",
-        "bands": 2
+        "bands": 3
       },
-      "stem": {
-        "color": "#e4d2aa",
-        "shading": "lambert"
-      },
-      "moss": {
-        "color": "#38b764",
-        "shading": "toon"
-      },
-      "gill": {
-        "color": "#cdb98f",
+      "frame": {
+        "color": "#d08c48",
         "shading": "toon",
-        "bands": 2
+        "bands": 3
+      },
+      "grain": {
+        "color": "#94582c",
+        "shading": "toon",
+        "bands": 3,
+        "outline": false
+      },
+      "gap": {
+        "color": "#3a2214",
+        "shading": "flat",
+        "outline": false
+      },
+      "nail": {
+        "color": "#241c1c",
+        "shading": "toon",
+        "bands": 2,
+        "outline": false
+      },
+      "rope": {
+        "color": "#c8924e",
+        "shading": "toon",
+        "bands": 3,
+        "outline": false
+      },
+      "rope-dark": {
+        "color": "#6e4422",
+        "shading": "toon",
+        "bands": 2,
+        "outline": false
+      },
+      "sack": {
+        "color": "#c49a68",
+        "shading": "toon",
+        "bands": 3
+      },
+      "sack-dark": {
+        "color": "#a8835a",
+        "shading": "toon",
+        "bands": 2,
+        "outline": false
+      },
+      "sack-light": {
+        "color": "#d8b888",
+        "shading": "toon",
+        "bands": 2,
+        "outline": false
+      },
+      "cord": {
+        "color": "#d8843a",
+        "shading": "toon",
+        "bands": 2,
+        "outline": false
+      },
+      "sack-hole": {
+        "color": "#3a2214",
+        "shading": "flat",
+        "outline": false
+      }
+    },
+    "lighting": {
+      "preset": "studio-toon",
+      "lights": [
+        {
+          "type": "directional",
+          "azimuth": -35,
+          "elevation": 55,
+          "intensity": 1.7279,
+          "color": "#fff1dc",
+          "castShadow": true
+        },
+        {
+          "type": "directional",
+          "azimuth": 60,
+          "elevation": 15,
+          "intensity": 0.55,
+          "color": "#c8d4ff"
+        },
+        {
+          "type": "ambient",
+          "intensity": 1.25,
+          "color": "#d4dcff"
+        }
+      ]
+    },
+    "render": {
+      "lines": {
+        "width": 1,
+        "color": "shade",
+        "shade": 0.5,
+        "depth": 0.015
+      }
+    },
+    "pixel": {
+      "outline": {
+        "color": "#3a2214",
+        "side": "outside",
+        "width": 1,
+        "snapToPalette": true
+      },
+      "cleanup": {
+        "orphans": "recolour"
       }
     }
   }

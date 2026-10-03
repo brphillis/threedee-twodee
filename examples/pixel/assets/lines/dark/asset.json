@@ -3,14 +3,14 @@
   "schemaVersion": "1.0.0",
   "id": "lines/dark",
   "type": "prop",
-  "description": "Lines drawn by the renderer in one dark colour: around the silhouette, and inside it where the cap overhangs the stem.",
+  "description": "Lines drawn by the renderer in one dark colour: around the silhouette, and inside it round every rail, brace and plank.",
   "render": { "lines": { "width": 1, "color": "#1a1c2c" } },
   "model": {
     "parts": [
       {
         "type": "component",
-        "id": "mushroom",
-        "component": "mushroom"
+        "id": "crates",
+        "component": "crates"
       }
     ]
   }

@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "generator": { "name": "td2d", "version": "0.0.0" },
   "assetId": "effects/energy-ball",
-  "generatedAt": "2026-10-03T06:34:59.534Z",
+  "generatedAt": "2026-10-03T08:48:11.146Z",
   "status": "pass",
   "checks": [
     { "id": "sprite-size", "status": "pass", "message": "Every sprite is 64 x 64." },

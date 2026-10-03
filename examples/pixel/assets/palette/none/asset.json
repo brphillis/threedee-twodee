@@ -3,7 +3,7 @@
   "schemaVersion": "1.0.0",
   "id": "palette/none",
   "type": "prop",
-  "description": "No palette: the rendered colours, here dozens of lambert gradient steps.",
+  "description": "No palette: the rendered colours, a few flat toon tones per face.",
   "pixel": {
     "palette": "none"
   },
@@ -11,8 +11,8 @@
     "parts": [
       {
         "type": "component",
-        "id": "mushroom",
-        "component": "mushroom"
+        "id": "crates",
+        "component": "crates"
       }
     ]
   }

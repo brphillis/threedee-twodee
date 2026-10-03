@@ -3,7 +3,7 @@
   "schemaVersion": "1.0.0",
   "id": "dither/none",
   "type": "prop",
-  "description": "PICO-8 palette without dithering: gradients become flat bands.",
+  "description": "PICO-8 palette without dithering: each tone snaps to its nearest palette colour, so tones between two palette colours jump to one of them.",
   "pixel": {
     "palette": "fixed:pico-8",
     "dither": "none"
@@ -12,8 +12,8 @@
     "parts": [
       {
         "type": "component",
-        "id": "mushroom",
-        "component": "mushroom"
+        "id": "crates",
+        "component": "crates"
       }
     ]
   },

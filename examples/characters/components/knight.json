@@ -17,7 +17,8 @@
     "gold": {
       "color": "#ffd25a",
       "shading": "toon",
-      "bands": 4
+      "bands": 4,
+      "outline": false
     },
     "tabard": {
       "color": "#2f6fd0",
@@ -37,13 +38,15 @@
     "plume": {
       "color": "#ff5a55",
       "shading": "toon",
-      "bands": 3
+      "bands": 3,
+      "outline": false
     },
     "jewel": {
       "color": "#ff4a4a",
       "shading": "toon",
       "bands": 2,
-      "emissive": "#5a0010"
+      "emissive": "#5a0010",
+      "outline": false
     },
     "leather": {
       "color": "#8a4e36",

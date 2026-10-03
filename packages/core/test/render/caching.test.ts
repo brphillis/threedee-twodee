@@ -29,7 +29,7 @@ function knightProject() {
   });
   const file = join(dir, 'assets/characters/knight/asset.json');
   const asset = JSON.parse(readFileSync(file, 'utf8')) as Record<string, unknown>;
-  writeFileSync(file, JSON.stringify({ ...asset, pixelsPerUnit: 36, camera: { preset: 'dimetric', groundMargin: 9 } }));
+  writeFileSync(file, JSON.stringify({ ...asset, pixelsPerUnit: 37, camera: { preset: 'dimetric', groundMargin: 8 } }));
   return dir;
 }
 
@@ -130,7 +130,7 @@ describe('item caches', () => {
     expect(palette.items.render).toEqual({ rendered: 0, reused: 192 });
     expect(palette.items.pixel).toEqual({ processed: 192, reused: 0 });
     edit(dir, (a) => {
-      a.camera = { preset: 'isometric', groundMargin: 9 };
+      a.camera = { preset: 'isometric', groundMargin: 8 };
     });
     const camera = await generate(dir);
     expect(statuses(camera)).toMatchObject({ model: 'cached', rig: 'cached', plan: 'ran', render: 'ran' });
@@ -138,7 +138,7 @@ describe('item caches', () => {
     // Back to the first camera with another material: the render stage runs again, and each
     // sample's own key now depends only on its new material and pose.
     edit(dir, (a) => {
-      a.camera = { preset: 'dimetric', groundMargin: 9 };
+      a.camera = { preset: 'dimetric', groundMargin: 8 };
       a.materials = {};
     });
     const back = await generate(dir);

@@ -44,7 +44,7 @@ export const RenderLines = z
       .meta({ description: "With color shade, the line's brightness as a share of the part's colour. Default 0.4." }),
     depth: z.number().min(0).max(1).optional().meta({
       description:
-        'How far in front of what lies behind it a part must be to get a line there, in metres. Keep it below the thickness of the parts: parts that merely meet stay unlined. Default 0.03.',
+        'The smallest step in depth that gets a line, in metres. Flat surfaces are never lined however steeply they are tilted. Default 0.015.',
     }),
   })
   .meta({
@@ -71,7 +71,7 @@ export const RenderOverrides = z
       .optional()
       .meta({
         description:
-          'Lines the renderer draws around every part, inside the silhouette as well as out, wherever a part stands in front of something further back. none (the default) draws none.',
+          'Lines the renderer draws along every step in depth and every boundary between two lined materials, on the nearer side: round the silhouette and inside it. none (the default) draws none.',
       }),
   })
   .meta({ description: 'Render settings.' });
