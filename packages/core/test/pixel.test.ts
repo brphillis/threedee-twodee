@@ -12,7 +12,9 @@ import {
   flipHorizontal,
   hexToRgb,
   isolatedPixels,
+  LINE_ALPHA,
   mapToPalette,
+  modeDownscale,
   opaqueColours,
   outline,
   Palette,
@@ -104,6 +106,37 @@ describe('boxDownscale', () => {
     const out = boxDownscale(src, 1);
     expect(out.rgba).toEqual(src.rgba);
     expect(out.rgba).not.toBe(src.rgba);
+  });
+});
+
+describe('modeDownscale with lines', () => {
+  const fill: [number, number, number, number] = [200, 200, 200, 255];
+  const ink: [number, number, number, number] = [20, 20, 30, LINE_ALPHA];
+  /** An 8 x 4 render (two 4 x 4 blocks) with a vertical line four samples wide starting at column x. */
+  const lined = (x: number) =>
+    image(
+      8,
+      4,
+      Array.from({ length: 32 }, (_, i) => (i % 8 >= x && i % 8 < x + 4 ? ink : fill)),
+    );
+  const isInk = (img: RgbaImage, x: number) => px(img, x, 0).slice(0, 3).join() === '20,20,30';
+
+  it('turns a block at least half covered by line into a line pixel, whatever the line covers of the rest', () => {
+    // A block-wide line is one pixel wide in three of four positions, and two where it straddles evenly.
+    expect(
+      [0, 1, 2, 3].map((x) => [isInk(modeDownscale(lined(x), 4), 0), isInk(modeDownscale(lined(x), 4), 1)]),
+    ).toEqual([
+      [true, false],
+      [true, false],
+      [true, true],
+      [false, true],
+    ]);
+  });
+
+  it('leaves line samples out of a block that is mostly something else', () => {
+    // Three line samples against thirteen fill: fill wins, and the line's colour does not leak into the vote.
+    const pixels = Array.from({ length: 16 }, (_, i): [number, number, number, number] => (i < 3 ? ink : fill));
+    expect(px(modeDownscale(image(4, 4, pixels), 4), 0, 0).slice(0, 3)).toEqual([200, 200, 200]);
   });
 });
 

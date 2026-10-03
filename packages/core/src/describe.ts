@@ -76,7 +76,7 @@ export const DOCS = {
   palette: 'docs/guide/materials-and-palettes.md#palettes',
   rig: 'docs/guide/rigging-and-animation.md#rigs',
   generator: (type: string) =>
-    `docs/guide/rigging-and-animation.md#${type === 'walk-cycle' ? 'walk-cycle' : 'idle-breathe-bob-and-spin'}`,
+    `docs/guide/rigging-and-animation.md#${type === 'walk-cycle' || type === 'sway' ? type : 'idle-breathe-bob-and-spin'}`,
   easing: 'docs/guide/rigging-and-animation.md#clips',
   exporter: (id: string) => `docs/reference/export-formats.md#${id}`,
   backend: 'docs/guide/rendering.md#reproducibility',

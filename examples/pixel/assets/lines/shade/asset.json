@@ -1,0 +1,18 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "lines/shade",
+  "type": "prop",
+  "description": "Lines in a darker shade of each part's own colour, with the dark outline outside: the cap is lined in deep red, the stem in brown.",
+  "render": { "lines": { "width": 1, "color": "shade", "shade": 0.35 } },
+  "pixel": { "outline": { "color": "#1a1c2c", "side": "outside", "width": 1 } },
+  "model": {
+    "parts": [
+      {
+        "type": "component",
+        "id": "mushroom",
+        "component": "mushroom"
+      }
+    ]
+  }
+}

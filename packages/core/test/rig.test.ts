@@ -391,6 +391,60 @@ describe('generators', () => {
     expect(breath.leftUpperArm?.translation).toEqual([0, -0.005, 0]);
   });
 
+  it('sway sends a wave down a chain: each bone trails the last, grows by growth and centres on the bias', () => {
+    const chain = ['spine', 'chest', 'neck'];
+    const keys = generateKeys({ type: 'sway', bones: chain, amount: 10, bias: 2, lag: 0.25, growth: 2 }, rig, 1, [0]);
+    const pose = keys[0]?.pose as Record<string, { rotation: number[] }>;
+    // At the start the first bone is mid-swing, the second a quarter cycle behind, the third half.
+    expect(pose.spine?.rotation).toEqual([2, 0, 0]);
+    expect(pose.chest?.rotation).toEqual([2 * (2 - 10), 0, 0]);
+    expect(pose.neck?.rotation[0]).toBeCloseTo(4 * 2, 5);
+    const side = generateKeys({ type: 'sway', bones: ['head'], axis: 'z', cycles: 2 }, rig, 1, [0.125])[0]?.pose;
+    expect(side).toEqual({ head: { rotation: [0, 0, 5] } });
+  });
+
+  it('composes layers over the clip pose at every sample time', () => {
+    const { asset } = resolveFigure(
+      figure({
+        animation: {
+          fps: 4,
+          clips: {
+            idle: {
+              duration: 1,
+              generator: { type: 'idle-breathe', amount: 4 },
+              layers: [
+                { type: 'sway', bones: ['chest'], axis: 'y', amount: 10, lag: 0 },
+                { type: 'sway', bones: ['head'], amount: 3 },
+              ],
+            },
+          },
+        },
+      }),
+    );
+    const clip = asset.animation.clips.idle as NonNullable<(typeof asset.animation.clips)['idle']>;
+    expect(clip.layers).toHaveLength(2);
+    const keys = clipKeys(clip, asset.rig);
+    expect(keys.map((k) => k.t)).toEqual(clip.times);
+    // At 0.25 s the breath is half in (chest tilted back 2 degrees) and the sway is at its peak (10 degrees about Y).
+    const quarter = keys[1]?.pose as Record<string, { rotation: number[]; translation?: number[] }>;
+    const expected = quaternionFrom([-2, 0, 0]).multiply(quaternionFrom([0, 10, 0]));
+    expect(quaternionFrom(quarter.chest?.rotation).angleTo(expected)).toBeLessThan(1e-5);
+    expect(quarter.chest?.translation?.[1]).toBeCloseTo(0.005, 6);
+    expect(quarter.head?.rotation).toEqual([3, 0, 0]);
+    expect(quarter.leftUpperArm?.translation?.[1]).toBeCloseTo(-0.0025, 6);
+  });
+
+  it('checks the bones of layered generators', () => {
+    const bad = failure(
+      figure({
+        animation: {
+          clips: { idle: { duration: 1, layers: [{ type: 'sway', bones: ['chest', 'cape-1'] }] } },
+        },
+      }),
+    );
+    expect(bad.issues?.map((i) => i.path)).toContain('animation.clips.idle.layers[0].bones[1]');
+  });
+
   it('turns a resolved generator clip into keys at its sample times', () => {
     const { asset } = resolveFigure(
       figure({ animation: { clips: { walk: { duration: 0.8, generator: { type: 'walk-cycle' } } } } }),

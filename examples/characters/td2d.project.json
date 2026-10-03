@@ -2,8 +2,33 @@
   "$schema": "./.td2d/schemas/project.schema.json",
   "schemaVersion": "1.0.0",
   "name": "characters",
-  "description": "An animated knight on the humanoid rig: an idle breath, a generated walk and a keyed sword attack in eight directions.",
+  "description": "An animated knight on the humanoid rig with extra bones for the cape and plume: a breathing idle, a generated walk and a keyed sword attack in eight directions, with the cape moving in the wind.",
   "typeDefaults": {
-    "character": { "frame": { "width": 32, "height": 48 }, "rig": "humanoid-basic", "directions": "d8" }
+    "character": {
+      "frame": { "width": 96, "height": 96 },
+      "rig": {
+        "preset": "humanoid-basic",
+        "bones": [
+          { "name": "cape-1", "parent": "chest", "position": [0, 0.23, -0.15] },
+          { "name": "cape-2", "parent": "cape-1", "position": [0, -0.3667, -0.05] },
+          { "name": "cape-3", "parent": "cape-2", "position": [0, -0.3667, -0.05] },
+          { "name": "plume", "parent": "head", "position": [0, 0.29, -0.01] }
+        ]
+      },
+      "directions": "d8",
+      "render": { "lines": { "width": 1, "color": "shade", "shade": 0.3, "depth": 0.008 } },
+      "lighting": {
+        "preset": "studio-toon",
+        "lights": [
+          { "type": "directional", "azimuth": -35, "elevation": 55, "intensity": 1.7279, "castShadow": true },
+          { "type": "directional", "azimuth": 160, "elevation": 25, "intensity": 1.3, "color": "#d6e4ff" },
+          { "type": "ambient", "intensity": 1.25 }
+        ]
+      },
+      "pixel": {
+        "palette": "fixed:heraldry",
+        "outline": { "color": "#14101e", "side": "outside", "width": 1, "snapToPalette": true }
+      }
+    }
   }
 }

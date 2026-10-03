@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "effects/energy-ball",
+  "assetHash": "sha256:40f70cce4f883ec8aeeabb30955966d6937f1da17499fa4de016bc22f2d79e60",
+  "generatedAt": "2026-10-03T06:34:59.550Z",
+  "frame": { "width": 64, "height": 64 },
+  "pivot": {
+    "x": 32,
+    "y": 62,
+    "normalized": { "x": 0.5, "y": 0.96875 }
+  },
+  "pixelsPerUnit": 56,
+  "camera": { "preset": "side", "pitch": 8, "yawOffset": 0, "groundMargin": 2 },
+  "directions": [
+    { "name": "e", "yaw": 270, "mirrorOf": null }
+  ],
+  "palette": {
+    "mode": "fixed:dojo",
+    "name": "dojo",
+    "colors": [
+      "#14101e",
+      "#3b1f1a",
+      "#6e3b2a",
+      "#a8603e",
+      "#d9895a",
+      "#f2b98a",
+      "#ffe0c2",
+      "#3d4260",
+      "#6c7396",
+      "#a9b0cb",
+      "#dde2ef",
+      "#ffffff",
+      "#26233a",
+      "#3e3a5c",
+      "#4a0f1c",
+      "#8c1c2b",
+      "#d0303c",
+      "#ff6a5c",
+      "#c9a97a",
+      "#efdcb5",
+      "#1d3f9e",
+      "#2f78e8",
+      "#5cc3ff",
+      "#b5ecff"
+    ]
+  },
+  "clips": [
+    { "name": "fly", "fps": 16, "frames": 8, "loop": true, "motion": false, "durationMs": 500 }
+  ],
+  "sheets": [
+    {
+      "name": "energy-ball",
+      "image": "energy-ball.png",
+      "data": "energy-ball.json",
+      "width": 512,
+      "height": 64,
+      "layout": "grid"
+    }
+  ],
+  "cells": [
+    {
+      "key": "fly/e/000",
+      "clip": "fly",
+      "direction": "e",
+      "index": 0,
+      "sheet": "energy-ball",
+      "x": 0,
+      "y": 0,
+      "w": 64,
+      "h": 64,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "fly/e/001",
+      "clip": "fly",
+      "direction": "e",
+      "index": 1,
+      "sheet": "energy-ball",
+      "x": 64,
+      "y": 0,
+      "w": 64,
+      "h": 64,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "fly/e/002",
+      "clip": "fly",
+      "direction": "e",
+      "index": 2,
+      "sheet": "energy-ball",
+      "x": 128,
+      "y": 0,
+      "w": 64,
+      "h": 64,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "fly/e/003",
+      "clip": "fly",
+      "direction": "e",
+      "index": 3,
+      "sheet": "energy-ball",
+      "x": 192,
+      "y": 0,
+      "w": 64,
+      "h": 64,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "fly/e/004",
+      "clip": "fly",
+      "direction": "e",
+      "index": 4,
+      "sheet": "energy-ball",
+      "x": 256,
+      "y": 0,
+      "w": 64,
+      "h": 64,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "fly/e/005",
+      "clip": "fly",
+      "direction": "e",
+      "index": 5,
+      "sheet": "energy-ball",
+      "x": 320,
+      "y": 0,
+      "w": 64,
+      "h": 64,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "fly/e/006",
+      "clip": "fly",
+      "direction": "e",
+      "index": 6,
+      "sheet": "energy-ball",
+      "x": 384,
+      "y": 0,
+      "w": 64,
+      "h": 64,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "fly/e/007",
+      "clip": "fly",
+      "direction": "e",
+      "index": 7,
+      "sheet": "energy-ball",
+      "x": 448,
+      "y": 0,
+      "w": 64,
+      "h": 64,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    }
+  ],
+  "files": {
+    "sheets": ["energy-ball.png"],
+    "aseprite-json": ["energy-ball.json"],
+    "gif-preview": ["energy-ball-fly.gif"],
+    "manifest": ["manifest.json"]
+  },
+  "stages": {
+    "model": "sha256:6a52d0957873ac3e872a91787e7623795ec7b7ca93c29871e96454de272e0a9b",
+    "rig": "sha256:b6c928788bb403181eb75aaaa584df7c28783091c3ccdc9a0fa07e20517b9cf5",
+    "plan": "sha256:94569c70511b1b23067dac48f9b679bb5fecbf6337f259dae10eecb9dd844482",
+    "render": "sha256:e173381f45ebfef613b8fa5505bbc52fe1219b49018241a0e5a73c6305fb0367",
+    "pixel": "sha256:eeed4ffc024dd3e1b30df51887063df13168709b054e3d88d6aa4af86b448b9f",
+    "sheet": "sha256:cef8494bfca1a594fc8460d14ca3579d09504a3e543a37a2b78aa84fcf2f68b1"
+  },
+  "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
+}

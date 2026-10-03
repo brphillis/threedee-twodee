@@ -25,6 +25,22 @@ export interface RenderSceneSettings {
   readonly lighting: LightingSettingsT;
   /** Materials by glTF material name. Materials not listed keep what the GLB carries. */
   readonly materials?: Readonly<Record<string, RenderMaterial>>;
+  /** Lines around every part, or absent for none. */
+  readonly lines?: RenderLinesSettings;
+}
+
+/** Lines the harness draws around each part: back faces pushed out along their normals. */
+export interface RenderLinesSettings {
+  /** Width in final sprite pixels. */
+  readonly width: number;
+  /** sRGB #rrggbb for every line, or null for a shade of each part's own colour. */
+  readonly color: string | null;
+  /** With color null, the line's brightness as a share of the part's colour. */
+  readonly shade: number;
+  /** How far in front of what lies behind it a part must be to get a line there, in metres. */
+  readonly depth: number;
+  /** Materials that draw no lines. */
+  readonly skip: readonly string[];
 }
 
 /** One frame to render: a direction yaw and, for animated models, a clip time. */

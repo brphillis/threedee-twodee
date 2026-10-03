@@ -1,8 +1,12 @@
 # Pixel settings example
 
-One mushroom, generated once per pixel setting so the results can be compared side by side.
-The cap and stem use lambert shading, which renders smooth gradients and so shows what the
-palette, dither and posterize settings do.
+One toadstool scene, generated once per pixel setting so the results can be compared side by
+side: a fly agaric on a mossy mound with two smaller ones beside it. The caps have a bell shape
+with a lip, cream gills showing under the rim and white warts set into them on a golden-angle
+spiral; the stems have a hanging skirt and a bulbous base; grass tufts and pebbles dot the moss.
+The caps and stems use lambert shading, which renders smooth gradients and so shows what the
+palette, dither and posterize settings do; the warts, gills and moss are toon. Every asset uses
+the same 64 x 64 frame and 44 pixels a metre, so the variants line up exactly.
 
 | Asset group | What changes |
 |---|---|

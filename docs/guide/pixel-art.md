@@ -92,6 +92,27 @@ Dithering only applies with a palette. It is ordered (Bayer 2 x 2, 4 x 4 or 8 x 
 - **`connectivity`** 8 (default) closes diagonal corners; 4 leaves them open, for a softer look.
 - **`snapToPalette`** replaces the colour with its nearest palette colour, so a fixed-palette sprite stays inside its palette. Otherwise the outline colour is added to the allowed colours.
 
+## Lines inside the silhouette
+
+The outline pass only rings the silhouette, so where an arm crosses the chest or one leg passes in front of the other, the two shapes run together. Pixel artists draw a line there. `render.lines` makes the renderer draw one:
+
+```json
+{ "render": { "lines": { "width": 1, "color": "shade", "shade": 0.35, "depth": 0.03 } } }
+```
+
+| outline only | `lines`, dark | `lines`, `shade`, with the outline |
+|---|---|---|
+| ![outline only](images/pixel/outline-outside.png) | ![dark lines](images/pixel/lines-dark.png) | ![shaded lines](images/pixel/lines-shade.png) |
+
+- **How.** Every part is drawn a second time, back faces only, pushed out along their normals by `width` final pixels. A part's line shows wherever what lies behind it is further away than the part itself: around the silhouette, and inside it where the part stands in front of another. Two parts that merely meet, a wrist going into a fist, get no line between them.
+- **`depth`** (metres, default 0.03) is how far in front of what lies behind it a part must be to get a line there. Raise it to line limbs held close to the body; keep it below the thickness of the parts, or thin parts (a headband, a cape panel, gold trim) are lined all over and turn dark.
+- **`color`** is one `#rrggbb` for every line, or `shade` (the default): each part's line is its own colour at `shade` brightness, so skin is lined in dark brown and cloth in its own deep tone, as hand-drawn sprites are.
+- Materials with `"outline": false` get no lines, such as eyes and visor slits.
+- Lines are drawn into the render and survive the `mode` downscale: a block at least half covered by line becomes a line pixel. With the `box` filter they blend into their neighbours instead.
+- The lines add `width` pixels around the silhouette, which the automatic scale, the ground margin and the out-of-frame check all allow for. With the outline pass as well, the outside edge is two pixels: the line in each part's shade, then the outline.
+
+Lines, two or three toon bands per material and `cleanup.orphans: "recolour"` together make a model read as drawn rather than rendered; `examples/fighter` uses all three.
+
 ## Cleanup and bleed
 
 `cleanup.orphans` removes stray pixels: `remove` (or `true`) deletes opaque pixels with fewer than `minNeighbours` opaque neighbours (up, down, left, right), and `recolour` gives a single off-colour pixel the colour of its neighbours. The validation report counts what was removed or recoloured, in its `cleanup` entry.

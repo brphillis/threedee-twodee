@@ -2,16 +2,16 @@
   "schemaVersion": "1.0.0",
   "generator": { "name": "td2d", "version": "0.0.0" },
   "assetId": "palette/custom",
-  "assetHash": "sha256:320fe2c85e3f7fdf5ae8db9437d434046dfe3ff69f8d557c47106f308e25fbe6",
-  "generatedAt": "2026-10-02T11:49:08.021Z",
-  "frame": { "width": 40, "height": 40 },
+  "assetHash": "sha256:4918c4b5b77652355d3f249eb6ed75bcf7f768b6f8f0e6d7f778620cb2a3a4ca",
+  "generatedAt": "2026-10-03T06:41:38.680Z",
+  "frame": { "width": 64, "height": 64 },
   "pivot": {
-    "x": 20,
-    "y": 32,
-    "normalized": { "x": 0.5, "y": 0.8 }
+    "x": 32,
+    "y": 52,
+    "normalized": { "x": 0.5, "y": 0.8125 }
   },
-  "pixelsPerUnit": 28,
-  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 8 },
+  "pixelsPerUnit": 44,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 12 },
   "directions": [
     { "name": "s", "yaw": 0, "mirrorOf": null },
     { "name": "w", "yaw": 90, "mirrorOf": null },
@@ -31,8 +31,8 @@
       "name": "custom",
       "image": "custom.png",
       "data": "custom.json",
-      "width": 40,
-      "height": 160,
+      "width": 64,
+      "height": 256,
       "layout": "grid"
     }
   ],
@@ -45,8 +45,8 @@
       "sheet": "custom",
       "x": 0,
       "y": 0,
-      "w": 40,
-      "h": 40,
+      "w": 64,
+      "h": 64,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -58,9 +58,9 @@
       "index": 0,
       "sheet": "custom",
       "x": 0,
-      "y": 40,
-      "w": 40,
-      "h": 40,
+      "y": 64,
+      "w": 64,
+      "h": 64,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -72,9 +72,9 @@
       "index": 0,
       "sheet": "custom",
       "x": 0,
-      "y": 80,
-      "w": 40,
-      "h": 40,
+      "y": 128,
+      "w": 64,
+      "h": 64,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -86,9 +86,9 @@
       "index": 0,
       "sheet": "custom",
       "x": 0,
-      "y": 120,
-      "w": 40,
-      "h": 40,
+      "y": 192,
+      "w": 64,
+      "h": 64,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -100,12 +100,12 @@
     "manifest": ["manifest.json"]
   },
   "stages": {
-    "model": "sha256:0cc760358d4fa215f3ab736ee1b58519db977c282d0b9bcc8fe4107e675f4766",
-    "rig": "sha256:c101524cb5be68f8bbfabed30db5586f5143d9a32ec34a705b81d241faaa5ea0",
-    "plan": "sha256:4ed5f8dd2ee13fd2e845aa6c3e6a91d9dc797220694afec373b217941fd24e93",
-    "render": "sha256:e7f8576c6d5051f358e971021a242cbb1f21dc25a17e17810a51a277e035d988",
-    "pixel": "sha256:39dc98a8bdae787d1523bae1f41b3b473b3b75cd1c6e851a06bacff7345285ff",
-    "sheet": "sha256:e56e4463203c56e70fbc988dbbc653c078fec12caa81e3c73ac32b0be7d5c799"
+    "model": "sha256:1ce36eaed64ea87af8050347f9e19242f81b05dd086c176d8f44833736281d3f",
+    "rig": "sha256:656a7c2f288b208e66e38e30806dc9d6b3c0651bd7e4259382e363d86e44e70a",
+    "plan": "sha256:1cfb5ba8082cfedd40af73f2306b8c6c5a2cad71877653179dc4e51a027e3eef",
+    "render": "sha256:bf35cead2bac7326df54934e817b8fc6840dfc2df520d4c2d332533ebd2c8851",
+    "pixel": "sha256:34638e7f7f383ac6f57d152e4ee410d01f1968037566fcf42d660fe4de4b5b79",
+    "sheet": "sha256:53e67775f87a51e5ca5e6a3045fdba1120b9b242c8645828c7c9b3a1951573bd"
   },
   "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
 }

@@ -1,0 +1,17 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "lines/dark",
+  "type": "prop",
+  "description": "Lines drawn by the renderer in one dark colour: around the silhouette, and inside it where the cap overhangs the stem.",
+  "render": { "lines": { "width": 1, "color": "#1a1c2c" } },
+  "model": {
+    "parts": [
+      {
+        "type": "component",
+        "id": "mushroom",
+        "component": "mushroom"
+      }
+    ]
+  }
+}

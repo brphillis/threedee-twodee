@@ -2,16 +2,16 @@
   "schemaVersion": "1.0.0",
   "generator": { "name": "td2d", "version": "0.0.0" },
   "assetId": "dither/bayer-4-70",
-  "assetHash": "sha256:8963c9af823442416766e4a45c42de0af5e0b26586b3e7059707d28768d41dc7",
-  "generatedAt": "2026-10-02T11:49:07.681Z",
-  "frame": { "width": 40, "height": 40 },
+  "assetHash": "sha256:3044dace5cb532fc2742477a56a9b43b2e6e74a54a7035fa2153b975bb43c1f9",
+  "generatedAt": "2026-10-03T06:41:38.001Z",
+  "frame": { "width": 64, "height": 64 },
   "pivot": {
-    "x": 20,
-    "y": 32,
-    "normalized": { "x": 0.5, "y": 0.8 }
+    "x": 32,
+    "y": 52,
+    "normalized": { "x": 0.5, "y": 0.8125 }
   },
-  "pixelsPerUnit": 28,
-  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 8 },
+  "pixelsPerUnit": 44,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 12 },
   "directions": [
     { "name": "s", "yaw": 0, "mirrorOf": null },
     { "name": "w", "yaw": 90, "mirrorOf": null },
@@ -48,8 +48,8 @@
       "name": "bayer-4-70",
       "image": "bayer-4-70.png",
       "data": "bayer-4-70.json",
-      "width": 40,
-      "height": 160,
+      "width": 64,
+      "height": 256,
       "layout": "grid"
     }
   ],
@@ -62,8 +62,8 @@
       "sheet": "bayer-4-70",
       "x": 0,
       "y": 0,
-      "w": 40,
-      "h": 40,
+      "w": 64,
+      "h": 64,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -75,9 +75,9 @@
       "index": 0,
       "sheet": "bayer-4-70",
       "x": 0,
-      "y": 40,
-      "w": 40,
-      "h": 40,
+      "y": 64,
+      "w": 64,
+      "h": 64,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -89,9 +89,9 @@
       "index": 0,
       "sheet": "bayer-4-70",
       "x": 0,
-      "y": 80,
-      "w": 40,
-      "h": 40,
+      "y": 128,
+      "w": 64,
+      "h": 64,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -103,9 +103,9 @@
       "index": 0,
       "sheet": "bayer-4-70",
       "x": 0,
-      "y": 120,
-      "w": 40,
-      "h": 40,
+      "y": 192,
+      "w": 64,
+      "h": 64,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -117,12 +117,12 @@
     "manifest": ["manifest.json"]
   },
   "stages": {
-    "model": "sha256:0cc760358d4fa215f3ab736ee1b58519db977c282d0b9bcc8fe4107e675f4766",
-    "rig": "sha256:de3d6a355449e63970f52177b4294a023763b3a58a6894f1e48b251cc077a48f",
-    "plan": "sha256:c7032a1f49235c4f79d7819eee7b2e6a2b99a6344e20b94500015f189e79fbd0",
-    "render": "sha256:3183b35bd175abd9ee3bcc2c9f5b0c521e7522b05eae879a21c25b3b1e3f43da",
-    "pixel": "sha256:d46695ece145b4538ca2e841b5dfd2ba0410eb318f7a970b30a21a0dcd589f61",
-    "sheet": "sha256:fb3cccf0908cb910eeb1c45b6754d0631e56bb389b16bd14f726a55cbf9178bb"
+    "model": "sha256:1ce36eaed64ea87af8050347f9e19242f81b05dd086c176d8f44833736281d3f",
+    "rig": "sha256:2857ce24ec917fe296529ed08cfb077a5b2b18cf532860c0b28629eacc391083",
+    "plan": "sha256:6a2539312598b5f1649214422875422786fb1aea5532ddd9e1009774e6f1826a",
+    "render": "sha256:da1ff1bee63ef6c670de70c48d432cd2fc193996a571fbefdf3a888f0eb1925c",
+    "pixel": "sha256:3861c78373abeba3faae998dfc1fbde1391cfb2a7fda883d5fedf36ffe9b05ab",
+    "sheet": "sha256:dce521a071f867a3472dbc569374c364b3f5af192c43c17085912f487ac0ff6f"
   },
   "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
 }

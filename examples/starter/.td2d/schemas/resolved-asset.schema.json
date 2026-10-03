@@ -1335,6 +1335,90 @@
                             "axis": "y"
                           }
                         ]
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "const": "sway"
+                          },
+                          "bones": {
+                            "minItems": 1,
+                            "maxItems": 16,
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "maxLength": 64,
+                              "pattern": "^[a-z][a-zA-Z0-9]*(-[a-z0-9]+)*$",
+                              "description": "Bone name. Humanoid rigs use VRM 1.0 names.",
+                              "examples": [
+                                "hips",
+                                "leftUpperArm",
+                                "tail-tip"
+                              ]
+                            },
+                            "description": "A chain of bones from root to tip, such as the segments of a cape or a tail."
+                          },
+                          "axis": {
+                            "description": "Axis each bone turns about. Default x.",
+                            "type": "string",
+                            "enum": [
+                              "x",
+                              "y",
+                              "z"
+                            ]
+                          },
+                          "amount": {
+                            "description": "Swing either side of the bias, in degrees. Default 5.",
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 90
+                          },
+                          "bias": {
+                            "description": "A constant turn the swing centres on, such as a cape blown back. Default 0.",
+                            "type": "number",
+                            "minimum": -90,
+                            "maximum": 90
+                          },
+                          "lag": {
+                            "description": "How far each bone trails the one before it, in cycles, so the wave travels down the chain. Default 0.12.",
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                          },
+                          "cycles": {
+                            "description": "Whole swings per clip, so a looping clip joins up. Default 1.",
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 16
+                          },
+                          "growth": {
+                            "description": "Each bone turns this many times as far as the one before it; above 1 the tip moves most. Default 1.",
+                            "type": "number",
+                            "minimum": 0.25,
+                            "maximum": 4
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "bones"
+                        ],
+                        "additionalProperties": false,
+                        "description": "A wave travelling down a chain of bones, for capes, banners, tails and plumes.",
+                        "examples": [
+                          {
+                            "type": "sway",
+                            "bones": [
+                              "spine",
+                              "chest",
+                              "neck",
+                              "head"
+                            ],
+                            "axis": "z",
+                            "amount": 3
+                          }
+                        ]
                       }
                     ],
                     "description": "Procedural clip. td2d turns it into keys; `td2d model inspect <id> --clip <name> --keys` shows them."
@@ -1343,6 +1427,420 @@
                     "type": "null"
                   }
                 ]
+              },
+              "layers": {
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "walk-cycle"
+                        },
+                        "stride": {
+                          "description": "Leg swing either side of vertical, in degrees. Default 25.",
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 90
+                        },
+                        "bob": {
+                          "description": "How far the hips drop when the legs are furthest apart, in metres. Default 0.03.",
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "armSwing": {
+                          "description": "Arm swing, opposite to the legs, in degrees. Default 20.",
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 90
+                        },
+                        "kneeBend": {
+                          "description": "Knee bend of the swinging leg, in degrees. Default 30.",
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 150
+                        },
+                        "hipSway": {
+                          "description": "Hip twist towards the forward leg, in degrees. Default 4.",
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 45
+                        },
+                        "lean": {
+                          "description": "Forward lean of the spine, in degrees. Default 0.",
+                          "type": "number",
+                          "minimum": -45,
+                          "maximum": 45
+                        },
+                        "bones": {
+                          "description": "Bone for each role, for rigs without VRM names. Roles default to the VRM name; missing arm, spine and foot bones are skipped.",
+                          "type": "object",
+                          "properties": {
+                            "hips": {
+                              "type": "string",
+                              "maxLength": 64,
+                              "pattern": "^[a-z][a-zA-Z0-9]*(-[a-z0-9]+)*$",
+                              "description": "Bone name. Humanoid rigs use VRM 1.0 names.",
+                              "examples": [
+                                "hips",
+                                "leftUpperArm",
+                                "tail-tip"
+                              ]
+                            },
+                            "spine": {
+                              "type": "string",
+                              "maxLength": 64,
+                              "pattern": "^[a-z][a-zA-Z0-9]*(-[a-z0-9]+)*$",
+                              "description": "Bone name. Humanoid rigs use VRM 1.0 names.",
+                              "examples": [
+                                "hips",
+                                "leftUpperArm",
+                                "tail-tip"
+                              ]
+                            },
+                            "leftUpperLeg": {
+                              "type": "string",
+                              "maxLength": 64,
+                              "pattern": "^[a-z][a-zA-Z0-9]*(-[a-z0-9]+)*$",
+                              "description": "Bone name. Humanoid rigs use VRM 1.0 names.",
+                              "examples": [
+                                "hips",
+                                "leftUpperArm",
+                                "tail-tip"
+                              ]
+                            },
+                            "rightUpperLeg": {
+                              "type": "string",
+                              "maxLength": 64,
+                              "pattern": "^[a-z][a-zA-Z0-9]*(-[a-z0-9]+)*$",
+                              "description": "Bone name. Humanoid rigs use VRM 1.0 names.",
+                              "examples": [
+                                "hips",
+                                "leftUpperArm",
+                                "tail-tip"
+                              ]
+                            },
+                            "leftLowerLeg": {
+                              "type": "string",
+                              "maxLength": 64,
+                              "pattern": "^[a-z][a-zA-Z0-9]*(-[a-z0-9]+)*$",
+                              "description": "Bone name. Humanoid rigs use VRM 1.0 names.",
+                              "examples": [
+                                "hips",
+                                "leftUpperArm",
+                                "tail-tip"
+                              ]
+                            },
+                            "rightLowerLeg": {
+                              "type": "string",
+                              "maxLength": 64,
+                              "pattern": "^[a-z][a-zA-Z0-9]*(-[a-z0-9]+)*$",
+                              "description": "Bone name. Humanoid rigs use VRM 1.0 names.",
+                              "examples": [
+                                "hips",
+                                "leftUpperArm",
+                                "tail-tip"
+                              ]
+                            },
+                            "leftFoot": {
+                              "type": "string",
+                              "maxLength": 64,
+                              "pattern": "^[a-z][a-zA-Z0-9]*(-[a-z0-9]+)*$",
+                              "description": "Bone name. Humanoid rigs use VRM 1.0 names.",
+                              "examples": [
+                                "hips",
+                                "leftUpperArm",
+                                "tail-tip"
+                              ]
+                            },
+                            "rightFoot": {
+                              "type": "string",
+                              "maxLength": 64,
+                              "pattern": "^[a-z][a-zA-Z0-9]*(-[a-z0-9]+)*$",
+                              "description": "Bone name. Humanoid rigs use VRM 1.0 names.",
+                              "examples": [
+                                "hips",
+                                "leftUpperArm",
+                                "tail-tip"
+                              ]
+                            },
+                            "leftUpperArm": {
+                              "type": "string",
+                              "maxLength": 64,
+                              "pattern": "^[a-z][a-zA-Z0-9]*(-[a-z0-9]+)*$",
+                              "description": "Bone name. Humanoid rigs use VRM 1.0 names.",
+                              "examples": [
+                                "hips",
+                                "leftUpperArm",
+                                "tail-tip"
+                              ]
+                            },
+                            "rightUpperArm": {
+                              "type": "string",
+                              "maxLength": 64,
+                              "pattern": "^[a-z][a-zA-Z0-9]*(-[a-z0-9]+)*$",
+                              "description": "Bone name. Humanoid rigs use VRM 1.0 names.",
+                              "examples": [
+                                "hips",
+                                "leftUpperArm",
+                                "tail-tip"
+                              ]
+                            }
+                          },
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": [
+                        "type"
+                      ],
+                      "additionalProperties": false,
+                      "description": "A looping walk: legs swing with knees bending on the way forward, arms counter-swing, hips drop and twist.",
+                      "examples": [
+                        {
+                          "type": "walk-cycle",
+                          "stride": 25,
+                          "bob": 0.05
+                        }
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "idle-breathe"
+                        },
+                        "amount": {
+                          "description": "Chest tilt at the top of the breath, in degrees. Default 2.",
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 30
+                        },
+                        "rise": {
+                          "description": "How far the chest lifts, in metres. Default 0.01.",
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 0.5
+                        },
+                        "bones": {
+                          "description": "chest defaults to chest, then spine. shoulders (default the upper arms) settle as the chest rises.",
+                          "type": "object",
+                          "properties": {
+                            "chest": {
+                              "type": "string",
+                              "maxLength": 64,
+                              "pattern": "^[a-z][a-zA-Z0-9]*(-[a-z0-9]+)*$",
+                              "description": "Bone name. Humanoid rigs use VRM 1.0 names.",
+                              "examples": [
+                                "hips",
+                                "leftUpperArm",
+                                "tail-tip"
+                              ]
+                            },
+                            "shoulders": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "maxLength": 64,
+                                "pattern": "^[a-z][a-zA-Z0-9]*(-[a-z0-9]+)*$",
+                                "description": "Bone name. Humanoid rigs use VRM 1.0 names.",
+                                "examples": [
+                                  "hips",
+                                  "leftUpperArm",
+                                  "tail-tip"
+                                ]
+                              }
+                            }
+                          },
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": [
+                        "type"
+                      ],
+                      "additionalProperties": false,
+                      "description": "A slow breath in and out over the clip.",
+                      "examples": [
+                        {
+                          "type": "idle-breathe",
+                          "amount": 3
+                        }
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "bob"
+                        },
+                        "height": {
+                          "description": "Rise at the middle of the clip, in metres. Default 0.05.",
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 10
+                        },
+                        "bone": {
+                          "description": "Bone to move. Default: the rig root, or the whole model when the asset has no rig.",
+                          "type": "string",
+                          "maxLength": 64,
+                          "pattern": "^[a-z][a-zA-Z0-9]*(-[a-z0-9]+)*$",
+                          "examples": [
+                            "hips",
+                            "leftUpperArm",
+                            "tail-tip"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type"
+                      ],
+                      "additionalProperties": false,
+                      "description": "Rise and fall once per clip, easing in and out.",
+                      "examples": [
+                        {
+                          "type": "bob",
+                          "height": 0.08
+                        }
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "spin"
+                        },
+                        "turns": {
+                          "description": "Full turns over the clip; negative turns the other way. Default 1.",
+                          "type": "number",
+                          "minimum": -16,
+                          "maximum": 16
+                        },
+                        "axis": {
+                          "description": "Axis to turn about. Default y.",
+                          "type": "string",
+                          "enum": [
+                            "x",
+                            "y",
+                            "z"
+                          ]
+                        },
+                        "bone": {
+                          "description": "Bone to move. Default: the rig root, or the whole model when the asset has no rig.",
+                          "type": "string",
+                          "maxLength": 64,
+                          "pattern": "^[a-z][a-zA-Z0-9]*(-[a-z0-9]+)*$",
+                          "examples": [
+                            "hips",
+                            "leftUpperArm",
+                            "tail-tip"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type"
+                      ],
+                      "additionalProperties": false,
+                      "description": "Turn at a constant rate.",
+                      "examples": [
+                        {
+                          "type": "spin",
+                          "turns": 1,
+                          "axis": "y"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "sway"
+                        },
+                        "bones": {
+                          "minItems": 1,
+                          "maxItems": 16,
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "maxLength": 64,
+                            "pattern": "^[a-z][a-zA-Z0-9]*(-[a-z0-9]+)*$",
+                            "description": "Bone name. Humanoid rigs use VRM 1.0 names.",
+                            "examples": [
+                              "hips",
+                              "leftUpperArm",
+                              "tail-tip"
+                            ]
+                          },
+                          "description": "A chain of bones from root to tip, such as the segments of a cape or a tail."
+                        },
+                        "axis": {
+                          "description": "Axis each bone turns about. Default x.",
+                          "type": "string",
+                          "enum": [
+                            "x",
+                            "y",
+                            "z"
+                          ]
+                        },
+                        "amount": {
+                          "description": "Swing either side of the bias, in degrees. Default 5.",
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 90
+                        },
+                        "bias": {
+                          "description": "A constant turn the swing centres on, such as a cape blown back. Default 0.",
+                          "type": "number",
+                          "minimum": -90,
+                          "maximum": 90
+                        },
+                        "lag": {
+                          "description": "How far each bone trails the one before it, in cycles, so the wave travels down the chain. Default 0.12.",
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "cycles": {
+                          "description": "Whole swings per clip, so a looping clip joins up. Default 1.",
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 16
+                        },
+                        "growth": {
+                          "description": "Each bone turns this many times as far as the one before it; above 1 the tip moves most. Default 1.",
+                          "type": "number",
+                          "minimum": 0.25,
+                          "maximum": 4
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "bones"
+                      ],
+                      "additionalProperties": false,
+                      "description": "A wave travelling down a chain of bones, for capes, banners, tails and plumes.",
+                      "examples": [
+                        {
+                          "type": "sway",
+                          "bones": [
+                            "spine",
+                            "chest",
+                            "neck",
+                            "head"
+                          ],
+                          "axis": "z",
+                          "amount": 3
+                        }
+                      ]
+                    }
+                  ],
+                  "description": "Procedural clip. td2d turns it into keys; `td2d model inspect <id> --clip <name> --keys` shows them."
+                }
               },
               "description": {
                 "type": "string",
@@ -1382,6 +1880,63 @@
         },
         "backend": {
           "type": "string"
+        },
+        "lines": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "none"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "width": {
+                  "description": "Line width in final sprite pixels. Default 1.",
+                  "type": "number",
+                  "minimum": 0.5,
+                  "maximum": 4
+                },
+                "color": {
+                  "description": "A #rrggbb colour for every line, or shade: each part's line is a darker shade of the part's own colour, as pixel artists draw them. Default shade.",
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "const": "shade"
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^#[0-9a-fA-F]{6}$",
+                      "description": "sRGB colour as #rrggbb.",
+                      "examples": [
+                        "#a0693a"
+                      ]
+                    }
+                  ]
+                },
+                "shade": {
+                  "description": "With color shade, the line's brightness as a share of the part's colour. Default 0.4.",
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "depth": {
+                  "description": "How far in front of what lies behind it a part must be to get a line there, in metres. Keep it below the thickness of the parts: parts that merely meet stay unlined. Default 0.03.",
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "additionalProperties": false,
+              "description": "Lines drawn by the renderer around each part.",
+              "examples": [
+                {
+                  "width": 1,
+                  "color": "shade",
+                  "shade": 0.4
+                }
+              ]
+            }
+          ]
         }
       },
       "required": [
@@ -1389,7 +1944,7 @@
         "backend"
       ],
       "additionalProperties": false,
-      "description": "Supersampling factor and render backend."
+      "description": "Supersampling factor, render backend and lines."
     },
     "pixel": {
       "type": "object",

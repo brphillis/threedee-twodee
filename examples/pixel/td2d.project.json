@@ -2,13 +2,13 @@
   "$schema": "./.td2d/schemas/project.schema.json",
   "schemaVersion": "1.0.0",
   "name": "pixel",
-  "description": "One mushroom through every pixel setting: downscale filters, palettes, posterize, dither strengths, outline styles and cleanup.",
+  "description": "One toadstool scene through every pixel setting: downscale filters, palettes, posterize, dither strengths, outline styles, render lines and cleanup.",
   "defaults": {
     "frame": {
-      "width": 40,
-      "height": 40
+      "width": 64,
+      "height": 64
     },
-    "pixelsPerUnit": 28,
+    "pixelsPerUnit": 44,
     "directions": "d4",
     "materials": {
       "cap": {
@@ -27,6 +27,11 @@
       "moss": {
         "color": "#38b764",
         "shading": "toon"
+      },
+      "gill": {
+        "color": "#cdb98f",
+        "shading": "toon",
+        "bands": 2
       }
     }
   }

@@ -2,16 +2,16 @@
   "schemaVersion": "1.0.0",
   "generator": { "name": "td2d", "version": "0.0.0" },
   "assetId": "preset/retro-16",
-  "assetHash": "sha256:2d71213aee24ef15981c29538f3506ffe7e5594390c842481f4ded805f6e0a78",
-  "generatedAt": "2026-10-02T11:49:08.169Z",
-  "frame": { "width": 40, "height": 40 },
+  "assetHash": "sha256:73543a9cb9ef13511e7cc7b108adf3973e48ed282294783c0d4ad8e3a37514d7",
+  "generatedAt": "2026-10-03T06:41:38.857Z",
+  "frame": { "width": 64, "height": 64 },
   "pivot": {
-    "x": 20,
-    "y": 31,
-    "normalized": { "x": 0.5, "y": 0.775 }
+    "x": 32,
+    "y": 51,
+    "normalized": { "x": 0.5, "y": 0.796875 }
   },
-  "pixelsPerUnit": 28,
-  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 9 },
+  "pixelsPerUnit": 44,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 13 },
   "directions": [
     { "name": "s", "yaw": 0, "mirrorOf": null },
     { "name": "w", "yaw": 90, "mirrorOf": null },
@@ -22,21 +22,21 @@
     "mode": "auto:16",
     "name": null,
     "colors": [
-      "#7b2838",
-      "#842c3c",
-      "#8c2f40",
-      "#943244",
-      "#9c3648",
-      "#a5394d",
+      "#7c2838",
+      "#923243",
+      "#9d3649",
+      "#a4394d",
       "#a93b4f",
       "#ae3d51",
       "#247f44",
+      "#8f8163",
       "#2f9e56",
       "#a09376",
       "#38b764",
-      "#ababab",
-      "#c4b492",
-      "#cebe99",
+      "#acaba8",
+      "#cbb992",
+      "#d7c6a0",
+      "#e3d1a9",
       "#f4f4f4"
     ]
   },
@@ -48,8 +48,8 @@
       "name": "retro-16",
       "image": "retro-16.png",
       "data": "retro-16.json",
-      "width": 40,
-      "height": 160,
+      "width": 64,
+      "height": 256,
       "layout": "grid"
     }
   ],
@@ -62,8 +62,8 @@
       "sheet": "retro-16",
       "x": 0,
       "y": 0,
-      "w": 40,
-      "h": 40,
+      "w": 64,
+      "h": 64,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -75,9 +75,9 @@
       "index": 0,
       "sheet": "retro-16",
       "x": 0,
-      "y": 40,
-      "w": 40,
-      "h": 40,
+      "y": 64,
+      "w": 64,
+      "h": 64,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -89,9 +89,9 @@
       "index": 0,
       "sheet": "retro-16",
       "x": 0,
-      "y": 80,
-      "w": 40,
-      "h": 40,
+      "y": 128,
+      "w": 64,
+      "h": 64,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -103,9 +103,9 @@
       "index": 0,
       "sheet": "retro-16",
       "x": 0,
-      "y": 120,
-      "w": 40,
-      "h": 40,
+      "y": 192,
+      "w": 64,
+      "h": 64,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -117,12 +117,12 @@
     "manifest": ["manifest.json"]
   },
   "stages": {
-    "model": "sha256:0cc760358d4fa215f3ab736ee1b58519db977c282d0b9bcc8fe4107e675f4766",
-    "rig": "sha256:927965db5f06221d6d3b1bc9550bee266164a86cfaca8eace22aa7428222e4be",
-    "plan": "sha256:b15836121c07716aeb7dbfc8f5a76687f8ecb0c6c86f10b09232cbffeddb6309",
-    "render": "sha256:904ee1f465311c2b7e319066fc69e63b24cb5edd284676412328905713624f36",
-    "pixel": "sha256:bfbfb2f078d91c160f91c563bb5939f3e9881a4507528e239deb0eb9e4208470",
-    "sheet": "sha256:862bbdd9ceb3f8da7e12caec791ed03cd1a8c62035fd86a9082e22697909b556"
+    "model": "sha256:1ce36eaed64ea87af8050347f9e19242f81b05dd086c176d8f44833736281d3f",
+    "rig": "sha256:e761dd620ea9784ca293d1f9d8f5d1ed5caa5798f17ada37f49f2c8e1c02577d",
+    "plan": "sha256:89ca57ab98ff92edbe7e9f6379f33a473a21d37bbcb5cdccc60de3e08e34feed",
+    "render": "sha256:8d6ded036d4d62e02efd6661e797066ec2a9dcbd2e38acd41a2beb61a9708b1b",
+    "pixel": "sha256:0144ef5322d41ccd26a9312e36febfd788b920c553020f6a83dd6c913c59b6df",
+    "sheet": "sha256:a01a50b4c4be3c162f4955c0c8b4fd17884a3ed2bc2ab08274417f3249f220b8"
   },
   "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
 }

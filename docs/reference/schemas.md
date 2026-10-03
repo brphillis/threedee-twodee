@@ -238,7 +238,7 @@ Asset after defaults and presets are applied. Written to `td2d asset show <id>`.
 | `model` | yes | Parts with components expanded and imports hashed. |
 | `rig` | yes | Bones in parent-first order, or null for an unrigged asset. |
 | `animation` | yes | Clips with their sample times; generator clips keep their settings. |
-| `render` | yes | Supersampling factor and render backend. |
+| `render` | yes | Supersampling factor, render backend and lines. |
 | `pixel` | yes | Pixel settings after presets and overrides. |
 | `paletteColors` | yes | The colours of a fixed palette, or null. |
 | `sheet` | yes | Sheet settings after presets and overrides. |

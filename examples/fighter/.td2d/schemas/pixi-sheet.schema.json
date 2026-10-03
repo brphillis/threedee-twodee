@@ -1,0 +1,218 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:td2d:schema:pixi-sheet:1",
+  "title": "td2d pixi-sheet",
+  "type": "object",
+  "properties": {
+    "frames": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "frame": {
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "y": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "w": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "h": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              }
+            },
+            "required": [
+              "x",
+              "y",
+              "w",
+              "h"
+            ],
+            "additionalProperties": false
+          },
+          "rotated": {
+            "type": "boolean"
+          },
+          "trimmed": {
+            "type": "boolean"
+          },
+          "spriteSourceSize": {
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "y": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "w": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "h": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              }
+            },
+            "required": [
+              "x",
+              "y",
+              "w",
+              "h"
+            ],
+            "additionalProperties": false
+          },
+          "sourceSize": {
+            "type": "object",
+            "properties": {
+              "w": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "h": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              }
+            },
+            "required": [
+              "w",
+              "h"
+            ],
+            "additionalProperties": false
+          },
+          "anchor": {
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "y": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "required": [
+              "x",
+              "y"
+            ],
+            "additionalProperties": false,
+            "description": "The pivot, as a fraction of the untrimmed frame."
+          }
+        },
+        "required": [
+          "frame",
+          "rotated",
+          "trimmed",
+          "spriteSourceSize",
+          "sourceSize",
+          "anchor"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Frames by sprite key, such as walk/s/000."
+    },
+    "animations": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "description": "Frame names of each clip and direction, as <clip>_<direction>."
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "app": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string",
+          "const": "RGBA8888"
+        },
+        "size": {
+          "type": "object",
+          "properties": {
+            "w": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "h": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": [
+            "w",
+            "h"
+          ],
+          "additionalProperties": false
+        },
+        "scale": {
+          "type": "string"
+        },
+        "related_multi_packs": {
+          "description": "The other sheets of a split atlas.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "app",
+        "version",
+        "image",
+        "format",
+        "size",
+        "scale"
+      ],
+      "additionalProperties": false,
+      "description": "The sheet image, its size, and the other sheets of a split atlas."
+    }
+  },
+  "required": [
+    "frames",
+    "animations",
+    "meta"
+  ],
+  "additionalProperties": false,
+  "description": "PixiJS spritesheet data (TexturePacker JSON Hash with animations)."
+}

@@ -7,6 +7,7 @@ import { describe, expect, it } from 'vitest';
 import { run, runJson, tempDir } from './helpers.ts';
 
 const PROPS = join(import.meta.dirname, '..', '..', '..', 'examples', 'props');
+const FIGHTER = join(import.meta.dirname, '..', '..', '..', 'examples', 'fighter');
 
 async function project(): Promise<string> {
   const root = join(tempDir(), 'game');
@@ -33,6 +34,12 @@ describe('td2d asset emit', () => {
       file: 'assets/props/barrel/asset.json',
       changed: false,
     });
+  });
+
+  it('reproduces the committed karateka, clips and all, from its script', async () => {
+    const { exitCode, stdout } = await run(['asset', 'emit', 'scripts/karateka.ts', '--print'], { cwd: FIGHTER });
+    expect(exitCode).toBe(0);
+    expect(stdout).toBe(readFileSync(join(FIGHTER, 'assets/fighters/karateka/asset.json'), 'utf8'));
   });
 
   it('resolves @td2d/core/sdk from td2d itself when the project does not install it', async () => {

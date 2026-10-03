@@ -1,0 +1,42 @@
+{
+  "$schema": "./.td2d/schemas/project.schema.json",
+  "schemaVersion": "1.0.0",
+  "name": "fighter",
+  "description": "A side-on fighting game: a martial artist with stance, walk, punch, kick and special clips, and the energy ball the special launches, all at one scale.",
+  "defaults": {
+    "camera": { "preset": "side", "pitch": 8 },
+    "directions": "d1-side",
+    "pixelsPerUnit": 56,
+    "lighting": {
+      "preset": "studio-toon",
+      "lights": [
+        { "type": "directional", "azimuth": 35, "elevation": 45, "intensity": 1.7279, "castShadow": true },
+        { "type": "directional", "azimuth": -150, "elevation": 20, "intensity": 1.4, "color": "#ffe6c8" },
+        { "type": "ambient", "intensity": 1.2 }
+      ]
+    },
+    "render": { "lines": { "width": 1, "color": "shade", "shade": 0.3, "depth": 0.02 } },
+    "export": { "formats": ["aseprite-json", "gif-preview"], "gif": { "scale": 1 } },
+    "pixel": {
+      "palette": "fixed:dojo",
+      "outline": { "color": "#14101e", "side": "outside", "width": 1, "snapToPalette": true },
+      "cleanup": { "orphans": "recolour" }
+    }
+  },
+  "typeDefaults": {
+    "character": {
+      "frame": { "width": 128, "height": 128 },
+      "camera": { "preset": "side", "pitch": 10, "yawOffset": 30 },
+      "rig": {
+        "preset": "humanoid-basic",
+        "bones": [
+          { "name": "headband-1", "parent": "head", "position": [0, 0.168, -0.13] },
+          { "name": "headband-2", "parent": "headband-1", "position": [0, -0.06, -0.145] },
+          { "name": "belt-1", "parent": "hips", "position": [0, 0.01, 0.15] },
+          { "name": "belt-2", "parent": "belt-1", "position": [0, -0.12, 0.01] }
+        ]
+      }
+    },
+    "effect": { "frame": { "width": 64, "height": 64 } }
+  }
+}

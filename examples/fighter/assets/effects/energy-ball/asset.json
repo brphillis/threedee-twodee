@@ -1,0 +1,352 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "effects/energy-ball",
+  "type": "effect",
+  "description": "The energy blast the karateka's special launches, drawn as flat layers facing the camera: a deep blue flame licking back, a light blue glow and a white-hot core, with speed streaks behind. The layers throb and the streaks drift back.",
+  "rig": {
+    "bones": [
+      {
+        "name": "blast",
+        "parent": null,
+        "position": [0, 0.5, 0]
+      },
+      {
+        "name": "flame",
+        "parent": "blast",
+        "position": [0, 0, 0]
+      },
+      {
+        "name": "glow",
+        "parent": "blast",
+        "position": [0, 0, 0]
+      },
+      {
+        "name": "core",
+        "parent": "blast",
+        "position": [0, 0, 0]
+      },
+      {
+        "name": "streaks",
+        "parent": "blast",
+        "position": [0, 0, 0]
+      }
+    ]
+  },
+  "render": {
+    "lines": "none"
+  },
+  "pixel": {
+    "outline": {
+      "color": "#1d3f9e",
+      "side": "outside",
+      "width": 1,
+      "snapToPalette": true
+    },
+    "cleanup": {
+      "orphans": "off"
+    }
+  },
+  "materials": {
+    "core": {
+      "color": "#ffffff",
+      "shading": "flat"
+    },
+    "glow": {
+      "color": "#5cc3ff",
+      "shading": "flat"
+    },
+    "deep": {
+      "color": "#2f78e8",
+      "shading": "flat"
+    }
+  },
+  "model": {
+    "parts": [
+      {
+        "type": "group",
+        "id": "flame",
+        "bone": "flame",
+        "position": [0, 0, 0],
+        "parts": [
+          {
+            "type": "extrude",
+            "id": "flame-outer",
+            "material": "deep",
+            "shape": [
+              [-0.0581, -0.1597],
+              [0.0059, -0.1699],
+              [0.0691, -0.1553],
+              [0.1223, -0.1181],
+              [0.1576, -0.0637],
+              [0.17, 0.0],
+              [0.1576, 0.0637],
+              [0.1223, 0.1181],
+              [0.0691, 0.1553],
+              [0.0059, 0.1699],
+              [-0.0581, 0.1597],
+              [-0.13, 0.15],
+              [-0.22, 0.1],
+              [-0.3, 0.15],
+              [-0.34, 0.07],
+              [-0.48, 0.06],
+              [-0.4, 0.0],
+              [-0.5, -0.05],
+              [-0.35, -0.07],
+              [-0.29, -0.14],
+              [-0.2, -0.1],
+              [-0.1, -0.155]
+            ],
+            "depth": 0.02,
+            "rotation": [0, -90, 0],
+            "position": [0, 0.5, 0.22]
+          }
+        ]
+      },
+      {
+        "type": "group",
+        "id": "glow",
+        "bone": "glow",
+        "position": [-0.015, 0, 0],
+        "parts": [
+          {
+            "type": "extrude",
+            "id": "glow-inner",
+            "material": "glow",
+            "shape": [
+              [-0.0328, -0.1133],
+              [0.0156, -0.1249],
+              [0.0648, -0.1167],
+              [0.1068, -0.0899],
+              [0.1351, -0.0488],
+              [0.145, 0.0],
+              [0.1351, 0.0488],
+              [0.1068, 0.0899],
+              [0.0648, 0.1167],
+              [0.0156, 0.1249],
+              [-0.0328, 0.1133],
+              [-0.12, 0.09],
+              [-0.2, 0.06],
+              [-0.3, 0.03],
+              [-0.22, 0.0],
+              [-0.31, -0.03],
+              [-0.19, -0.06],
+              [-0.11, -0.09]
+            ],
+            "depth": 0.02,
+            "rotation": [0, -90, 0],
+            "position": [0, 0.5, 0.22]
+          }
+        ]
+      },
+      {
+        "type": "group",
+        "id": "core",
+        "bone": "core",
+        "position": [-0.03, 0, 0],
+        "parts": [
+          {
+            "type": "extrude",
+            "id": "core-hot",
+            "material": "core",
+            "shape": [
+              [0.0, -0.0693],
+              [0.0316, -0.0796],
+              [0.0647, -0.0761],
+              [0.0935, -0.0595],
+              [0.1131, -0.0325],
+              [0.12, 0.0],
+              [0.1131, 0.0325],
+              [0.0935, 0.0595],
+              [0.0647, 0.0761],
+              [0.0316, 0.0796],
+              [0.0, 0.0693],
+              [-0.07, 0.04],
+              [-0.16, 0.0],
+              [-0.07, -0.04]
+            ],
+            "depth": 0.02,
+            "rotation": [0, -90, 0],
+            "position": [0, 0.5, 0.22]
+          }
+        ]
+      },
+      {
+        "type": "group",
+        "id": "streaks",
+        "bone": "streaks",
+        "position": [-0.04, 0, 0],
+        "parts": [
+          {
+            "type": "extrude",
+            "id": "streak-high",
+            "material": "core",
+            "shape": [[-0.3, 0.115], [-0.5, 0.11], [-0.52, 0.1], [-0.3, 0.1]],
+            "depth": 0.02,
+            "rotation": [0, -90, 0],
+            "position": [0, 0.5, 0.22]
+          },
+          {
+            "type": "extrude",
+            "id": "streak-low",
+            "material": "glow",
+            "shape": [[-0.36, -0.1], [-0.6, -0.105], [-0.62, -0.115], [-0.36, -0.115]],
+            "depth": 0.02,
+            "rotation": [0, -90, 0],
+            "position": [0, 0.5, 0.22]
+          }
+        ]
+      }
+    ]
+  },
+  "animation": {
+    "fps": 16,
+    "clips": {
+      "fly": {
+        "description": "Throbbing in flight, the streaks drifting back; the engine moves it across the screen.",
+        "duration": 0.5,
+        "keys": [
+          {
+            "t": 0.0,
+            "pose": {
+              "flame": {
+                "scale": [1, 1.0, 1.0]
+              },
+              "glow": {
+                "scale": [1, 1.08, 1.08]
+              },
+              "core": {
+                "scale": [1, 1.0, 1.0]
+              },
+              "streaks": {
+                "translation": [0, 0, -0.0]
+              }
+            }
+          },
+          {
+            "t": 0.0625,
+            "pose": {
+              "flame": {
+                "scale": [1, 1.07, 1.0707]
+              },
+              "glow": {
+                "scale": [1, 1.0566, 1.0566]
+              },
+              "core": {
+                "scale": [1, 0.92, 0.92]
+              },
+              "streaks": {
+                "translation": [0, 0, -0.015]
+              }
+            }
+          },
+          {
+            "t": 0.125,
+            "pose": {
+              "flame": {
+                "scale": [1, 1.0, 1.1]
+              },
+              "glow": {
+                "scale": [1, 1.0, 1.0]
+              },
+              "core": {
+                "scale": [1, 1.0, 1.0]
+              },
+              "streaks": {
+                "translation": [0, 0, -0.03]
+              }
+            }
+          },
+          {
+            "t": 0.1875,
+            "pose": {
+              "flame": {
+                "scale": [1, 0.93, 1.0707]
+              },
+              "glow": {
+                "scale": [1, 0.9434, 0.9434]
+              },
+              "core": {
+                "scale": [1, 1.08, 1.08]
+              },
+              "streaks": {
+                "translation": [0, 0, -0.045]
+              }
+            }
+          },
+          {
+            "t": 0.25,
+            "pose": {
+              "flame": {
+                "scale": [1, 1.0, 1.0]
+              },
+              "glow": {
+                "scale": [1, 0.92, 0.92]
+              },
+              "core": {
+                "scale": [1, 1.0, 1.0]
+              },
+              "streaks": {
+                "translation": [0, 0, -0.06]
+              }
+            }
+          },
+          {
+            "t": 0.3125,
+            "pose": {
+              "flame": {
+                "scale": [1, 1.07, 0.9293]
+              },
+              "glow": {
+                "scale": [1, 0.9434, 0.9434]
+              },
+              "core": {
+                "scale": [1, 0.92, 0.92]
+              },
+              "streaks": {
+                "translation": [0, 0, -0.075]
+              }
+            }
+          },
+          {
+            "t": 0.375,
+            "pose": {
+              "flame": {
+                "scale": [1, 1.0, 0.9]
+              },
+              "glow": {
+                "scale": [1, 1.0, 1.0]
+              },
+              "core": {
+                "scale": [1, 1.0, 1.0]
+              },
+              "streaks": {
+                "translation": [0, 0, -0.09]
+              }
+            }
+          },
+          {
+            "t": 0.4375,
+            "pose": {
+              "flame": {
+                "scale": [1, 0.93, 0.9293]
+              },
+              "glow": {
+                "scale": [1, 1.0566, 1.0566]
+              },
+              "core": {
+                "scale": [1, 1.08, 1.08]
+              },
+              "streaks": {
+                "translation": [0, 0, -0.105]
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "requiredClips": ["fly"]
+  }
+}

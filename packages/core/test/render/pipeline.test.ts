@@ -187,6 +187,69 @@ describe('the end-to-end pipeline on the starter crate', () => {
   });
 });
 
+describe('render lines', () => {
+  /** A small box standing in front of a big one, seen from the front, lined in magenta. */
+  const scene = (lines: unknown, front: Record<string, unknown> = {}) => {
+    const dir = starter();
+    editAsset(dir, (a) => {
+      a.directions = 'd1';
+      a.render = { lines };
+      a.materials = { back: { color: '#3b5dc9' }, front: { color: '#a0693a', ...front } };
+      a.model = {
+        parts: [
+          { type: 'box', id: 'back', material: 'back', size: [1, 1, 0.2], position: [0, 0.5, -0.4] },
+          { type: 'box', id: 'front', material: 'front', size: [0.4, 0.4, 0.2], position: [0, 0.2, 0.3] },
+        ],
+      };
+    });
+    return dir;
+  };
+  /** Magenta pixels in the sprite, and those of them inside the silhouette (all four neighbours opaque). */
+  const magenta = async (dir: string) => {
+    const build = join(dir, 'build/props/crate');
+    const render = await readPng(join(build, 'renders/idle/s/000.png'));
+    const sprite = await readPng(join(build, 'sprites/idle/s/000.png'));
+    const at = (x: number, y: number) => (y * sprite.width + x) * 4;
+    const opaque = (x: number, y: number) =>
+      x >= 0 && y >= 0 && x < sprite.width && y < sprite.height && sprite.rgba[at(x, y) + 3] === 255;
+    let all = 0;
+    let inside = 0;
+    for (let y = 0; y < sprite.height; y++)
+      for (let x = 0; x < sprite.width; x++) {
+        const i = at(x, y);
+        if (
+          sprite.rgba[i + 3] !== 255 ||
+          sprite.rgba[i] !== 255 ||
+          sprite.rgba[i + 1] !== 0 ||
+          sprite.rgba[i + 2] !== 255
+        )
+          continue;
+        all++;
+        if (opaque(x - 1, y) && opaque(x + 1, y) && opaque(x, y - 1) && opaque(x, y + 1)) inside++;
+      }
+    const marked = render.rgba.filter((v, i) => i % 4 === 3 && v === 254).length;
+    return { all, inside, marked };
+  };
+
+  it('lines every part, inside the silhouette too, and marks line samples in the render', async () => {
+    const dir = scene({ width: 1, color: '#ff00ff' });
+    expect((await generate(dir)).status).toBe('ok');
+    const lined = await magenta(dir);
+    expect(lined.marked).toBeGreaterThan(0);
+    expect(lined.inside).toBeGreaterThan(0);
+
+    // A material with outline false draws no lines, so the front box's line goes.
+    const skipped = scene({ width: 1, color: '#ff00ff' }, { outline: false });
+    expect((await generate(skipped)).status).toBe('ok');
+    const without = await magenta(skipped);
+    expect(without.inside).toBeLessThan(lined.inside);
+
+    const none = scene('none');
+    expect((await generate(none)).status).toBe('ok');
+    expect(await magenta(none)).toEqual({ all: 0, inside: 0, marked: 0 });
+  }, 120_000);
+});
+
 const EXAMPLES = join(import.meta.dirname, '..', '..', '..', '..', 'examples');
 const strip = (doc: Record<string, unknown>) => {
   // Stage hashes fingerprint the toolchain (harness bundle, library versions), not the output;

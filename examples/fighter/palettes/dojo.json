@@ -1,0 +1,32 @@
+{
+  "$schema": "../.td2d/schemas/palette.schema.json",
+  "schemaVersion": "1.0.0",
+  "name": "dojo",
+  "description": "Ramps for the fighting-game example: warm skin, a cool-shadowed white gi, ink black, headband red, cloth wraps and a blue energy ramp, with one shared outline colour.",
+  "colors": [
+    "#14101e",
+    "#3b1f1a",
+    "#6e3b2a",
+    "#a8603e",
+    "#d9895a",
+    "#f2b98a",
+    "#ffe0c2",
+    "#3d4260",
+    "#6c7396",
+    "#a9b0cb",
+    "#dde2ef",
+    "#ffffff",
+    "#26233a",
+    "#3e3a5c",
+    "#4a0f1c",
+    "#8c1c2b",
+    "#d0303c",
+    "#ff6a5c",
+    "#c9a97a",
+    "#efdcb5",
+    "#1d3f9e",
+    "#2f78e8",
+    "#5cc3ff",
+    "#b5ecff"
+  ]
+}

@@ -26,6 +26,32 @@ export const PixelsPerUnit = z.union([z.number().positive().max(1024), z.literal
   examples: [16, 'auto'],
 });
 
+export const RenderLines = z
+  .strictObject({
+    width: z.number().min(0.5).max(4).optional().meta({ description: 'Line width in final sprite pixels. Default 1.' }),
+    color: z
+      .union([z.literal('shade'), HexColor])
+      .optional()
+      .meta({
+        description:
+          "A #rrggbb colour for every line, or shade: each part's line is a darker shade of the part's own colour, as pixel artists draw them. Default shade.",
+      }),
+    shade: z
+      .number()
+      .min(0)
+      .max(1)
+      .optional()
+      .meta({ description: "With color shade, the line's brightness as a share of the part's colour. Default 0.4." }),
+    depth: z.number().min(0).max(1).optional().meta({
+      description:
+        'How far in front of what lies behind it a part must be to get a line there, in metres. Keep it below the thickness of the parts: parts that merely meet stay unlined. Default 0.03.',
+    }),
+  })
+  .meta({
+    description: 'Lines drawn by the renderer around each part.',
+    examples: [{ width: 1, color: 'shade', shade: 0.4 }],
+  });
+
 export const RenderOverrides = z
   .strictObject({
     supersample: z
@@ -40,6 +66,13 @@ export const RenderOverrides = z
       .regex(/^[a-z][a-z0-9-]*$/)
       .optional()
       .meta({ description: 'Render backend id. Default playwright-swiftshader.' }),
+    lines: z
+      .union([z.literal('none'), RenderLines])
+      .optional()
+      .meta({
+        description:
+          'Lines the renderer draws around every part, inside the silhouette as well as out, wherever a part stands in front of something further back. none (the default) draws none.',
+      }),
   })
   .meta({ description: 'Render settings.' });
 
@@ -196,6 +229,7 @@ export const ResolvedClip = z.strictObject({
   interpolation: Interpolation,
   keys: z.array(ClipKey).nullable(),
   generator: ClipGenerator.nullable(),
+  layers: z.array(ClipGenerator).optional(),
   description: Description.optional(),
 });
 
@@ -232,8 +266,12 @@ export const ResolvedAsset = z
       .strictObject({ fps: z.number().int(), clips: z.record(ClipName, ResolvedClip) })
       .meta({ description: 'Clips with their sample times; generator clips keep their settings.' }),
     render: z
-      .strictObject({ supersample: z.number().int(), backend: z.string() })
-      .meta({ description: 'Supersampling factor and render backend.' }),
+      .strictObject({
+        supersample: z.number().int(),
+        backend: z.string(),
+        lines: z.union([z.literal('none'), RenderLines]).optional(),
+      })
+      .meta({ description: 'Supersampling factor, render backend and lines.' }),
     pixel: ResolvedPixel.meta({ description: 'Pixel settings after presets and overrides.' }),
     paletteColors: z.array(HexColor).nullable().meta({ description: 'The colours of a fixed palette, or null.' }),
     sheet: ResolvedSheet.meta({ description: 'Sheet settings after presets and overrides.' }),

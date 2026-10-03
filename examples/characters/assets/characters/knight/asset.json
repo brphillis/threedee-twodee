@@ -3,7 +3,7 @@
   "schemaVersion": "1.0.0",
   "id": "characters/knight",
   "type": "character",
-  "description": "A knight with a sword in the right hand and a shield on the left arm. Every part rides one bone; the left limbs are mirrored to the right.",
+  "description": "A crowned knight in plate armour, with a royal blue surcoat, a red cape, a longsword in the right hand and a heraldic shield on the left arm. Every part rides one bone; the left limbs are mirrored to the right.",
   "pixelsPerUnit": "auto",
   "model": {
     "parts": [
@@ -18,26 +18,75 @@
     "fps": 10,
     "clips": {
       "idle": {
-        "description": "A slow breath.",
+        "description": "A deep breath, with the cape stirring in the wind and the plume fluttering.",
         "duration": 1,
         "generator": {
           "type": "idle-breathe",
-          "amount": 3,
-          "rise": 0.015
-        }
+          "amount": 4,
+          "rise": 0.035
+        },
+        "layers": [
+          {
+            "type": "sway",
+            "bones": ["cape-1", "cape-2", "cape-3"],
+            "amount": 4,
+            "bias": 6,
+            "lag": 0.15,
+            "growth": 1.25
+          },
+          {
+            "type": "sway",
+            "bones": ["cape-1", "cape-2", "cape-3"],
+            "axis": "z",
+            "amount": 2,
+            "cycles": 2,
+            "lag": 0.2
+          },
+          {
+            "type": "sway",
+            "bones": ["plume"],
+            "amount": 6,
+            "cycles": 2
+          }
+        ]
       },
       "walk": {
-        "description": "Generated walk cycle.",
+        "description": "Generated walk cycle, with the cape streaming back and rippling with each step.",
         "duration": 0.8,
         "generator": {
           "type": "walk-cycle",
           "stride": 25,
-          "bob": 0.065,
+          "bob": 0.019,
           "armSwing": 15
-        }
+        },
+        "layers": [
+          {
+            "type": "sway",
+            "bones": ["cape-1", "cape-2", "cape-3"],
+            "amount": 5,
+            "bias": 12,
+            "cycles": 2,
+            "lag": 0.15,
+            "growth": 1.25
+          },
+          {
+            "type": "sway",
+            "bones": ["cape-1", "cape-2", "cape-3"],
+            "axis": "z",
+            "amount": 3,
+            "lag": 0.2
+          },
+          {
+            "type": "sway",
+            "bones": ["plume"],
+            "amount": 10,
+            "cycles": 2,
+            "lag": 0
+          }
+        ]
       },
       "attack": {
-        "description": "Draw the sword back over the shoulder, cut down and forward, recover.",
+        "description": "Draw the sword back over the shoulder, cut down and forward, recover; the cape flares with the cut.",
         "duration": 0.5,
         "loop": false,
         "motion": true,
@@ -80,6 +129,21 @@
           {
             "t": 0.5,
             "pose": {}
+          }
+        ],
+        "layers": [
+          {
+            "type": "sway",
+            "bones": ["cape-1", "cape-2", "cape-3"],
+            "amount": 10,
+            "bias": 8,
+            "lag": 0.2,
+            "growth": 1.25
+          },
+          {
+            "type": "sway",
+            "bones": ["plume"],
+            "amount": 12
           }
         ]
       }

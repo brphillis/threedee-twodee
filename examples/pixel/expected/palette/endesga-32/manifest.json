@@ -2,16 +2,16 @@
   "schemaVersion": "1.0.0",
   "generator": { "name": "td2d", "version": "0.0.0" },
   "assetId": "palette/endesga-32",
-  "assetHash": "sha256:d00bfdfcda9034ca9b92a5b5b891fce29c871d05ef1c07025e8f160157b96881",
-  "generatedAt": "2026-10-02T11:49:08.051Z",
-  "frame": { "width": 40, "height": 40 },
+  "assetHash": "sha256:7c8003ecf58388c30c7180f392cc551bfdfa1a9e68629606a8023f51e1d674f4",
+  "generatedAt": "2026-10-03T06:41:38.719Z",
+  "frame": { "width": 64, "height": 64 },
   "pivot": {
-    "x": 20,
-    "y": 32,
-    "normalized": { "x": 0.5, "y": 0.8 }
+    "x": 32,
+    "y": 52,
+    "normalized": { "x": 0.5, "y": 0.8125 }
   },
-  "pixelsPerUnit": 28,
-  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 8 },
+  "pixelsPerUnit": 44,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 12 },
   "directions": [
     { "name": "s", "yaw": 0, "mirrorOf": null },
     { "name": "w", "yaw": 90, "mirrorOf": null },
@@ -64,8 +64,8 @@
       "name": "endesga-32",
       "image": "endesga-32.png",
       "data": "endesga-32.json",
-      "width": 40,
-      "height": 160,
+      "width": 64,
+      "height": 256,
       "layout": "grid"
     }
   ],
@@ -78,8 +78,8 @@
       "sheet": "endesga-32",
       "x": 0,
       "y": 0,
-      "w": 40,
-      "h": 40,
+      "w": 64,
+      "h": 64,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -91,9 +91,9 @@
       "index": 0,
       "sheet": "endesga-32",
       "x": 0,
-      "y": 40,
-      "w": 40,
-      "h": 40,
+      "y": 64,
+      "w": 64,
+      "h": 64,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -105,9 +105,9 @@
       "index": 0,
       "sheet": "endesga-32",
       "x": 0,
-      "y": 80,
-      "w": 40,
-      "h": 40,
+      "y": 128,
+      "w": 64,
+      "h": 64,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -119,9 +119,9 @@
       "index": 0,
       "sheet": "endesga-32",
       "x": 0,
-      "y": 120,
-      "w": 40,
-      "h": 40,
+      "y": 192,
+      "w": 64,
+      "h": 64,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -133,12 +133,12 @@
     "manifest": ["manifest.json"]
   },
   "stages": {
-    "model": "sha256:0cc760358d4fa215f3ab736ee1b58519db977c282d0b9bcc8fe4107e675f4766",
-    "rig": "sha256:98e5617ea49887f95baba20f271b36b29064187d1249feb8ac074415612124c1",
-    "plan": "sha256:16f4d5e3d9f8d3b096005cacdd175fc75f2456d2088ad47d649d9b6bca649c78",
-    "render": "sha256:92448f4a80e6545e7d7247c5965f5a820b045098114f46533e7e3a533cb9e222",
-    "pixel": "sha256:be1354801522e334f05936673f451758ec0e0efe453bc599dcb33182bd6916a7",
-    "sheet": "sha256:21115485ce4c503f2b5ae9e4a9f0f2e6cd0b7f1d929b98746cb3783ff6038313"
+    "model": "sha256:1ce36eaed64ea87af8050347f9e19242f81b05dd086c176d8f44833736281d3f",
+    "rig": "sha256:74ea29786ee33146082ff774ca7fe8bbf3e9d9a43643c417272035dde2df5afe",
+    "plan": "sha256:8d4b29740731da08fc8af00fe74003ae0d4b2e1cdd4e431c52b815e31941d268",
+    "render": "sha256:8351512d0d52bd29db781e6ba35c318db6d3f8776c974054dcd7b9fa3c135c4d",
+    "pixel": "sha256:e0eb78e7f5def0b6697e553126ff83bbd64ad0640f4d582bfb3e47c06fa3d634",
+    "sheet": "sha256:03fc7f51db9600a119f88dcb17b25aa6257e5309e94e3fd51aba325aa7711adf"
   },
   "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
 }

@@ -175,13 +175,55 @@ export const SpinGenerator = z
   })
   .meta({ description: 'Turn at a constant rate.', examples: [{ type: 'spin', turns: 1, axis: 'y' }] });
 
+export const SwayGenerator = z
+  .strictObject({
+    type: z.literal('sway'),
+    bones: z
+      .array(BoneName)
+      .min(1)
+      .max(16)
+      .meta({ description: 'A chain of bones from root to tip, such as the segments of a cape or a tail.' }),
+    axis: z.enum(['x', 'y', 'z']).optional().meta({ description: 'Axis each bone turns about. Default x.' }),
+    amount: z
+      .number()
+      .min(0)
+      .max(90)
+      .optional()
+      .meta({ description: 'Swing either side of the bias, in degrees. Default 5.' }),
+    bias: z
+      .number()
+      .min(-90)
+      .max(90)
+      .optional()
+      .meta({ description: 'A constant turn the swing centres on, such as a cape blown back. Default 0.' }),
+    lag: z.number().min(0).max(1).optional().meta({
+      description:
+        'How far each bone trails the one before it, in cycles, so the wave travels down the chain. Default 0.12.',
+    }),
+    cycles: z
+      .number()
+      .int()
+      .min(1)
+      .max(16)
+      .optional()
+      .meta({ description: 'Whole swings per clip, so a looping clip joins up. Default 1.' }),
+    growth: z.number().min(0.25).max(4).optional().meta({
+      description:
+        'Each bone turns this many times as far as the one before it; above 1 the tip moves most. Default 1.',
+    }),
+  })
+  .meta({
+    description: 'A wave travelling down a chain of bones, for capes, banners, tails and plumes.',
+    examples: [{ type: 'sway', bones: ['spine', 'chest', 'neck', 'head'], axis: 'z', amount: 3 }],
+  });
+
 export const ClipGenerator = z
-  .discriminatedUnion('type', [WalkCycleGenerator, IdleBreatheGenerator, BobGenerator, SpinGenerator])
+  .discriminatedUnion('type', [WalkCycleGenerator, IdleBreatheGenerator, BobGenerator, SpinGenerator, SwayGenerator])
   .meta({
     description: 'Procedural clip. td2d turns it into keys; `td2d model inspect <id> --clip <name> --keys` shows them.',
   });
 
-export const GENERATOR_TYPES = ['walk-cycle', 'idle-breathe', 'bob', 'spin'] as const;
+export const GENERATOR_TYPES = ['walk-cycle', 'idle-breathe', 'bob', 'spin', 'sway'] as const;
 
 export const ClipDefinition = z
   .strictObject({
@@ -209,6 +251,10 @@ export const ClipDefinition = z
       .optional()
       .meta({ description: 'Pose keys. Use keys or generator, not both.' }),
     generator: ClipGenerator.optional(),
+    layers: z.array(ClipGenerator).min(1).max(8).optional().meta({
+      description:
+        "Generators layered over the clip's keys or generator, such as a sway on a cape over a walk. At every frame their rotations turn the pose further and their translations add to it.",
+    }),
     interpolation: Interpolation.optional().meta({ description: 'Default linear.' }),
     sampleTimes: z
       .array(z.number().min(0).max(60))

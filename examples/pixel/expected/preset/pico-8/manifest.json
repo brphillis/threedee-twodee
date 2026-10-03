@@ -2,16 +2,16 @@
   "schemaVersion": "1.0.0",
   "generator": { "name": "td2d", "version": "0.0.0" },
   "assetId": "preset/pico-8",
-  "assetHash": "sha256:75ae562ead106f04c37f8cff91ea73d839a38c348676a070553d665f95c77642",
-  "generatedAt": "2026-10-02T11:49:08.135Z",
-  "frame": { "width": 40, "height": 40 },
+  "assetHash": "sha256:0cfa32d1eaf5b8bd5c410f0ae2c5d29e51237de64f424d996ea9d8bb30784c40",
+  "generatedAt": "2026-10-03T06:41:38.820Z",
+  "frame": { "width": 64, "height": 64 },
   "pivot": {
-    "x": 20,
-    "y": 31,
-    "normalized": { "x": 0.5, "y": 0.775 }
+    "x": 32,
+    "y": 51,
+    "normalized": { "x": 0.5, "y": 0.796875 }
   },
-  "pixelsPerUnit": 28,
-  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 9 },
+  "pixelsPerUnit": 44,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 13 },
   "directions": [
     { "name": "s", "yaw": 0, "mirrorOf": null },
     { "name": "w", "yaw": 90, "mirrorOf": null },
@@ -48,8 +48,8 @@
       "name": "pico-8",
       "image": "pico-8.png",
       "data": "pico-8.json",
-      "width": 40,
-      "height": 160,
+      "width": 64,
+      "height": 256,
       "layout": "grid"
     }
   ],
@@ -62,8 +62,8 @@
       "sheet": "pico-8",
       "x": 0,
       "y": 0,
-      "w": 40,
-      "h": 40,
+      "w": 64,
+      "h": 64,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -75,9 +75,9 @@
       "index": 0,
       "sheet": "pico-8",
       "x": 0,
-      "y": 40,
-      "w": 40,
-      "h": 40,
+      "y": 64,
+      "w": 64,
+      "h": 64,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -89,9 +89,9 @@
       "index": 0,
       "sheet": "pico-8",
       "x": 0,
-      "y": 80,
-      "w": 40,
-      "h": 40,
+      "y": 128,
+      "w": 64,
+      "h": 64,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -103,9 +103,9 @@
       "index": 0,
       "sheet": "pico-8",
       "x": 0,
-      "y": 120,
-      "w": 40,
-      "h": 40,
+      "y": 192,
+      "w": 64,
+      "h": 64,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -117,12 +117,12 @@
     "manifest": ["manifest.json"]
   },
   "stages": {
-    "model": "sha256:0cc760358d4fa215f3ab736ee1b58519db977c282d0b9bcc8fe4107e675f4766",
-    "rig": "sha256:cab8f1b5d605b0acb97c050952c3a254a416894c51742f7902550f38fe89ad53",
-    "plan": "sha256:6a0a0c763a71b1322a51421b7743be74f02ba00c39f4bf6a855def65f5b42c0e",
-    "render": "sha256:93c194fd046a5e4c34d9287a6cead0e91066c4b76fb6120f36d472e9a057b2c7",
-    "pixel": "sha256:95b7e71ab15e264628b03606f212d0dc6bab49c8d821d940bd81a6cca47af2d5",
-    "sheet": "sha256:a004e4eedd9828a50b2699006a7c55d1f3d6685a4db1a64898f731f71815a0eb"
+    "model": "sha256:1ce36eaed64ea87af8050347f9e19242f81b05dd086c176d8f44833736281d3f",
+    "rig": "sha256:68c537d7a954fca1e6ed6d4ea35ff5bae86994936111e91eabefd7adeee592c5",
+    "plan": "sha256:3065bb37b61106849a016caa5e05d956d4f5286d2ab4ccf1ebcf685f4da9bb6c",
+    "render": "sha256:df1c907747f32892c88e7f6bdf7121aabbdd016645ab83005600a37900d1e3ea",
+    "pixel": "sha256:e63029c550c8094f95ddd26ff305d703f9e05ca3dd660ae13c258f80cd00cc2a",
+    "sheet": "sha256:2c1d4d7e5c4edd17aa06193233a7d9f72c75fe55f331fe5a6a228c6637df8236"
   },
   "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
 }

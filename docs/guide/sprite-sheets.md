@@ -7,7 +7,7 @@ The `sheet` stage places every sprite on one or more sheet images, and the `expo
 | `grid` (default) | `packed` |
 |---|---|
 | ![The knight on a grid sheet](images/sheets/knight-grid.png) | ![The knight packed](images/sheets/knight-packed.png) |
-| One row per clip and direction, one column per frame. 320 x 1152 for the knight. | Sprites trimmed to their opaque pixels and packed with maxrects. 512 x 256 for the same frames. |
+| One row per clip and direction, one column per frame. 960 x 2304 for the knight. | Sprites trimmed to their opaque pixels and packed with maxrects. 1024 x 1024 for the same frames. |
 
 - **`grid`** is predictable: a cell's place follows from its clip, direction and frame number. `flow: "columns"` turns it so each sequence runs down a column.
 - **`strips`** writes a separate sheet for each clip and direction, such as `knight-walk-s.png`.

@@ -1,7 +1,7 @@
 import type { BonePoseT, ClipKeyT, ResolvedClipT, ResolvedRigT } from '@td2d/schema';
 import { type Quaternion, Vector3 } from 'three';
 import { generateKeys } from './generators.ts';
-import { EASINGS, quaternionFrom } from './math.ts';
+import { EASINGS, eulerDegrees, quaternionFrom, round6 } from './math.ts';
 
 /** A bone's pose relative to its rest pose. */
 export interface PoseDelta {
@@ -10,12 +10,46 @@ export interface PoseDelta {
   readonly scale: Vector3;
 }
 
-/** The keys a clip plays: its own, or its generator's. Empty for a rest-pose clip. */
+/**
+ * The keys a clip plays: its own, or its generator's, empty for a rest-pose clip. With layers,
+ * one key per sample time: the clip's pose there with each layer's pose composed on top.
+ */
 export function clipKeys(clip: ResolvedClipT, rig: ResolvedRigT | null): ClipKeyT[] {
-  if (clip.keys) return clip.keys;
-  if (clip.generator) return generateKeys(clip.generator, rig, clip.duration, clip.times);
-  return [];
+  const keys = clip.keys ?? (clip.generator ? generateKeys(clip.generator, rig, clip.duration, clip.times) : []);
+  if (!clip.layers?.length) return keys;
+  const layers = clip.layers.map((layer) => generateKeys(layer, rig, clip.duration, clip.times));
+  return clip.times.map((t, i) => {
+    const pose = sampleKeys(keys, t, clip);
+    for (const layer of layers) {
+      for (const [bone, p] of Object.entries(layer[i]?.pose ?? {})) {
+        const d = delta(p);
+        const base = pose.get(bone);
+        pose.set(
+          bone,
+          base
+            ? {
+                rotation: base.rotation.clone().multiply(d.rotation),
+                translation: base.translation.clone().add(d.translation),
+                scale: base.scale.clone().multiply(d.scale),
+              }
+            : d,
+        );
+      }
+    }
+    const out: ClipKeyT['pose'] = {};
+    for (const [bone, d] of pose) {
+      out[bone] = {
+        rotation: eulerDegrees(d.rotation).map(round6) as [number, number, number],
+        ...(d.translation.lengthSq() > 0 ? { translation: d.translation.toArray().map(round6) as Vec3 } : {}),
+        ...(d.scale.equals(ONE) ? {} : { scale: d.scale.toArray().map(round6) as Vec3 }),
+      };
+    }
+    return { t: round6(t), pose: out };
+  });
 }
+
+type Vec3 = [number, number, number];
+const ONE = new Vector3(1, 1, 1);
 
 /** Every bone a set of keys moves, in first-seen order. */
 export function animatedBones(keys: readonly ClipKeyT[]): string[] {

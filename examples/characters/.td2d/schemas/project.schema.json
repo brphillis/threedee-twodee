@@ -554,6 +554,64 @@
               "description": "Render backend id. Default playwright-swiftshader.",
               "type": "string",
               "pattern": "^[a-z][a-z0-9-]*$"
+            },
+            "lines": {
+              "description": "Lines the renderer draws around every part, inside the silhouette as well as out, wherever a part stands in front of something further back. none (the default) draws none.",
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "none"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "width": {
+                      "description": "Line width in final sprite pixels. Default 1.",
+                      "type": "number",
+                      "minimum": 0.5,
+                      "maximum": 4
+                    },
+                    "color": {
+                      "description": "A #rrggbb colour for every line, or shade: each part's line is a darker shade of the part's own colour, as pixel artists draw them. Default shade.",
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "const": "shade"
+                        },
+                        {
+                          "type": "string",
+                          "pattern": "^#[0-9a-fA-F]{6}$",
+                          "description": "sRGB colour as #rrggbb.",
+                          "examples": [
+                            "#a0693a"
+                          ]
+                        }
+                      ]
+                    },
+                    "shade": {
+                      "description": "With color shade, the line's brightness as a share of the part's colour. Default 0.4.",
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "depth": {
+                      "description": "How far in front of what lies behind it a part must be to get a line there, in metres. Keep it below the thickness of the parts: parts that merely meet stay unlined. Default 0.03.",
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    }
+                  },
+                  "additionalProperties": false,
+                  "description": "Lines drawn by the renderer around each part.",
+                  "examples": [
+                    {
+                      "width": 1,
+                      "color": "shade",
+                      "shade": 0.4
+                    }
+                  ]
+                }
+              ]
             }
           },
           "additionalProperties": false,
@@ -1834,6 +1892,64 @@
                 "description": "Render backend id. Default playwright-swiftshader.",
                 "type": "string",
                 "pattern": "^[a-z][a-z0-9-]*$"
+              },
+              "lines": {
+                "description": "Lines the renderer draws around every part, inside the silhouette as well as out, wherever a part stands in front of something further back. none (the default) draws none.",
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "const": "none"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "width": {
+                        "description": "Line width in final sprite pixels. Default 1.",
+                        "type": "number",
+                        "minimum": 0.5,
+                        "maximum": 4
+                      },
+                      "color": {
+                        "description": "A #rrggbb colour for every line, or shade: each part's line is a darker shade of the part's own colour, as pixel artists draw them. Default shade.",
+                        "anyOf": [
+                          {
+                            "type": "string",
+                            "const": "shade"
+                          },
+                          {
+                            "type": "string",
+                            "pattern": "^#[0-9a-fA-F]{6}$",
+                            "description": "sRGB colour as #rrggbb.",
+                            "examples": [
+                              "#a0693a"
+                            ]
+                          }
+                        ]
+                      },
+                      "shade": {
+                        "description": "With color shade, the line's brightness as a share of the part's colour. Default 0.4.",
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "depth": {
+                        "description": "How far in front of what lies behind it a part must be to get a line there, in metres. Keep it below the thickness of the parts: parts that merely meet stay unlined. Default 0.03.",
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      }
+                    },
+                    "additionalProperties": false,
+                    "description": "Lines drawn by the renderer around each part.",
+                    "examples": [
+                      {
+                        "width": 1,
+                        "color": "shade",
+                        "shade": 0.4
+                      }
+                    ]
+                  }
+                ]
               }
             },
             "additionalProperties": false,

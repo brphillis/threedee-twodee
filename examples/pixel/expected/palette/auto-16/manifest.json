@@ -2,16 +2,16 @@
   "schemaVersion": "1.0.0",
   "generator": { "name": "td2d", "version": "0.0.0" },
   "assetId": "palette/auto-16",
-  "assetHash": "sha256:184b12c7519e71fd184bffbac035ea706c74a4458dc3dd136b1e6c49f1d60705",
-  "generatedAt": "2026-10-02T11:49:07.963Z",
-  "frame": { "width": 40, "height": 40 },
+  "assetHash": "sha256:34ed8d2810adde111d59230f3328d2606b9b021951abdb349d6c55ff08d0842c",
+  "generatedAt": "2026-10-03T06:41:38.597Z",
+  "frame": { "width": 64, "height": 64 },
   "pivot": {
-    "x": 20,
-    "y": 32,
-    "normalized": { "x": 0.5, "y": 0.8 }
+    "x": 32,
+    "y": 52,
+    "normalized": { "x": 0.5, "y": 0.8125 }
   },
-  "pixelsPerUnit": 28,
-  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 8 },
+  "pixelsPerUnit": 44,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 12 },
   "directions": [
     { "name": "s", "yaw": 0, "mirrorOf": null },
     { "name": "w", "yaw": 90, "mirrorOf": null },
@@ -22,21 +22,21 @@
     "mode": "auto:16",
     "name": null,
     "colors": [
-      "#7b2838",
-      "#842c3c",
-      "#8c2f40",
-      "#943244",
-      "#9c3648",
-      "#a5394d",
+      "#7c2838",
+      "#923243",
+      "#9d3649",
+      "#a4394d",
       "#a93b4f",
       "#ae3d51",
       "#247f44",
+      "#8f8163",
       "#2f9e56",
       "#a09376",
       "#38b764",
-      "#ababab",
-      "#c4b492",
-      "#cebe99",
+      "#acaba8",
+      "#cbb992",
+      "#d7c6a0",
+      "#e3d1a9",
       "#f4f4f4"
     ]
   },
@@ -48,8 +48,8 @@
       "name": "auto-16",
       "image": "auto-16.png",
       "data": "auto-16.json",
-      "width": 40,
-      "height": 160,
+      "width": 64,
+      "height": 256,
       "layout": "grid"
     }
   ],
@@ -62,8 +62,8 @@
       "sheet": "auto-16",
       "x": 0,
       "y": 0,
-      "w": 40,
-      "h": 40,
+      "w": 64,
+      "h": 64,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -75,9 +75,9 @@
       "index": 0,
       "sheet": "auto-16",
       "x": 0,
-      "y": 40,
-      "w": 40,
-      "h": 40,
+      "y": 64,
+      "w": 64,
+      "h": 64,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -89,9 +89,9 @@
       "index": 0,
       "sheet": "auto-16",
       "x": 0,
-      "y": 80,
-      "w": 40,
-      "h": 40,
+      "y": 128,
+      "w": 64,
+      "h": 64,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -103,9 +103,9 @@
       "index": 0,
       "sheet": "auto-16",
       "x": 0,
-      "y": 120,
-      "w": 40,
-      "h": 40,
+      "y": 192,
+      "w": 64,
+      "h": 64,
       "trimmed": false,
       "offset": { "x": 0, "y": 0 },
       "mirrored": false
@@ -117,12 +117,12 @@
     "manifest": ["manifest.json"]
   },
   "stages": {
-    "model": "sha256:0cc760358d4fa215f3ab736ee1b58519db977c282d0b9bcc8fe4107e675f4766",
-    "rig": "sha256:a49610a1879973c67263d1650109c8224f0bf5245fffe86373683c7f3c4edaa4",
-    "plan": "sha256:a93bb26e9dd0fe58aea6988e9cd589c0a457530aa7aab4252c0dda7ef7e82d6d",
-    "render": "sha256:58c7f75e2543a0b42cb6aee9442e290bcd821ef44eb4ddc18f6b761f71b9bab3",
-    "pixel": "sha256:52dda5e0c4be155c1d3b5d1d14641e4c1d406eb0727240b1464555f2e63d5ebc",
-    "sheet": "sha256:3da1be78b1ef9e1fb20ca1fc3767e7a40d1923c75d472cdf2b06431cc0054ea6"
+    "model": "sha256:1ce36eaed64ea87af8050347f9e19242f81b05dd086c176d8f44833736281d3f",
+    "rig": "sha256:5a9e12928a09a0d75eea124ac33b1b1d2469d620c9fcb4757abbd8d4b42417d4",
+    "plan": "sha256:6604968c01be0a6446bbd4c602d186e232fc612be13ddfdba3a76d3d69a47881",
+    "render": "sha256:f748933edfee72cbddeeca7d6badaf0c0caa1462e919e8bc01120f0241cb1c4e",
+    "pixel": "sha256:44652e0fbcc0779881c831aed94b3114161ed8cd721cdd61ff6a27502c483cbc",
+    "sheet": "sha256:af024ccbc33e8bf7134911701a39c2d76bf193b42d046e399b85d9ce195c0025"
   },
   "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
 }

@@ -5,6 +5,7 @@ import {
   type ExportFormatT,
   type FrameSample,
   Manifest,
+  type RenderLinesSettings,
   type RenderMaterial,
   type RenderSceneSettings,
   type ResolvedAssetT,
@@ -292,10 +293,29 @@ function poseHash(positions: Float64Array): string {
   return sha256Hex(new Uint8Array(rounded.buffer));
 }
 
-/** Pixels the pixel stage adds outside the rendered silhouette: the width of an outside outline. */
+/**
+ * Pixels added outside the rendered silhouette: the width of an outside outline, plus the
+ * lines the renderer draws around every part.
+ */
 function outlinePad(asset: ResolvedAssetT): number {
   const o = asset.pixel.outline;
-  return o !== 'none' && o.side === 'outside' ? o.width : 0;
+  return (o !== 'none' && o.side === 'outside' ? o.width : 0) + Math.ceil(renderLines(asset)?.width ?? 0);
+}
+
+/** The harness's line settings, or null when the asset draws no lines. */
+function renderLines(asset: ResolvedAssetT): RenderLinesSettings | null {
+  const lines = asset.render.lines;
+  if (lines === undefined || lines === 'none') return null;
+  return {
+    width: lines.width ?? 1,
+    color: lines.color === undefined || lines.color === 'shade' ? null : lines.color,
+    shade: lines.shade ?? 0.4,
+    depth: lines.depth ?? 0.03,
+    skip: Object.entries(asset.materials)
+      .filter(([, m]) => !m.outline)
+      .map(([name]) => name)
+      .sort(),
+  };
 }
 
 const plan: Stage<PlanData> = {
@@ -436,6 +456,7 @@ const render: Stage<RenderData> = {
   key: ({ asset }) => ({
     materials: renderMaterials(asset),
     lighting: asset.lighting,
+    lines: renderLines(asset),
     backend: getBackend(asset.render.backend).fingerprint(),
   }),
   async run(ctx, dir) {
@@ -443,6 +464,7 @@ const render: Stage<RenderData> = {
     const planData = ctx.output<PlanData>('plan').data;
     const { preset: _p, ...lighting } = asset.lighting;
     const materials = renderMaterials(asset);
+    const lines = renderLines(asset);
     // A sample's pixels depend on its posed geometry, the scene, its yaw, the materials, the
     // lighting and the backend, not on the rest of the clip, so each sample is cached alone.
     const shared = {
@@ -452,6 +474,8 @@ const render: Stage<RenderData> = {
       scene: planData.scene,
       materials,
       lighting,
+      // Absent when there are no lines, so existing cache entries still match.
+      ...(lines ? { lines } : {}),
       backend: getBackend(asset.render.backend).fingerprint(),
     };
     const itemKey = (s: FrameSample) =>
@@ -499,7 +523,7 @@ const render: Stage<RenderData> = {
       const items = new Map(todo.map((s) => [s.key, itemKey(s)]));
       const job = {
         model: { glb: readFileSync(join(ctx.output('rig').dir, 'model.glb')), label: asset.id },
-        scene: { ...planData.scene, lighting, materials },
+        scene: { ...planData.scene, lighting, materials, ...(lines ? { lines } : {}) },
         samples: todo,
       };
       const attempt = async () => {

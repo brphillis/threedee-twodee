@@ -445,6 +445,7 @@ export function resolveAsset(project: Project, loaded: LoadedAsset, library: Lib
       interpolation: c.interpolation ?? 'linear',
       keys: c.keys ?? null,
       generator: c.generator ?? null,
+      ...(c.layers ? { layers: c.layers } : {}),
       ...(c.description === undefined ? {} : { description: c.description }),
     };
   }

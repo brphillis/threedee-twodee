@@ -1,0 +1,1443 @@
+{
+  "$schema": "../.td2d/schemas/component.schema.json",
+  "schemaVersion": "1.0.0",
+  "name": "fighter",
+  "description": "A martial artist on the humanoid rig: spiky hair and a red headband, a white gi with torn sleeves and a crossing flap, open at the chest, a knotted black belt, wrapped hands and bare feet. The head is drawn a fifth larger than life. Left limbs are mirrored to the right; the headband and belt tails ride their own bones.",
+  "materials": {
+    "skin": {
+      "color": "#e0905e",
+      "shading": "toon",
+      "bands": 3
+    },
+    "skin-line": {
+      "color": "#8e4a3a",
+      "shading": "flat",
+      "outline": false
+    },
+    "lips": {
+      "color": "#8e4a3a",
+      "shading": "flat",
+      "outline": false
+    },
+    "gi": {
+      "color": "#d2d8e8",
+      "shading": "toon",
+      "bands": 2
+    },
+    "lapel": {
+      "color": "#8a91b0",
+      "shading": "toon",
+      "bands": 2
+    },
+    "belt": {
+      "color": "#3e3a5c",
+      "shading": "toon",
+      "bands": 2
+    },
+    "hair": {
+      "color": "#2c2840",
+      "shading": "toon",
+      "bands": 2
+    },
+    "band": {
+      "color": "#d8323e",
+      "shading": "toon",
+      "bands": 2
+    },
+    "wrap": {
+      "color": "#efdcb5",
+      "shading": "toon",
+      "bands": 2
+    },
+    "wrap-line": {
+      "color": "#c9a97a",
+      "shading": "flat",
+      "outline": false
+    },
+    "eye-white": {
+      "color": "#ffffff",
+      "shading": "flat",
+      "outline": false
+    },
+    "eyes": {
+      "color": "#14101e",
+      "shading": "flat",
+      "outline": false
+    }
+  },
+  "parts": [
+    {
+      "type": "group",
+      "id": "head",
+      "bone": "head",
+      "description": "The head, a fifth larger than life about the neck joint.",
+      "position": [0, 1.57, 0],
+      "pivot": [0, 1.57, 0],
+      "scale": 1.2,
+      "parts": [
+        {
+          "type": "csg",
+          "id": "skull",
+          "op": "hull",
+          "parts": [
+            {
+              "type": "sphere",
+              "id": "skull-crown",
+              "material": "skin",
+              "radius": 0.098,
+              "widthSegments": 20,
+              "heightSegments": 14,
+              "position": [0, 1.685, -0.005]
+            },
+            {
+              "type": "sphere",
+              "id": "skull-cheek",
+              "material": "skin",
+              "radius": 0.05,
+              "widthSegments": 20,
+              "heightSegments": 14,
+              "position": [0.048, 1.63, 0.05]
+            },
+            {
+              "type": "sphere",
+              "id": "skull-cheek-r",
+              "material": "skin",
+              "radius": 0.05,
+              "widthSegments": 20,
+              "heightSegments": 14,
+              "position": [-0.048, 1.63, 0.05]
+            },
+            {
+              "type": "sphere",
+              "id": "skull-jaw",
+              "material": "skin",
+              "radius": 0.038,
+              "widthSegments": 20,
+              "heightSegments": 14,
+              "position": [0.045, 1.585, 0.04]
+            },
+            {
+              "type": "sphere",
+              "id": "skull-jaw-r",
+              "material": "skin",
+              "radius": 0.038,
+              "widthSegments": 20,
+              "heightSegments": 14,
+              "position": [-0.045, 1.585, 0.04]
+            },
+            {
+              "type": "sphere",
+              "id": "skull-chin",
+              "material": "skin",
+              "radius": 0.034,
+              "widthSegments": 20,
+              "heightSegments": 14,
+              "position": [0, 1.565, 0.075]
+            }
+          ]
+        },
+        {
+          "type": "wedge",
+          "id": "nose",
+          "material": "skin",
+          "size": [0.032, 0.05, 0.035],
+          "position": [0, 1.645, 0.11]
+        },
+        {
+          "type": "sphere",
+          "id": "ear",
+          "material": "skin",
+          "radius": 0.026,
+          "scale": [0.55, 1, 0.85],
+          "position": [0.097, 1.652, -0.005],
+          "mirror": "x",
+          "widthSegments": 14,
+          "heightSegments": 10
+        },
+        {
+          "type": "box",
+          "id": "eye-white",
+          "material": "eye-white",
+          "size": [0.034, 0.018, 0.012],
+          "position": [0.038, 1.673, 0.093],
+          "mirror": "x"
+        },
+        {
+          "type": "box",
+          "id": "pupil",
+          "material": "eyes",
+          "size": [0.015, 0.018, 0.012],
+          "position": [0.043, 1.673, 0.098],
+          "mirror": "x"
+        },
+        {
+          "type": "box",
+          "id": "brow",
+          "material": "hair",
+          "size": [0.052, 0.02, 0.026],
+          "rotation": [0, 0, 18],
+          "position": [0.04, 1.696, 0.094],
+          "mirror": "x"
+        },
+        {
+          "type": "box",
+          "id": "mouth",
+          "material": "lips",
+          "size": [0.04, 0.009, 0.012],
+          "position": [0, 1.598, 0.096]
+        },
+        {
+          "type": "box",
+          "id": "sideburn",
+          "material": "hair",
+          "size": [0.018, 0.05, 0.03],
+          "position": [0.093, 1.66, 0.035],
+          "mirror": "x"
+        },
+        {
+          "type": "csg",
+          "id": "hair",
+          "op": "hull",
+          "parts": [
+            {
+              "type": "sphere",
+              "id": "hair-top",
+              "material": "hair",
+              "radius": 0.108,
+              "widthSegments": 20,
+              "heightSegments": 14,
+              "position": [0, 1.722, -0.02]
+            },
+            {
+              "type": "sphere",
+              "id": "hair-back",
+              "material": "hair",
+              "radius": 0.096,
+              "widthSegments": 20,
+              "heightSegments": 14,
+              "position": [0, 1.665, -0.05]
+            },
+            {
+              "type": "sphere",
+              "id": "hair-front",
+              "material": "hair",
+              "radius": 0.065,
+              "widthSegments": 20,
+              "heightSegments": 14,
+              "position": [0, 1.76, 0.04]
+            }
+          ]
+        },
+        {
+          "type": "cone",
+          "id": "hair-spike-0",
+          "material": "hair",
+          "radius": 0.05,
+          "height": 0.16,
+          "segments": 5,
+          "rotation": [-35, 0, 28.0],
+          "position": [-0.07, 1.775, 0.03]
+        },
+        {
+          "type": "cone",
+          "id": "hair-spike-1",
+          "material": "hair",
+          "radius": 0.05,
+          "height": 0.16,
+          "segments": 5,
+          "rotation": [-35, 0, -0.0],
+          "position": [0.0, 1.8, 0.05]
+        },
+        {
+          "type": "cone",
+          "id": "hair-spike-2",
+          "material": "hair",
+          "radius": 0.05,
+          "height": 0.16,
+          "segments": 5,
+          "rotation": [-35, 0, -28.0],
+          "position": [0.07, 1.775, 0.03]
+        },
+        {
+          "type": "cone",
+          "id": "hair-spike-3",
+          "material": "hair",
+          "radius": 0.05,
+          "height": 0.17,
+          "segments": 5,
+          "rotation": [-65, 0, 42.0],
+          "position": [-0.07, 1.765, -0.05]
+        },
+        {
+          "type": "cone",
+          "id": "hair-spike-4",
+          "material": "hair",
+          "radius": 0.05,
+          "height": 0.17,
+          "segments": 5,
+          "rotation": [-65, 0, 14.0],
+          "position": [-0.0233, 1.7817, -0.0367]
+        },
+        {
+          "type": "cone",
+          "id": "hair-spike-5",
+          "material": "hair",
+          "radius": 0.05,
+          "height": 0.17,
+          "segments": 5,
+          "rotation": [-65, 0, -14.0],
+          "position": [0.0233, 1.7817, -0.0367]
+        },
+        {
+          "type": "cone",
+          "id": "hair-spike-6",
+          "material": "hair",
+          "radius": 0.05,
+          "height": 0.17,
+          "segments": 5,
+          "rotation": [-65, 0, -42.0],
+          "position": [0.07, 1.765, -0.05]
+        },
+        {
+          "type": "cone",
+          "id": "hair-spike-7",
+          "material": "hair",
+          "radius": 0.045,
+          "height": 0.16,
+          "segments": 5,
+          "rotation": [-100, 0, 55.0],
+          "position": [-0.07, 1.695, -0.11]
+        },
+        {
+          "type": "cone",
+          "id": "hair-spike-8",
+          "material": "hair",
+          "radius": 0.045,
+          "height": 0.16,
+          "segments": 5,
+          "rotation": [-100, 0, 27.5],
+          "position": [-0.035, 1.7075, -0.1]
+        },
+        {
+          "type": "cone",
+          "id": "hair-spike-9",
+          "material": "hair",
+          "radius": 0.045,
+          "height": 0.16,
+          "segments": 5,
+          "rotation": [-100, 0, -0.0],
+          "position": [0.0, 1.72, -0.09]
+        },
+        {
+          "type": "cone",
+          "id": "hair-spike-10",
+          "material": "hair",
+          "radius": 0.045,
+          "height": 0.16,
+          "segments": 5,
+          "rotation": [-100, 0, -27.5],
+          "position": [0.035, 1.7075, -0.1]
+        },
+        {
+          "type": "cone",
+          "id": "hair-spike-11",
+          "material": "hair",
+          "radius": 0.045,
+          "height": 0.16,
+          "segments": 5,
+          "rotation": [-100, 0, -55.0],
+          "position": [0.07, 1.695, -0.11]
+        },
+        {
+          "type": "torus",
+          "id": "headband",
+          "material": "band",
+          "radius": 0.104,
+          "tube": 0.019,
+          "rotation": [-6, 0, 0],
+          "position": [0, 1.71, 0.0],
+          "radialSegments": 6,
+          "tubularSegments": 24
+        },
+        {
+          "type": "sphere",
+          "id": "headband-knot",
+          "material": "band",
+          "radius": 0.028,
+          "scale": [1.3, 1, 1],
+          "position": [0, 1.71, -0.105],
+          "widthSegments": 14,
+          "heightSegments": 10
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "headband-tail-a",
+      "bone": "headband-1",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "headband-tail-a-0",
+          "material": "band",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.006, 1.74, -0.13]
+        },
+        {
+          "type": "box",
+          "id": "headband-tail-a-1",
+          "material": "band",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.034, 1.74, -0.13]
+        },
+        {
+          "type": "box",
+          "id": "headband-tail-a-2",
+          "material": "band",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.015, 1.68, -0.28]
+        },
+        {
+          "type": "box",
+          "id": "headband-tail-a-3",
+          "material": "band",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.055, 1.68, -0.28]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "headband-tail-b",
+      "bone": "headband-1",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "headband-tail-b-0",
+          "material": "band",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.033, 1.74, -0.13]
+        },
+        {
+          "type": "box",
+          "id": "headband-tail-b-1",
+          "material": "band",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.005, 1.74, -0.13]
+        },
+        {
+          "type": "box",
+          "id": "headband-tail-b-2",
+          "material": "band",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.049, 1.7, -0.27]
+        },
+        {
+          "type": "box",
+          "id": "headband-tail-b-3",
+          "material": "band",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.011, 1.7, -0.27]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "headband-tail-a2",
+      "bone": "headband-2",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "headband-tail-a2-0",
+          "material": "band",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.017, 1.68, -0.275]
+        },
+        {
+          "type": "box",
+          "id": "headband-tail-a2-1",
+          "material": "band",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.053, 1.68, -0.275]
+        },
+        {
+          "type": "box",
+          "id": "headband-tail-a2-2",
+          "material": "band",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.032, 1.62, -0.42]
+        },
+        {
+          "type": "box",
+          "id": "headband-tail-a2-3",
+          "material": "band",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.068, 1.62, -0.42]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "headband-tail-b2",
+      "bone": "headband-2",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "headband-tail-b2-0",
+          "material": "band",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.047, 1.7, -0.265]
+        },
+        {
+          "type": "box",
+          "id": "headband-tail-b2-1",
+          "material": "band",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.013, 1.7, -0.265]
+        },
+        {
+          "type": "box",
+          "id": "headband-tail-b2-2",
+          "material": "band",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.062, 1.66, -0.4]
+        },
+        {
+          "type": "box",
+          "id": "headband-tail-b2-3",
+          "material": "band",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.028, 1.66, -0.4]
+        }
+      ]
+    },
+    {
+      "type": "cylinder",
+      "id": "neck",
+      "bone": "neck",
+      "material": "skin",
+      "radiusTop": 0.058,
+      "radiusBottom": 0.07,
+      "height": 0.11,
+      "segments": 12,
+      "position": [0, 1.53, 0.0]
+    },
+    {
+      "type": "csg",
+      "id": "torso",
+      "bone": "chest",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "sphere",
+          "id": "pec",
+          "material": "skin",
+          "radius": 0.097,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [0.08, 1.35, 0.07]
+        },
+        {
+          "type": "sphere",
+          "id": "pec-r",
+          "material": "skin",
+          "radius": 0.097,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [-0.08, 1.35, 0.07]
+        },
+        {
+          "type": "sphere",
+          "id": "trap",
+          "material": "skin",
+          "radius": 0.085,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [0.165, 1.45, -0.01]
+        },
+        {
+          "type": "sphere",
+          "id": "trap-r",
+          "material": "skin",
+          "radius": 0.085,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [-0.165, 1.45, -0.01]
+        },
+        {
+          "type": "sphere",
+          "id": "lat",
+          "material": "skin",
+          "radius": 0.085,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [0.13, 1.22, -0.02]
+        },
+        {
+          "type": "sphere",
+          "id": "lat-r",
+          "material": "skin",
+          "radius": 0.085,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [-0.13, 1.22, -0.02]
+        },
+        {
+          "type": "sphere",
+          "id": "sternum",
+          "material": "skin",
+          "radius": 0.07,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [0, 1.2, 0.05]
+        }
+      ]
+    },
+    {
+      "type": "box",
+      "id": "pec-line",
+      "bone": "chest",
+      "material": "skin-line",
+      "size": [0.012, 0.09, 0.02],
+      "position": [0, 1.35, 0.135]
+    },
+    {
+      "type": "box",
+      "id": "pec-fold",
+      "bone": "chest",
+      "material": "skin-line",
+      "size": [0.07, 0.01, 0.02],
+      "rotation": [0, 0, -12],
+      "position": [0.06, 1.287, 0.128],
+      "mirror": "x"
+    },
+    {
+      "type": "csg",
+      "id": "gi-top",
+      "bone": "chest",
+      "op": "subtract",
+      "parts": [
+        {
+          "type": "csg",
+          "id": "gi-top-body",
+          "op": "hull",
+          "parts": [
+            {
+              "type": "sphere",
+              "id": "gi-pec",
+              "material": "gi",
+              "radius": 0.107,
+              "widthSegments": 20,
+              "heightSegments": 14,
+              "position": [0.08, 1.35, 0.065]
+            },
+            {
+              "type": "sphere",
+              "id": "gi-pec-r",
+              "material": "gi",
+              "radius": 0.107,
+              "widthSegments": 20,
+              "heightSegments": 14,
+              "position": [-0.08, 1.35, 0.065]
+            },
+            {
+              "type": "sphere",
+              "id": "gi-trap",
+              "material": "gi",
+              "radius": 0.095,
+              "widthSegments": 20,
+              "heightSegments": 14,
+              "position": [0.17, 1.445, -0.01]
+            },
+            {
+              "type": "sphere",
+              "id": "gi-trap-r",
+              "material": "gi",
+              "radius": 0.095,
+              "widthSegments": 20,
+              "heightSegments": 14,
+              "position": [-0.17, 1.445, -0.01]
+            },
+            {
+              "type": "sphere",
+              "id": "gi-lat",
+              "material": "gi",
+              "radius": 0.097,
+              "widthSegments": 20,
+              "heightSegments": 14,
+              "position": [0.135, 1.2, -0.02]
+            },
+            {
+              "type": "sphere",
+              "id": "gi-lat-r",
+              "material": "gi",
+              "radius": 0.097,
+              "widthSegments": 20,
+              "heightSegments": 14,
+              "position": [-0.135, 1.2, -0.02]
+            },
+            {
+              "type": "sphere",
+              "id": "gi-sternum",
+              "material": "gi",
+              "radius": 0.082,
+              "widthSegments": 20,
+              "heightSegments": 14,
+              "position": [0, 1.17, 0.05]
+            }
+          ]
+        },
+        {
+          "type": "csg",
+          "id": "gi-v",
+          "op": "hull",
+          "parts": [
+            {
+              "type": "box",
+              "id": "gi-v-0",
+              "material": "lapel",
+              "size": [0.01, 0.01, 0.01],
+              "position": [-0.09, 1.54, 0.0]
+            },
+            {
+              "type": "box",
+              "id": "gi-v-1",
+              "material": "lapel",
+              "size": [0.01, 0.01, 0.01],
+              "position": [0.09, 1.54, 0.0]
+            },
+            {
+              "type": "box",
+              "id": "gi-v-2",
+              "material": "lapel",
+              "size": [0.01, 0.01, 0.01],
+              "position": [0.0, 1.2, 0.02]
+            },
+            {
+              "type": "box",
+              "id": "gi-v-3",
+              "material": "lapel",
+              "size": [0.01, 0.01, 0.01],
+              "position": [-0.12, 1.54, 0.3]
+            },
+            {
+              "type": "box",
+              "id": "gi-v-4",
+              "material": "lapel",
+              "size": [0.01, 0.01, 0.01],
+              "position": [0.12, 1.54, 0.3]
+            },
+            {
+              "type": "box",
+              "id": "gi-v-5",
+              "material": "lapel",
+              "size": [0.01, 0.01, 0.01],
+              "position": [0.0, 1.17, 0.3]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "gi-flap",
+      "bone": "chest",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "sphere",
+          "id": "gi-flap-0",
+          "material": "gi",
+          "radius": 0.03,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [-0.07, 1.45, 0.12]
+        },
+        {
+          "type": "sphere",
+          "id": "gi-flap-1",
+          "material": "gi",
+          "radius": 0.03,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [-0.02, 1.25, 0.15]
+        },
+        {
+          "type": "sphere",
+          "id": "gi-flap-2",
+          "material": "gi",
+          "radius": 0.03,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [0.1, 1.17, 0.13]
+        },
+        {
+          "type": "sphere",
+          "id": "gi-flap-3",
+          "material": "gi",
+          "radius": 0.03,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [-0.12, 1.2, 0.11]
+        },
+        {
+          "type": "sphere",
+          "id": "gi-flap-4",
+          "material": "gi",
+          "radius": 0.03,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [-0.13, 1.4, 0.1]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "gi-waist",
+      "bone": "spine",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "sphere",
+          "id": "gi-waist-l",
+          "material": "gi",
+          "radius": 0.095,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [0.06, 1.06, 0.0]
+        },
+        {
+          "type": "sphere",
+          "id": "gi-waist-r",
+          "material": "gi",
+          "radius": 0.095,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [-0.06, 1.06, 0.0]
+        },
+        {
+          "type": "sphere",
+          "id": "gi-waist-f",
+          "material": "gi",
+          "radius": 0.085,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [0, 1.1, 0.05]
+        }
+      ]
+    },
+    {
+      "type": "cylinder",
+      "id": "belt",
+      "bone": "hips",
+      "material": "belt",
+      "radius": 0.178,
+      "height": 0.065,
+      "segments": 20,
+      "scale": [1, 1, 0.78],
+      "position": [0, 0.975, 0]
+    },
+    {
+      "type": "sphere",
+      "id": "belt-knot",
+      "bone": "hips",
+      "material": "belt",
+      "radius": 0.034,
+      "scale": [1.3, 1, 0.8],
+      "position": [0.0, 0.975, 0.14],
+      "widthSegments": 14,
+      "heightSegments": 10
+    },
+    {
+      "type": "torus",
+      "id": "belt-loop",
+      "bone": "hips",
+      "material": "belt",
+      "radius": 0.028,
+      "tube": 0.012,
+      "rotation": [90, 0, 30],
+      "position": [0.035, 0.985, 0.145],
+      "mirror": "x",
+      "radialSegments": 6,
+      "tubularSegments": 24
+    },
+    {
+      "type": "csg",
+      "id": "belt-tail-a",
+      "bone": "belt-1",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "belt-tail-a-0",
+          "material": "belt",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.003, 0.96, 0.15]
+        },
+        {
+          "type": "box",
+          "id": "belt-tail-a-1",
+          "material": "belt",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.033, 0.96, 0.15]
+        },
+        {
+          "type": "box",
+          "id": "belt-tail-a-2",
+          "material": "belt",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.027, 0.83, 0.16]
+        },
+        {
+          "type": "box",
+          "id": "belt-tail-a-3",
+          "material": "belt",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.063, 0.83, 0.16]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "belt-tail-b",
+      "bone": "belt-1",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "belt-tail-b-0",
+          "material": "belt",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.033, 0.96, 0.15]
+        },
+        {
+          "type": "box",
+          "id": "belt-tail-b-1",
+          "material": "belt",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.003, 0.96, 0.15]
+        },
+        {
+          "type": "box",
+          "id": "belt-tail-b-2",
+          "material": "belt",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.053, 0.84, 0.155]
+        },
+        {
+          "type": "box",
+          "id": "belt-tail-b-3",
+          "material": "belt",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.017, 0.84, 0.155]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "belt-tail-a2",
+      "bone": "belt-2",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "belt-tail-a2-0",
+          "material": "belt",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.028, 0.835, 0.16]
+        },
+        {
+          "type": "box",
+          "id": "belt-tail-a2-1",
+          "material": "belt",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.062, 0.835, 0.16]
+        },
+        {
+          "type": "box",
+          "id": "belt-tail-a2-2",
+          "material": "belt",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.041, 0.71, 0.165]
+        },
+        {
+          "type": "box",
+          "id": "belt-tail-a2-3",
+          "material": "belt",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.075, 0.71, 0.165]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "belt-tail-b2",
+      "bone": "belt-2",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "belt-tail-b2-0",
+          "material": "belt",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.052, 0.845, 0.155]
+        },
+        {
+          "type": "box",
+          "id": "belt-tail-b2-1",
+          "material": "belt",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.018, 0.845, 0.155]
+        },
+        {
+          "type": "box",
+          "id": "belt-tail-b2-2",
+          "material": "belt",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.059, 0.73, 0.16]
+        },
+        {
+          "type": "box",
+          "id": "belt-tail-b2-3",
+          "material": "belt",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.025, 0.73, 0.16]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "gi-skirt",
+      "bone": "hips",
+      "op": "subtract",
+      "parts": [
+        {
+          "type": "lathe",
+          "id": "gi-skirt-body",
+          "material": "gi",
+          "segments": 20,
+          "position": [0, 0.74, 0],
+          "scale": [1, 1, 0.8],
+          "profile": [[0, 0], [0.222, 0], [0.21, 0.1], [0.188, 0.23], [0, 0.23]]
+        },
+        {
+          "type": "box",
+          "id": "gi-skirt-split",
+          "material": "lapel",
+          "size": [0.05, 0.2, 0.2],
+          "position": [0, 0.8, 0.2]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "gi-skirt-flap",
+      "bone": "hips",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "sphere",
+          "id": "gi-skirt-flap-0",
+          "material": "gi",
+          "radius": 0.028,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [0.1, 0.95, 0.15]
+        },
+        {
+          "type": "sphere",
+          "id": "gi-skirt-flap-1",
+          "material": "gi",
+          "radius": 0.028,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [0.17, 0.95, 0.09]
+        },
+        {
+          "type": "sphere",
+          "id": "gi-skirt-flap-2",
+          "material": "gi",
+          "radius": 0.028,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [0.07, 0.76, 0.17]
+        },
+        {
+          "type": "sphere",
+          "id": "gi-skirt-flap-3",
+          "material": "gi",
+          "radius": 0.028,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [0.19, 0.76, 0.1]
+        }
+      ]
+    },
+    {
+      "type": "lathe",
+      "id": "arm",
+      "bone": "leftUpperArm",
+      "material": "skin",
+      "segments": 18,
+      "skin": "two-bone-blend",
+      "skinBones": ["leftUpperArm", "leftLowerArm"],
+      "position": [0.22, 0.92, 0.0],
+      "scale": [1, 1, 0.92],
+      "profile": [
+        [0, 0],
+        [0.0496, 0.0],
+        [0.0543, 0.04],
+        [0.0637, 0.09],
+        [0.0684, 0.14],
+        [0.0649, 0.19],
+        [0.059, 0.22],
+        [0.0578, 0.24],
+        [0.059, 0.26],
+        [0.0661, 0.29],
+        [0.0743, 0.33],
+        [0.0755, 0.37],
+        [0.0708, 0.41],
+        [0.0802, 0.45],
+        [0.0885, 0.48],
+        [0.0826, 0.51],
+        [0.0531, 0.535],
+        [0, 0.535]
+      ],
+      "mirror": "x"
+    },
+    {
+      "type": "cylinder",
+      "id": "sleeve",
+      "bone": "leftUpperArm",
+      "material": "gi",
+      "radiusTop": 0.092,
+      "radiusBottom": 0.09,
+      "height": 0.12,
+      "segments": 16,
+      "position": [0.218, 1.4, 0.0],
+      "mirror": "x"
+    },
+    {
+      "type": "cone",
+      "id": "sleeve-tear-0",
+      "bone": "leftUpperArm",
+      "material": "gi",
+      "radius": 0.03,
+      "height": 0.03,
+      "segments": 4,
+      "rotation": [180, 0, 0],
+      "position": [0.295, 1.335, 0.0],
+      "mirror": "x"
+    },
+    {
+      "type": "cone",
+      "id": "sleeve-tear-1",
+      "bone": "leftUpperArm",
+      "material": "gi",
+      "radius": 0.03,
+      "height": 0.055,
+      "segments": 4,
+      "rotation": [180, 0, 0],
+      "position": [0.266, 1.323, 0.0602],
+      "mirror": "x"
+    },
+    {
+      "type": "cone",
+      "id": "sleeve-tear-2",
+      "bone": "leftUpperArm",
+      "material": "gi",
+      "radius": 0.03,
+      "height": 0.03,
+      "segments": 4,
+      "rotation": [180, 0, 0],
+      "position": [0.2009, 1.335, 0.0751],
+      "mirror": "x"
+    },
+    {
+      "type": "cone",
+      "id": "sleeve-tear-3",
+      "bone": "leftUpperArm",
+      "material": "gi",
+      "radius": 0.03,
+      "height": 0.055,
+      "segments": 4,
+      "rotation": [180, 0, 0],
+      "position": [0.1486, 1.323, 0.0334],
+      "mirror": "x"
+    },
+    {
+      "type": "cone",
+      "id": "sleeve-tear-4",
+      "bone": "leftUpperArm",
+      "material": "gi",
+      "radius": 0.03,
+      "height": 0.03,
+      "segments": 4,
+      "rotation": [180, 0, 0],
+      "position": [0.1486, 1.335, -0.0334],
+      "mirror": "x"
+    },
+    {
+      "type": "cone",
+      "id": "sleeve-tear-5",
+      "bone": "leftUpperArm",
+      "material": "gi",
+      "radius": 0.03,
+      "height": 0.055,
+      "segments": 4,
+      "rotation": [180, 0, 0],
+      "position": [0.2009, 1.323, -0.0751],
+      "mirror": "x"
+    },
+    {
+      "type": "cone",
+      "id": "sleeve-tear-6",
+      "bone": "leftUpperArm",
+      "material": "gi",
+      "radius": 0.03,
+      "height": 0.03,
+      "segments": 4,
+      "rotation": [180, 0, 0],
+      "position": [0.266, 1.335, -0.0602],
+      "mirror": "x"
+    },
+    {
+      "type": "cylinder",
+      "id": "wrap",
+      "bone": "leftLowerArm",
+      "material": "wrap",
+      "radius": 0.047,
+      "height": 0.085,
+      "segments": 12,
+      "position": [0.22, 0.94, 0.0],
+      "mirror": "x"
+    },
+    {
+      "type": "torus",
+      "id": "wrap-band",
+      "bone": "leftLowerArm",
+      "material": "wrap-line",
+      "radius": 0.047,
+      "tube": 0.006,
+      "position": [0.22, 0.94, 0.0],
+      "mirror": "x",
+      "radialSegments": 6,
+      "tubularSegments": 24
+    },
+    {
+      "type": "csg",
+      "id": "fist",
+      "bone": "leftLowerArm",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "sphere",
+          "id": "fist-a",
+          "material": "skin",
+          "radius": 0.046,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [0.2, 0.885, 0.0]
+        },
+        {
+          "type": "sphere",
+          "id": "fist-b",
+          "material": "skin",
+          "radius": 0.046,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [0.245, 0.885, 0.0]
+        },
+        {
+          "type": "sphere",
+          "id": "fist-c",
+          "material": "skin",
+          "radius": 0.0414,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [0.2, 0.82, 0.045]
+        },
+        {
+          "type": "sphere",
+          "id": "fist-d",
+          "material": "skin",
+          "radius": 0.0414,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [0.245, 0.82, 0.045]
+        },
+        {
+          "type": "sphere",
+          "id": "knuckle-in",
+          "material": "skin",
+          "radius": 0.0253,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [0.196, 0.84, 0.068]
+        },
+        {
+          "type": "sphere",
+          "id": "knuckle-out",
+          "material": "skin",
+          "radius": 0.0253,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [0.248, 0.84, 0.068]
+        }
+      ],
+      "mirror": "x"
+    },
+    {
+      "type": "capsule",
+      "id": "thumb",
+      "bone": "leftLowerArm",
+      "material": "skin",
+      "radius": 0.015,
+      "length": 0.04,
+      "rotation": [0, 0, 80],
+      "position": [0.212, 0.808, 0.08],
+      "mirror": "x"
+    },
+    {
+      "type": "box",
+      "id": "knuckle-wrap",
+      "bone": "leftLowerArm",
+      "material": "wrap",
+      "size": [0.085, 0.022, 0.03],
+      "position": [0.221, 0.86, 0.07],
+      "mirror": "x"
+    },
+    {
+      "type": "lathe",
+      "id": "trouser",
+      "bone": "leftUpperLeg",
+      "material": "gi",
+      "segments": 20,
+      "skin": "two-bone-blend",
+      "skinBones": ["leftUpperLeg", "leftLowerLeg"],
+      "position": [0.1, 0.1, 0.0],
+      "profile": [
+        [0, 0],
+        [0.108, 0.0],
+        [0.114, 0.02],
+        [0.112, 0.045],
+        [0.104, 0.06],
+        [0.098, 0.14],
+        [0.094, 0.24],
+        [0.09, 0.32],
+        [0.091, 0.36],
+        [0.094, 0.4],
+        [0.098, 0.44],
+        [0.104, 0.52],
+        [0.11, 0.62],
+        [0.114, 0.72],
+        [0.112, 0.8],
+        [0.1, 0.84],
+        [0, 0.84]
+      ],
+      "mirror": "x"
+    },
+    {
+      "type": "csg",
+      "id": "foot",
+      "bone": "leftFoot",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "sphere",
+          "id": "ankle",
+          "material": "skin",
+          "radius": 0.0515,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [0.1, 0.1, -0.005]
+        },
+        {
+          "type": "sphere",
+          "id": "heel",
+          "material": "skin",
+          "radius": 0.0504,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [0.1, 0.0509, -0.025]
+        },
+        {
+          "type": "sphere",
+          "id": "ball",
+          "material": "skin",
+          "radius": 0.0448,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [0.115, 0.0453, 0.085]
+        },
+        {
+          "type": "sphere",
+          "id": "ball-in",
+          "material": "skin",
+          "radius": 0.0426,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [0.078, 0.0431, 0.085]
+        },
+        {
+          "type": "sphere",
+          "id": "arch",
+          "material": "skin",
+          "radius": 0.0392,
+          "widthSegments": 20,
+          "heightSegments": 14,
+          "position": [0.095, 0.05, 0.03]
+        }
+      ],
+      "mirror": "x"
+    },
+    {
+      "type": "sphere",
+      "id": "toe-0",
+      "bone": "leftFoot",
+      "material": "skin",
+      "radius": 0.017,
+      "position": [0.075, 0.018, 0.13],
+      "mirror": "x",
+      "widthSegments": 14,
+      "heightSegments": 10
+    },
+    {
+      "type": "sphere",
+      "id": "toe-1",
+      "bone": "leftFoot",
+      "material": "skin",
+      "radius": 0.015000000000000001,
+      "position": [0.091, 0.018, 0.122],
+      "mirror": "x",
+      "widthSegments": 14,
+      "heightSegments": 10
+    },
+    {
+      "type": "sphere",
+      "id": "toe-2",
+      "bone": "leftFoot",
+      "material": "skin",
+      "radius": 0.013000000000000001,
+      "position": [0.107, 0.018, 0.114],
+      "mirror": "x",
+      "widthSegments": 14,
+      "heightSegments": 10
+    },
+    {
+      "type": "sphere",
+      "id": "toe-3",
+      "bone": "leftFoot",
+      "material": "skin",
+      "radius": 0.011000000000000001,
+      "position": [0.123, 0.018, 0.106],
+      "mirror": "x",
+      "widthSegments": 14,
+      "heightSegments": 10
+    }
+  ]
+}

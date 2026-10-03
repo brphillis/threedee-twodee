@@ -205,6 +205,10 @@ export function checkClip(
     for (const p of checkGenerator(clip.generator, rig))
       issues.push({ file, path: `${base}.generator.${p.path}`, message: p.message, code: 'unknown_bone' });
   }
+  for (const [i, layer] of (clip.layers ?? []).entries()) {
+    for (const p of checkGenerator(layer, rig))
+      issues.push({ file, path: `${base}.layers[${i}].${p.path}`, message: p.message, code: 'unknown_bone' });
+  }
   let last = -1;
   for (const [i, t] of (clip.sampleTimes ?? []).entries()) {
     const path = `${base}.sampleTimes[${i}]`;

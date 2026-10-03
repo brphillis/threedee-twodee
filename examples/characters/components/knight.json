@@ -2,214 +2,2892 @@
   "$schema": "../.td2d/schemas/component.schema.json",
   "schemaVersion": "1.0.0",
   "name": "knight",
-  "description": "The knight's body on the humanoid rig: armour, tabard, helm, a sword in the right hand and a shield on the left arm. Left limbs are mirrored to the right.",
+  "description": "A crowned knight on the humanoid rig: plate armour with gold trim, a royal blue surcoat with a gold cross, a folded red cape, a great helm with a plume, a longsword in the right hand and a curved heater shield on the left arm. Left limbs are mirrored to the right.",
   "materials": {
     "steel": {
-      "color": "#8b9bb4",
-      "shading": "toon"
+      "color": "#93a3c4",
+      "shading": "toon",
+      "bands": 4
     },
-    "trim": {
-      "color": "#feae34",
+    "mail": {
+      "color": "#434c6e",
       "shading": "toon",
       "bands": 2
+    },
+    "gold": {
+      "color": "#ffd25a",
+      "shading": "toon",
+      "bands": 4
     },
     "tabard": {
-      "color": "#3b5dc9",
-      "shading": "toon"
+      "color": "#2f6fd0",
+      "shading": "toon",
+      "bands": 4
     },
-    "skin": {
-      "color": "#e8b796",
+    "cape": {
+      "color": "#d63445",
+      "shading": "toon",
+      "bands": 4
+    },
+    "lining": {
+      "color": "#5e1427",
       "shading": "toon",
       "bands": 2
+    },
+    "plume": {
+      "color": "#ff5a55",
+      "shading": "toon",
+      "bands": 3
+    },
+    "jewel": {
+      "color": "#ff4a4a",
+      "shading": "toon",
+      "bands": 2,
+      "emissive": "#5a0010"
     },
     "leather": {
-      "color": "#5d275d",
+      "color": "#8a4e36",
       "shading": "toon",
       "bands": 2
+    },
+    "visor": {
+      "color": "#14101e",
+      "shading": "flat",
+      "outline": false
     },
     "blade": {
-      "color": "#c0cbdc",
+      "color": "#d8e2f2",
       "shading": "toon",
-      "bands": 2
-    },
-    "wood": {
-      "color": "#733e39",
-      "shading": "toon",
-      "bands": 2
+      "bands": 3
     }
   },
   "parts": [
     {
+      "type": "csg",
+      "id": "helm",
+      "bone": "head",
+      "op": "subtract",
+      "description": "A great helm with a gold-edged eye slit.",
+      "parts": [
+        {
+          "type": "lathe",
+          "id": "helm-shell",
+          "material": "steel",
+          "segments": 24,
+          "position": [0, 1.5, 0],
+          "profile": [
+            [0, 0],
+            [0.118, 0],
+            [0.132, 0.03],
+            [0.142, 0.1],
+            [0.144, 0.18],
+            [0.137, 0.24],
+            [0.117, 0.29],
+            [0.08, 0.322],
+            [0.035, 0.336],
+            [0, 0.338]
+          ]
+        },
+        {
+          "type": "box",
+          "id": "eye-slit",
+          "material": "visor",
+          "size": [0.21, 0.024, 0.1],
+          "position": [0, 1.672, 0.13]
+        }
+      ]
+    },
+    {
       "type": "box",
+      "id": "nasal",
+      "bone": "head",
+      "material": "gold",
+      "size": [0.03, 0.17, 0.03],
+      "position": [0, 1.63, 0.138]
+    },
+    {
+      "type": "torus",
+      "id": "circlet",
+      "bone": "head",
+      "material": "gold",
+      "radius": 0.143,
+      "tube": 0.022,
+      "position": [0, 1.745, 0],
+      "radialSegments": 6,
+      "tubularSegments": 28
+    },
+    {
+      "type": "cone",
+      "id": "fleuron",
+      "bone": "head",
+      "material": "gold",
+      "radius": 0.03,
+      "height": 0.085,
+      "segments": 6,
+      "position": [0, 1.805, 0.14],
+      "repeat": {
+        "count": 8,
+        "offset": [0, 0, 0],
+        "rotation": [0, 45, 0]
+      }
+    },
+    {
+      "type": "sphere",
+      "id": "crown-jewel",
+      "bone": "head",
+      "material": "jewel",
+      "radius": 0.022,
+      "position": [0, 1.745, 0.165]
+    },
+    {
+      "type": "cylinder",
+      "id": "plume-holder",
+      "bone": "head",
+      "material": "gold",
+      "radius": 0.03,
+      "height": 0.06,
+      "position": [0, 1.86, -0.01]
+    },
+    {
+      "type": "sphere",
+      "id": "plume-0",
+      "bone": "plume",
+      "material": "plume",
+      "radius": 0.075,
+      "scale": [0.5, 1.0, 1.25],
+      "rotation": [20, 0, 0],
+      "position": [0, 1.9, 0.03]
+    },
+    {
+      "type": "sphere",
+      "id": "plume-1",
+      "bone": "plume",
+      "material": "plume",
+      "radius": 0.08,
+      "scale": [0.5, 0.9, 1.3],
+      "rotation": [0, 0, 0],
+      "position": [0, 1.94, -0.07]
+    },
+    {
+      "type": "sphere",
+      "id": "plume-2",
+      "bone": "plume",
+      "material": "plume",
+      "radius": 0.075,
+      "scale": [0.45, 0.9, 1.25],
+      "rotation": [-25, 0, 0],
+      "position": [0, 1.91, -0.17]
+    },
+    {
+      "type": "sphere",
+      "id": "plume-3",
+      "bone": "plume",
+      "material": "plume",
+      "radius": 0.07,
+      "scale": [0.4, 1.0, 1.1],
+      "rotation": [-45, 0, 0],
+      "position": [0, 1.83, -0.24]
+    },
+    {
+      "type": "sphere",
+      "id": "plume-4",
+      "bone": "plume",
+      "material": "plume",
+      "radius": 0.06,
+      "scale": [0.35, 1.1, 0.9],
+      "rotation": [-60, 0, 0],
+      "position": [0, 1.73, -0.27]
+    },
+    {
+      "type": "lathe",
+      "id": "surcoat",
+      "bone": "chest",
+      "material": "tabard",
+      "segments": 20,
+      "position": [0, 1.15, 0],
+      "scale": [1, 1, 0.72],
+      "profile": [[0, 0], [0.15, 0], [0.19, 0.06], [0.22, 0.16], [0.228, 0.24], [0.21, 0.3], [0.15, 0.35], [0, 0.36]]
+    },
+    {
+      "type": "extrude",
+      "id": "chest-cross",
+      "bone": "chest",
+      "material": "gold",
+      "depth": 0.024,
+      "description": "The gold cross pattee of the knight's order.",
+      "shape": [
+        [-0.05, 0.1],
+        [0.05, 0.1],
+        [0.022, 0.022],
+        [0.1, 0.05],
+        [0.1, -0.05],
+        [0.022, -0.022],
+        [0.05, -0.13],
+        [-0.05, -0.13],
+        [-0.022, -0.022],
+        [-0.1, -0.05],
+        [-0.1, 0.05],
+        [-0.022, 0.022]
+      ],
+      "position": [0, 1.33, 0.156]
+    },
+    {
+      "type": "cylinder",
+      "id": "gorget",
+      "bone": "chest",
+      "material": "steel",
+      "radiusTop": 0.095,
+      "radiusBottom": 0.14,
+      "height": 0.07,
+      "segments": 20,
+      "position": [0, 1.5, 0],
+      "scale": [1, 1, 0.85]
+    },
+    {
+      "type": "torus",
+      "id": "gorget-rim",
+      "bone": "chest",
+      "material": "gold",
+      "radius": 0.135,
+      "tube": 0.012,
+      "position": [0, 1.468, 0],
+      "scale": [1, 1, 0.85],
+      "radialSegments": 6,
+      "tubularSegments": 28
+    },
+    {
+      "type": "sphere",
+      "id": "clasp",
+      "bone": "chest",
+      "material": "gold",
+      "radius": 0.032,
+      "position": [0.17, 1.47, 0.07],
+      "mirror": "x"
+    },
+    {
+      "type": "sphere",
+      "id": "clasp-jewel",
+      "bone": "chest",
+      "material": "jewel",
+      "radius": 0.016,
+      "position": [0.17, 1.47, 0.1],
+      "mirror": "x"
+    },
+    {
+      "type": "csg",
+      "id": "cape-0-0",
+      "bone": "cape-1",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-0-0-0",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.2, 1.5, -0.12]
+        },
+        {
+          "type": "box",
+          "id": "cape-0-0-1",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.15, 1.5, -0.1275]
+        },
+        {
+          "type": "box",
+          "id": "cape-0-0-2",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.2533, 1.1333, -0.16]
+        },
+        {
+          "type": "box",
+          "id": "cape-0-0-3",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.19, 1.1333, -0.1933]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-lining-0-0",
+      "bone": "cape-1",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-lining-0-0-0",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.2032, 1.478, -0.1084]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-0-0-1",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1524, 1.478, -0.1175]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-0-0-2",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.2533, 1.1333, -0.146]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-0-0-3",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.19, 1.1333, -0.1793]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-0-1",
+      "bone": "cape-1",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-0-1-0",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.15, 1.5, -0.1275]
+        },
+        {
+          "type": "box",
+          "id": "cape-0-1-1",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1, 1.5, -0.135]
+        },
+        {
+          "type": "box",
+          "id": "cape-0-1-2",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.19, 1.1333, -0.1933]
+        },
+        {
+          "type": "box",
+          "id": "cape-0-1-3",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1267, 1.1333, -0.1733]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-lining-0-1",
+      "bone": "cape-1",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-lining-0-1-0",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1524, 1.478, -0.1175]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-0-1-1",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1016, 1.478, -0.1233]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-0-1-2",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.19, 1.1333, -0.1793]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-0-1-3",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1267, 1.1333, -0.1593]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-0-2",
+      "bone": "cape-1",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-0-2-0",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1, 1.5, -0.135]
+        },
+        {
+          "type": "box",
+          "id": "cape-0-2-1",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.05, 1.5, -0.1425]
+        },
+        {
+          "type": "box",
+          "id": "cape-0-2-2",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1267, 1.1333, -0.1733]
+        },
+        {
+          "type": "box",
+          "id": "cape-0-2-3",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.0633, 1.1333, -0.2167]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-lining-0-2",
+      "bone": "cape-1",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-lining-0-2-0",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1016, 1.478, -0.1233]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-0-2-1",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.0508, 1.478, -0.1329]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-0-2-2",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1267, 1.1333, -0.1593]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-0-2-3",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.0633, 1.1333, -0.2027]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-0-3",
+      "bone": "cape-1",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-0-3-0",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.05, 1.5, -0.1425]
+        },
+        {
+          "type": "box",
+          "id": "cape-0-3-1",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 1.5, -0.15]
+        },
+        {
+          "type": "box",
+          "id": "cape-0-3-2",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.0633, 1.1333, -0.2167]
+        },
+        {
+          "type": "box",
+          "id": "cape-0-3-3",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 1.1333, -0.1917]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-lining-0-3",
+      "bone": "cape-1",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-lining-0-3-0",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.0508, 1.478, -0.1329]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-0-3-1",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 1.478, -0.1385]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-0-3-2",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.0633, 1.1333, -0.2027]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-0-3-3",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 1.1333, -0.1777]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-0-4",
+      "bone": "cape-1",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-0-4-0",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 1.5, -0.15]
+        },
+        {
+          "type": "box",
+          "id": "cape-0-4-1",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.05, 1.5, -0.1425]
+        },
+        {
+          "type": "box",
+          "id": "cape-0-4-2",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 1.1333, -0.1917]
+        },
+        {
+          "type": "box",
+          "id": "cape-0-4-3",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0633, 1.1333, -0.2167]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-lining-0-4",
+      "bone": "cape-1",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-lining-0-4-0",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 1.478, -0.1385]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-0-4-1",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0508, 1.478, -0.1329]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-0-4-2",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 1.1333, -0.1777]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-0-4-3",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0633, 1.1333, -0.2027]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-0-5",
+      "bone": "cape-1",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-0-5-0",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.05, 1.5, -0.1425]
+        },
+        {
+          "type": "box",
+          "id": "cape-0-5-1",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1, 1.5, -0.135]
+        },
+        {
+          "type": "box",
+          "id": "cape-0-5-2",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0633, 1.1333, -0.2167]
+        },
+        {
+          "type": "box",
+          "id": "cape-0-5-3",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1267, 1.1333, -0.1733]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-lining-0-5",
+      "bone": "cape-1",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-lining-0-5-0",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0508, 1.478, -0.1329]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-0-5-1",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1016, 1.478, -0.1233]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-0-5-2",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0633, 1.1333, -0.2027]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-0-5-3",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1267, 1.1333, -0.1593]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-0-6",
+      "bone": "cape-1",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-0-6-0",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1, 1.5, -0.135]
+        },
+        {
+          "type": "box",
+          "id": "cape-0-6-1",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.15, 1.5, -0.1275]
+        },
+        {
+          "type": "box",
+          "id": "cape-0-6-2",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1267, 1.1333, -0.1733]
+        },
+        {
+          "type": "box",
+          "id": "cape-0-6-3",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.19, 1.1333, -0.1933]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-lining-0-6",
+      "bone": "cape-1",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-lining-0-6-0",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1016, 1.478, -0.1233]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-0-6-1",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1524, 1.478, -0.1175]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-0-6-2",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1267, 1.1333, -0.1593]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-0-6-3",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.19, 1.1333, -0.1793]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-0-7",
+      "bone": "cape-1",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-0-7-0",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.15, 1.5, -0.1275]
+        },
+        {
+          "type": "box",
+          "id": "cape-0-7-1",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.2, 1.5, -0.12]
+        },
+        {
+          "type": "box",
+          "id": "cape-0-7-2",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.19, 1.1333, -0.1933]
+        },
+        {
+          "type": "box",
+          "id": "cape-0-7-3",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.2533, 1.1333, -0.16]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-lining-0-7",
+      "bone": "cape-1",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-lining-0-7-0",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1524, 1.478, -0.1175]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-0-7-1",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.2032, 1.478, -0.1084]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-0-7-2",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.19, 1.1333, -0.1793]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-0-7-3",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.2533, 1.1333, -0.146]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-1-0",
+      "bone": "cape-2",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-1-0-0",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.2501, 1.1553, -0.1576]
+        },
+        {
+          "type": "box",
+          "id": "cape-1-0-1",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1876, 1.1553, -0.1894]
+        },
+        {
+          "type": "box",
+          "id": "cape-1-0-2",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.3067, 0.7667, -0.2]
+        },
+        {
+          "type": "box",
+          "id": "cape-1-0-3",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.23, 0.7667, -0.2592]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-lining-1-0",
+      "bone": "cape-2",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-lining-1-0-0",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.2501, 1.1553, -0.1436]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-1-0-1",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1876, 1.1553, -0.1754]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-1-0-2",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.3067, 0.7667, -0.186]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-1-0-3",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.23, 0.7667, -0.2452]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-1-1",
+      "bone": "cape-2",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-1-1-0",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1876, 1.1553, -0.1894]
+        },
+        {
+          "type": "box",
+          "id": "cape-1-1-1",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1251, 1.1553, -0.171]
+        },
+        {
+          "type": "box",
+          "id": "cape-1-1-2",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.23, 0.7667, -0.2592]
+        },
+        {
+          "type": "box",
+          "id": "cape-1-1-3",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1533, 0.7667, -0.2117]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-lining-1-1",
+      "bone": "cape-2",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-lining-1-1-0",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1876, 1.1553, -0.1754]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-1-1-1",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1251, 1.1553, -0.157]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-1-1-2",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.23, 0.7667, -0.2452]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-1-1-3",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1533, 0.7667, -0.1977]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-1-2",
+      "bone": "cape-2",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-1-2-0",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1251, 1.1553, -0.171]
+        },
+        {
+          "type": "box",
+          "id": "cape-1-2-1",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.0625, 1.1553, -0.2122]
+        },
+        {
+          "type": "box",
+          "id": "cape-1-2-2",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1533, 0.7667, -0.2117]
+        },
+        {
+          "type": "box",
+          "id": "cape-1-2-3",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.0767, 0.7667, -0.2908]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-lining-1-2",
+      "bone": "cape-2",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-lining-1-2-0",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1251, 1.1553, -0.157]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-1-2-1",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.0625, 1.1553, -0.1982]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-1-2-2",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1533, 0.7667, -0.1977]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-1-2-3",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.0767, 0.7667, -0.2768]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-1-3",
+      "bone": "cape-2",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-1-3-0",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.0625, 1.1553, -0.2122]
+        },
+        {
+          "type": "box",
+          "id": "cape-1-3-1",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 1.1553, -0.1892]
+        },
+        {
+          "type": "box",
+          "id": "cape-1-3-2",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.0767, 0.7667, -0.2908]
+        },
+        {
+          "type": "box",
+          "id": "cape-1-3-3",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 0.7667, -0.2333]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-lining-1-3",
+      "bone": "cape-2",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-lining-1-3-0",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.0625, 1.1553, -0.1982]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-1-3-1",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 1.1553, -0.1752]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-1-3-2",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.0767, 0.7667, -0.2768]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-1-3-3",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 0.7667, -0.2193]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-1-4",
+      "bone": "cape-2",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-1-4-0",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 1.1553, -0.1892]
+        },
+        {
+          "type": "box",
+          "id": "cape-1-4-1",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0625, 1.1553, -0.2122]
+        },
+        {
+          "type": "box",
+          "id": "cape-1-4-2",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 0.7667, -0.2333]
+        },
+        {
+          "type": "box",
+          "id": "cape-1-4-3",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0767, 0.7667, -0.2908]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-lining-1-4",
+      "bone": "cape-2",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-lining-1-4-0",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 1.1553, -0.1752]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-1-4-1",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0625, 1.1553, -0.1982]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-1-4-2",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 0.7667, -0.2193]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-1-4-3",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0767, 0.7667, -0.2768]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-1-5",
+      "bone": "cape-2",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-1-5-0",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0625, 1.1553, -0.2122]
+        },
+        {
+          "type": "box",
+          "id": "cape-1-5-1",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1251, 1.1553, -0.171]
+        },
+        {
+          "type": "box",
+          "id": "cape-1-5-2",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0767, 0.7667, -0.2908]
+        },
+        {
+          "type": "box",
+          "id": "cape-1-5-3",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1533, 0.7667, -0.2117]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-lining-1-5",
+      "bone": "cape-2",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-lining-1-5-0",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0625, 1.1553, -0.1982]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-1-5-1",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1251, 1.1553, -0.157]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-1-5-2",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0767, 0.7667, -0.2768]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-1-5-3",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1533, 0.7667, -0.1977]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-1-6",
+      "bone": "cape-2",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-1-6-0",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1251, 1.1553, -0.171]
+        },
+        {
+          "type": "box",
+          "id": "cape-1-6-1",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1876, 1.1553, -0.1894]
+        },
+        {
+          "type": "box",
+          "id": "cape-1-6-2",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1533, 0.7667, -0.2117]
+        },
+        {
+          "type": "box",
+          "id": "cape-1-6-3",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.23, 0.7667, -0.2592]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-lining-1-6",
+      "bone": "cape-2",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-lining-1-6-0",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1251, 1.1553, -0.157]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-1-6-1",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1876, 1.1553, -0.1754]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-1-6-2",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1533, 0.7667, -0.1977]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-1-6-3",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.23, 0.7667, -0.2452]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-1-7",
+      "bone": "cape-2",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-1-7-0",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1876, 1.1553, -0.1894]
+        },
+        {
+          "type": "box",
+          "id": "cape-1-7-1",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.2501, 1.1553, -0.1576]
+        },
+        {
+          "type": "box",
+          "id": "cape-1-7-2",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.23, 0.7667, -0.2592]
+        },
+        {
+          "type": "box",
+          "id": "cape-1-7-3",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.3067, 0.7667, -0.2]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-lining-1-7",
+      "bone": "cape-2",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-lining-1-7-0",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1876, 1.1553, -0.1754]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-1-7-1",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.2501, 1.1553, -0.1436]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-1-7-2",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.23, 0.7667, -0.2452]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-1-7-3",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.3067, 0.7667, -0.186]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-2-0",
+      "bone": "cape-3",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-2-0-0",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.3035, 0.7887, -0.1976]
+        },
+        {
+          "type": "box",
+          "id": "cape-2-0-1",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.2276, 0.7887, -0.2552]
+        },
+        {
+          "type": "box",
+          "id": "cape-2-0-2",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.36, 0.4, -0.24]
+        },
+        {
+          "type": "box",
+          "id": "cape-2-0-3",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.27, 0.4, -0.325]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-lining-2-0",
+      "bone": "cape-3",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-lining-2-0-0",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.3035, 0.7887, -0.1836]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-2-0-1",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.2276, 0.7887, -0.2412]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-2-0-2",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.3584, 0.411, -0.2248]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-2-0-3",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.2688, 0.411, -0.309]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-2-1",
+      "bone": "cape-3",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-2-1-0",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.2276, 0.7887, -0.2552]
+        },
+        {
+          "type": "box",
+          "id": "cape-2-1-1",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1517, 0.7887, -0.2094]
+        },
+        {
+          "type": "box",
+          "id": "cape-2-1-2",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.27, 0.4, -0.325]
+        },
+        {
+          "type": "box",
+          "id": "cape-2-1-3",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.18, 0.4, -0.25]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-lining-2-1",
+      "bone": "cape-3",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-lining-2-1-0",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.2276, 0.7887, -0.2412]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-2-1-1",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1517, 0.7887, -0.1954]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-2-1-2",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.2688, 0.411, -0.309]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-2-1-3",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1792, 0.411, -0.2348]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-2-2",
+      "bone": "cape-3",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-2-2-0",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1517, 0.7887, -0.2094]
+        },
+        {
+          "type": "box",
+          "id": "cape-2-2-1",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.0759, 0.7887, -0.2864]
+        },
+        {
+          "type": "box",
+          "id": "cape-2-2-2",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.18, 0.4, -0.25]
+        },
+        {
+          "type": "box",
+          "id": "cape-2-2-3",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.09, 0.4, -0.365]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-lining-2-2",
+      "bone": "cape-3",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-lining-2-2-0",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1517, 0.7887, -0.1954]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-2-2-1",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.0759, 0.7887, -0.2724]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-2-2-2",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1792, 0.411, -0.2348]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-2-2-3",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.0896, 0.411, -0.3488]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-2-3",
+      "bone": "cape-3",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-2-3-0",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.0759, 0.7887, -0.2864]
+        },
+        {
+          "type": "box",
+          "id": "cape-2-3-1",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 0.7887, -0.2308]
+        },
+        {
+          "type": "box",
+          "id": "cape-2-3-2",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.09, 0.4, -0.365]
+        },
+        {
+          "type": "box",
+          "id": "cape-2-3-3",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 0.4, -0.275]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-lining-2-3",
+      "bone": "cape-3",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-lining-2-3-0",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.0759, 0.7887, -0.2724]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-2-3-1",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 0.7887, -0.2168]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-2-3-2",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.0896, 0.411, -0.3488]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-2-3-3",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 0.411, -0.2597]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-2-4",
+      "bone": "cape-3",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-2-4-0",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 0.7887, -0.2308]
+        },
+        {
+          "type": "box",
+          "id": "cape-2-4-1",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0759, 0.7887, -0.2864]
+        },
+        {
+          "type": "box",
+          "id": "cape-2-4-2",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 0.4, -0.275]
+        },
+        {
+          "type": "box",
+          "id": "cape-2-4-3",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.09, 0.4, -0.365]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-lining-2-4",
+      "bone": "cape-3",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-lining-2-4-0",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 0.7887, -0.2168]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-2-4-1",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0759, 0.7887, -0.2724]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-2-4-2",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 0.411, -0.2597]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-2-4-3",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0896, 0.411, -0.3488]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-2-5",
+      "bone": "cape-3",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-2-5-0",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0759, 0.7887, -0.2864]
+        },
+        {
+          "type": "box",
+          "id": "cape-2-5-1",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1517, 0.7887, -0.2094]
+        },
+        {
+          "type": "box",
+          "id": "cape-2-5-2",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.09, 0.4, -0.365]
+        },
+        {
+          "type": "box",
+          "id": "cape-2-5-3",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.18, 0.4, -0.25]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-lining-2-5",
+      "bone": "cape-3",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-lining-2-5-0",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0759, 0.7887, -0.2724]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-2-5-1",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1517, 0.7887, -0.1954]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-2-5-2",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0896, 0.411, -0.3488]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-2-5-3",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1792, 0.411, -0.2348]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-2-6",
+      "bone": "cape-3",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-2-6-0",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1517, 0.7887, -0.2094]
+        },
+        {
+          "type": "box",
+          "id": "cape-2-6-1",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.2276, 0.7887, -0.2552]
+        },
+        {
+          "type": "box",
+          "id": "cape-2-6-2",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.18, 0.4, -0.25]
+        },
+        {
+          "type": "box",
+          "id": "cape-2-6-3",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.27, 0.4, -0.325]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-lining-2-6",
+      "bone": "cape-3",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-lining-2-6-0",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1517, 0.7887, -0.1954]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-2-6-1",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.2276, 0.7887, -0.2412]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-2-6-2",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1792, 0.411, -0.2348]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-2-6-3",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.2688, 0.411, -0.309]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-2-7",
+      "bone": "cape-3",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-2-7-0",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.2276, 0.7887, -0.2552]
+        },
+        {
+          "type": "box",
+          "id": "cape-2-7-1",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.3035, 0.7887, -0.1976]
+        },
+        {
+          "type": "box",
+          "id": "cape-2-7-2",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.27, 0.4, -0.325]
+        },
+        {
+          "type": "box",
+          "id": "cape-2-7-3",
+          "material": "cape",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.36, 0.4, -0.24]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-lining-2-7",
+      "bone": "cape-3",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-lining-2-7-0",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.2276, 0.7887, -0.2412]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-2-7-1",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.3035, 0.7887, -0.1836]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-2-7-2",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.2688, 0.411, -0.309]
+        },
+        {
+          "type": "box",
+          "id": "cape-lining-2-7-3",
+          "material": "lining",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.3584, 0.411, -0.2248]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-hem-0",
+      "bone": "cape-3",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-hem-0-0",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.36, 0.394, -0.246]
+        },
+        {
+          "type": "box",
+          "id": "cape-hem-0-1",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.27, 0.394, -0.331]
+        },
+        {
+          "type": "box",
+          "id": "cape-hem-0-2",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.3536, 0.444, -0.2412]
+        },
+        {
+          "type": "box",
+          "id": "cape-hem-0-3",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.2652, 0.444, -0.3231]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-hem-1",
+      "bone": "cape-3",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-hem-1-0",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.27, 0.394, -0.331]
+        },
+        {
+          "type": "box",
+          "id": "cape-hem-1-1",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.18, 0.394, -0.256]
+        },
+        {
+          "type": "box",
+          "id": "cape-hem-1-2",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.2652, 0.444, -0.3231]
+        },
+        {
+          "type": "box",
+          "id": "cape-hem-1-3",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1768, 0.444, -0.2514]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-hem-2",
+      "bone": "cape-3",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-hem-2-0",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.18, 0.394, -0.256]
+        },
+        {
+          "type": "box",
+          "id": "cape-hem-2-1",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.09, 0.394, -0.371]
+        },
+        {
+          "type": "box",
+          "id": "cape-hem-2-2",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.1768, 0.444, -0.2514]
+        },
+        {
+          "type": "box",
+          "id": "cape-hem-2-3",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.0884, 0.444, -0.3621]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-hem-3",
+      "bone": "cape-3",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-hem-3-0",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.09, 0.394, -0.371]
+        },
+        {
+          "type": "box",
+          "id": "cape-hem-3-1",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 0.394, -0.281]
+        },
+        {
+          "type": "box",
+          "id": "cape-hem-3-2",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [-0.0884, 0.444, -0.3621]
+        },
+        {
+          "type": "box",
+          "id": "cape-hem-3-3",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 0.444, -0.276]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-hem-4",
+      "bone": "cape-3",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-hem-4-0",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 0.394, -0.281]
+        },
+        {
+          "type": "box",
+          "id": "cape-hem-4-1",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.09, 0.394, -0.371]
+        },
+        {
+          "type": "box",
+          "id": "cape-hem-4-2",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0, 0.444, -0.276]
+        },
+        {
+          "type": "box",
+          "id": "cape-hem-4-3",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0884, 0.444, -0.3621]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-hem-5",
+      "bone": "cape-3",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-hem-5-0",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.09, 0.394, -0.371]
+        },
+        {
+          "type": "box",
+          "id": "cape-hem-5-1",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.18, 0.394, -0.256]
+        },
+        {
+          "type": "box",
+          "id": "cape-hem-5-2",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.0884, 0.444, -0.3621]
+        },
+        {
+          "type": "box",
+          "id": "cape-hem-5-3",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1768, 0.444, -0.2514]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-hem-6",
+      "bone": "cape-3",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-hem-6-0",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.18, 0.394, -0.256]
+        },
+        {
+          "type": "box",
+          "id": "cape-hem-6-1",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.27, 0.394, -0.331]
+        },
+        {
+          "type": "box",
+          "id": "cape-hem-6-2",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.1768, 0.444, -0.2514]
+        },
+        {
+          "type": "box",
+          "id": "cape-hem-6-3",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.2652, 0.444, -0.3231]
+        }
+      ]
+    },
+    {
+      "type": "csg",
+      "id": "cape-hem-7",
+      "bone": "cape-3",
+      "op": "hull",
+      "parts": [
+        {
+          "type": "box",
+          "id": "cape-hem-7-0",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.27, 0.394, -0.331]
+        },
+        {
+          "type": "box",
+          "id": "cape-hem-7-1",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.36, 0.394, -0.246]
+        },
+        {
+          "type": "box",
+          "id": "cape-hem-7-2",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.2652, 0.444, -0.3231]
+        },
+        {
+          "type": "box",
+          "id": "cape-hem-7-3",
+          "material": "gold",
+          "size": [0.012, 0.012, 0.012],
+          "position": [0.3536, 0.444, -0.2412]
+        }
+      ]
+    },
+    {
+      "type": "cylinder",
+      "id": "waist",
+      "bone": "spine",
+      "material": "tabard",
+      "radius": 0.155,
+      "height": 0.16,
+      "segments": 20,
+      "position": [0, 1.08, 0],
+      "scale": [1, 1, 0.75]
+    },
+    {
+      "type": "cylinder",
       "id": "belt",
       "bone": "hips",
       "material": "leather",
-      "size": [0.34, 0.08, 0.22],
-      "position": [0, 0.96, 0]
+      "radius": 0.172,
+      "height": 0.055,
+      "segments": 20,
+      "position": [0, 0.99, 0],
+      "scale": [1, 1, 0.76]
     },
     {
       "type": "box",
+      "id": "buckle",
+      "bone": "hips",
+      "material": "gold",
+      "size": [0.065, 0.065, 0.025],
+      "position": [0, 0.99, 0.135]
+    },
+    {
+      "type": "sphere",
+      "id": "belt-stud",
+      "bone": "hips",
+      "material": "gold",
+      "radius": 0.013,
+      "position": [0.09, 0.99, 0.115],
+      "mirror": "x"
+    },
+    {
+      "type": "csg",
       "id": "skirt",
       "bone": "hips",
-      "material": "tabard",
-      "size": [0.36, 0.2, 0.24],
-      "position": [0, 0.84, 0]
+      "op": "subtract",
+      "description": "The surcoat's flared skirt, split front and back for riding; the cut edges show gold.",
+      "parts": [
+        {
+          "type": "lathe",
+          "id": "skirt-body",
+          "material": "tabard",
+          "segments": 24,
+          "position": [0, 0.55, 0],
+          "scale": [1, 1, 0.8],
+          "profile": [[0, 0], [0.27, 0], [0.245, 0.12], [0.205, 0.28], [0.17, 0.42], [0, 0.42]]
+        },
+        {
+          "type": "box",
+          "id": "slit-front",
+          "material": "gold",
+          "size": [0.05, 0.3, 0.2],
+          "position": [0, 0.6, 0.22]
+        },
+        {
+          "type": "box",
+          "id": "slit-back",
+          "material": "gold",
+          "size": [0.05, 0.3, 0.2],
+          "position": [0, 0.6, -0.22]
+        }
+      ]
     },
     {
-      "type": "box",
-      "id": "belly",
-      "bone": "spine",
-      "material": "tabard",
-      "size": [0.34, 0.2, 0.22],
-      "position": [0, 1.1, 0]
+      "type": "torus",
+      "id": "skirt-hem",
+      "bone": "hips",
+      "material": "gold",
+      "radius": 0.266,
+      "tube": 0.012,
+      "position": [0, 0.556, 0],
+      "scale": [1, 1, 0.8],
+      "radialSegments": 6,
+      "tubularSegments": 28
     },
     {
-      "type": "box",
-      "id": "chest-plate",
-      "bone": "chest",
-      "material": "steel",
-      "size": [0.4, 0.3, 0.26],
-      "position": [0, 1.34, 0]
-    },
-    {
-      "type": "box",
-      "id": "crest",
-      "bone": "chest",
-      "material": "trim",
-      "size": [0.08, 0.12, 0.02],
-      "position": [0, 1.33, 0.135]
+      "type": "group",
+      "id": "scabbard",
+      "bone": "hips",
+      "position": [0.25, 0.94, -0.02],
+      "rotation": [28, 0, 6],
+      "description": "An empty scabbard hanging from the left hip.",
+      "parts": [
+        {
+          "type": "cylinder",
+          "id": "scabbard-body",
+          "material": "leather",
+          "radius": 0.024,
+          "height": 0.56,
+          "segments": 8,
+          "position": [0, -0.3, 0],
+          "scale": [1, 1, 0.6]
+        },
+        {
+          "type": "cylinder",
+          "id": "locket",
+          "material": "gold",
+          "radius": 0.03,
+          "height": 0.05,
+          "segments": 8,
+          "position": [0, -0.04, 0],
+          "scale": [1, 1, 0.65]
+        },
+        {
+          "type": "cone",
+          "id": "chape",
+          "material": "gold",
+          "radius": 0.028,
+          "height": 0.07,
+          "segments": 8,
+          "position": [0, -0.6, 0],
+          "rotation": [180, 0, 0],
+          "scale": [1, 1, 0.65]
+        }
+      ]
     },
     {
       "type": "sphere",
       "id": "pauldron",
       "bone": "leftUpperArm",
       "material": "steel",
-      "radius": 0.09,
-      "position": [0.22, 1.44, 0],
-      "mirror": "x"
-    },
-    {
-      "type": "capsule",
-      "id": "upper-arm",
-      "bone": "leftUpperArm",
-      "material": "steel",
-      "radius": 0.055,
-      "length": 0.16,
-      "position": [0.22, 1.3, 0],
-      "mirror": "x"
-    },
-    {
-      "type": "capsule",
-      "id": "forearm",
-      "bone": "leftLowerArm",
-      "material": "leather",
-      "radius": 0.05,
-      "length": 0.16,
-      "position": [0.22, 1.04, 0],
+      "radius": 0.14,
+      "scale": [1, 0.72, 1],
+      "position": [0.25, 1.47, 0],
       "mirror": "x"
     },
     {
       "type": "sphere",
-      "id": "head",
-      "bone": "head",
-      "material": "skin",
-      "radius": 0.12,
-      "position": [0, 1.66, 0.01]
-    },
-    {
-      "type": "cylinder",
-      "id": "helm",
-      "bone": "head",
-      "material": "steel",
-      "radius": 0.135,
-      "height": 0.16,
-      "position": [0, 1.73, 0],
-      "segments": 12
-    },
-    {
-      "type": "box",
-      "id": "plume",
-      "bone": "head",
-      "material": "trim",
-      "size": [0.04, 0.08, 0.22],
-      "position": [0, 1.85, -0.02]
-    },
-    {
-      "type": "capsule",
-      "id": "thigh",
-      "bone": "leftUpperLeg",
-      "material": "tabard",
-      "radius": 0.07,
-      "length": 0.28,
-      "position": [0.1, 0.69, 0],
+      "id": "pauldron-boss",
+      "bone": "leftUpperArm",
+      "material": "gold",
+      "radius": 0.03,
+      "position": [0.27, 1.56, 0],
       "mirror": "x"
     },
     {
-      "type": "capsule",
+      "type": "torus",
+      "id": "pauldron-rim-0",
+      "bone": "leftUpperArm",
+      "material": "gold",
+      "radius": 0.135,
+      "tube": 0.014,
+      "rotation": [0, 0, -14],
+      "position": [0.25, 1.43, 0],
+      "mirror": "x",
+      "radialSegments": 6,
+      "tubularSegments": 28
+    },
+    {
+      "type": "torus",
+      "id": "pauldron-rim-1",
+      "bone": "leftUpperArm",
+      "material": "gold",
+      "radius": 0.115,
+      "tube": 0.014,
+      "rotation": [0, 0, -18],
+      "position": [0.27, 1.37, 0],
+      "mirror": "x",
+      "radialSegments": 6,
+      "tubularSegments": 28
+    },
+    {
+      "type": "sphere",
+      "id": "pauldron-lame-1",
+      "bone": "leftUpperArm",
+      "material": "steel",
+      "radius": 0.115,
+      "scale": [1, 0.55, 1],
+      "rotation": [0, 0, -18],
+      "position": [0.27, 1.385, 0],
+      "mirror": "x"
+    },
+    {
+      "type": "torus",
+      "id": "pauldron-rim-2",
+      "bone": "leftUpperArm",
+      "material": "gold",
+      "radius": 0.095,
+      "tube": 0.014,
+      "rotation": [0, 0, -22],
+      "position": [0.29, 1.315, 0],
+      "mirror": "x",
+      "radialSegments": 6,
+      "tubularSegments": 28
+    },
+    {
+      "type": "sphere",
+      "id": "pauldron-lame-2",
+      "bone": "leftUpperArm",
+      "material": "steel",
+      "radius": 0.095,
+      "scale": [1, 0.55, 1],
+      "rotation": [0, 0, -22],
+      "position": [0.29, 1.33, 0],
+      "mirror": "x"
+    },
+    {
+      "type": "cylinder",
+      "id": "upper-arm",
+      "bone": "leftUpperArm",
+      "material": "steel",
+      "radiusTop": 0.062,
+      "radiusBottom": 0.055,
+      "height": 0.16,
+      "segments": 12,
+      "position": [0.22, 1.28, 0],
+      "mirror": "x"
+    },
+    {
+      "type": "sphere",
+      "id": "elbow",
+      "bone": "leftLowerArm",
+      "material": "steel",
+      "radius": 0.062,
+      "position": [0.22, 1.16, -0.01],
+      "mirror": "x"
+    },
+    {
+      "type": "cylinder",
+      "id": "elbow-wing",
+      "bone": "leftLowerArm",
+      "material": "steel",
+      "radius": 0.055,
+      "height": 0.014,
+      "segments": 12,
+      "rotation": [0, 0, 90],
+      "position": [0.275, 1.16, -0.01],
+      "mirror": "x"
+    },
+    {
+      "type": "cylinder",
+      "id": "forearm",
+      "bone": "leftLowerArm",
+      "material": "steel",
+      "radiusTop": 0.056,
+      "radiusBottom": 0.05,
+      "height": 0.15,
+      "segments": 12,
+      "position": [0.22, 1.05, 0],
+      "mirror": "x"
+    },
+    {
+      "type": "cylinder",
+      "id": "cuff",
+      "bone": "leftLowerArm",
+      "material": "steel",
+      "radiusTop": 0.058,
+      "radiusBottom": 0.076,
+      "height": 0.06,
+      "segments": 12,
+      "position": [0.22, 0.955, 0],
+      "mirror": "x"
+    },
+    {
+      "type": "torus",
+      "id": "cuff-rim",
+      "bone": "leftLowerArm",
+      "material": "gold",
+      "radius": 0.074,
+      "tube": 0.011,
+      "position": [0.22, 0.927, 0],
+      "mirror": "x",
+      "radialSegments": 6,
+      "tubularSegments": 28
+    },
+    {
+      "type": "box",
+      "id": "gauntlet",
+      "bone": "leftLowerArm",
+      "material": "mail",
+      "size": [0.085, 0.09, 0.1],
+      "position": [0.22, 0.88, 0.02],
+      "mirror": "x"
+    },
+    {
+      "type": "box",
+      "id": "knuckles",
+      "bone": "leftLowerArm",
+      "material": "steel",
+      "size": [0.092, 0.035, 0.05],
+      "position": [0.22, 0.895, 0.06],
+      "mirror": "x"
+    },
+    {
+      "type": "cylinder",
+      "id": "thigh",
+      "bone": "leftUpperLeg",
+      "material": "steel",
+      "radiusTop": 0.085,
+      "radiusBottom": 0.07,
+      "height": 0.3,
+      "segments": 14,
+      "position": [0.1, 0.7, 0.005],
+      "mirror": "x"
+    },
+    {
+      "type": "sphere",
+      "id": "knee",
+      "bone": "leftLowerLeg",
+      "material": "steel",
+      "radius": 0.068,
+      "position": [0.1, 0.48, 0.035],
+      "mirror": "x"
+    },
+    {
+      "type": "sphere",
+      "id": "knee-stud",
+      "bone": "leftLowerLeg",
+      "material": "gold",
+      "radius": 0.018,
+      "position": [0.1, 0.49, 0.1],
+      "mirror": "x"
+    },
+    {
+      "type": "cylinder",
+      "id": "knee-wing",
+      "bone": "leftLowerLeg",
+      "material": "steel",
+      "radius": 0.05,
+      "height": 0.012,
+      "segments": 12,
+      "rotation": [0, 0, 90],
+      "position": [0.16, 0.48, 0.02],
+      "mirror": "x"
+    },
+    {
+      "type": "lathe",
       "id": "shin",
       "bone": "leftLowerLeg",
       "material": "steel",
-      "radius": 0.06,
-      "length": 0.28,
-      "position": [0.1, 0.28, 0],
+      "segments": 14,
+      "position": [0.1, 0.1, 0],
+      "profile": [[0, 0], [0.052, 0], [0.06, 0.08], [0.068, 0.2], [0.064, 0.32], [0, 0.32]],
       "mirror": "x"
     },
     {
       "type": "box",
       "id": "boot",
       "bone": "leftFoot",
-      "material": "leather",
-      "size": [0.11, 0.08, 0.22],
-      "position": [0.1, 0.04, 0.04],
+      "material": "steel",
+      "size": [0.11, 0.07, 0.14],
+      "position": [0.1, 0.05, -0.005],
+      "mirror": "x"
+    },
+    {
+      "type": "wedge",
+      "id": "toe",
+      "bone": "leftFoot",
+      "material": "steel",
+      "size": [0.1, 0.06, 0.09],
+      "position": [0.1, 0.03, 0.11],
+      "mirror": "x"
+    },
+    {
+      "type": "box",
+      "id": "spur",
+      "bone": "leftFoot",
+      "material": "gold",
+      "size": [0.02, 0.02, 0.03],
+      "position": [0.1, 0.07, -0.085],
       "mirror": "x"
     },
     {
       "type": "group",
       "id": "sword",
       "bone": "rightLowerArm",
-      "description": "Held in the right fist, tipped 40 degrees down from forward about the grip.",
+      "description": "A longsword held in the right fist, tipped 40 degrees down from forward about the grip.",
       "position": [-0.22, 0.88, 0.04],
       "pivot": [-0.22, 0.88, 0.04],
       "rotation": [40, 0, 0],
       "parts": [
         {
+          "type": "sphere",
+          "id": "pommel",
+          "material": "gold",
+          "radius": 0.034,
+          "position": [-0.22, 0.88, -0.075]
+        },
+        {
+          "type": "sphere",
+          "id": "pommel-jewel",
+          "material": "jewel",
+          "radius": 0.016,
+          "position": [-0.22, 0.88, -0.1]
+        },
+        {
           "type": "box",
           "id": "grip",
-          "material": "wood",
-          "size": [0.035, 0.035, 0.14],
-          "position": [-0.22, 0.88, 0.04]
+          "material": "leather",
+          "size": [0.032, 0.032, 0.16],
+          "position": [-0.22, 0.88, 0.03]
         },
         {
-          "type": "box",
+          "type": "extrude",
           "id": "guard",
-          "material": "trim",
-          "size": [0.16, 0.035, 0.035],
-          "position": [-0.22, 0.88, 0.12]
+          "material": "gold",
+          "depth": 0.035,
+          "rotation": [90, 0, 0],
+          "position": [-0.22, 0.88, 0.112],
+          "shape": [
+            [-0.14, 0.035],
+            [-0.1, 0.0],
+            [0.1, 0.0],
+            [0.14, 0.035],
+            [0.125, 0.05],
+            [0.09, 0.028],
+            [-0.09, 0.028],
+            [-0.125, 0.05]
+          ]
         },
         {
-          "type": "box",
+          "type": "extrude",
           "id": "blade",
           "material": "blade",
-          "size": [0.08, 0.05, 0.5],
-          "position": [-0.22, 0.88, 0.385]
+          "depth": 0.022,
+          "rotation": [90, 0, 0],
+          "position": [-0.22, 0.88, 0.15],
+          "shape": [[-0.034, 0], [0.034, 0], [0.03, 0.66], [0, 0.78], [-0.03, 0.66]]
+        },
+        {
+          "type": "box",
+          "id": "fuller",
+          "material": "mail",
+          "size": [0.012, 0.026, 0.5],
+          "position": [-0.22, 0.88, 0.43]
         }
       ]
     },
     {
-      "type": "box",
+      "type": "group",
       "id": "shield",
       "bone": "leftLowerArm",
-      "material": "wood",
-      "size": [0.04, 0.34, 0.28],
-      "position": [0.3, 1.02, 0.04]
-    },
-    {
-      "type": "box",
-      "id": "shield-rim",
-      "bone": "leftLowerArm",
-      "material": "trim",
-      "size": [0.05, 0.08, 0.3],
-      "position": [0.3, 1.02, 0.04]
+      "position": [0.33, 1.02, 0.04],
+      "rotation": [0, 90, 0],
+      "description": "A curved heater shield on the left forearm, its face turned outward: gold rim, blue field, gold cross, leather back.",
+      "parts": [
+        {
+          "type": "csg",
+          "id": "shield-rim",
+          "op": "subtract",
+          "parts": [
+            {
+              "type": "csg",
+              "id": "shield-rim-face",
+              "op": "intersect",
+              "parts": [
+                {
+                  "type": "extrude",
+                  "id": "shield-rim-outline",
+                  "material": "gold",
+                  "shape": [
+                    [-0.22, 0.24],
+                    [0.22, 0.24],
+                    [0.22, 0.02],
+                    [0.15839999999999999, -0.1705],
+                    [0, -0.31],
+                    [-0.15839999999999999, -0.1705],
+                    [-0.22, 0.02]
+                  ],
+                  "depth": 0.4
+                },
+                {
+                  "type": "cylinder",
+                  "id": "shield-rim-curve",
+                  "material": "gold",
+                  "radius": 0.45,
+                  "height": 0.7,
+                  "segments": 48,
+                  "position": [0, 0, -0.45]
+                }
+              ]
+            },
+            {
+              "type": "cylinder",
+              "id": "shield-rim-back",
+              "material": "leather",
+              "radius": 0.45,
+              "height": 0.8,
+              "segments": 48,
+              "position": [0, 0, -0.485]
+            }
+          ]
+        },
+        {
+          "type": "csg",
+          "id": "shield-field",
+          "op": "subtract",
+          "parts": [
+            {
+              "type": "csg",
+              "id": "shield-field-face",
+              "op": "intersect",
+              "parts": [
+                {
+                  "type": "extrude",
+                  "id": "shield-field-outline",
+                  "material": "tabard",
+                  "shape": [
+                    [-0.19, 0.21],
+                    [0.19, 0.21],
+                    [0.19, 0.02],
+                    [0.1368, -0.14850000000000002],
+                    [0, -0.27],
+                    [-0.1368, -0.14850000000000002],
+                    [-0.19, 0.02]
+                  ],
+                  "depth": 0.4
+                },
+                {
+                  "type": "cylinder",
+                  "id": "shield-field-curve",
+                  "material": "tabard",
+                  "radius": 0.45,
+                  "height": 0.7,
+                  "segments": 48,
+                  "position": [0, 0, -0.443]
+                }
+              ]
+            },
+            {
+              "type": "cylinder",
+              "id": "shield-field-back",
+              "material": "tabard",
+              "radius": 0.45,
+              "height": 0.8,
+              "segments": 48,
+              "position": [0, 0, -0.463]
+            }
+          ]
+        },
+        {
+          "type": "csg",
+          "id": "shield-cross",
+          "op": "subtract",
+          "parts": [
+            {
+              "type": "csg",
+              "id": "shield-cross-face",
+              "op": "intersect",
+              "parts": [
+                {
+                  "type": "extrude",
+                  "id": "shield-cross-outline",
+                  "material": "gold",
+                  "shape": [
+                    [-0.06, 0.15],
+                    [0.06, 0.15],
+                    [0.026, 0.026],
+                    [0.13, 0.06],
+                    [0.13, -0.06],
+                    [0.026, -0.026],
+                    [0.06, -0.19],
+                    [-0.06, -0.19],
+                    [-0.026, -0.026],
+                    [-0.13, -0.06],
+                    [-0.13, 0.06],
+                    [-0.026, 0.026]
+                  ],
+                  "depth": 0.4
+                },
+                {
+                  "type": "cylinder",
+                  "id": "shield-cross-curve",
+                  "material": "gold",
+                  "radius": 0.45,
+                  "height": 0.7,
+                  "segments": 48,
+                  "position": [0, 0, -0.436]
+                }
+              ]
+            },
+            {
+              "type": "cylinder",
+              "id": "shield-cross-back",
+              "material": "gold",
+              "radius": 0.45,
+              "height": 0.8,
+              "segments": 48,
+              "position": [0, 0, -0.456]
+            }
+          ]
+        },
+        {
+          "type": "sphere",
+          "id": "shield-boss",
+          "material": "gold",
+          "radius": 0.03,
+          "scale": [1, 1, 0.6],
+          "position": [0, 0.0, 0.02]
+        }
+      ]
     }
   ]
 }

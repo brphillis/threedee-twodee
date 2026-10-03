@@ -66,10 +66,20 @@ export function boxDownscale(src: RgbaImage, factor: number): RgbaImage {
 }
 
 /**
+ * The alpha the renderer writes for lines drawn around parts (render.lines). Opaque surfaces
+ * are written with 255, so this marks line samples without changing how anything looks.
+ */
+export const LINE_ALPHA = 254;
+
+/**
  * Like boxDownscale for alpha, but each pixel takes the most common colour among the block's
  * opaque samples instead of their mean, so no in-between colours are made: toon bands and
  * material borders stay crisp, as in hand-drawn pixel art. Ties go to the colour of the
  * sample nearest the block centre (the first such sample in row order).
+ *
+ * Line samples (alpha LINE_ALPHA) vote apart: a block at least half covered by line becomes
+ * a line pixel, and any other block leaves its line samples out. A line as wide as one block
+ * then comes out one pixel wide wherever it falls, or two where it straddles two blocks equally.
  */
 export function modeDownscale(src: RgbaImage, factor: number): RgbaImage {
   const out = boxDownscale(src, factor);
@@ -82,11 +92,22 @@ export function modeDownscale(src: RgbaImage, factor: number): RgbaImage {
     for (let ox = 0; ox < out.width; ox++) {
       const o = (oy * out.width + ox) * 4;
       if (out.rgba[o + 3] === 0) continue;
+      let lines = 0;
+      let opaque = 0;
+      for (let dy = 0; dy < factor; dy++) {
+        let i = ((oy * factor + dy) * src.width + ox * factor) * 4 + 3;
+        for (let dx = 0; dx < factor; dx++, i += 4) {
+          if (s[i] === LINE_ALPHA) lines++;
+          else if (s[i] !== 0) opaque++;
+        }
+      }
+      // Vote among line samples if the block is mostly line (or has nothing else), else without them.
+      const line = 2 * lines >= factor * factor || opaque === 0;
       let used = 0;
       for (let dy = 0; dy < factor; dy++) {
         let i = ((oy * factor + dy) * src.width + ox * factor) * 4;
         for (let dx = 0; dx < factor; dx++, i += 4) {
-          if (s[i + 3] === 0) continue;
+          if (s[i + 3] === 0 || (lines > 0 && (s[i + 3] === LINE_ALPHA) !== line)) continue;
           const c = ((s[i] as number) << 16) | ((s[i + 1] as number) << 8) | (s[i + 2] as number);
           const d = (2 * dx - factor + 1) ** 2 + (2 * dy - factor + 1) ** 2;
           let k = 0;

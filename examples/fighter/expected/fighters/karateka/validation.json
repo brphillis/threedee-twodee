@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "fighters/karateka",
+  "generatedAt": "2026-10-03T06:35:01.405Z",
+  "status": "pass",
+  "checks": [
+    { "id": "sprite-size", "status": "pass", "message": "Every sprite is 128 x 128." },
+    {
+      "id": "binary-alpha",
+      "status": "pass",
+      "message": "Every pixel is fully opaque or fully transparent."
+    },
+    { "id": "not-blank", "status": "pass", "message": "No sprite is blank." },
+    { "id": "inside-frame", "status": "pass", "message": "No sprite touches the frame edge." },
+    { "id": "grounded", "status": "pass", "message": "Every sprite reaches the ground line." },
+    {
+      "id": "palette",
+      "status": "pass",
+      "message": "Every opaque pixel uses one of the 24 palette colours."
+    },
+    {
+      "id": "jitter",
+      "status": "pass",
+      "message": "No frame's centre moves more than 2 px from the previous frame."
+    },
+    {
+      "id": "cleanup",
+      "status": "pass",
+      "message": "Cleanup removed 0 and recoloured 4565 stray pixel(s) across all sprites.",
+      "details": { "removed": 0, "recoloured": 4565 }
+    },
+    { "id": "isolated-pixels", "status": "pass", "message": "No sprite has stray single pixels." },
+    { "id": "sheet-size", "status": "pass", "message": "The sheet is 1664 x 640." },
+    {
+      "id": "cells-in-bounds",
+      "status": "pass",
+      "message": "Every cell, with its extruded border, lies inside its sheet."
+    },
+    {
+      "id": "frame-count",
+      "status": "pass",
+      "message": "All 55 planned frames are on the sheets, each once."
+    }
+  ]
+}

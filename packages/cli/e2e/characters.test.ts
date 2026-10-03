@@ -89,7 +89,7 @@ describe('the knight example', () => {
 
     const rig = await runJson(['rig', 'show', 'characters/knight'], { cwd: root });
     const bones = (rig.envelope.data as { bones: { name: string; parts: string[] }[] }).bones;
-    expect(bones).toHaveLength(15);
+    expect(bones).toHaveLength(19);
     expect(bones.find((b) => b.name === 'rightLowerArm')?.parts).toEqual(
       expect.arrayContaining(['knight-blade', 'knight-grip', 'knight-forearm-mx']),
     );
@@ -114,6 +114,6 @@ describe('the knight example', () => {
     expect(preview.exitCode, preview.stderr).toBe(0);
     const meta = await sharp(join(root, (preview.envelope.data as { file: string }).file)).metadata();
     // Eight frames in a row for each of eight directions, with a 2 px grid between cells.
-    expect([meta.width, meta.height]).toEqual([8 * 64 + 9 * 2, 8 * 96 + 9 * 2]);
+    expect([meta.width, meta.height]).toEqual([8 * 192 + 9 * 2, 8 * 192 + 9 * 2]);
   });
 });

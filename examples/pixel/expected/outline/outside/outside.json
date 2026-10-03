@@ -1,35 +1,35 @@
 {
   "frames": {
     "0": {
-      "frame": { "x": 0, "y": 0, "w": 40, "h": 40 },
+      "frame": { "x": 0, "y": 0, "w": 64, "h": 64 },
       "rotated": false,
       "trimmed": false,
-      "spriteSourceSize": { "x": 0, "y": 0, "w": 40, "h": 40 },
-      "sourceSize": { "w": 40, "h": 40 },
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
+      "sourceSize": { "w": 64, "h": 64 },
       "duration": 100
     },
     "1": {
-      "frame": { "x": 0, "y": 40, "w": 40, "h": 40 },
+      "frame": { "x": 0, "y": 64, "w": 64, "h": 64 },
       "rotated": false,
       "trimmed": false,
-      "spriteSourceSize": { "x": 0, "y": 0, "w": 40, "h": 40 },
-      "sourceSize": { "w": 40, "h": 40 },
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
+      "sourceSize": { "w": 64, "h": 64 },
       "duration": 100
     },
     "2": {
-      "frame": { "x": 0, "y": 80, "w": 40, "h": 40 },
+      "frame": { "x": 0, "y": 128, "w": 64, "h": 64 },
       "rotated": false,
       "trimmed": false,
-      "spriteSourceSize": { "x": 0, "y": 0, "w": 40, "h": 40 },
-      "sourceSize": { "w": 40, "h": 40 },
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
+      "sourceSize": { "w": 64, "h": 64 },
       "duration": 100
     },
     "3": {
-      "frame": { "x": 0, "y": 120, "w": 40, "h": 40 },
+      "frame": { "x": 0, "y": 192, "w": 64, "h": 64 },
       "rotated": false,
       "trimmed": false,
-      "spriteSourceSize": { "x": 0, "y": 0, "w": 40, "h": 40 },
-      "sourceSize": { "w": 40, "h": 40 },
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
+      "sourceSize": { "w": 64, "h": 64 },
       "duration": 100
     }
   },
@@ -38,7 +38,7 @@
     "version": "0.0.0",
     "image": "outside.png",
     "format": "RGBA8888",
-    "size": { "w": 40, "h": 160 },
+    "size": { "w": 64, "h": 256 },
     "scale": "1",
     "frameTags": [
       { "name": "idle_s", "from": 0, "to": 0, "direction": "forward", "color": "#000000ff" },
@@ -54,8 +54,8 @@
         "keys": [
           {
             "frame": 0,
-            "bounds": { "x": 0, "y": 0, "w": 40, "h": 40 },
-            "pivot": { "x": 20, "y": 31 }
+            "bounds": { "x": 0, "y": 0, "w": 64, "h": 64 },
+            "pivot": { "x": 32, "y": 51 }
           }
         ]
       }

@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "lines/dark",
+  "assetHash": "sha256:b5f85b1c3447aa7be5742589fe3408e2d59b2abb3b98243dd906df5ade4d0f29",
+  "generatedAt": "2026-10-03T06:41:38.233Z",
+  "frame": { "width": 64, "height": 64 },
+  "pivot": {
+    "x": 32,
+    "y": 51,
+    "normalized": { "x": 0.5, "y": 0.796875 }
+  },
+  "pixelsPerUnit": 44,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 13 },
+  "directions": [
+    { "name": "s", "yaw": 0, "mirrorOf": null },
+    { "name": "w", "yaw": 90, "mirrorOf": null },
+    { "name": "n", "yaw": 180, "mirrorOf": null },
+    { "name": "e", "yaw": 270, "mirrorOf": null }
+  ],
+  "palette": { "mode": "none", "name": null, "colors": [] },
+  "clips": [
+    { "name": "idle", "fps": 10, "frames": 1, "loop": true, "motion": false, "durationMs": 100 }
+  ],
+  "sheets": [
+    {
+      "name": "dark",
+      "image": "dark.png",
+      "data": "dark.json",
+      "width": 64,
+      "height": 256,
+      "layout": "grid"
+    }
+  ],
+  "cells": [
+    {
+      "key": "idle/s/000",
+      "clip": "idle",
+      "direction": "s",
+      "index": 0,
+      "sheet": "dark",
+      "x": 0,
+      "y": 0,
+      "w": 64,
+      "h": 64,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/w/000",
+      "clip": "idle",
+      "direction": "w",
+      "index": 0,
+      "sheet": "dark",
+      "x": 0,
+      "y": 64,
+      "w": 64,
+      "h": 64,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/n/000",
+      "clip": "idle",
+      "direction": "n",
+      "index": 0,
+      "sheet": "dark",
+      "x": 0,
+      "y": 128,
+      "w": 64,
+      "h": 64,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/e/000",
+      "clip": "idle",
+      "direction": "e",
+      "index": 0,
+      "sheet": "dark",
+      "x": 0,
+      "y": 192,
+      "w": 64,
+      "h": 64,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    }
+  ],
+  "files": { "sheets": ["dark.png"], "aseprite-json": ["dark.json"], "manifest": ["manifest.json"] },
+  "stages": {
+    "model": "sha256:1ce36eaed64ea87af8050347f9e19242f81b05dd086c176d8f44833736281d3f",
+    "rig": "sha256:166163342f57820ce15b3c4e76a552890bd032ecfb833e6bf9a26f077a20e56e",
+    "plan": "sha256:858b5ae7bbb6091324a8a1092feae7a8871673970f03fc24feb2be6340a9fa2d",
+    "render": "sha256:84d2fb2a024ed986e90c56f066ad0dda3ed8cf7665636a321482120bc6b802fd",
+    "pixel": "sha256:abaa1e647c952163e6c85d053ec175037b185118a1e099fcdf0908ca5f8a9fdb",
+    "sheet": "sha256:d23147614aba86f168cf93c6bb5d045d3baff417d28c3329dd2e9f3675ad1553"
+  },
+  "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
+}

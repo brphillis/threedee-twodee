@@ -26,12 +26,14 @@ export const GENERATOR_VERSIONS: Readonly<Record<ClipGeneratorT['type'], number>
   'idle-breathe': 1,
   bob: 1,
   spin: 1,
+  sway: 1,
 };
 
 export const WALK_DEFAULTS = { stride: 25, bob: 0.03, armSwing: 20, kneeBend: 30, hipSway: 4, lean: 0 } as const;
 export const BREATHE_DEFAULTS = { amount: 2, rise: 0.01 } as const;
 export const BOB_DEFAULTS = { height: 0.05 } as const;
 export const SPIN_DEFAULTS = { turns: 1, axis: 'y' } as const;
+export const SWAY_DEFAULTS = { axis: 'x', amount: 5, bias: 0, lag: 0.12, cycles: 1, growth: 1 } as const;
 
 export interface GeneratorProblem {
   /** Path inside the generator, such as "bones.hips". */
@@ -104,6 +106,11 @@ export function checkGenerator(gen: ClipGeneratorT, rig: ResolvedRigT | null): G
       if (gen.bone !== undefined && !known(gen.bone))
         problems.push({ path: 'bone', message: `Bone "${gen.bone}" is not in the rig` });
       break;
+    case 'sway':
+      gen.bones.forEach((b, i) => {
+        if (!known(b)) problems.push({ path: `bones[${i}]`, message: `Bone "${b}" is not in the rig` });
+      });
+      break;
   }
   return problems;
 }
@@ -168,6 +175,19 @@ export function generateKeys(
         const angle = round6((360 * turns * p) % 360);
         const rotation = r3(axis === 'x' ? angle : 0, axis === 'y' ? angle : 0, axis === 'z' ? angle : 0);
         return { t: round6(t), pose: { [bone]: { rotation } } };
+      });
+    }
+    case 'sway': {
+      const o = { ...SWAY_DEFAULTS, ...gen };
+      return phases.map(({ t, p }) => {
+        const pose: ClipKeyT['pose'] = {};
+        o.bones.forEach((bone, i) => {
+          const angle = o.growth ** i * (o.bias + o.amount * Math.sin(2 * Math.PI * (o.cycles * p - i * o.lag)));
+          pose[bone] = {
+            rotation: r3(o.axis === 'x' ? angle : 0, o.axis === 'y' ? angle : 0, o.axis === 'z' ? angle : 0),
+          };
+        });
+        return { t: round6(t), pose };
       });
     }
   }

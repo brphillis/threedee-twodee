@@ -115,6 +115,7 @@ Rigid parts are the default and suit sprites at 32 to 64 px: at that size, exper
 | `sampleTimes` | Render exactly these times instead of evenly spaced frames. |
 | `motion` | The model moves on purpose (an attack, a dash), so the jitter check skips the clip. |
 | `keys` or `generator` | How the clip poses the bones. Without either the clip shows the rest pose. |
+| `layers` | More generators composed on top, such as a `sway` on a cape over a walk. See [Layers](#layers). |
 | `interpolation` | `linear` (default) or `step`. |
 
 **Keys.** Each key is a whole pose at time `t`: a bone the key does not list is at its rest pose. A pose sets `rotation` (Euler degrees, or a quaternion `[x, y, z, w]`), `translation` (metres added to the rest position, in the parent bone's frame) and `scale`, all relative to the rest pose. Between keys a bone moves with the earlier key's `easing`: `linear`, `step`, `ease-in`, `ease-out`, `ease-in-out`, `ease-in-cubic`, `ease-out-cubic`, `ease-in-out-cubic` or `ease-in-out-sine`.
@@ -152,6 +153,41 @@ A foot should stay on the ground: with straight legs, a stride of S degrees lift
 | `idle-breathe` | `amount` 2 degrees, `rise` 0.01 m, `bones.chest`, `bones.shoulders` | The chest (or spine) tilts back and lifts once per clip; the upper arms settle by half the rise. |
 | `bob` | `height` 0.05 m, `bone` | Rises and falls once per clip, easing in and out. |
 | `spin` | `turns` 1, `axis` y, `bone` | Turns at a constant rate. Negative turns go the other way. |
+
+### sway
+
+`sway` sends a wave down a chain of bones: a cape, a banner, a tail or a plume. Each bone turns about `axis` by `bias` plus `amount` times a sine, and trails the bone before it by `lag` of a cycle, so the movement starts at the root and travels to the tip.
+
+| Parameter | Default | Meaning |
+|---|---|---|
+| `bones` | required | The chain, root first. Give the rig a bone for each segment and attach each segment's parts to its bone. |
+| `axis` | x | The axis every bone turns about. Positive X turns a hanging cape's hem backwards. |
+| `amount` | 5 | Swing either side of the bias, in degrees. |
+| `bias` | 0 | A constant turn the swing centres on, such as a cape held back by the wind. |
+| `lag` | 0.12 | How far each bone trails the one before it, in cycles. |
+| `cycles` | 1 | Whole swings per clip, so a looping clip joins up. |
+| `growth` | 1 | Each bone turns this many times as far as the one before it; above 1 the tip moves most. |
+
+Each bone's turn is relative to its parent, so the turns add up along the chain: three bones turning 4 degrees each bend the tip 12 degrees from the root.
+
+### Layers
+
+A clip has one `keys` list or one `generator`. `layers` adds more generators over it, each usually moving bones the main motion leaves alone:
+
+```json
+{
+  "walk": {
+    "duration": 0.8,
+    "generator": { "type": "walk-cycle", "stride": 25 },
+    "layers": [
+      { "type": "sway", "bones": ["cape-1", "cape-2", "cape-3"], "amount": 4, "bias": 10, "cycles": 2 },
+      { "type": "sway", "bones": ["cape-1", "cape-2", "cape-3"], "axis": "z", "amount": 2, "lag": 0.2 }
+    ]
+  }
+}
+```
+
+At every sample time td2d poses the clip as usual, then composes each layer's pose on top in order: rotations turn the bone further, translations add and scales multiply. The result is baked as one key per frame, which `td2d model inspect <id> --clip <name> --keys` prints. Layers work over keys too, so a hand-keyed attack can keep its cape moving. Two layers on the same axis with different `cycles` give a less regular, wind-like movement than one.
 
 ## Animating props
 

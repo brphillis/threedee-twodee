@@ -228,11 +228,33 @@ async function exportsImages(): Promise<void> {
   mkdirSync(out, { recursive: true });
   const sheets = join(readBuild(project, 'characters/knight-packed').dir, 'sheets');
   cpSync(join(sheets, 'knight-packed-walk.gif'), join(out, 'knight-packed-walk.gif'));
+  // The fighter example's README and the top-level README play these.
+  const fighter = await example('fighter');
+  const animations = join(images, 'examples', 'fighter');
+  mkdirSync(animations, { recursive: true });
+  for (const [id, name] of [
+    ['fighters/karateka', 'karateka'],
+    ['effects/energy-ball', 'energy-ball'],
+  ] as const) {
+    const build = readBuild(fighter, id);
+    const built = join(build.dir, 'sheets');
+    for (const gif of readdirSync(built).filter((f) => f.startsWith(`${name}-`) && f.endsWith('.gif')))
+      cpSync(join(built, gif), join(animations, gif));
+    // Every frame of every clip in a row, at the sprite's own size.
+    for (const clip of build.manifest.clips.map((c) => c.name))
+      await writePreview(build, {
+        scale: 1,
+        background: 'checker',
+        grid: false,
+        clip,
+        out: join(animations, `${name}-${clip}-frames.png`),
+      });
+  }
 }
 
 /** A preview of every asset of every example project, for the gallery. */
 async function gallery(): Promise<void> {
-  for (const name of ['starter', 'props', 'cameras', 'pixel', 'characters']) {
+  for (const name of ['starter', 'props', 'cameras', 'pixel', 'characters', 'fighter']) {
     const project = await example(name);
     const assets = join(project.root, 'assets');
     const ids: string[] = [];
@@ -248,11 +270,14 @@ async function gallery(): Promise<void> {
     for (const id of ids.sort()) {
       const file = join(images, 'examples', name, `${id.replace(/\//g, '-')}.png`);
       mkdirSync(dirname(file), { recursive: true });
-      await writePreview(readBuild(project, id), {
-        scale: 2,
+      const build = readBuild(project, id);
+      // A ring of one direction is a single frame: show a side-on asset's whole sheet instead.
+      const sideOn = build.manifest.directions.length === 1;
+      await writePreview(build, {
+        scale: sideOn && build.manifest.frame.width > 64 ? 1 : 2,
         background: 'checker',
         grid: false,
-        layout: 'ring',
+        layout: sideOn ? 'sheet' : 'ring',
         out: file,
       });
     }
@@ -390,6 +415,8 @@ async function pixel(): Promise<void> {
     'outline/outside-4',
     'outline/inside',
     'outline/snapped',
+    'lines/dark',
+    'lines/shade',
     'preset/retro-16',
     'preset/pico-8',
   ];
@@ -425,7 +452,7 @@ async function characters(): Promise<void> {
   for (const clip of ['idle', 'walk', 'attack']) {
     const file = join(out, `knight-${clip}.png`);
     await writePreview(build, { scale: 3, background: 'checker', grid: true, clip, out: file });
-    await firstRow(file, 3 * 48 + 2 * 3);
+    await firstRow(file, 3 * build.manifest.frame.height + 2 * 3);
   }
 }
 

@@ -72,7 +72,7 @@ describe('describeCapabilities', () => {
     expect(caps.stages.planned).toEqual([]);
     expect(caps.rigs.map((r) => r.name)).toEqual(['humanoid-basic', 'none', 'quadruped-basic']);
     expect(caps.rigs.find((r) => r.name === 'humanoid-basic')?.bones).toHaveLength(15);
-    expect(caps.generators.map((g) => g.type)).toEqual(['walk-cycle', 'idle-breathe', 'bob', 'spin']);
+    expect(caps.generators.map((g) => g.type)).toEqual(['walk-cycle', 'idle-breathe', 'bob', 'spin', 'sway']);
     expect(caps.easings).toContain('ease-in-out');
     expect(caps.pixelPasses.map((p) => p.id)).toEqual([
       'downscale',
