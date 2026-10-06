@@ -80,9 +80,11 @@ Material, used inside asset materials maps. Read from `asset.json materials.<nam
 | Field | Required | Meaning |
 |---|---|---|
 | `description` |  | Free-text note. Use this instead of comments. |
-| `color` | yes | Either a #rrggbb colour or a palette reference. |
+| `color` |  | Either a #rrggbb colour or a palette reference. Required unless ramp is set. |
 | `shading` |  | toon: banded lighting. flat: unlit base colour. lambert: smooth diffuse lighting. |
-| `bands` |  | Number of light bands for toon shading. Default 3. |
+| `bands` |  | Number of light bands for toon shading. Default 3. A ramp sets it to its length. |
+| `ramp` |  | Colours from shadow to full light, each a #rrggbb or a palette reference. Toon shading paints each light level with one of them, darkest first, in place of color and bands, so shadows and highlights can change hue as in hand-painted pixel art. |
+| `hueShift` |  | Degrees to turn the hue of darker toon bands, making a ramp from color: positive turns shadows towards blue-violet, negative towards yellow. The full-light band keeps color; the shadow band turns by the whole amount and the bands between by their share. Default 0. |
 | `emissive` |  | Emissive colour added regardless of lighting. |
 | `outline` |  | Whether render.lines may line this material. Default true. Turn it off for fine detail such as grain, stitching or strands, and for dark gaps. |
 | `opacity` |  | Render opacity. The pixel stage thresholds alpha, so values below 1 produce a warning. |
@@ -238,7 +240,7 @@ Asset after defaults and presets are applied. Written to `td2d asset show <id>`.
 | `model` | yes | Parts with components expanded and imports hashed. |
 | `rig` | yes | Bones in parent-first order, or null for an unrigged asset. |
 | `animation` | yes | Clips with their sample times; generator clips keep their settings. |
-| `render` | yes | Supersampling factor, render backend and lines. |
+| `render` | yes | Supersampling factor, render backend, lines and whether normal maps are written. |
 | `pixel` | yes | Pixel settings after presets and overrides. |
 | `paletteColors` | yes | The colours of a fixed palette, or null. |
 | `sheet` | yes | Sheet settings after presets and overrides. |

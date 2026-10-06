@@ -13,6 +13,8 @@ export interface RenderedFrame {
   readonly width: number;
   readonly height: number;
   readonly rgba: Uint8Array;
+  /** View-space normals as RGBA rows top-down, when the job asked for them. */
+  readonly normals?: Uint8Array;
 }
 
 export type FrameSink = (frame: RenderedFrame, index: number) => Promise<void> | void;

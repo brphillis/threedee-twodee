@@ -28,6 +28,24 @@ const Quaternion = z
   .refine((q) => Math.hypot(...q) > 1e-6, 'A quaternion cannot be all zeros')
   .meta({ description: 'Quaternion [x, y, z, w]; normalised before use.' });
 
+export const IkTarget = z
+  .strictObject({
+    target: Vec3.meta({ description: "Where this bone's joint should be, in model space (metres, Y up)." }),
+    pole: Vec3.optional().meta({
+      description:
+        "Direction the middle joint (knee or elbow) bends towards. Default: +Z or -Z, whichever side the middle bone's X limits allow, so knees bend forwards and elbows backwards on the humanoid rig.",
+    }),
+    keepOrientation: z.boolean().optional().meta({
+      description:
+        "Keep this bone's orientation in model space while the chain bends, with its own rotation applied on top, so a planted foot stays flat on the ground. Default false.",
+    }),
+  })
+  .meta({
+    description:
+      "Two-bone inverse kinematics: the two bones above this one turn so its joint lands on the target, like a planted foot or a hand on a hilt. Between two keys that both target the bone the target moves and is solved at every frame; towards a key without a target the solved rotations ease into that key's.",
+    examples: [{ target: [0.1, 0.08, 0.3], keepOrientation: true }],
+  });
+
 export const BonePose = z
   .strictObject({
     rotation: z.union([Vec3, Quaternion]).optional().meta({
@@ -41,6 +59,7 @@ export const BonePose = z
       .union([z.number().positive(), PositiveVec3])
       .optional()
       .meta({ description: 'Scale relative to the rest pose.' }),
+    ik: IkTarget.optional(),
   })
   .meta({ description: 'Pose of one bone in a key. Missing fields hold the rest pose.' });
 
@@ -68,12 +87,10 @@ export const WalkCycleGenerator = z
       .max(90)
       .optional()
       .meta({ description: 'Leg swing either side of vertical, in degrees. Default 25.' }),
-    bob: z
-      .number()
-      .min(0)
-      .max(1)
-      .optional()
-      .meta({ description: 'How far the hips drop when the legs are furthest apart, in metres. Default 0.03.' }),
+    bob: z.number().min(0).max(1).optional().meta({
+      description:
+        'How far the hips drop when the legs are furthest apart, in metres. Default 0.03, or with ik the drop that keeps the feet planted with straight legs at full stride.',
+    }),
     armSwing: z
       .number()
       .min(0)
@@ -85,7 +102,17 @@ export const WalkCycleGenerator = z
       .min(0)
       .max(150)
       .optional()
-      .meta({ description: 'Knee bend of the swinging leg, in degrees. Default 30.' }),
+      .meta({ description: 'Knee bend of the swinging leg, in degrees. Default 30. Not used with ik.' }),
+    ik: z.boolean().optional().meta({
+      description:
+        'Plant the feet: each foot stands still on the ground through its stance and lifts in an arc through its swing, and the legs are solved to reach it, so nothing slides and the knees bend as far as they need. Needs lower leg and foot bones. Default false.',
+    }),
+    lift: z
+      .number()
+      .min(0)
+      .max(1)
+      .optional()
+      .meta({ description: 'With ik: how high the swinging foot lifts, in metres. Default 0.06.' }),
     hipSway: z
       .number()
       .min(0)
@@ -120,7 +147,10 @@ export const WalkCycleGenerator = z
   .meta({
     description:
       'A looping walk: legs swing with knees bending on the way forward, arms counter-swing, hips drop and twist.',
-    examples: [{ type: 'walk-cycle', stride: 25, bob: 0.05 }],
+    examples: [
+      { type: 'walk-cycle', stride: 25, bob: 0.05 },
+      { type: 'walk-cycle', stride: 25, ik: true },
+    ],
   });
 
 export const IdleBreatheGenerator = z
@@ -294,6 +324,7 @@ export const AnimationDefinition = z
 
 export type EasingT = z.infer<typeof Easing>;
 export type InterpolationT = z.infer<typeof Interpolation>;
+export type IkTargetT = z.infer<typeof IkTarget>;
 export type BonePoseT = z.infer<typeof BonePose>;
 export type ClipKeyT = z.infer<typeof ClipKey>;
 export type ClipGeneratorT = z.infer<typeof ClipGenerator>;

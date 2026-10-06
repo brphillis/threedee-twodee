@@ -51,13 +51,14 @@
         ]
       },
       "walk": {
-        "description": "Generated walk cycle, with the cape streaming back and rippling with each step.",
+        "description": "Generated walk cycle with planted feet, the cape streaming back and rippling with each step.",
         "duration": 0.8,
         "generator": {
           "type": "walk-cycle",
           "stride": 25,
-          "bob": 0.019,
-          "armSwing": 15
+          "bob": 0.025,
+          "armSwing": 15,
+          "ik": true
         },
         "layers": [
           {

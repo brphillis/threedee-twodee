@@ -1,0 +1,77 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "ramp/palette",
+  "type": "prop",
+  "description": "Every material a ramp of colours from palettes/crate-8.json, darkest first, so each toon band is painted with a hand-picked palette colour and the sprite never leaves the palette.",
+  "materials": {
+    "wood": {
+      "ramp": [
+        { "palette": "crate-8", "index": 1 },
+        { "palette": "crate-8", "index": 2 },
+        { "palette": "crate-8", "index": 3 }
+      ]
+    },
+    "frame": {
+      "ramp": [
+        { "palette": "crate-8", "index": 2 },
+        { "palette": "crate-8", "index": 3 },
+        { "palette": "crate-8", "index": 4 }
+      ]
+    },
+    "grain": {
+      "ramp": [
+        { "palette": "crate-8", "index": 0 },
+        { "palette": "crate-8", "index": 1 },
+        { "palette": "crate-8", "index": 2 }
+      ],
+      "outline": false
+    },
+    "rope": {
+      "ramp": [
+        { "palette": "crate-8", "index": 1 },
+        { "palette": "crate-8", "index": 7 },
+        { "palette": "crate-8", "index": 4 }
+      ],
+      "outline": false
+    },
+    "rope-dark": {
+      "ramp": [{ "palette": "crate-8", "index": 0 }, { "palette": "crate-8", "index": 1 }],
+      "outline": false
+    },
+    "sack": {
+      "ramp": [
+        { "palette": "crate-8", "index": 5 },
+        { "palette": "crate-8", "index": 6 },
+        { "palette": "crate-8", "index": 4 }
+      ]
+    },
+    "sack-dark": {
+      "ramp": [{ "palette": "crate-8", "index": 5 }, { "palette": "crate-8", "index": 6 }],
+      "outline": false
+    },
+    "sack-light": {
+      "ramp": [{ "palette": "crate-8", "index": 6 }, { "palette": "crate-8", "index": 4 }],
+      "outline": false
+    },
+    "cord": {
+      "ramp": [{ "palette": "crate-8", "index": 2 }, { "palette": "crate-8", "index": 3 }],
+      "outline": false
+    }
+  },
+  "pixel": {
+    "palette": "fixed:crate-8"
+  },
+  "model": {
+    "parts": [
+      {
+        "type": "component",
+        "id": "crates",
+        "component": "crates"
+      }
+    ]
+  },
+  "acceptance": {
+    "maxColors": 8
+  }
+}

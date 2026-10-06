@@ -120,6 +120,20 @@ Rigid parts are the default and suit sprites at 32 to 64 px: at that size, exper
 
 **Keys.** Each key is a whole pose at time `t`: a bone the key does not list is at its rest pose. A pose sets `rotation` (Euler degrees, or a quaternion `[x, y, z, w]`), `translation` (metres added to the rest position, in the parent bone's frame) and `scale`, all relative to the rest pose. Between keys a bone moves with the earlier key's `easing`: `linear`, `step`, `ease-in`, `ease-out`, `ease-in-out`, `ease-in-cubic`, `ease-out-cubic`, `ease-in-out-cubic` or `ease-in-out-sine`.
 
+**Inverse kinematics.** Instead of a rotation, a bone's pose can give `ik`: where its joint should be, in model space. The two bones above it turn to put it there, so a foot can be told to stand at a spot on the ground, or a hand to hold a hilt, however the hips and spine move:
+
+```json
+{ "t": 0.3, "pose": { "hips": { "translation": [0, -0.1, 0.05] }, "leftFoot": { "ik": { "target": [0.1, 0.08, 0.3], "keepOrientation": true } } } }
+```
+
+- `target` is the joint's position in metres, like a part's `position`. Out of reach, the leg straightens towards it.
+- `pole` is the direction the middle joint bends towards. By default knees bend forwards and elbows backwards, taken from the middle bone's X limits.
+- `keepOrientation` holds the bone's orientation in model space while the chain bends, so a planted foot stays flat; the bone's own `rotation` applies on top.
+- Between two keys that both give a bone a target, the target moves between them and the chain is solved at every frame, so the foot never slides. Towards a key without one, the solved pose eases into that key's rotations.
+- The chain is the bone and the two above it, so a target for a hand needs a hand bone: add one under the lower arm (`{ "name": "leftHand", "parent": "leftLowerArm", "position": [0, -0.26, 0] }`).
+
+`td2d model inspect <id> --clip <name> --keys` prints the rotations the solver chose. The `walk-cycle` generator's `ik` option does the same for a walk; the knight in `examples/characters` walks that way.
+
 **Interpolation.** `linear` moves smoothly between keys. `step` holds every key until the next one, like hand-drawn key frames. Experiment Q4 found that at 10 fps a walk keyed with four poses and `step` freezes on every other frame and then jumps; `linear` changes the same amount every frame and stays much closer to the true motion. Use `step` only for a deliberately held, choppy look.
 
 Clips are baked at their frame times into glTF animations, so every rendered frame is exactly the pose the keys describe.
@@ -139,12 +153,20 @@ Generators write keys for you, one per frame. `td2d model inspect <id> --clip wa
 | `stride` | 25 | Leg swing either side of vertical, in degrees. |
 | `bob` | 0.03 | How far the hips drop when the legs are furthest apart, in metres. |
 | `armSwing` | 20 | Arm swing opposite the legs, in degrees. |
-| `kneeBend` | 30 | Knee bend of the leg swinging forward, in degrees. |
+| `kneeBend` | 30 | Knee bend of the leg swinging forward, in degrees. Not used with `ik`. |
+| `ik` | false | Plant the feet. Each foot stands still on the ground for half the cycle and slides back at a steady speed, as a foot does against the ground while the body walks over it, then lifts in an arc and swings forward. The legs are solved to reach it, so the knees bend as far as they need and nothing slides. Needs lower leg and foot bones. |
+| `lift` | 0.06 | With `ik`: how high the swinging foot lifts, in metres. |
 | `hipSway` | 4 | Hip twist towards the forward leg, in degrees; the spine twists back. |
 | `lean` | 0 | Forward lean of the spine, in degrees. |
 | `bones` | VRM names | Bone for each role: `hips`, `spine`, `leftUpperLeg`, `rightUpperLeg`, `leftLowerLeg`, `rightLowerLeg`, `leftFoot`, `rightFoot`, `leftUpperArm`, `rightUpperArm`. Only the hips and upper legs are required. |
 
 A foot should stay on the ground: with straight legs, a stride of S degrees lifts a foot by about leg length x (1 - cos S), and `bob` should match it. The plan stage checks that in every frame the lowest foot point is within one pixel of the ground. Otherwise it warns with `W_CLIP_FOOT_CONTACT`, and the hint gives a `bob` for your stride.
+
+With `ik` the feet are placed on the ground and the legs solved to reach them, so the check always passes. Without a `bob` the hips drop as far as straight legs need at full stride; that is a large bob at sprite scale, so set `bob` to the one or two pixels you want, and the step shortens to what the legs can reach with it:
+
+```json
+{ "walk": { "duration": 0.8, "generator": { "type": "walk-cycle", "stride": 25, "bob": 0.03, "ik": true } } }
+```
 
 ### idle-breathe, bob and spin
 
@@ -216,4 +238,5 @@ Changing a clip reruns `rig` and the stages after it; the geometry stays cached.
 | A key time after the end of the clip, or keys out of order | `E_ASSET_INVALID` |
 | A pose turns a bone past its limits | `W_CLIP_BONE_LIMIT` |
 | A walk-cycle foot off or into the ground | `W_CLIP_FOOT_CONTACT` |
+| An `ik` target on a bone with fewer than two bones above it | `E_ASSET_INVALID` |
 | A frame's centre jumps more than `acceptance.maxJitter` px | the `jitter` check, skipped for `motion` clips |

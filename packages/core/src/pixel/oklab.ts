@@ -39,3 +39,34 @@ export function hexToRgb(hex: string): [number, number, number] {
 export function rgbToHex(packed: number): string {
   return `#${packed.toString(16).padStart(6, '0')}`;
 }
+
+/** Oklab to sRGB bytes, clamped to the gamut. The inverse of rgbToOklab. */
+export function oklabToRgb([L, a, b]: Oklab): [number, number, number] {
+  const l = (L + 0.3963377774 * a + 0.2158037573 * b) ** 3;
+  const m = (L - 0.1055613458 * a - 0.0638541728 * b) ** 3;
+  const s = (L - 0.0894841775 * a - 1.291485548 * b) ** 3;
+  const encode = (linear: number) => {
+    const c = Math.min(1, Math.max(0, linear));
+    return Math.round(255 * (c <= 0.0031308 ? 12.92 * c : 1.055 * c ** (1 / 2.4) - 0.055));
+  };
+  return [
+    encode(4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s),
+    encode(-1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s),
+    encode(-0.0041960863 * l - 0.7034186147 * m + 1.707614701 * s),
+  ];
+}
+
+/**
+ * Turn a colour's hue towards a target hue (Oklch degrees) by up to `degrees`, never past it,
+ * keeping its lightness and chroma. Greys have no hue and come back unchanged.
+ */
+export function turnHueTowards(lab: Oklab, targetDeg: number, degrees: number): Oklab {
+  const [L, a, b] = lab;
+  const chroma = Math.hypot(a, b);
+  if (chroma < 1e-6 || degrees <= 0) return lab;
+  const hue = (Math.atan2(b, a) * 180) / Math.PI;
+  let delta = ((((targetDeg - hue) % 360) + 540) % 360) - 180;
+  if (Math.abs(delta) > degrees) delta = Math.sign(delta) * degrees;
+  const turned = ((hue + delta) * Math.PI) / 180;
+  return [L, chroma * Math.cos(turned), chroma * Math.sin(turned)];
+}

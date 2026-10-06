@@ -17,6 +17,7 @@ The `everything` preset writes every format. Each JSON format has a JSON Schema,
 | `godot-spriteframes` | `<asset>.tres` | Godot text resource |
 | `frames` | `frames/<asset>_<clip>_<direction>_<nnn>.png` | |
 | `gif-preview` | `<asset>-<clip>.gif` | |
+| `render.normals` (not a format) | `<sheet>-normals.png` for each sheet | |
 
 Sequence names are `<clip>_<direction>`, such as `walk_s`, in every format. Frame names in the engine formats are sprite keys, such as `walk/s/000`.
 
@@ -86,6 +87,10 @@ Every sprite as its own untrimmed PNG, mirrored ones included: `frames/<asset>_<
 ## gif-preview
 
 One looping GIF per clip with every direction side by side, at `export.gif.scale` (default 2) on `export.gif.background` (default transparent). GIFs hold at most 256 colours: sprites with more are quantised for the preview only.
+
+## Normal maps
+
+With `render.normals` on, each sheet has a normal map `<sheet>-normals.png` beside it: the same size and layout, RGBA, never indexed. RGB is the view-space normal (x right, y up, z towards the viewer) mapped from -1..1 to 0..255, so a surface facing the viewer is (128, 128, 255); alpha matches the sheet's. Mirrored cells have their x component turned around. The manifest names it in `sheets[].normals` and lists the files under `files.normals`. See [normal maps for lit sprites](../guide/export-formats.md#normal-maps-for-lit-sprites) for loading them in each engine.
 
 ## Not supported
 

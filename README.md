@@ -41,7 +41,7 @@ Things to know before you start:
 
 - **The art is only as good as the model.** Models are made from primitives, CSG and components, or imported as GLB from a tool such as Blender. Faces, cloth and organic shapes take an imported model, and texture support is limited.
 - **It does not learn a style from images.** Your style is expressed as settings: palette, outline, dither, shading, camera, scale and frame size. Claude can study your existing art and choose those settings for you; see [Matching your game's style](#matching-your-games-style).
-- **Animation is rigid.** Each part rides one bone, so limbs do not bend smoothly, and there is no inverse kinematics. Clips are keyed by hand or generated (walk, breathe, bob, spin).
+- **Animation is simple.** Each part rides one bone, or is skinned across two at a joint. Clips are keyed by hand or generated (walk, breathe, bob, spin, sway); a key can place a foot or hand with two-bone inverse kinematics, and the generated walk can plant its feet. There are no blend trees or physics.
 - **Cameras are orthographic.** There are no perspective sprites.
 - **Hand polish is still hand work.** For hero characters, or where hand-placed pixels give the charm, treat td2d's output as a base to touch up in Aseprite.
 
@@ -213,7 +213,7 @@ Everything that makes up a pixel-art style is a setting, and setting it once in 
 | Colours           | A palette in `palettes/<name>.json`, used as `"palette": "fixed:<name>"`; or `auto:<n>` to build one from each asset |
 | Outline           | `pixel.outline`: colour, `outside` or `inside`, width, 4 or 8 connectivity, snapped to the palette or not            |
 | Dithering         | `pixel.dither` (`bayer-2`, `bayer-4`, `bayer-8`) and `ditherStrength`                                                |
-| Shading           | Material `shading` (`toon`, `lambert`, `flat`) and toon `bands`                                                      |
+| Shading           | Material `shading` (`toon`, `lambert`, `flat`) and toon `bands`; a `ramp` of palette colours or a `hueShift` per band |
 | Light             | Lighting presets: `studio-toon`, `studio-rim`, `world-sun`, `flat`                                                   |
 | Viewing angle     | Camera presets: `dimetric`, `isometric`, `three-quarter`, `top-down-45`, `side`, `top`                               |
 | Detail and size   | `pixelsPerUnit` and `frame`                                                                                          |
@@ -299,6 +299,7 @@ The [materials and palettes](docs/guide/materials-and-palettes.md), [pixel art](
 | Godot 4                                     | `godot-spriteframes`              |
 | Anything else                               | `frames`: one PNG per frame       |
 | Previews for people                         | `gif-preview`                     |
+| Engines that light sprites                  | `render.normals`: a normal map beside each sheet |
 
 Set the formats with `export.formats`, or use the `everything` export preset. Every asset also gets `sheets/manifest.json`, which records each cell, the pivot where the sprite stands, and the palette. Sequences are named `<clip>_<direction>`, such as `walk_s`. See [Getting sprites into an engine](docs/guide/export-formats.md); `examples/engines` has Phaser and PixiJS pages that play the knight.
 

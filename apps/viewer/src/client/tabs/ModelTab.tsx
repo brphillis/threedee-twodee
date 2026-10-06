@@ -1,5 +1,6 @@
 // The 3D preview. Loaded only when the tab opens, so three.js stays out of the main bundle.
 import { lightDirection, materialFromSpec, td2dMaterial } from '@td2d/render-harness';
+import { lightLevels } from '@td2d/schema/camera';
 import { useEffect, useRef, useState } from 'react';
 import {
   AmbientLight,
@@ -101,6 +102,7 @@ export default function ModelTab({ detail }: { readonly detail: AssetDetail }) {
         if (disposed) return;
         const root: Object3D = gltf.scene;
         const specs = detail.resolved?.materials ?? {};
+        const levels = detail.resolved ? lightLevels(detail.resolved.lighting) : undefined;
         let meshes = 0;
         let triangles = 0;
         const names = new Set<string>();
@@ -115,8 +117,15 @@ export default function ModelTab({ detail }: { readonly detail: AssetDetail }) {
             const material = spec
               ? materialFromSpec(
                   m.name,
-                  { color: spec.color, shading: spec.shading, bands: spec.bands, emissive: spec.emissive },
+                  {
+                    color: spec.color,
+                    shading: spec.shading,
+                    bands: spec.bands,
+                    emissive: spec.emissive,
+                    ...(spec.ramp ? { ramp: spec.ramp } : {}),
+                  },
                   colours,
+                  levels,
                 )
               : td2dMaterial(m as unknown as Parameters<typeof td2dMaterial>[0]);
             names.add(material.name);

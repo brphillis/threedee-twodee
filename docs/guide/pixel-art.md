@@ -111,7 +111,7 @@ The outline pass only rings the silhouette, so where an arm crosses the chest or
 - Lines are drawn into the render and survive the `mode` downscale: a block at least half covered by line becomes a line pixel. With the `box` filter they blend into their neighbours instead.
 - Lines lie inside the silhouette, so they do not change the sprite's size. With the outline pass as well, the outside edge is two pixels: the line in each part's shade, then the outline.
 
-Lines, two or three toon bands per material and `cleanup.orphans: "recolour"` together make a model read as drawn rather than rendered; `examples/fighter` uses all three.
+Lines, two or three toon bands per material painted with a [ramp](materials-and-palettes.md#ramps) and `cleanup.orphans: "recolour"` together make a model read as drawn rather than rendered; `examples/fighter` uses lines, bands and cleanup.
 
 ## Cleanup and bleed
 

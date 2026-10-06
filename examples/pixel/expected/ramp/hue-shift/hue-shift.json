@@ -1,0 +1,64 @@
+{
+  "frames": {
+    "0": {
+      "frame": { "x": 0, "y": 0, "w": 160, "h": 160 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 160, "h": 160 },
+      "sourceSize": { "w": 160, "h": 160 },
+      "duration": 100
+    },
+    "1": {
+      "frame": { "x": 0, "y": 160, "w": 160, "h": 160 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 160, "h": 160 },
+      "sourceSize": { "w": 160, "h": 160 },
+      "duration": 100
+    },
+    "2": {
+      "frame": { "x": 0, "y": 320, "w": 160, "h": 160 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 160, "h": 160 },
+      "sourceSize": { "w": 160, "h": 160 },
+      "duration": 100
+    },
+    "3": {
+      "frame": { "x": 0, "y": 480, "w": 160, "h": 160 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 160, "h": 160 },
+      "sourceSize": { "w": 160, "h": 160 },
+      "duration": 100
+    }
+  },
+  "meta": {
+    "app": "td2d",
+    "version": "0.0.0",
+    "image": "hue-shift.png",
+    "format": "RGBA8888",
+    "size": { "w": 160, "h": 640 },
+    "scale": "1",
+    "frameTags": [
+      { "name": "idle_s", "from": 0, "to": 0, "direction": "forward", "color": "#000000ff" },
+      { "name": "idle_w", "from": 1, "to": 1, "direction": "forward", "color": "#000000ff" },
+      { "name": "idle_n", "from": 2, "to": 2, "direction": "forward", "color": "#000000ff" },
+      { "name": "idle_e", "from": 3, "to": 3, "direction": "forward", "color": "#000000ff" }
+    ],
+    "layers": [],
+    "slices": [
+      {
+        "name": "pivot",
+        "color": "#0000ffff",
+        "keys": [
+          {
+            "frame": 0,
+            "bounds": { "x": 0, "y": 0, "w": 160, "h": 160 },
+            "pivot": { "x": 80, "y": 121 }
+          }
+        ]
+      }
+    ]
+  }
+}

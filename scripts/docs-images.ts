@@ -172,6 +172,26 @@ async function materials(): Promise<void> {
     );
   }
   await writePng(join(out, 'shading.png'), beside(cells));
+
+  // The same sphere shaded from its colour, with a hueShift ramp, and with a ramp of palette colours.
+  const ramps: Record<string, unknown>[] = [
+    { color: '#d08c48', bands: 4 },
+    { color: '#d08c48', bands: 4, hueShift: 45 },
+    { ramp: ['#5d275d', '#b13e53', '#ef7d57', '#ffcd75'] },
+  ];
+  const rampCells: RgbaImage[] = [];
+  for (const [i, variant] of ramps.entries()) {
+    const project = await scratch(`ramp-${i}`, {
+      frame: { width: 32, height: 32 },
+      directions: 'd1',
+      materials: { paint: variant },
+      model: { parts: [{ type: 'sphere', id: 'ball', material: 'paint', radius: 0.5, position: [0, 0.5, 0] }] },
+    });
+    rampCells.push(
+      onChecker(await readPng(join(readBuild(project, 'props/crate').dir, 'sprites', 'idle', 's', '000.png')), 4),
+    );
+  }
+  await writePng(join(out, 'ramps.png'), beside(rampCells));
 }
 
 /** A crate too large for its frame: the composition checks warn and the preview shows why. */
@@ -228,6 +248,17 @@ async function exportsImages(): Promise<void> {
   mkdirSync(out, { recursive: true });
   const sheets = join(readBuild(project, 'characters/knight-packed').dir, 'sheets');
   cpSync(join(sheets, 'knight-packed-walk.gif'), join(out, 'knight-packed-walk.gif'));
+  // The packed sheet beside its normal map, at 2x on a checkerboard.
+  await writePng(
+    join(out, 'knight-packed-normals.png'),
+    beside(
+      [
+        onChecker(await readPng(join(sheets, 'knight-packed.png')), 2),
+        onChecker(await readPng(join(sheets, 'knight-packed-normals.png')), 2),
+      ],
+      16,
+    ),
+  );
   // The fighter example's README and the top-level README play these.
   const fighter = await example('fighter');
   const animations = join(images, 'examples', 'fighter');

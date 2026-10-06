@@ -364,3 +364,73 @@ describe('part type examples', () => {
     },
   );
 });
+
+describe('material ramps', () => {
+  it('paints toon bands with the ramp colours only, and a ramp change reruns the render but not the model', async () => {
+    const dir = starter();
+    const ramp = ['#5d275d', '#b13e53', '#ef7d57', '#ffcd75'];
+    editAsset(dir, (a) => {
+      a.materials = { wood: { ramp }, iron: { color: '#5b6770', hueShift: 40, bands: 2 } };
+    });
+    const first = await generate(dir);
+    expect(first.status).toBe('ok');
+    const sprite = await readPng(join(dir, 'build/props/crate/sprites/idle/s/000.png'));
+    const colours = new Set<string>();
+    for (let i = 0; i < sprite.rgba.length; i += 4) {
+      if (sprite.rgba[i + 3] === 0) continue;
+      colours.add(`#${[0, 1, 2].map((c) => (sprite.rgba[i + c] as number).toString(16).padStart(2, '0')).join('')}`);
+    }
+    const resolved = JSON.parse(readFileSync(join(dir, 'build/props/crate/resolved.json'), 'utf8')) as {
+      materials: Record<string, { ramp: string[] | null; bands: number }>;
+    };
+    expect(resolved.materials.wood).toMatchObject({ ramp, bands: 4 });
+    expect(resolved.materials.iron?.ramp).toHaveLength(2);
+    expect(resolved.materials.iron?.ramp?.[1]).toBe('#5b6770');
+    const allowed = new Set([...ramp, ...(resolved.materials.iron?.ramp ?? [])]);
+    for (const c of colours) expect(allowed.has(c), `${c} is not a ramp colour`).toBe(true);
+    // The wood faces the key light in front and lies in shadow behind, so more than one band shows.
+    expect([...colours].filter((c) => ramp.includes(c)).length).toBeGreaterThan(1);
+
+    editAsset(dir, (a) => {
+      (a.materials as Record<string, { ramp: string[] }>).wood = { ramp: ['#000000', '#ffffff'] };
+    });
+    const r = await generate(dir);
+    expect(statuses(r)).toMatchObject({ model: 'cached', plan: 'cached', render: 'ran', pixel: 'ran' });
+  });
+});
+
+describe('normal maps', () => {
+  it('writes a normal map per sprite and per sheet, mirrored with its sprite, and lists it in the manifest', async () => {
+    const dir = starter();
+    editAsset(dir, (a) => {
+      a.render = { normals: true };
+      a.mirror = ['e:w'];
+      a.pixel = { outline: { color: '#1a1c2c', side: 'outside', width: 1 } };
+    });
+    const r = await generate(dir);
+    expect(r.status).toBe('ok');
+    const build = join(dir, 'build/props/crate');
+    const sprite = await readPng(join(build, 'sprites/idle/w/000.png'));
+    const normals = await readPng(join(build, 'sprites/idle/w/000.normals.png'));
+    expect([normals.width, normals.height]).toEqual([sprite.width, sprite.height]);
+    for (let i = 3; i < sprite.rgba.length; i += 4) expect(normals.rgba[i] === 0).toBe(sprite.rgba[i] === 0);
+    const mirrored = await readPng(join(build, 'sprites/idle/e/000.normals.png'));
+    for (let y = 0; y < normals.height; y++)
+      for (let x = 0; x < normals.width; x++) {
+        const a = (y * normals.width + x) * 4;
+        const b = (y * normals.width + (normals.width - 1 - x)) * 4;
+        expect(mirrored.rgba[b + 3]).toBe(normals.rgba[a + 3]);
+        if (normals.rgba[a + 3]) expect(mirrored.rgba[b]).toBe(255 - (normals.rgba[a] as number));
+      }
+    const sheet = await readPng(join(build, 'sheets/crate.png'));
+    const normalSheet = await readPng(join(build, 'sheets/crate-normals.png'));
+    expect([normalSheet.width, normalSheet.height]).toEqual([sheet.width, sheet.height]);
+    const manifest = Manifest.parse(JSON.parse(readFileSync(join(build, 'sheets/manifest.json'), 'utf8')));
+    expect(manifest.sheets[0]?.normals).toBe('crate-normals.png');
+    expect(manifest.files.normals).toEqual(['crate-normals.png']);
+    // The normal maps come back from the cache with everything else.
+    const warm = await generate(dir);
+    expect(warm.cache.misses).toBe(0);
+    expect(existsSync(join(build, 'sprites/idle/w/000.normals.png'))).toBe(true);
+  });
+});

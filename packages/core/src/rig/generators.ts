@@ -1,5 +1,6 @@
 import type { ClipGeneratorT, ClipKeyT, ResolvedRigT } from '@td2d/schema';
-import { round6 } from './math.ts';
+import { type Matrix4, Vector3 } from 'three';
+import { boneWorldRest, DEG, round6 } from './math.ts';
 
 /** The bone a generator moves when the asset has no rig: the whole model. */
 export const MODEL_ROOT = 'root';
@@ -29,7 +30,18 @@ export const GENERATOR_VERSIONS: Readonly<Record<ClipGeneratorT['type'], number>
   sway: 1,
 };
 
-export const WALK_DEFAULTS = { stride: 25, bob: 0.03, armSwing: 20, kneeBend: 30, hipSway: 4, lean: 0 } as const;
+export const WALK_DEFAULTS = {
+  stride: 25,
+  bob: 0.03,
+  armSwing: 20,
+  kneeBend: 30,
+  hipSway: 4,
+  lean: 0,
+  ik: false,
+  lift: 0.06,
+} as const;
+/** The roles a planted-feet walk needs on each side, besides the hips and upper legs. */
+const IK_WALK_ROLES: readonly WalkRole[] = ['leftLowerLeg', 'rightLowerLeg', 'leftFoot', 'rightFoot'];
 export const BREATHE_DEFAULTS = { amount: 2, rise: 0.01 } as const;
 export const BOB_DEFAULTS = { height: 0.05 } as const;
 export const SPIN_DEFAULTS = { turns: 1, axis: 'y' } as const;
@@ -80,11 +92,11 @@ export function checkGenerator(gen: ClipGeneratorT, rig: ResolvedRigT | null): G
         if (!names.has(name)) problems.push({ path: `bones.${role}`, message: `Bone "${name}" is not in the rig` });
       }
       const found = walkBones(rig, gen.bones);
-      for (const role of REQUIRED_WALK_ROLES) {
+      for (const role of [...REQUIRED_WALK_ROLES, ...(gen.ik ? IK_WALK_ROLES : [])]) {
         if (!found[role] && !gen.bones?.[role]) {
           problems.push({
             path: `bones.${role}`,
-            message: `The rig has no "${role}" bone; map the ${role} role to one of its bones`,
+            message: `The rig has no "${role}" bone; map the ${role} role to one of its bones${gen.ik && IK_WALK_ROLES.includes(role) ? ' (ik needs the lower legs and feet)' : ''}`,
           });
         }
       }
@@ -118,6 +130,51 @@ export function checkGenerator(gen: ClipGeneratorT, rig: ResolvedRigT | null): G
 const r3 = (x: number, y: number, z: number): [number, number, number] => [round6(x), round6(y), round6(z)];
 
 /**
+ * Where a planted foot is through the cycle. `phase` is 0 where the foot is furthest forward and
+ * about to bear weight. For half a cycle it stands on the ground and slides back at a steady
+ * speed, which is what a foot does against the ground while the body walks over it; for the
+ * other half it lifts in an arc and swings forward again.
+ */
+export function footPath(phase: number, stride: number, lift: number): { z: number; lift: number } {
+  const p = ((phase % 1) + 1) % 1;
+  if (p < 0.5) return { z: stride / 2 - stride * (p / 0.5), lift: 0 };
+  const q = (p - 0.5) / 0.5;
+  return { z: -stride / 2 + stride * q * q * (3 - 2 * q), lift: lift * Math.sin(Math.PI * q) };
+}
+
+/**
+ * The feet of a planted walk: each foot's rest position in model space, the step length, and the
+ * drop of the hips. Without a bob, the hips drop as far as straight legs need to reach the ground
+ * at the full stride. With one, the step is as long as the legs can reach with that drop, so the
+ * feet stay on the ground and the body bobs only as much as asked.
+ */
+export function plantedFeet(
+  rig: ResolvedRigT,
+  b: Partial<Record<WalkRole, string>>,
+  stride: number,
+  bob: number | undefined,
+): {
+  left: { bone: string; rest: Vector3 };
+  right: { bone: string; rest: Vector3 };
+  stride: number;
+  bob: number;
+} | null {
+  if (!b.leftFoot || !b.rightFoot || !b.leftLowerLeg || !b.rightLowerLeg) return null;
+  const rest = boneWorldRest(rig);
+  const at = (bone: string) => new Vector3().setFromMatrixPosition(rest.get(bone) as Matrix4);
+  const legLength =
+    at(b.leftLowerLeg).distanceTo(at(b.leftUpperLeg ?? b.leftLowerLeg)) + at(b.leftFoot).distanceTo(at(b.leftLowerLeg));
+  const wanted = 2 * legLength * Math.sin(stride * DEG);
+  const reach = bob === undefined ? wanted : 2 * Math.sqrt(Math.max(0, legLength ** 2 - (legLength - bob) ** 2));
+  return {
+    left: { bone: b.leftFoot, rest: at(b.leftFoot) },
+    right: { bone: b.rightFoot, rest: at(b.rightFoot) },
+    stride: round6(Math.min(wanted, reach)),
+    bob: bob ?? round6(legLength * (1 - Math.cos(stride * DEG))),
+  };
+}
+
+/**
  * Keys for a generator, one per sample time, so every rendered frame is exactly the
  * generator's pose. Phase runs from 0 at the start of the clip to 1 at its end.
  */
@@ -132,16 +189,31 @@ export function generateKeys(
     case 'walk-cycle': {
       const o = { ...WALK_DEFAULTS, ...gen };
       const b = walkBones(rig, gen.bones);
+      const feet = o.ik && rig ? plantedFeet(rig, b, o.stride, gen.bob) : null;
+      const bob = feet?.bob ?? o.bob;
       return phases.map(({ t, p }) => {
         const s = Math.sin(2 * Math.PI * p);
         const c = Math.cos(2 * Math.PI * p);
         const pose: ClipKeyT['pose'] = {};
         // Negative X swings a leg forward (+Z). The leg moving forward bends its knee most as it passes under the hips.
-        if (b.hips) pose[b.hips] = { translation: r3(0, -o.bob * s * s, 0), rotation: r3(0, -o.hipSway * s, 0) };
-        if (b.leftUpperLeg) pose[b.leftUpperLeg] = { rotation: r3(-o.stride * s, 0, 0) };
-        if (b.rightUpperLeg) pose[b.rightUpperLeg] = { rotation: r3(o.stride * s, 0, 0) };
-        if (b.leftLowerLeg) pose[b.leftLowerLeg] = { rotation: r3(o.kneeBend * Math.max(0, c), 0, 0) };
-        if (b.rightLowerLeg) pose[b.rightLowerLeg] = { rotation: r3(o.kneeBend * Math.max(0, -c), 0, 0) };
+        if (b.hips) pose[b.hips] = { translation: r3(0, -bob * s * s, 0), rotation: r3(0, -o.hipSway * s, 0) };
+        if (feet) {
+          // The left foot is furthest forward a quarter of the way in, where the FK walk's left leg is.
+          for (const [foot, phase] of [
+            [feet.left, p - 0.25],
+            [feet.right, p + 0.25],
+          ] as const) {
+            const step = footPath(phase, feet.stride, o.lift);
+            pose[foot.bone] = {
+              ik: { target: r3(foot.rest.x, foot.rest.y + step.lift, foot.rest.z + step.z), keepOrientation: true },
+            };
+          }
+        } else {
+          if (b.leftUpperLeg) pose[b.leftUpperLeg] = { rotation: r3(-o.stride * s, 0, 0) };
+          if (b.rightUpperLeg) pose[b.rightUpperLeg] = { rotation: r3(o.stride * s, 0, 0) };
+          if (b.leftLowerLeg) pose[b.leftLowerLeg] = { rotation: r3(o.kneeBend * Math.max(0, c), 0, 0) };
+          if (b.rightLowerLeg) pose[b.rightLowerLeg] = { rotation: r3(o.kneeBend * Math.max(0, -c), 0, 0) };
+        }
         if (b.leftUpperArm) pose[b.leftUpperArm] = { rotation: r3(o.armSwing * s, 0, 0) };
         if (b.rightUpperArm) pose[b.rightUpperArm] = { rotation: r3(-o.armSwing * s, 0, 0) };
         if (b.spine) pose[b.spine] = { rotation: r3(o.lean, o.hipSway * s, 0) };

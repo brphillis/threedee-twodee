@@ -18,6 +18,8 @@ export interface ManifestInput {
   readonly images: readonly string[];
   /** Aseprite data file of each page, or null when aseprite-json is not written. */
   readonly dataFiles: readonly (string | null)[];
+  /** Normal map of each page, when render.normals is on. */
+  readonly normals?: readonly string[];
   /** Files written per export format. */
   readonly files: Readonly<Record<string, readonly string[]>>;
   readonly stages: Readonly<Record<string, string>>;
@@ -69,6 +71,7 @@ export function buildManifest(input: ManifestInput): ManifestT {
       name: page.name,
       image: input.images[i] as string,
       data: input.dataFiles[i] ?? null,
+      ...(input.normals?.[i] ? { normals: input.normals[i] as string } : {}),
       width: page.width,
       height: page.height,
       layout: asset.sheet.layout,

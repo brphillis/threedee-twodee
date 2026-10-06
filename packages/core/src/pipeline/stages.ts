@@ -25,8 +25,9 @@ import { buildModel, type ModelReport, modelInputs } from '../model/build.ts';
 import { readGlb } from '../model/gltf.ts';
 import type { RgbaImage } from '../pixel/image.ts';
 import { opaqueColours } from '../pixel/image.ts';
+import { downscaleNormals, mirrorNormals } from '../pixel/normals.ts';
 import { hexToRgb, packRgb } from '../pixel/oklab.ts';
-import { flipHorizontal } from '../pixel/passes.ts';
+import { bleedEdges, flipHorizontal } from '../pixel/passes.ts';
 import { type FrameInput, orphanMode, passSignature } from '../pixel/pipeline.ts';
 import { autoGroundMargin, autoPixelsPerUnit, boundingRadius, frameFit } from '../plan/ground.ts';
 import type { ProgressReporter } from '../progress.ts';
@@ -39,6 +40,7 @@ import { frameKey } from '../render/samples.ts';
 import { buildRig, type RigReport } from '../rig/build.ts';
 import { posedPositions, posedPositionsByNode } from '../rig/evaluate.ts';
 import { GENERATOR_VERSIONS, WALK_DEFAULTS, walkBones } from '../rig/generators.ts';
+import { IK_VERSION } from '../rig/ik.ts';
 import { layoutSheets, type SheetLayout, type SheetRow } from '../sheet/layout.ts';
 import { validateSprites } from '../validate/checks.ts';
 import type { WorkerPool } from '../workers/pool.ts';
@@ -120,8 +122,8 @@ export interface PlanData {
 export interface RenderData {
   readonly backend: BackendInfo;
   readonly timings: RenderTimings;
-  /** Every planned sample, with its render cache key. */
-  readonly frames: readonly { key: string; file: string; item: string; coverage: number }[];
+  /** Every planned sample, with its render cache key, and its normal render when asked for. */
+  readonly frames: readonly { key: string; file: string; item: string; coverage: number; normals?: string }[];
   /** Samples rendered in this run, and samples restored from the render cache. */
   readonly items: { readonly rendered: number; readonly reused: number };
 }
@@ -133,6 +135,8 @@ export interface PixelData {
     coverage: number;
     colours: number;
     mirrorOf: string | null;
+    /** The sprite's normal map, when render.normals is on. */
+    normals?: string;
   }[];
   /** Palette colours by clip (or "*" for the whole asset); empty without a palette. */
   readonly palettes: Readonly<Record<string, readonly string[]>>;
@@ -146,6 +150,8 @@ export interface SheetData {
   /** Image file of each page, in the stage directory. */
   readonly files: readonly string[];
   readonly layout: SheetLayout;
+  /** Normal map of each page, in page order, when render.normals is on. */
+  readonly normals?: readonly string[];
 }
 
 export interface ValidateData {
@@ -159,6 +165,8 @@ export interface ExportData {
   readonly sheets: readonly string[];
   /** Aseprite data file of each sheet, or null. */
   readonly data: readonly (string | null)[];
+  /** Normal map of each sheet, when render.normals is on. */
+  readonly normals?: readonly string[];
   readonly manifest: string;
 }
 
@@ -204,6 +212,7 @@ const rigStage: Stage<RigReport> = {
     sourceFile: asset.sourceFile,
     rig: asset.rig,
     generators: GENERATOR_VERSIONS,
+    ik: IK_VERSION,
     clips: Object.entries(asset.animation.clips),
   }),
   async run(ctx, dir) {
@@ -432,7 +441,14 @@ function renderMaterials(asset: ResolvedAssetT): Record<string, RenderMaterial> 
   return Object.fromEntries(
     Object.entries(asset.materials).map(([name, m]) => [
       name,
-      { color: m.color, shading: m.shading, bands: m.bands, emissive: m.emissive },
+      {
+        color: m.color,
+        shading: m.shading,
+        bands: m.bands,
+        emissive: m.emissive,
+        // Only when present, so cache keys of materials without a ramp are unchanged.
+        ...(m.ramp ? { ramp: m.ramp } : {}),
+      },
     ]),
   );
 }
@@ -471,8 +487,9 @@ const render: Stage<RenderData> = {
       scene: planData.scene,
       materials,
       lighting,
-      // Absent when there are no lines, so existing cache entries still match.
+      // Absent when there are no lines or normals, so existing cache entries still match.
       ...(lines ? { lines } : {}),
+      ...(asset.render.normals ? { normals: true } : {}),
       backend: getBackend(asset.render.backend).fingerprint(),
     };
     const itemKey = (s: FrameSample) =>
@@ -493,11 +510,19 @@ const render: Stage<RenderData> = {
       const item = itemKey(sample);
       const cached = forced && selected.has(sample.key) ? undefined : ctx.items?.get('render', item);
       const meta = cached ? ctx.items?.get('render', item, '.json') : undefined;
-      if (cached && meta) {
+      const cachedNormals = cached && asset.render.normals ? ctx.items?.get('render', item, '.normals.png') : undefined;
+      if (cached && meta && (!asset.render.normals || cachedNormals)) {
         mkdirSync(join(dir, sample.key, '..'), { recursive: true });
         cloneFile(cached, join(dir, `${sample.key}.png`));
+        if (cachedNormals) cloneFile(cachedNormals, join(dir, `${sample.key}.normals.png`));
         const { coverage } = JSON.parse(readFileSync(meta, 'utf8')) as { coverage: number };
-        frames.push({ key: sample.key, file: `${sample.key}.png`, item, coverage });
+        frames.push({
+          key: sample.key,
+          file: `${sample.key}.png`,
+          item,
+          coverage,
+          ...(cachedNormals ? { normals: `${sample.key}.normals.png` } : {}),
+        });
       } else {
         todo.push(sample);
       }
@@ -520,7 +545,13 @@ const render: Stage<RenderData> = {
       const items = new Map(todo.map((s) => [s.key, itemKey(s)]));
       const job = {
         model: { glb: readFileSync(join(ctx.output('rig').dir, 'model.glb')), label: asset.id },
-        scene: { ...planData.scene, lighting, materials, ...(lines ? { lines } : {}) },
+        scene: {
+          ...planData.scene,
+          lighting,
+          materials,
+          ...(lines ? { lines } : {}),
+          ...(asset.render.normals ? { normals: true } : {}),
+        },
         samples: todo,
       };
       const attempt = async () => {
@@ -536,7 +567,17 @@ const render: Stage<RenderData> = {
             const coverage = Number(alphaCoverage(frame.rgba).toFixed(6));
             ctx.items?.put('render', item, join(dir, file));
             ctx.items?.put('render', item, new TextEncoder().encode(JSON.stringify({ coverage })), '.json');
-            done.push({ key: frame.key, file, item, coverage });
+            let normals: string | undefined;
+            if (frame.normals) {
+              normals = `${frame.key}.normals.png`;
+              await writePng(
+                join(dir, normals),
+                { width: frame.width, height: frame.height, rgba: frame.normals },
+                INTERMEDIATE_PNG_LEVEL,
+              );
+              ctx.items?.put('render', item, join(dir, normals), '.normals.png');
+            }
+            done.push({ key: frame.key, file, item, coverage, ...(normals ? { normals } : {}) });
           },
           {
             ...(ctx.signal ? { signal: ctx.signal } : {}),
@@ -730,6 +771,41 @@ const pixel: Stage<PixelData> = {
       if (!original) throw new Td2dError('E_INTERNAL', `Mirror source ${source} was not rendered.`);
       await record(key, flipHorizontal(original), source);
     }
+    // Normal maps follow each sprite's final alpha, so they are made once the sprites are.
+    const normalFiles = new Map<string, string>();
+    if (asset.render.normals) {
+      const spriteImage = async (key: string) => {
+        const done = processed.get(key)?.image;
+        if (done) return done;
+        const cached = restored.get(key);
+        return readPng(cached ? cached.file : join(dir, `${key}.png`));
+      };
+      for (const frame of renderOut.data.frames) {
+        if (!frame.normals) continue;
+        const file = `${frame.key}.normals.png`;
+        const key = itemKey(frame.item);
+        const cached = together || forced ? undefined : ctx.items?.get('pixel', key, '.normals.png');
+        if (cached) {
+          cloneFile(cached, join(dir, file));
+        } else {
+          const normals = downscaleNormals(
+            await readPng(join(renderOut.dir, frame.normals)),
+            await spriteImage(frame.key),
+            asset.render.supersample,
+          );
+          await writePng(join(dir, file), asset.pixel.bleed ? bleedEdges(normals) : normals, SPRITE_PNG_LEVEL);
+          if (!together && ctx.items) ctx.items.put('pixel', key, join(dir, file), '.normals.png');
+        }
+        normalFiles.set(frame.key, file);
+      }
+      for (const [key, source] of Object.entries(ctx.output<PlanData>('plan').data.mirrors)) {
+        const from = normalFiles.get(source);
+        if (!from) continue;
+        const file = `${key}.normals.png`;
+        await writePng(join(dir, file), mirrorNormals(await readPng(join(dir, from))), SPRITE_PNG_LEVEL);
+        normalFiles.set(key, file);
+      }
+    }
     const counts =
       totals ??
       [...processed.values(), ...restored.values()].reduce(
@@ -751,7 +827,10 @@ const pixel: Stage<PixelData> = {
     }
     return {
       data: {
-        sprites,
+        sprites: sprites.map((s) => {
+          const normals = normalFiles.get(s.key);
+          return normals ? { ...s, normals } : s;
+        }),
         palettes: asset.pixel.palette === 'none' ? {} : palettes,
         removed: counts.removed,
         recoloured: counts.recoloured,
@@ -777,11 +856,15 @@ const sheet: Stage<SheetData> = {
     frame: asset.frame,
     name: sheetName(asset.id),
     png: asset.export.png.compressionLevel,
+    ...(asset.render.normals ? { normals: true } : {}),
   }),
   async run(ctx, dir) {
     const { asset } = ctx;
     const pixelOut = ctx.output<PixelData>('pixel');
     const sprites = await loadSprites(pixelOut.dir, pixelOut.data.sprites);
+    const normalSprites = new Map<string, RgbaImage>();
+    for (const s of pixelOut.data.sprites)
+      if (s.normals) normalSprites.set(s.key, await readPng(join(pixelOut.dir, s.normals)));
     const layout = layoutSheets(
       ctx.output<PlanData>('plan').data.rows,
       sprites,
@@ -800,7 +883,21 @@ const sheet: Stage<SheetData> = {
       await writePng(join(dir, file), image, asset.export.png.compressionLevel);
       files.push(file);
     }
-    return { data: { files, layout } };
+    // The normal maps use the very same layout, so a cell's normals are at its own rectangle.
+    const normals: string[] = [];
+    if (normalSprites.size > 0) {
+      for (const [page, info] of layout.pages.entries()) {
+        const file = `${info.name}-normals.png`;
+        const used = [...normalSprites].filter(([key]) => layout.cells.some((c) => c.page === page && c.key === key));
+        const image = await ctx.workers.composite(
+          { layout, page, sprites: used, extrude: asset.sheet.extrude },
+          ctx.signal,
+        );
+        await writePng(join(dir, file), image, asset.export.png.compressionLevel);
+        normals.push(file);
+      }
+    }
+    return { data: { files, layout, ...(normals.length > 0 ? { normals } : {}) } };
   },
 };
 
@@ -945,6 +1042,10 @@ const exportStage: Stage<ExportData> = {
     const images = sheetOut.data.files;
     for (const image of images) await writeImage(join(sheetOut.dir, image), image);
     files.sheets = [...images];
+    // Normal maps are not palette images: they are copied as the RGBA PNGs the sheet stage wrote.
+    const normalSheets = sheetOut.data.normals ?? [];
+    for (const image of normalSheets) cloneFile(join(sheetOut.dir, image), join(dir, image));
+    if (normalSheets.length > 0) files.normals = [...normalSheets];
     const pivot = pivotFor(asset.frame, planData.groundMargin);
     const context: ExportContext = {
       asset,
@@ -992,6 +1093,7 @@ const exportStage: Stage<ExportData> = {
       layout: sheetOut.data.layout,
       images,
       dataFiles,
+      ...(normalSheets.length > 0 ? { normals: normalSheets } : {}),
       files,
       stages,
       validation,
@@ -999,7 +1101,13 @@ const exportStage: Stage<ExportData> = {
     writeChecked(dir, 'manifest.json', manifest, Manifest, 'manifest');
     const all = Object.values(files).flat();
     return {
-      data: { files: [...new Set(all)], sheets: [...images], data: dataFiles, manifest: 'manifest.json' },
+      data: {
+        files: [...new Set(all)],
+        sheets: [...images],
+        data: dataFiles,
+        ...(normalSheets.length > 0 ? { normals: [...normalSheets] } : {}),
+        manifest: 'manifest.json',
+      },
       warnings,
     };
   },

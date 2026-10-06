@@ -3,10 +3,11 @@
   "schemaVersion": "1.0.0",
   "id": "characters/knight-packed",
   "type": "character",
-  "description": "The same knight, trimmed and packed onto power-of-two sheets, exported in every format: Aseprite, PixiJS, Phaser, Godot, frame PNGs and GIF previews.",
+  "description": "The same knight, trimmed and packed onto power-of-two sheets, exported in every format: Aseprite, PixiJS, Phaser, Godot, frame PNGs and GIF previews, with a normal map for engines that light sprites.",
   "pixelsPerUnit": "auto",
   "sheet": "packed",
   "export": "everything",
+  "render": { "normals": true },
   "model": {
     "parts": [
       {
@@ -53,13 +54,14 @@
         ]
       },
       "walk": {
-        "description": "Generated walk cycle, with the cape streaming back and rippling with each step.",
+        "description": "Generated walk cycle with planted feet, the cape streaming back and rippling with each step.",
         "duration": 0.8,
         "generator": {
           "type": "walk-cycle",
           "stride": 25,
-          "bob": 0.019,
-          "armSwing": 15
+          "bob": 0.025,
+          "armSwing": 15,
+          "ik": true
         },
         "layers": [
           {

@@ -79,7 +79,13 @@ const api: HarnessApi & { protocol: number } = {
     const s = requireScene();
     return samples.map((sample) => {
       const frame = s.render(sample);
-      return { key: sample.key, width: frame.width, height: frame.height, rgbaBase64: bytesToBase64(frame.rgba) };
+      return {
+        key: sample.key,
+        width: frame.width,
+        height: frame.height,
+        rgbaBase64: bytesToBase64(frame.rgba),
+        ...(frame.normals ? { normalsBase64: bytesToBase64(frame.normals) } : {}),
+      };
     });
   },
 };

@@ -8,12 +8,14 @@ import {
   boxDownscale,
   cleanupOrphans,
   createImage,
+  downscaleNormals,
   encodeIndexedPng,
   flipHorizontal,
   hexToRgb,
   isolatedPixels,
   LINE_ALPHA,
   mapToPalette,
+  mirrorNormals,
   modeDownscale,
   opaqueColours,
   outline,
@@ -661,3 +663,59 @@ function gradientShifted(w: number, h: number, shift: number): RgbaImage {
   for (let i = 0; i < img.rgba.length; i += 4) if (img.rgba[i + 3] !== 0) img.rgba[i + 2] = (128 + shift) & 255;
   return img;
 }
+
+describe('normal maps', () => {
+  it('averages each block of normals, follows the sprite alpha and fills outline pixels from their neighbours', () => {
+    // A 4 x 2 render at 2x: the left block faces the viewer, the right block is tilted up; the
+    // bottom row has no geometry.
+    const up = [128, 255, 128, 255] as [number, number, number, number];
+    const flat = [128, 128, 255, 255] as [number, number, number, number];
+    const none = [0, 0, 0, 0] as [number, number, number, number];
+    const render = image(4, 4, [
+      flat,
+      flat,
+      up,
+      up,
+      flat,
+      flat,
+      up,
+      up,
+      none,
+      none,
+      none,
+      none,
+      none,
+      none,
+      none,
+      none,
+    ]);
+    // The sprite is opaque in both top pixels and in the bottom-left pixel (an outline ring there), not bottom-right.
+    const opaque = [10, 20, 30, 255] as [number, number, number, number];
+    const sprite = image(2, 2, [opaque, opaque, opaque, none]);
+    const normals = downscaleNormals(render, sprite, 2);
+    expect(px(normals, 0, 0)).toEqual([128, 128, 255, 255]);
+    expect(px(normals, 1, 0)).toEqual([128, 255, 128, 255]);
+    // The outline pixel takes the nearest normal above it; the transparent one stays transparent.
+    expect(px(normals, 0, 1)).toEqual([128, 128, 255, 255]);
+    expect(px(normals, 1, 1)).toEqual([0, 0, 0, 0]);
+    // A block half left-facing and half facing the viewer points between the two, at unit length.
+    const left = [0, 128, 128, 255] as [number, number, number, number];
+    const mixed = downscaleNormals(image(2, 2, [left, flat, left, flat]), image(1, 1, [opaque]), 2);
+    const [mx, my, mz] = px(mixed, 0, 0) as [number, number, number];
+    expect(Math.abs(mx - 38)).toBeLessThanOrEqual(1);
+    expect(Math.abs(my - 128)).toBeLessThanOrEqual(1);
+    expect(Math.abs(mz - 218)).toBeLessThanOrEqual(1);
+    // A real tilted normal keeps its length after averaging.
+    const tilted = [255, 128, 128, 255] as [number, number, number, number];
+    const same = downscaleNormals(image(2, 2, [tilted, tilted, tilted, tilted]), image(1, 1, [opaque]), 2);
+    expect(px(same, 0, 0)).toEqual([255, 128, 128, 255]);
+  });
+
+  it('mirrors a normal map by flipping it and turning every x around', () => {
+    const a = [200, 100, 220, 255] as [number, number, number, number];
+    const none = [0, 0, 0, 0] as [number, number, number, number];
+    const mirrored = mirrorNormals(image(2, 1, [a, none]));
+    expect(px(mirrored, 1, 0)).toEqual([55, 100, 220, 255]);
+    expect(px(mirrored, 0, 0)).toEqual([0, 0, 0, 0]);
+  });
+});

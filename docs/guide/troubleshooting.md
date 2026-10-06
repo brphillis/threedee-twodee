@@ -54,7 +54,7 @@ Codes: E_MODEL_INVALID, E_PART_NOT_MANIFOLD, E_COMPONENT_NOT_FOUND, E_COMPONENT_
 
 ## Rigs and animation
 
-- **Feet slide or float in a walk** (`W_CLIP_FOOT_CONTACT`): set the walk-cycle `bob` the warning suggests.
+- **Feet slide or float in a walk** (`W_CLIP_FOOT_CONTACT`): set the walk-cycle `bob` the warning suggests, or set `ik: true` on the generator so the feet are planted and the legs solved to reach them.
 - **A clip plays at a slightly odd rate** (`W_CLIP_FRAME_PERIOD`): make `duration` times `fps` a whole number.
 - **A pose bends too far** (`W_CLIP_BONE_LIMIT`): reduce the rotation in the named key, or widen the bone's limits in the rig.
 - **Iterating on one clip rerenders everything**: a fitted `pixelsPerUnit: "auto"` or `groundMargin: "auto"` depends on every pose. Fix both while you work on a clip; `td2d inspect <id>` shows the fitted values.

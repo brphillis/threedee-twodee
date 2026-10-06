@@ -1,6 +1,7 @@
 import type { BoneDefinitionT, ClipDefinitionT, IssueT, ResolvedRigT, RigDefinitionT, WarningT } from '@td2d/schema';
 import type { Library } from '../project/library.ts';
 import { checkGenerator, MODEL_ROOT } from './generators.ts';
+import { ikChain } from './ik.ts';
 
 export interface RigLayer {
   readonly file: string | undefined;
@@ -191,14 +192,32 @@ export function checkClip(
     if (key.t <= previous)
       issues.push({ file, path: `${path}.t`, message: 'Key times must increase', code: 'unsorted_keys' });
     previous = key.t;
-    for (const bone of Object.keys(key.pose)) {
-      if (!allowed.has(bone))
+    for (const [bone, pose] of Object.entries(key.pose)) {
+      if (!allowed.has(bone)) {
         issues.push({
           file,
           path: `${path}.pose.${bone}`,
           message: `Bone "${bone}" is not in the rig. ${listed}`,
           code: 'unknown_bone',
         });
+        continue;
+      }
+      if (pose.ik) {
+        if (!rig || !ikChain(rig, bone))
+          issues.push({
+            file,
+            path: `${path}.pose.${bone}.ik`,
+            message: `Inverse kinematics needs two bones above "${bone}" to turn, such as a lower and an upper leg above a foot`,
+            code: 'ik_chain',
+          });
+        if (pose.ik.pole && Math.hypot(...pose.ik.pole) < 1e-9)
+          issues.push({
+            file,
+            path: `${path}.pose.${bone}.ik.pole`,
+            message: 'A pole cannot be all zeros',
+            code: 'ik_pole',
+          });
+      }
     }
   }
   if (clip.generator) {

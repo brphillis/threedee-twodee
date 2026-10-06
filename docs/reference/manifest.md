@@ -17,7 +17,7 @@
 | `directions` | Direction names and yaws in sheet order; `mirrorOf` names the source of mirrored directions. |
 | `palette` | Palette mode and name, the colours sprites may use, and `byClip` for per-clip palettes. |
 | `clips` | Name, fps, frame count, loop, motion and duration of each clip. |
-| `sheets` | Each sheet: `name`, `image`, `data` (its Aseprite JSON, or null), `width`, `height` and `layout`. |
+| `sheets` | Each sheet: `name`, `image`, `data` (its Aseprite JSON, or null), `normals` (its normal map, when `render.normals` is on), `width`, `height` and `layout`. |
 | `cells` | Every sprite: `key` (`clip/direction/nnn`), `clip`, `direction`, `index`, `sheet` (a sheet name), the rectangle `x`, `y`, `w`, `h` on that sheet, `trimmed`, `offset` and `mirrored`. |
 | `files` | Files written for each export format, relative to the manifest. |
 | `stages` | Hash of each stage's output, for provenance. |

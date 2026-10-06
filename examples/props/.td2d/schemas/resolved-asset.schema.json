@@ -483,6 +483,18 @@
             "minimum": -9007199254740991,
             "maximum": 9007199254740991
           },
+          "ramp": {
+            "description": "The colours toon shading paints its bands with, darkest first. Absent to shade color.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$",
+              "description": "sRGB colour as #rrggbb.",
+              "examples": [
+                "#a0693a"
+              ]
+            }
+          },
           "emissive": {
             "type": "string",
             "pattern": "^#[0-9a-fA-F]{6}$",
@@ -959,6 +971,80 @@
                                     ]
                                   }
                                 ]
+                              },
+                              "ik": {
+                                "type": "object",
+                                "properties": {
+                                  "target": {
+                                    "type": "array",
+                                    "prefixItems": [
+                                      {
+                                        "type": "number"
+                                      },
+                                      {
+                                        "type": "number"
+                                      },
+                                      {
+                                        "type": "number"
+                                      }
+                                    ],
+                                    "items": false,
+                                    "minItems": 3,
+                                    "maxItems": 3,
+                                    "description": "Where this bone's joint should be, in model space (metres, Y up).",
+                                    "examples": [
+                                      [
+                                        0,
+                                        0.5,
+                                        0
+                                      ]
+                                    ]
+                                  },
+                                  "pole": {
+                                    "description": "Direction the middle joint (knee or elbow) bends towards. Default: +Z or -Z, whichever side the middle bone's X limits allow, so knees bend forwards and elbows backwards on the humanoid rig.",
+                                    "type": "array",
+                                    "prefixItems": [
+                                      {
+                                        "type": "number"
+                                      },
+                                      {
+                                        "type": "number"
+                                      },
+                                      {
+                                        "type": "number"
+                                      }
+                                    ],
+                                    "items": false,
+                                    "minItems": 3,
+                                    "maxItems": 3,
+                                    "examples": [
+                                      [
+                                        0,
+                                        0.5,
+                                        0
+                                      ]
+                                    ]
+                                  },
+                                  "keepOrientation": {
+                                    "description": "Keep this bone's orientation in model space while the chain bends, with its own rotation applied on top, so a planted foot stays flat on the ground. Default false.",
+                                    "type": "boolean"
+                                  }
+                                },
+                                "required": [
+                                  "target"
+                                ],
+                                "additionalProperties": false,
+                                "description": "Two-bone inverse kinematics: the two bones above this one turn so its joint lands on the target, like a planted foot or a hand on a hilt. Between two keys that both target the bone the target moves and is solved at every frame; towards a key without a target the solved rotations ease into that key's.",
+                                "examples": [
+                                  {
+                                    "target": [
+                                      0.1,
+                                      0.08,
+                                      0.3
+                                    ],
+                                    "keepOrientation": true
+                                  }
+                                ]
                               }
                             },
                             "additionalProperties": false,
@@ -1028,7 +1114,7 @@
                             "maximum": 90
                           },
                           "bob": {
-                            "description": "How far the hips drop when the legs are furthest apart, in metres. Default 0.03.",
+                            "description": "How far the hips drop when the legs are furthest apart, in metres. Default 0.03, or with ik the drop that keeps the feet planted with straight legs at full stride.",
                             "type": "number",
                             "minimum": 0,
                             "maximum": 1
@@ -1040,10 +1126,20 @@
                             "maximum": 90
                           },
                           "kneeBend": {
-                            "description": "Knee bend of the swinging leg, in degrees. Default 30.",
+                            "description": "Knee bend of the swinging leg, in degrees. Default 30. Not used with ik.",
                             "type": "number",
                             "minimum": 0,
                             "maximum": 150
+                          },
+                          "ik": {
+                            "description": "Plant the feet: each foot stands still on the ground through its stance and lifts in an arc through its swing, and the legs are solved to reach it, so nothing slides and the knees bend as far as they need. Needs lower leg and foot bones. Default false.",
+                            "type": "boolean"
+                          },
+                          "lift": {
+                            "description": "With ik: how high the swinging foot lifts, in metres. Default 0.06.",
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
                           },
                           "hipSway": {
                             "description": "Hip twist towards the forward leg, in degrees. Default 4.",
@@ -1185,6 +1281,11 @@
                             "type": "walk-cycle",
                             "stride": 25,
                             "bob": 0.05
+                          },
+                          {
+                            "type": "walk-cycle",
+                            "stride": 25,
+                            "ik": true
                           }
                         ]
                       },
@@ -1446,7 +1547,7 @@
                           "maximum": 90
                         },
                         "bob": {
-                          "description": "How far the hips drop when the legs are furthest apart, in metres. Default 0.03.",
+                          "description": "How far the hips drop when the legs are furthest apart, in metres. Default 0.03, or with ik the drop that keeps the feet planted with straight legs at full stride.",
                           "type": "number",
                           "minimum": 0,
                           "maximum": 1
@@ -1458,10 +1559,20 @@
                           "maximum": 90
                         },
                         "kneeBend": {
-                          "description": "Knee bend of the swinging leg, in degrees. Default 30.",
+                          "description": "Knee bend of the swinging leg, in degrees. Default 30. Not used with ik.",
                           "type": "number",
                           "minimum": 0,
                           "maximum": 150
+                        },
+                        "ik": {
+                          "description": "Plant the feet: each foot stands still on the ground through its stance and lifts in an arc through its swing, and the legs are solved to reach it, so nothing slides and the knees bend as far as they need. Needs lower leg and foot bones. Default false.",
+                          "type": "boolean"
+                        },
+                        "lift": {
+                          "description": "With ik: how high the swinging foot lifts, in metres. Default 0.06.",
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
                         },
                         "hipSway": {
                           "description": "Hip twist towards the forward leg, in degrees. Default 4.",
@@ -1603,6 +1714,11 @@
                           "type": "walk-cycle",
                           "stride": 25,
                           "bob": 0.05
+                        },
+                        {
+                          "type": "walk-cycle",
+                          "stride": 25,
+                          "ik": true
                         }
                       ]
                     },
@@ -1937,6 +2053,9 @@
               ]
             }
           ]
+        },
+        "normals": {
+          "type": "boolean"
         }
       },
       "required": [
@@ -1944,7 +2063,7 @@
         "backend"
       ],
       "additionalProperties": false,
-      "description": "Supersampling factor, render backend and lines."
+      "description": "Supersampling factor, render backend, lines and whether normal maps are written."
     },
     "pixel": {
       "type": "object",

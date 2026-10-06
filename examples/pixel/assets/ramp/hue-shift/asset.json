@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../.td2d/schemas/asset.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "ramp/hue-shift",
+  "type": "prop",
+  "description": "hueShift 35 on every toon material: each shadow band turns towards blue-violet, so the shaded sides go cool and plum while the lit sides keep their warm colour.",
+  "materials": {
+    "wood": { "color": "#b8743a", "shading": "toon", "bands": 3, "hueShift": 35 },
+    "frame": { "color": "#d08c48", "shading": "toon", "bands": 3, "hueShift": 35 },
+    "grain": { "color": "#94582c", "shading": "toon", "bands": 3, "hueShift": 35, "outline": false },
+    "rope": { "color": "#c8924e", "shading": "toon", "bands": 3, "hueShift": 35, "outline": false },
+    "rope-dark": { "color": "#6e4422", "shading": "toon", "bands": 2, "hueShift": 35, "outline": false },
+    "sack": { "color": "#c49a68", "shading": "toon", "bands": 3, "hueShift": 35 },
+    "sack-dark": { "color": "#a8835a", "shading": "toon", "bands": 2, "hueShift": 35, "outline": false },
+    "sack-light": { "color": "#d8b888", "shading": "toon", "bands": 2, "hueShift": 35, "outline": false },
+    "cord": { "color": "#d8843a", "shading": "toon", "bands": 2, "hueShift": 35, "outline": false }
+  },
+  "model": {
+    "parts": [
+      {
+        "type": "component",
+        "id": "crates",
+        "component": "crates"
+      }
+    ]
+  }
+}

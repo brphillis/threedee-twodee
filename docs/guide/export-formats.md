@@ -46,6 +46,26 @@ td2d export characters/knight --format aseprite-json,pixi,phaser-atlas
 
 Only the export stage runs; sprites and sheets come from the cache.
 
+## Normal maps for lit sprites
+
+Because every sprite comes from a 3D model, td2d can write the normal map a hand artist cannot: set `render.normals` and each sheet gets a `<sheet>-normals.png` beside it, the same size and layout, so a cell's normals sit at the cell's own rectangle. Each pixel's RGB is the surface normal in view space, x to the right, y up and z towards the viewer, mapped from -1..1 to 0..255; the alpha matches the sprite's, outline pixels take the normal next to them, and mirrored directions have their x turned around.
+
+```json
+{ "render": { "normals": true } }
+```
+
+The packed knight's sheet and its normal map:
+
+![The knight's sheet beside its normal map](images/exports/knight-packed-normals.png)
+
+| Engine | Loading the normal map |
+|---|---|
+| Phaser 3 and 4 | Pass both images: `this.load.multiatlas` and `this.load.atlas` take `[image, normalMap]` as the texture URL; with Light2D (`sprite.setPipeline('Light2D')`) the normals light the sprite. For `aseprite-json`, `this.load.aseprite(key, [image, normalMap], json)` does the same. |
+| Godot 4 | Make a `CanvasTexture` with the sheet as `diffuse_texture` and the normal map as `normal_texture`, then use it in place of the sheet; `PointLight2D` lights it. |
+| PixiJS 8 | Use a lighting plugin such as `pixi-lights`, which takes a diffuse and a normal texture per sprite. |
+
+The manifest lists each sheet's normal map under `sheets[].normals` and the files under `files.normals`.
+
 ## Play it in a browser engine
 
 `examples/engines` has a Phaser page and a PixiJS page that play any clip of a generated sheet:

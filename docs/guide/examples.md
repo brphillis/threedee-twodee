@@ -95,6 +95,8 @@ td2d generate
 | `posterize/4`<br>Each colour channel cut to 4 levels before anything else. | ![posterize/4](images/examples/pixel/posterize-4.png) |
 | `preset/pico-8`<br>The built-in pico-8 preset. | ![preset/pico-8](images/examples/pixel/preset-pico-8.png) |
 | `preset/retro-16`<br>The built-in retro-16 preset: auto:16 palette, outline and stray-pixel cleanup. | ![preset/retro-16](images/examples/pixel/preset-retro-16.png) |
+| `ramp/hue-shift`<br>hueShift 35 on every toon material: each shadow band turns towards blue-violet, so the shaded sides go cool and plum while the lit sides keep their warm colour. | ![ramp/hue-shift](images/examples/pixel/ramp-hue-shift.png) |
+| `ramp/palette`<br>Every material a ramp of colours from palettes/crate-8.json, darkest first, so each toon band is painted with a hand-picked palette colour and the sprite never leaves the palette. | ![ramp/palette](images/examples/pixel/ramp-palette.png) |
 
 ## characters
 
@@ -108,7 +110,7 @@ td2d generate
 | Asset | Preview |
 |---|---|
 | `characters/knight`<br>A crowned knight in plate armour, with a royal blue surcoat, a red cape, a longsword in the right hand and a heraldic shield on the left arm. Every part rides one bone; the left limbs are mirrored to the right. | ![characters/knight](images/examples/characters/characters-knight.png) |
-| `characters/knight-packed`<br>The same knight, trimmed and packed onto power-of-two sheets, exported in every format: Aseprite, PixiJS, Phaser, Godot, frame PNGs and GIF previews. | ![characters/knight-packed](images/examples/characters/characters-knight-packed.png) |
+| `characters/knight-packed`<br>The same knight, trimmed and packed onto power-of-two sheets, exported in every format: Aseprite, PixiJS, Phaser, Godot, frame PNGs and GIF previews, with a normal map for engines that light sprites. | ![characters/knight-packed](images/examples/characters/characters-knight-packed.png) |
 
 ## fighter
 

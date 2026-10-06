@@ -73,6 +73,10 @@ export const RenderOverrides = z
         description:
           'Lines the renderer draws along every step in depth and every boundary between two lined materials, on the nearer side: round the silhouette and inside it. none (the default) draws none.',
       }),
+    normals: z.boolean().optional().meta({
+      description:
+        "Also write a normal map: each sprite's view-space surface normals at sprite resolution, as <sheet>-normals.png in the same layout as the sheet, for engines that light sprites. Default false.",
+    }),
   })
   .meta({ description: 'Render settings.' });
 
@@ -204,6 +208,10 @@ export const ResolvedMaterial = z.strictObject({
   colorRef: PaletteColorRef.nullable(),
   shading: Shading,
   bands: z.number().int(),
+  ramp: z
+    .array(HexColor)
+    .optional()
+    .meta({ description: 'The colours toon shading paints its bands with, darkest first. Absent to shade color.' }),
   emissive: HexColor,
   outline: z.boolean(),
   opacity: z.number(),
@@ -270,8 +278,9 @@ export const ResolvedAsset = z
         supersample: z.number().int(),
         backend: z.string(),
         lines: z.union([z.literal('none'), RenderLines]).optional(),
+        normals: z.boolean().optional(),
       })
-      .meta({ description: 'Supersampling factor, render backend and lines.' }),
+      .meta({ description: 'Supersampling factor, render backend, lines and whether normal maps are written.' }),
     pixel: ResolvedPixel.meta({ description: 'Pixel settings after presets and overrides.' }),
     paletteColors: z.array(HexColor).nullable().meta({ description: 'The colours of a fixed palette, or null.' }),
     sheet: ResolvedSheet.meta({ description: 'Sheet settings after presets and overrides.' }),

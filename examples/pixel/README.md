@@ -22,6 +22,8 @@ and a tied burlap sack beside them.
   `lines/none` turns the lines off for comparison.
 - **Shading.** Every material is toon-shaded, so each face is a few flat tones; the palette,
   dither and posterize settings then show how they treat tones that fall between palette colours.
+  `ramp/*` paints the bands with chosen colours instead of shades of one: a `hueShift` that turns
+  the shadows cool, and ramps picked straight from the project palette.
   The fine detail (grain, nails, rope strands, flecks, cord) is `"outline": false`, so the lines
   follow the structure and not every strand.
 
@@ -37,6 +39,7 @@ The scene is the `crates` component in `components/crates.json`. Every asset use
 | `outline/*` | outside rings with 8 and 4 connectivity, an inside outline, and an outline snapped to the palette |
 | `lines/*` | no render lines, lines in one dark colour, and lines in a shade of each part's colour |
 | `preset/*` | the built-in `retro-16` and `pico-8` presets |
+| `ramp/*` | `hueShift` ramps made from each material's colour, and ramps of palette colours with the palette fixed |
 
 ```sh
 td2d generate            # every asset

@@ -96,6 +96,7 @@
             "description": "Free-text note. Use this instead of comments."
           },
           "color": {
+            "description": "Either a #rrggbb colour or a palette reference. Required unless ramp is set.",
             "anyOf": [
               {
                 "type": "string",
@@ -132,8 +133,7 @@
                 "additionalProperties": false,
                 "description": "A colour taken from a named palette by index."
               }
-            ],
-            "description": "Either a #rrggbb colour or a palette reference."
+            ]
           },
           "shading": {
             "type": "string",
@@ -145,10 +145,70 @@
             "description": "toon: banded lighting. flat: unlit base colour. lambert: smooth diffuse lighting."
           },
           "bands": {
-            "description": "Number of light bands for toon shading. Default 3.",
+            "description": "Number of light bands for toon shading. Default 3. A ramp sets it to its length.",
             "type": "integer",
             "minimum": 2,
             "maximum": 8
+          },
+          "ramp": {
+            "minItems": 2,
+            "maxItems": 8,
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^#[0-9a-fA-F]{6}$",
+                  "description": "sRGB colour as #rrggbb.",
+                  "examples": [
+                    "#a0693a"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "palette": {
+                      "type": "string",
+                      "maxLength": 64,
+                      "pattern": "^[a-z0-9][a-z0-9-]*$",
+                      "description": "Palette name.",
+                      "examples": [
+                        "steel",
+                        "endesga-32"
+                      ]
+                    },
+                    "index": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 255,
+                      "description": "Zero-based colour index within the palette."
+                    }
+                  },
+                  "required": [
+                    "palette",
+                    "index"
+                  ],
+                  "additionalProperties": false,
+                  "description": "A colour taken from a named palette by index."
+                }
+              ],
+              "description": "Either a #rrggbb colour or a palette reference."
+            },
+            "description": "Colours from shadow to full light, each a #rrggbb or a palette reference. Toon shading paints each light level with one of them, darkest first, in place of color and bands, so shadows and highlights can change hue as in hand-painted pixel art.",
+            "examples": [
+              [
+                "#5d275d",
+                "#b13e53",
+                "#ef7d57",
+                "#ffcd75"
+              ]
+            ]
+          },
+          "hueShift": {
+            "description": "Degrees to turn the hue of darker toon bands, making a ramp from color: positive turns shadows towards blue-violet, negative towards yellow. The full-light band keeps color; the shadow band turns by the whole amount and the bands between by their share. Default 0.",
+            "type": "number",
+            "minimum": -180,
+            "maximum": 180
           },
           "emissive": {
             "description": "Emissive colour added regardless of lighting.",
@@ -169,9 +229,6 @@
             "maximum": 1
           }
         },
-        "required": [
-          "color"
-        ],
         "additionalProperties": false,
         "description": "Renderer-agnostic material.",
         "examples": [
@@ -180,6 +237,18 @@
             "shading": "toon",
             "bands": 3,
             "outline": true
+          },
+          {
+            "color": "#a0693a",
+            "hueShift": 30
+          },
+          {
+            "ramp": [
+              "#5d275d",
+              "#b13e53",
+              "#ef7d57",
+              "#ffcd75"
+            ]
           }
         ]
       }

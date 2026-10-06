@@ -1,3 +1,4 @@
+import type { LightingSettingsT } from './documents/lighting.ts';
 import type { RenderSceneSettings } from './render.ts';
 
 export type Point3 = [number, number, number];
@@ -91,4 +92,49 @@ export function lightDirection(
   cameraAzimuth: number,
 ): Point3 {
   return directionVector(space === 'camera' ? cameraAzimuth + light.azimuth : light.azimuth, light.elevation);
+}
+
+/** sRGB #rrggbb to linear channels, as three.js converts light and material colours. */
+export function hexToLinearRgb(hex: string): Point3 {
+  const n = Number.parseInt(hex.slice(1), 16);
+  const channel = (byte: number) => {
+    const c = byte / 255;
+    return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  };
+  return [channel((n >> 16) & 255), channel((n >> 8) & 255), channel(n & 255)];
+}
+
+/** Luminance of linear RGB, with the weights the three.js shaders use. */
+export function linearLuminance([r, g, b]: Point3): number {
+  return 0.2126729 * r + 0.7151522 * g + 0.072175 * b;
+}
+
+/**
+ * How much light a white toon-shaded surface receives, in the units the shaders add up:
+ * `floor` from the ambient and hemisphere lights alone, which is all a face turned from every
+ * light or in shadow gets, and `ceil` with the strongest directional light fully on as well.
+ * A toon band k of n lands at floor + (ceil - floor) * k / (n - 1), so these two numbers turn
+ * the light on a pixel into a band, which is how a material's ramp picks its colour.
+ */
+export function lightLevels(lighting: Pick<LightingSettingsT, 'lights'>): { floor: number; ceil: number } {
+  let floor = 0;
+  let strongest = 0;
+  for (const light of lighting.lights) {
+    if (light.type === 'ambient') {
+      floor += (light.intensity * linearLuminance(hexToLinearRgb(light.color ?? '#ffffff'))) / Math.PI;
+    } else if (light.type === 'hemisphere') {
+      const sky = hexToLinearRgb(light.skyColor);
+      const ground = hexToLinearRgb(light.groundColor);
+      floor +=
+        (light.intensity *
+          linearLuminance([0, 1, 2].map((i) => ((sky[i] as number) + (ground[i] as number)) / 2) as Point3)) /
+        Math.PI;
+    } else {
+      strongest = Math.max(
+        strongest,
+        (light.intensity * linearLuminance(hexToLinearRgb(light.color ?? '#ffffff'))) / Math.PI,
+      );
+    }
+  }
+  return { floor, ceil: floor + strongest };
 }

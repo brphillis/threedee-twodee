@@ -1,5 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import { loadAsset, loadLibrary, loadProject, resolveAsset, type Td2dError } from '../src/index.ts';
+import {
+  hexToRgb,
+  loadAsset,
+  loadLibrary,
+  loadProject,
+  resolveAsset,
+  rgbToOklab,
+  type Td2dError,
+} from '../src/index.ts';
 import { CRATE, makeProject, writeJson } from './helpers/tmp.ts';
 
 function resolve(
@@ -172,6 +180,93 @@ describe('resolveAsset problems', () => {
     expect(error.issues?.map((i) => [i.file, i.path])).toEqual([
       ['assets/props/crate/asset.json', 'camera.preset'],
       ['td2d.project.json', 'defaults.lighting'],
+    ]);
+  });
+
+  it('resolves a ramp, dark to light, and takes the middle colour as the material colour', () => {
+    const { asset } = resolve(
+      {},
+      {
+        ...CRATE,
+        materials: {
+          ...CRATE.materials,
+          wood: { ramp: ['#3A2214', { palette: 'pico-8', index: 9 }, '#E8B070'], outline: false },
+        },
+      },
+    );
+    expect(asset.materials.wood).toMatchObject({
+      color: '#ffa300',
+      colorRef: null,
+      shading: 'toon',
+      bands: 3,
+      ramp: ['#3a2214', '#ffa300', '#e8b070'],
+      outline: false,
+    });
+  });
+
+  it('makes a ramp from hueShift that keeps the colour in full light and turns the shadows towards blue', () => {
+    const { asset } = resolve(
+      {},
+      { ...CRATE, materials: { ...CRATE.materials, wood: { color: '#a0693a', hueShift: 40 } } },
+    );
+    const ramp = asset.materials.wood?.ramp as string[];
+    expect(ramp).toHaveLength(3);
+    expect(ramp[2]).toBe('#a0693a');
+    const hue = (hex: string) => {
+      const [, a, b] = rgbToOklab(...hexToRgb(hex));
+      return (Math.atan2(b, a) * 180) / Math.PI;
+    };
+    const lightness = (hex: string) => rgbToOklab(...hexToRgb(hex))[0];
+    expect(lightness(ramp[0] as string)).toBeLessThan(lightness(ramp[1] as string));
+    expect(lightness(ramp[1] as string)).toBeLessThan(lightness(ramp[2] as string));
+    // Orange sits near 60 degrees; towards blue-violet means a smaller hue, by 40 for the shadow and 20 half
+    // way, within the rounding of dark 8-bit colours.
+    expect(hue(ramp[0] as string)).toBeCloseTo(hue('#a0693a') - 40, -1);
+    expect(hue(ramp[1] as string)).toBeCloseTo(hue('#a0693a') - 20, -1);
+    const warm = resolve(
+      {},
+      { ...CRATE, materials: { ...CRATE.materials, wood: { color: '#a0693a', hueShift: -40 } } },
+    );
+    expect(hue(warm.asset.materials.wood?.ramp?.[0] as string)).toBeGreaterThan(hue('#a0693a'));
+    const none = resolve({}, { ...CRATE, materials: { ...CRATE.materials, wood: { color: '#a0693a', hueShift: 0 } } });
+    expect(none.asset.materials.wood?.ramp).toBeUndefined();
+  });
+
+  it('gives a part with its own colour a new ramp from that colour instead of the material ramp', () => {
+    const { asset } = resolve(
+      {},
+      {
+        ...CRATE,
+        materials: { ...CRATE.materials, wood: { ramp: ['#000000', '#ffffff'], hueShift: undefined } },
+        model: {
+          parts: [
+            { type: 'box', id: 'body', material: 'wood', size: [1, 1, 1], color: '#ff0000' },
+            { type: 'box', id: 'lid', material: 'wood', size: [1, 0.1, 1], position: [0, 1, 0] },
+          ],
+        },
+      },
+    );
+    expect(asset.materials['wood~body']).toMatchObject({ color: '#ff0000', bands: 3 });
+    expect(asset.materials['wood~body']?.ramp).toBeUndefined();
+    expect(asset.materials.wood?.ramp).toEqual(['#000000', '#ffffff']);
+  });
+
+  it('rejects a ramp with flat shading, a mismatched bands count, a hueShift as well, or no colour at all', () => {
+    const issues = (material: Record<string, unknown>) =>
+      failure({}, { ...CRATE, materials: { ...CRATE.materials, wood: material } }).issues?.map((i) => [i.path, i.code]);
+    expect(issues({ ramp: ['#000000', '#ffffff'], shading: 'flat' })).toEqual([
+      ['materials.wood.shading', 'ramp_shading'],
+    ]);
+    expect(issues({ ramp: ['#000000', '#ffffff'], bands: 3 })).toEqual([['materials.wood.bands', 'ramp_bands']]);
+    expect(issues({ ramp: ['#000000', '#ffffff'], hueShift: 10 })).toEqual([
+      ['materials.wood.hueShift', 'ramp_hue_shift'],
+    ]);
+    expect(issues({ color: '#a0693a', hueShift: 10, shading: 'lambert' })).toEqual([
+      ['materials.wood.shading', 'ramp_shading'],
+    ]);
+    expect(issues({ shading: 'toon' })).toEqual([['materials.wood.color', 'invalid_type']]);
+    expect(issues({ ramp: ['#000000', { palette: 'pico-8', index: 99 }] })).toEqual([
+      ['materials.wood.ramp[1].index', 'palette_index'],
     ]);
   });
 

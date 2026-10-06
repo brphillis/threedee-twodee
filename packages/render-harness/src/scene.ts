@@ -1,4 +1,5 @@
 import type { LightingSettingsT, ModelInfo, RenderSceneSettings } from '@td2d/schema';
+import { lightLevels } from '@td2d/schema/camera';
 import {
   AmbientLight,
   type AnimationClip,
@@ -12,6 +13,7 @@ import {
   LoopOnce,
   type Material,
   Mesh,
+  MeshNormalMaterial,
   NoToneMapping,
   type Object3D,
   OrthographicCamera,
@@ -70,6 +72,7 @@ export class HarnessScene {
   private radius = 1;
   private ground: Mesh | undefined;
   private readonly linePass: LinePass;
+  private readonly normalMaterial = new MeshNormalMaterial();
 
   constructor(renderer: WebGLRenderer) {
     this.renderer = renderer;
@@ -140,13 +143,17 @@ export class HarnessScene {
   }
 
   /** Replace materials by name. Called by configure() when the job carries materials. */
-  private applyMaterials(materials: NonNullable<RenderSceneSettings['materials']>): void {
+  private applyMaterials(
+    materials: NonNullable<RenderSceneSettings['materials']>,
+    lighting: RenderSceneSettings['lighting'],
+  ): void {
+    const levels = lightLevels(lighting);
     this.root?.traverse((object) => {
       if (!(object instanceof Mesh)) return;
       const hasColours = object.geometry.getAttribute('color') !== undefined;
       const swap = (m: Material) => {
         const spec = materials[m.name];
-        return spec ? materialFromSpec(m.name, spec, hasColours) : m;
+        return spec ? materialFromSpec(m.name, spec, hasColours, levels) : m;
       };
       object.material = Array.isArray(object.material) ? object.material.map(swap) : swap(object.material);
     });
@@ -154,7 +161,7 @@ export class HarnessScene {
 
   configure(settings: RenderSceneSettings): void {
     this.settings = settings;
-    if (settings.materials) this.applyMaterials(settings.materials);
+    if (settings.materials) this.applyMaterials(settings.materials, settings.lighting);
     this.renderer.setSize(
       settings.frame.width * settings.supersample,
       settings.frame.height * settings.supersample,
@@ -272,11 +279,17 @@ export class HarnessScene {
     }
   }
 
-  /** Render one sample and return RGBA rows bottom-up, exactly as WebGL reads them. */
+  /**
+   * Render one sample and return RGBA rows bottom-up, exactly as WebGL reads them. With
+   * `normals` in the settings, the frame's view-space normals come too, drawn with the same
+   * camera: x to the right, y up and z towards the viewer, each mapped from -1..1 to 0..255,
+   * opaque wherever there is geometry.
+   */
   render(sample: { clip: string | null; time: number; yaw: number }): {
     width: number;
     height: number;
     rgba: Uint8Array;
+    normals?: Uint8Array;
   } {
     const settings = this.settings;
     if (!settings) throw new Error('configure() must be called before render().');
@@ -298,6 +311,31 @@ export class HarnessScene {
     const gl = this.renderer.getContext();
     const rgba = new Uint8Array(rig.renderWidth * rig.renderHeight * 4);
     gl.readPixels(0, 0, rig.renderWidth, rig.renderHeight, gl.RGBA, gl.UNSIGNED_BYTE, rgba);
-    return { width: rig.renderWidth, height: rig.renderHeight, rgba };
+    if (!settings.normals) return { width: rig.renderWidth, height: rig.renderHeight, rgba };
+    const normals = new Uint8Array(rig.renderWidth * rig.renderHeight * 4);
+    this.renderNormals();
+    gl.readPixels(0, 0, rig.renderWidth, rig.renderHeight, gl.RGBA, gl.UNSIGNED_BYTE, normals);
+    return { width: rig.renderWidth, height: rig.renderHeight, rgba, normals };
+  }
+
+  /** Draw the posed model again with every part's view-space normal as its colour, without the ground shadow. */
+  private renderNormals(): void {
+    const swapped: [Mesh, Material | Material[]][] = [];
+    this.root?.traverse((object) => {
+      if (!(object instanceof Mesh)) return;
+      swapped.push([object, object.material]);
+      object.material = this.normalMaterial;
+    });
+    const ground = this.ground;
+    if (ground) ground.visible = false;
+    const shadows = this.renderer.shadowMap.enabled;
+    this.renderer.shadowMap.enabled = false;
+    this.renderer.setRenderTarget(null);
+    this.renderer.setClearColor(0x000000, 0);
+    this.renderer.clear();
+    this.renderer.render(this.scene, this.camera);
+    this.renderer.shadowMap.enabled = shadows;
+    if (ground) ground.visible = true;
+    for (const [object, material] of swapped) object.material = material;
   }
 }

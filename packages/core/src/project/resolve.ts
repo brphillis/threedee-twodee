@@ -3,6 +3,7 @@ import {
   type AssetDefinitionT,
   CameraSettings,
   COMPASS_ANGLES,
+  type ColorValueT,
   type CompassDirection,
   DIRECTION_SETS,
   type DirectionSpecT,
@@ -10,7 +11,9 @@ import {
   type IssueT,
   issuesFromZod,
   LightingSettings,
+  type LightingSettingsT,
   type MaterialDefinitionT,
+  type PaletteColorRefT,
   PixelSettings,
   type PresetKind,
   ResolvedAsset,
@@ -21,9 +24,11 @@ import {
   SheetSettings,
   type WarningT,
 } from '@td2d/schema';
+import { hexToLinearRgb, lightLevels } from '@td2d/schema/camera';
 import type { z } from 'zod';
 import { Td2dError } from '../errors.ts';
 import { colourVariantName, expandModel } from '../model/expand.ts';
+import { oklabToRgb, packRgb, rgbToHex, rgbToOklab, turnHueTowards } from '../pixel/oklab.ts';
 import { clipTimes } from '../render/samples.ts';
 import { checkClip, type RigLayer, resolveRig } from '../rig/resolve.ts';
 import type { LoadedAsset } from './assets.ts';
@@ -154,43 +159,126 @@ export function presetSettings<K extends PresetKind>(
   return SETTINGS_SCHEMAS[kind].parse(deepMerge(BASE_SETTINGS[kind], stripPresetMeta(entry.data))) as never;
 }
 
+/** Resolve a #rrggbb or palette reference to a lowercase hex colour, reporting missing palettes and indices. */
+function resolveColorValue(
+  value: ColorValueT,
+  library: Library,
+  file: string,
+  path: string,
+  issues: IssueT[],
+): { color: string; ref: PaletteColorRefT | null } {
+  if (typeof value === 'string') return { color: value.toLowerCase(), ref: null };
+  const palette = library.palettes.get(value.palette);
+  if (!palette) {
+    issues.push({
+      file,
+      path: `${path}.palette`,
+      message: `Palette "${value.palette}" does not exist`,
+      code: 'palette_not_found',
+    });
+  } else if (value.index >= palette.data.colors.length) {
+    issues.push({
+      file,
+      path: `${path}.index`,
+      message: `Palette "${value.palette}" has ${palette.data.colors.length} colours, so index ${value.index} is out of range`,
+      code: 'palette_index',
+    });
+  } else {
+    return { color: (palette.data.colors[value.index] as string).toLowerCase(), ref: value };
+  }
+  return { color: '#ff00ff', ref: value };
+}
+
+/** Oklch hues the shadow bands of a hue-shifted material turn towards: blue-violet, or yellow for a negative shift. */
+const COOL_SHADOW_HUE = 280;
+const WARM_SHADOW_HUE = 95;
+
+/**
+ * The ramp `hueShift` makes from a colour: one colour per band, from the band lit by the ambient
+ * light alone to the band in full light. Each band is the colour at the brightness the lights
+ * give that band, which is what plain toon shading would show, with its hue turned towards
+ * blue-violet (or yellow) by the band's share of the shift. Full light keeps the colour.
+ */
+export function hueShiftRamp(
+  color: string,
+  bands: number,
+  hueShift: number,
+  lighting: Pick<LightingSettingsT, 'lights'>,
+): string[] {
+  const { floor, ceil } = lightLevels(lighting);
+  const darkest = ceil > 1e-6 ? Math.min(1, floor / ceil) : 1;
+  const linear = hexToLinearRgb(color);
+  const target = hueShift > 0 ? COOL_SHADOW_HUE : WARM_SHADOW_HUE;
+  const ramp: string[] = [];
+  for (let k = 0; k < bands; k++) {
+    const level = k / (bands - 1);
+    const brightness = darkest + (1 - darkest) * level;
+    const lab = rgbToOklab(...linearToBytes(linear.map((c) => c * brightness) as [number, number, number]));
+    const [r, g, b] = oklabToRgb(turnHueTowards(lab, target, Math.abs(hueShift) * (1 - level)));
+    ramp.push(rgbToHex(packRgb(r, g, b)));
+  }
+  return ramp;
+}
+
+function linearToBytes(linear: readonly [number, number, number]): [number, number, number] {
+  const encode = (c: number) =>
+    Math.round(255 * Math.min(1, Math.max(0, c <= 0.0031308 ? 12.92 * c : 1.055 * c ** (1 / 2.4) - 0.055)));
+  return [encode(linear[0]), encode(linear[1]), encode(linear[2])];
+}
+
 function resolveMaterial(
   name: string,
   def: MaterialDefinitionT,
   library: Library,
   file: string,
   issues: IssueT[],
+  lighting: Pick<LightingSettingsT, 'lights'>,
 ): ResolvedMaterialT {
+  const at = (field: string) => `materials.${name}.${field}`;
+  const shading = def.shading ?? MATERIAL_DEFAULTS.shading;
+  let ramp: string[] | null = null;
+  if (def.ramp) {
+    ramp = def.ramp.map((c, i) => resolveColorValue(c, library, file, at(`ramp[${i}]`), issues).color);
+    if (shading !== 'toon')
+      issues.push({ file, path: at('shading'), message: 'A ramp needs toon shading', code: 'ramp_shading' });
+    if (def.bands !== undefined && def.bands !== def.ramp.length)
+      issues.push({
+        file,
+        path: at('bands'),
+        message: `bands is set by the ramp's length (${def.ramp.length}); remove it or make it match`,
+        code: 'ramp_bands',
+      });
+    if (def.hueShift !== undefined)
+      issues.push({
+        file,
+        path: at('hueShift'),
+        message: 'A material takes a ramp or a hueShift, not both',
+        code: 'ramp_hue_shift',
+      });
+  }
   let color = '#ff00ff';
-  let colorRef: ResolvedMaterialT['colorRef'] = null;
-  if (typeof def.color === 'string') {
-    color = def.color.toLowerCase();
+  let colorRef: PaletteColorRefT | null = null;
+  if (def.color !== undefined) {
+    ({ color, ref: colorRef } = resolveColorValue(def.color, library, file, at('color'), issues));
+  } else if (ramp) {
+    // The middle of the ramp stands for the material where one colour is needed: lines, the 3D view.
+    color = ramp[Math.floor((ramp.length - 1) / 2)] as string;
   } else {
-    colorRef = def.color;
-    const palette = library.palettes.get(def.color.palette);
-    if (!palette) {
-      issues.push({
-        file,
-        path: `materials.${name}.color.palette`,
-        message: `Palette "${def.color.palette}" does not exist`,
-        code: 'palette_not_found',
-      });
-    } else if (def.color.index >= palette.data.colors.length) {
-      issues.push({
-        file,
-        path: `materials.${name}.color.index`,
-        message: `Palette "${def.color.palette}" has ${palette.data.colors.length} colours, so index ${def.color.index} is out of range`,
-        code: 'palette_index',
-      });
-    } else {
-      color = (palette.data.colors[def.color.index] ?? color).toLowerCase();
-    }
+    issues.push({ file, path: at('color'), message: 'A material needs a color or a ramp', code: 'invalid_type' });
+  }
+  const bands = ramp ? ramp.length : (def.bands ?? MATERIAL_DEFAULTS.bands);
+  if (def.hueShift !== undefined && !def.ramp) {
+    if (shading !== 'toon')
+      issues.push({ file, path: at('shading'), message: 'hueShift needs toon shading', code: 'ramp_shading' });
+    else if (def.hueShift !== 0) ramp = hueShiftRamp(color, bands, def.hueShift, lighting);
   }
   return {
     color,
     colorRef,
-    shading: def.shading ?? MATERIAL_DEFAULTS.shading,
-    bands: def.bands ?? MATERIAL_DEFAULTS.bands,
+    shading,
+    bands,
+    // Only when present, so assets without ramps resolve, and hash, as before.
+    ...(ramp ? { ramp } : {}),
     emissive: (def.emissive ?? MATERIAL_DEFAULTS.emissive).toLowerCase(),
     outline: def.outline ?? MATERIAL_DEFAULTS.outline,
     opacity: def.opacity ?? MATERIAL_DEFAULTS.opacity,
@@ -351,7 +439,7 @@ export function resolveAsset(project: Project, loaded: LoadedAsset, library: Lib
   Object.assign(materialDefs, def.materials ?? {});
   const materials: Record<string, ResolvedMaterialT> = {};
   for (const [name, m] of Object.entries(materialDefs))
-    materials[name] = resolveMaterial(name, m, library, file, issues);
+    materials[name] = resolveMaterial(name, m, library, file, issues, lighting as unknown as LightingSettingsT);
 
   const used = new Set<string>();
   const known = Object.keys(materials);
@@ -377,13 +465,15 @@ export function resolveAsset(project: Project, loaded: LoadedAsset, library: Lib
     }
     if (part.color !== undefined) {
       // A part colour becomes its own material, keyed by part id, so geometry never depends on colour.
-      const base = materialDefs[part.material] as MaterialDefinitionT;
+      // It replaces an explicit ramp too; a hueShift makes a new ramp from the part's colour.
+      const { ramp: _ramp, ...base } = materialDefs[part.material] as MaterialDefinitionT;
       materials[colourVariantName(part.material, part.id)] = resolveMaterial(
         `${part.material}~${part.id}`,
         { ...base, color: part.color },
         library,
         leaf.file || file,
         issues,
+        lighting as unknown as LightingSettingsT,
       );
     }
   }

@@ -63,9 +63,10 @@ describe('the knight example', () => {
     expect(again.exitCode, again.stderr).toBe(0);
     expect(stages(again.envelope)).toMatchObject({ model: 'cached', rig: 'ran', plan: 'ran', render: 'ran' });
 
-    // Forcing the stride far past what the bob allows lifts the feet off the ground.
-    const walk = asset.animation.clips as unknown as { walk: { generator: { stride: number } } };
+    // Without planted feet, a stride far past what the bob allows lifts the feet off the ground.
+    const walk = asset.animation.clips as unknown as { walk: { generator: { stride: number; ik: boolean } } };
     walk.walk.generator.stride = 50;
+    walk.walk.generator.ik = false;
     writeFileSync(file, JSON.stringify(asset));
     const planned = await runJson(['generate', 'characters/knight', '--to', 'plan'], { cwd: root });
     expect(planned.exitCode, planned.stderr).toBe(0);

@@ -8,11 +8,15 @@ import {
   buildRig,
   clipKeys,
   EASINGS,
+  eulerDegrees,
+  footPath,
   generateAssets,
   generateKeys,
+  type IkPose,
   loadAsset,
   loadLibrary,
   loadProject,
+  posedBoneWorld,
   posedPositions,
   posedPositionsByNode,
   quaternionFrom,
@@ -21,6 +25,7 @@ import {
   resolveRig,
   sampleKeys,
   skinWeights,
+  solveIk,
   swapSide,
   type Td2dError,
 } from '../src/index.ts';
@@ -454,6 +459,200 @@ describe('generators', () => {
   });
 });
 
+describe('inverse kinematics', () => {
+  const rig = resolveRig([{ file: undefined, path: 'rig', value: 'humanoid-basic' }], library, []) as NonNullable<
+    ReturnType<typeof resolveRig>
+  >;
+  const at = (pose: Map<string, IkPose>, bone: string) =>
+    new Vector3().setFromMatrixPosition(posedBoneWorld(rig, pose).get(bone) as Matrix4);
+  const posed = (entries: Record<string, Partial<IkPose>>) =>
+    new Map(
+      Object.entries(entries).map(([bone, p]) => [
+        bone,
+        {
+          rotation: p.rotation ?? new Quaternion(),
+          translation: p.translation ?? new Vector3(),
+          scale: p.scale ?? new Vector3(1, 1, 1),
+        },
+      ]),
+    );
+
+  it('turns the two bones above a foot so its joint lands on the target, knee forwards', () => {
+    const pose = posed({ hips: { translation: new Vector3(0, -0.1, 0) } });
+    const target = new Vector3(0.1, 0.3, 0.2);
+    solveIk(rig, pose, new Map([['leftFoot', { target, pole: null, keepOrientation: false, weight: 1 }]]));
+    expect(at(pose, 'leftFoot').distanceTo(target)).toBeLessThan(1e-6);
+    expect(at(pose, 'leftLowerLeg').z).toBeGreaterThan(0.1);
+    // Bending in the side plane turns the thigh and shin about X only.
+    for (const bone of ['leftUpperLeg', 'leftLowerLeg']) {
+      const [, y, z] = eulerOf(pose, bone);
+      expect(Math.abs(y)).toBeLessThan(1e-6);
+      expect(Math.abs(z)).toBeLessThan(1e-6);
+    }
+    expect(pose.get('rightUpperLeg')).toBeUndefined();
+  });
+
+  it('bends towards an explicit pole and clamps a target out of reach', () => {
+    const back = posed({});
+    solveIk(
+      rig,
+      back,
+      new Map([
+        [
+          'leftFoot',
+          { target: new Vector3(0.1, 0.3, 0.2), pole: new Vector3(0, 0, -1), keepOrientation: false, weight: 1 },
+        ],
+      ]),
+    );
+    expect(at(back, 'leftLowerLeg').z).toBeLessThan(-0.1);
+    expect(at(back, 'leftFoot').distanceTo(new Vector3(0.1, 0.3, 0.2))).toBeLessThan(1e-6);
+    const far = posed({});
+    const target = new Vector3(0.1, 0.2, 1.5);
+    solveIk(rig, far, new Map([['leftFoot', { target, pole: null, keepOrientation: false, weight: 1 }]]));
+    const hip = at(far, 'leftUpperLeg');
+    const ankle = at(far, 'leftFoot');
+    expect(ankle.distanceTo(hip)).toBeCloseTo(0.82, 3);
+    expect(ankle.clone().sub(hip).normalize().dot(target.clone().sub(hip).normalize())).toBeCloseTo(1, 6);
+  });
+
+  it('keeps a planted foot flat while the leg bends, with its own rotation on top', () => {
+    const goal = { target: new Vector3(0.1, 0.15, 0.3), pole: null, keepOrientation: true, weight: 1 };
+    const flat = posed({});
+    solveIk(rig, flat, new Map([['leftFoot', goal]]));
+    const world = new Quaternion().setFromRotationMatrix(posedBoneWorld(rig, flat).get('leftFoot') as Matrix4);
+    expect(world.angleTo(new Quaternion())).toBeLessThan(1e-6);
+    const tilted = posed({ leftFoot: { rotation: quaternionFrom([-20, 0, 0]) } });
+    solveIk(rig, tilted, new Map([['leftFoot', goal]]));
+    const tiltedWorld = new Quaternion().setFromRotationMatrix(posedBoneWorld(rig, tilted).get('leftFoot') as Matrix4);
+    expect(tiltedWorld.angleTo(quaternionFrom([-20, 0, 0]))).toBeLessThan(1e-6);
+    const loose = posed({});
+    solveIk(rig, loose, new Map([['leftFoot', { ...goal, keepOrientation: false }]]));
+    expect(loose.get('leftFoot')).toBeUndefined();
+  });
+
+  it('solves goals at every frame between keys that share them, and eases into a key without one', () => {
+    const { asset } = resolveFigure(
+      figure({
+        animation: {
+          fps: 10,
+          clips: {
+            step: {
+              duration: 1,
+              loop: false,
+              keys: [
+                { t: 0, pose: { leftFoot: { ik: { target: [0.1, 0.15, 0.2] } } } },
+                { t: 0.5, pose: { leftFoot: { ik: { target: [0.1, 0.15, -0.2] } } } },
+                { t: 1, pose: { leftUpperLeg: { rotation: [-30, 0, 0] } } },
+              ],
+            },
+          },
+        },
+      }),
+    );
+    const clip = asset.animation.clips.step as NonNullable<(typeof asset.animation.clips)['step']>;
+    const keys = clipKeys(clip, asset.rig);
+    expect(keys.map((k) => k.t)).toEqual(clip.times);
+    for (const key of keys) for (const p of Object.values(key.pose)) expect(p.ik).toBeUndefined();
+    const footAt = (i: number) => {
+      const pose = new Map<string, IkPose>();
+      for (const [bone, p] of Object.entries(keys[i]?.pose ?? {}))
+        pose.set(bone, {
+          rotation: quaternionFrom(p.rotation),
+          translation: new Vector3(...(p.translation ?? [0, 0, 0])),
+          scale: new Vector3(1, 1, 1),
+        });
+      return at(pose, 'leftFoot');
+    };
+    // Frames 0 to 5 follow the moving target exactly; the leg stays bent to keep the ankle at rest height.
+    for (let i = 0; i <= 5; i++)
+      expect(footAt(i).distanceTo(new Vector3(0.1, 0.15, 0.2 - 0.08 * i))).toBeLessThan(1e-5);
+    // From the goal at 0.5 s the bent knee eases straight towards the plain key at 1 s, a little each frame.
+    const angle = (i: number, bone: string) => (keys[i]?.pose[bone]?.rotation as number[] | undefined)?.[0] ?? 0;
+    expect(angle(10, 'leftUpperLeg')).toBeCloseTo(-30, 5);
+    expect(angle(10, 'leftLowerLeg')).toBeCloseTo(0, 5);
+    expect(angle(5, 'leftLowerLeg')).toBeGreaterThan(30);
+    for (let i = 5; i < 10; i++) {
+      expect(angle(i + 1, 'leftLowerLeg')).toBeLessThan(angle(i, 'leftLowerLeg'));
+      expect(angle(i, 'leftLowerLeg') - angle(i + 1, 'leftLowerLeg')).toBeLessThan(15);
+    }
+  });
+
+  it('rejects goals on bones without two bones above them, and zero poles', () => {
+    const bad = failure(
+      figure({
+        animation: {
+          clips: {
+            a: {
+              duration: 1,
+              keys: [
+                {
+                  t: 0,
+                  pose: {
+                    spine: { ik: { target: [0, 1, 0] } },
+                    leftFoot: { ik: { target: [0, 0, 0], pole: [0, 0, 0] } },
+                  },
+                },
+              ],
+            },
+          },
+        },
+      }),
+    );
+    expect(bad.issues?.map((i) => [i.path, i.code])).toEqual([
+      ['animation.clips.a.keys[0].pose.spine.ik', 'ik_chain'],
+      ['animation.clips.a.keys[0].pose.leftFoot.ik.pole', 'ik_pole'],
+    ]);
+  });
+
+  it('plants the feet of a walk cycle: still on the ground through the stance, lifted through the swing', () => {
+    expect(footPath(0, 0.6, 0.1)).toEqual({ z: 0.3, lift: 0 });
+    expect(footPath(0.25, 0.6, 0.1)).toEqual({ z: 0, lift: 0 });
+    expect(footPath(0.75, 0.6, 0.1).lift).toBeCloseTo(0.1, 9);
+    expect(footPath(0.75, 0.6, 0.1).z).toBeCloseTo(0, 9);
+    const times = Array.from({ length: 16 }, (_, i) => i / 20);
+    const keys = generateKeys({ type: 'walk-cycle', ik: true, stride: 30, lift: 0.08 }, rig, 0.8, times);
+    const feet = keys.map((k) => (k.pose.leftFoot as { ik: { target: number[] } }).ik.target);
+    expect(feet.every((f) => f[0] === 0.1)).toBe(true);
+    // Stance from a quarter to three quarters of the way through: on the ground, sliding back evenly.
+    const stance = feet.slice(4, 13);
+    expect(stance.every((f) => Math.abs((f[1] as number) - 0.08) < 1e-9)).toBe(true);
+    const steps = stance.slice(1).map((f, i) => (f[2] as number) - (stance[i] as number[])[2]!);
+    for (const d of steps) expect(d).toBeCloseTo(steps[0] as number, 9);
+    expect(steps[0]).toBeLessThan(0);
+    expect(feet[0]?.[1]).toBeGreaterThan(0.1);
+    // Without a bob the hips drop just enough for straight legs to reach at full stride.
+    const drop = -(keys[4]?.pose.hips?.translation?.[1] as number);
+    expect(drop).toBeCloseTo(0.82 * (1 - Math.cos((30 * Math.PI) / 180)), 5);
+    // A given bob keeps the body as steady as asked and shortens the step to what the legs reach.
+    const steady = generateKeys({ type: 'walk-cycle', ik: true, bob: 0.02 }, rig, 0.8, times);
+    expect(steady[4]?.pose.hips?.translation?.[1]).toBeCloseTo(-0.02, 9);
+    const front = ((steady[4] as ClipKeyT).pose.leftFoot as { ik: { target: number[] } }).ik.target[2] as number;
+    expect(front).toBeCloseTo(Math.sqrt(0.82 ** 2 - 0.8 ** 2), 5);
+    expect(front).toBeLessThan(0.82 * Math.sin((25 * Math.PI) / 180));
+    expect(keys.every((k) => k.pose.leftUpperLeg === undefined)).toBe(true);
+    expect(keys[4]?.pose.leftUpperArm?.rotation).toEqual([20, 0, 0]);
+  });
+
+  it('needs the lower legs and feet for a planted walk', () => {
+    const bad = failure(
+      figure({
+        rig: {
+          preset: 'humanoid-basic',
+          bones: [{ name: 'leftFoot', parent: 'leftLowerLeg', position: [0, -0.4, 0] }],
+        },
+        animation: {
+          clips: { walk: { duration: 0.8, generator: { type: 'walk-cycle', ik: true, bones: { rightFoot: 'toes' } } } },
+        },
+      }),
+    );
+    expect(bad.issues?.[0]?.path).toBe('animation.clips.walk.generator.bones.rightFoot');
+  });
+});
+
+function eulerOf(pose: Map<string, IkPose>, bone: string): [number, number, number] {
+  return eulerDegrees(pose.get(bone)?.rotation ?? new Quaternion());
+}
+
 describe('skinWeights', () => {
   const rig = resolveRig([{ file: undefined, path: 'rig', value: 'humanoid-basic' }], library, []) as NonNullable<
     ReturnType<typeof resolveRig>
@@ -748,6 +947,11 @@ describe('walk-cycle foot contact', () => {
 
   it('keeps a foot on the ground with matching stride and bob', async () => {
     const ok = await plan(walker({ stride: 25, bob: 0.08 }));
+    expect(ok.warnings.filter((w) => w.code === 'W_CLIP_FOOT_CONTACT')).toEqual([]);
+  });
+
+  it('keeps both feet within a pixel of the ground with planted feet at any stride', async () => {
+    const ok = await plan(walker({ stride: 45, ik: true }));
     expect(ok.warnings.filter((w) => w.code === 'W_CLIP_FOOT_CONTACT')).toEqual([]);
   });
 

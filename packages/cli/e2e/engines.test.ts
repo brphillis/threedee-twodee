@@ -124,6 +124,7 @@ describe('engine example pages', () => {
       'gif-preview',
       'godot-spriteframes',
       'manifest',
+      'normals',
       'phaser-atlas',
       'pixi',
       'sheets',

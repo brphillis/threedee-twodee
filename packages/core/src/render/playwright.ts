@@ -227,7 +227,13 @@ export class PlaywrightBackend implements RenderBackend {
               (
                 globalThis as unknown as {
                   __td2d: {
-                    renderSamples(s: unknown): { key: string; width: number; height: number; rgbaBase64: string }[];
+                    renderSamples(s: unknown): {
+                      key: string;
+                      width: number;
+                      height: number;
+                      rgbaBase64: string;
+                      normalsBase64?: string;
+                    }[];
                   };
                 }
               ).__td2d.renderSamples(samples),
@@ -250,9 +256,21 @@ export class PlaywrightBackend implements RenderBackend {
         next = following ? request(following) : null;
         for (const frame of encoded) {
           signal?.throwIfAborted();
-          const raw = Buffer.from(frame.rgbaBase64, 'base64');
-          const rgba = flipRows(new Uint8Array(raw.buffer, raw.byteOffset, raw.byteLength), frame.width, frame.height);
-          await sink({ key: frame.key, width: frame.width, height: frame.height, rgba }, n);
+          const decode = (b64: string) => {
+            const raw = Buffer.from(b64, 'base64');
+            return flipRows(new Uint8Array(raw.buffer, raw.byteOffset, raw.byteLength), frame.width, frame.height);
+          };
+          const rgba = decode(frame.rgbaBase64);
+          await sink(
+            {
+              key: frame.key,
+              width: frame.width,
+              height: frame.height,
+              rgba,
+              ...(frame.normalsBase64 ? { normals: decode(frame.normalsBase64) } : {}),
+            },
+            n,
+          );
           n++;
           options.onFrame?.({ key: frame.key, n, total: job.samples.length });
         }

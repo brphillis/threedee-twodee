@@ -24,7 +24,7 @@ wave travels down it.
 | Clip | Made by | Layers | Frames |
 |---|---|---|---|
 | `idle` | the `idle-breathe` generator | the cape stirs in the wind, swaying back and to the side; the plume flutters | 10 |
-| `walk` | the `walk-cycle` generator, with `bob` set so a foot stays on the ground | the cape streams back and ripples twice a cycle, once per step | 8 |
+| `walk` | the `walk-cycle` generator with `ik`, so each foot stands still on the ground through its step and the knees bend to reach it, with a 2.5 cm `bob` | the cape streams back and ripples twice a cycle, once per step | 8 |
 | `attack` | four pose keys with easing, played once | the cape flares with the cut | 6 |
 
 The project sets `typeDefaults.character` (a 96 x 96 frame, the rig, eight directions, a key

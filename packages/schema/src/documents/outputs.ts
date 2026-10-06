@@ -89,6 +89,10 @@ export const Manifest = z
             .string()
             .nullable()
             .meta({ description: 'Aseprite JSON for this sheet, or null when aseprite-json is not written.' }),
+          normals: z.string().optional().meta({
+            description:
+              'Normal map of this sheet, the same size and layout, when render.normals is on: RGB are the view-space normal (x right, y up, z towards the viewer) mapped to 0 to 255.',
+          }),
           width: z.number().int(),
           height: z.number().int(),
           layout: z.enum(['grid', 'strips', 'packed']),

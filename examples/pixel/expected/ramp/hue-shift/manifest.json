@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0.0",
+  "generator": { "name": "td2d", "version": "0.0.0" },
+  "assetId": "ramp/hue-shift",
+  "assetHash": "sha256:83169d12bf9583ffcb3626e9d00647e6f4989eefc0aec471031b6dc4ef900619",
+  "generatedAt": "2026-10-05T23:54:02.335Z",
+  "frame": { "width": 160, "height": 160 },
+  "pivot": {
+    "x": 80,
+    "y": 121,
+    "normalized": { "x": 0.5, "y": 0.75625 }
+  },
+  "pixelsPerUnit": 90,
+  "camera": { "preset": "dimetric", "pitch": 30, "yawOffset": 45, "groundMargin": 39 },
+  "directions": [
+    { "name": "s", "yaw": 0, "mirrorOf": null },
+    { "name": "w", "yaw": 90, "mirrorOf": null },
+    { "name": "n", "yaw": 180, "mirrorOf": null },
+    { "name": "e", "yaw": 270, "mirrorOf": null }
+  ],
+  "palette": { "mode": "none", "name": null, "colors": [] },
+  "clips": [
+    { "name": "idle", "fps": 10, "frames": 1, "loop": true, "motion": false, "durationMs": 100 }
+  ],
+  "sheets": [
+    {
+      "name": "hue-shift",
+      "image": "hue-shift.png",
+      "data": "hue-shift.json",
+      "width": 160,
+      "height": 640,
+      "layout": "grid"
+    }
+  ],
+  "cells": [
+    {
+      "key": "idle/s/000",
+      "clip": "idle",
+      "direction": "s",
+      "index": 0,
+      "sheet": "hue-shift",
+      "x": 0,
+      "y": 0,
+      "w": 160,
+      "h": 160,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/w/000",
+      "clip": "idle",
+      "direction": "w",
+      "index": 0,
+      "sheet": "hue-shift",
+      "x": 0,
+      "y": 160,
+      "w": 160,
+      "h": 160,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/n/000",
+      "clip": "idle",
+      "direction": "n",
+      "index": 0,
+      "sheet": "hue-shift",
+      "x": 0,
+      "y": 320,
+      "w": 160,
+      "h": 160,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    },
+    {
+      "key": "idle/e/000",
+      "clip": "idle",
+      "direction": "e",
+      "index": 0,
+      "sheet": "hue-shift",
+      "x": 0,
+      "y": 480,
+      "w": 160,
+      "h": 160,
+      "trimmed": false,
+      "offset": { "x": 0, "y": 0 },
+      "mirrored": false
+    }
+  ],
+  "files": {
+    "sheets": ["hue-shift.png"],
+    "aseprite-json": ["hue-shift.json"],
+    "manifest": ["manifest.json"]
+  },
+  "stages": {
+    "model": "sha256:38f1c020a083e22ea6540fb84f758f0f00ec795350daff701bde674e6c47f56d",
+    "rig": "sha256:c4c0b099a38838bb961ba984da3385cfe715cac120df9ef15e39240cb6f1cc02",
+    "plan": "sha256:d39e3b0229dc6bdcaa17b5f056fc37b9e207555e12157979a74c4a9f3725b54f",
+    "render": "sha256:0138084c1cc06f564030dbd592deda269a332c6794a233e06d657477947f4be5",
+    "pixel": "sha256:6ecffabe0683f6f1607bf52cd4aebedc030ee6d538c3c1d012d6c0bd6a78465c",
+    "sheet": "sha256:bcbefb1769eb6f00d58d170cd2daeca6349bec942e254e24b7af9d3897e84bd8"
+  },
+  "validation": { "status": "pass", "warnings": 0, "errors": 0, "report": "../validation.json" }
+}

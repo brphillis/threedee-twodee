@@ -13,6 +13,11 @@ export interface RenderMaterial {
   readonly bands: number;
   /** sRGB #rrggbb. */
   readonly emissive: string;
+  /**
+   * sRGB #rrggbb colours for toon shading to paint its light levels with, darkest first, in
+   * place of `color` and `bands`. Absent to shade `color`.
+   */
+  readonly ramp?: readonly string[];
 }
 
 /** Settings shared by every sample in a render job. */
@@ -27,6 +32,8 @@ export interface RenderSceneSettings {
   readonly materials?: Readonly<Record<string, RenderMaterial>>;
   /** Lines around every part, or absent for none. */
   readonly lines?: RenderLinesSettings;
+  /** Also render each frame's view-space normals, for a normal map beside the sprites. */
+  readonly normals?: boolean;
 }
 
 /**
@@ -64,6 +71,8 @@ export interface EncodedFrame {
   readonly width: number;
   readonly height: number;
   readonly rgbaBase64: string;
+  /** View-space normals as RGB (x, y, z mapped from -1..1 to 0..255), alpha 255 on geometry, when asked for. */
+  readonly normalsBase64?: string;
 }
 
 export interface HarnessCapabilities {
@@ -97,4 +106,4 @@ export interface HarnessApi {
 }
 
 /** Bump when the harness API changes so a stale bundle is detected. */
-export const HARNESS_PROTOCOL_VERSION = 3;
+export const HARNESS_PROTOCOL_VERSION = 5;

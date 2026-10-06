@@ -159,9 +159,12 @@ export function MetadataTab({ detail }: { readonly detail: AssetDetail }) {
               <dd>
                 {Object.entries(resolved.materials).map(([name, m]) => (
                   <span key={name} className="inline-swatch">
-                    <span className="chip" style={{ background: m.color }} />
+                    {(m.ramp ?? [m.color]).map((c, i) => (
+                      // biome-ignore lint/suspicious/noArrayIndexKey: a ramp may repeat a colour; its order is its identity.
+                      <span key={i} className="chip" style={{ background: c }} />
+                    ))}
                     {name} {m.shading}
-                    {m.shading === 'toon' ? ` ${m.bands} bands` : ''}
+                    {m.ramp ? ` ${m.ramp.length} colour ramp` : m.shading === 'toon' ? ` ${m.bands} bands` : ''}
                   </span>
                 ))}
               </dd>

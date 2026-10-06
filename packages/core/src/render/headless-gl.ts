@@ -124,7 +124,12 @@ function harnessHash(): string {
 interface HarnessLike {
   loadModel(glb: ArrayBuffer): Promise<ModelInfo>;
   configure(settings: RenderJob['scene']): void;
-  render(sample: RenderJob['samples'][number]): { width: number; height: number; rgba: Uint8Array };
+  render(sample: RenderJob['samples'][number]): {
+    width: number;
+    height: number;
+    rgba: Uint8Array;
+    normals?: Uint8Array;
+  };
 }
 
 export class HeadlessGlBackend implements RenderBackend {
@@ -213,7 +218,7 @@ export class HeadlessGlBackend implements RenderBackend {
     let n = 0;
     for (const sample of job.samples) {
       signal?.throwIfAborted();
-      let frame: { width: number; height: number; rgba: Uint8Array };
+      let frame: { width: number; height: number; rgba: Uint8Array; normals?: Uint8Array };
       try {
         frame = scene.render(sample);
       } catch (error) {
@@ -227,6 +232,7 @@ export class HeadlessGlBackend implements RenderBackend {
           width: frame.width,
           height: frame.height,
           rgba: flipRows(frame.rgba, frame.width, frame.height),
+          ...(frame.normals ? { normals: flipRows(frame.normals, frame.width, frame.height) } : {}),
         },
         n,
       );
